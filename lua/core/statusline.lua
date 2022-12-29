@@ -94,7 +94,7 @@ local function lsp()
     return ""
   end
   if #names > 0 then
-    return " [" .. table.concat(names, " ") .. "]"
+    return "[" .. table.concat(names, " ") .. "]"
   end
 end
 

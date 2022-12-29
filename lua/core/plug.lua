@@ -77,7 +77,7 @@ function M.config()
       {
         "nvim-telescope/telescope.nvim",
         -- event = "VimEnter",
-        cmd = "Telescope",
+        -- cmd = "Telescope",
         config = function()
           require("configs.telescope")
         end,
@@ -98,6 +98,7 @@ function M.config()
           { "hrsh7th/cmp-nvim-lsp" },
           { "saadparwaiz1/cmp_luasnip" },
           { "rafamadriz/friendly-snippets" },
+          { "hrsh7th/cmp-nvim-lsp-signature-help" },
           {
             "windwp/nvim-autopairs",
             config = function()
