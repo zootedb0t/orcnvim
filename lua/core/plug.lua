@@ -74,14 +74,23 @@ local plugins = {
         end,
       },
     },
-  },
-  { "williamboman/mason.nvim" },
-  { "williamboman/mason-lspconfig.nvim" },
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    config = function()
-      require("configs.null-ls").config()
-    end,
+    {
+      "williamboman/mason.nvim",
+        cmd = {
+          "Mason",
+          "MasonInstall",
+          "MasonUninstall",
+          "MasonUninstallAll",
+          "MasonLog",
+        }, -- Package Manager
+    },
+    { "williamboman/mason-lspconfig.nvim" },
+    {
+      "jose-elias-alvarez/null-ls.nvim",
+      config = function()
+        require("configs.null-ls").config()
+      end,
+    },
   },
   {
     "nvim-telescope/telescope.nvim",
