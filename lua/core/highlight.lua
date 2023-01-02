@@ -1,10 +1,9 @@
 local highlight = vim.api.nvim_set_hl
-local rose = require("rose-pine.palette")
--- local mocha = require("catppuccin.palettes").get_palette("mocha")
+local mocha = require("catppuccin.palettes").get_palette("mocha")
 
-highlight(0, "StatusLineAccent", { fg = rose.base, bg = rose.foam })
-highlight(0, "StatuslineInsertAccent", { fg = rose.base, bg = rose.love })
-highlight(0, "StatuslineVisualAccent", { fg = rose.base, bg = rose.iris })
-highlight(0, "StatuslineReplaceAccent", { fg = rose.base, bg = rose.rose })
-highlight(0, "StatuslineTerminalAccent", { fg = rose.base, bg = rose.pine })
-highlight(0, "StatuslineCmdLineAccent", { fg = rose.base, bg = rose.gold })
+highlight(0, "StatusLineAccent", { fg = mocha.surface0, bg = mocha.green })
+highlight(0, "StatuslineInsertAccent", { fg = mocha.surface0, bg = mocha.mauve })
+highlight(0, "StatuslineVisualAccent", { fg = mocha.surface0, bg = mocha.red })
+highlight(0, "StatuslineReplaceAccent", { fg = mocha.surface0, bg = mocha.blue })
+highlight(0, "StatuslineTerminalAccent", { fg = mocha.surface0, bg = mocha.yellow })
+highlight(0, "StatuslineCmdLineAccent", { fg = mocha.surface0, bg = mocha.sapphire })

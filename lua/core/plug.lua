@@ -13,15 +13,6 @@ vim.opt.runtimepath:prepend(lazypath)
 
 local plugins = {
   {
-    "rose-pine/neovim",
-    name = "rose-pine",
-    lazy = false,
-    enabled = true,
-    -- config = function()
-    --   vim.cmd("colorscheme rose-pine")
-    -- end,
-  },
-  {
     "catppuccin/nvim",
     name = "catppuccin",
     config = function()

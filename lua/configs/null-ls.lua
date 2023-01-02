@@ -9,7 +9,7 @@ function M.config()
     local code_action = null_ls.builtins.code_actions
     null_ls.setup({
       debug = false,
-      diagnostics_format = "(#{s}) #{m}",
+      diagnostics_format = "#{m}",
       sources = {
         formatting.stylua,
         -- diagnostics.luacheck,

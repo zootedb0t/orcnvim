@@ -117,8 +117,8 @@ local on_attach = function(client, bufnr)
   -- navic.attach(client, bufnr)
 end
 
-for name, opts in pairs(servers) do
-  if type(opts) == "function" then
+for name, opt in pairs(servers) do
+  if type(opt) == "function" then
     opts()
   else
     local client = lsp[name]
@@ -126,6 +126,6 @@ for name, opts in pairs(servers) do
       flags = { debounce_text_changes = 150 },
       on_attach = on_attach,
       capabilities = capabilities,
-    }, opts))
+    }, opt))
   end
 end
