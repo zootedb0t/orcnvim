@@ -67,13 +67,13 @@ local plugins = {
     },
     {
       "williamboman/mason.nvim",
-        cmd = {
-          "Mason",
-          "MasonInstall",
-          "MasonUninstall",
-          "MasonUninstallAll",
-          "MasonLog",
-        }, -- Package Manager
+      cmd = {
+        "Mason",
+        "MasonInstall",
+        "MasonUninstall",
+        "MasonUninstallAll",
+        "MasonLog",
+      }, -- Package Manager
     },
     { "williamboman/mason-lspconfig.nvim" },
     {
@@ -168,8 +168,11 @@ local plugins = {
   },
   {
     "rcarriga/nvim-notify",
+    -- event = "VeryLazy",
     config = function()
-      require("notify").setup()
+      require("notify").setup({
+        background_colour = "#000000",
+      })
     end,
   },
   {

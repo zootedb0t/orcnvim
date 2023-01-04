@@ -20,6 +20,8 @@ function M.config()
         formatting.prettierd,
         code_action.eslint_d,
         diagnostics.shellcheck,
+        formatting.shfmt,
+        formatting.astyle.with({ extra_args = { "-A3", "-t8", "-p", "-xg", "-H", "-j", "-xB" } }),
       },
     })
   end

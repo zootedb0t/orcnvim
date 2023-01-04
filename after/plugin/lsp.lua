@@ -62,7 +62,11 @@ local servers = {
   html = {},
   cssls = {},
   tsserver = {},
-  clangd = {},
+  clangd = {
+    on_attach = function(client)
+      client.server_capabilities.documentFormattingProvider = false
+    end,
+  },
   pyright = {},
   sumneko_lua = {
     settings = {

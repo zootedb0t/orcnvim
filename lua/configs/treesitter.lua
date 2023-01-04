@@ -23,6 +23,11 @@ if status_ok then
       "rust",
       "typescript",
       "yaml",
+      "markdown",
+      "markdown_inline",
+      "vim",
+      "gitignore",
+      "diff",
     },
     autotag = {
       enable = true,
