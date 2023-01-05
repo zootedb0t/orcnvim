@@ -28,6 +28,7 @@ if status_ok then
       "vim",
       "gitignore",
       "diff",
+      "fish",
     },
     autotag = {
       enable = true,
