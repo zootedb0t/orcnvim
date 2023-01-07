@@ -43,7 +43,9 @@ local options = {
     updatetime = 50, -- Length of time to wait before triggering the plugin
     wrap = false, -- Disable wrapping of lines longer than the width of window
     writebackup = false, -- Disable making a backup before overwriting a file
-    cmdheight = 1, -- Hide cmdheight after issue #16251
+    title = true,
+    jumpoptions = "stack",
+    cmdheight = 0, -- Hide cmdheight after issue #16251
     wbr = "%=%f %m", -- Winbar
     ls = 3, -- Global statusline
     shell = "/usr/bin/bash",

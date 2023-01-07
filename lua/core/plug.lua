@@ -15,18 +15,6 @@ local plugins = {
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    config = function()
-      require("catppuccin").setup({
-        flavour = "mocha", -- latte, frappe, macchiato, mocha
-        background = { -- :h background
-          light = "latte",
-          dark = "mocha",
-        },
-        transparent_background = true,
-        term_colors = true,
-      })
-      vim.cmd("colorscheme catppuccin")
-    end,
   },
   {
     "numToStr/Comment.nvim",
@@ -167,15 +155,6 @@ local plugins = {
     end,
   },
   {
-    "rcarriga/nvim-notify",
-    -- event = "VeryLazy",
-    config = function()
-      require("notify").setup({
-        background_colour = "#000000",
-      })
-    end,
-  },
-  {
     "NvChad/nvim-colorizer.lua",
     cmd = "ColorizerToggle",
     config = function()
@@ -257,7 +236,6 @@ local opts = {
   change_detection = {
     -- automatically check for config file changes and reload the ui
     enabled = true,
-    notify = true, -- get a notification when changes are found
   },
   -- lazy can generate helptags from the headings in markdown readme files,
   -- so :help works even for plugins that don't have vim docs.
