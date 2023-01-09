@@ -16,32 +16,8 @@ cmd("VimLeave", {
   end,
 })
 
-cmd("ColorScheme", {
-  pattern = "*",
-  callback = function()
-    local hl_group = {
-      "Normal",
-      "SignColumn",
-      "NormalNC",
-      "TelescopeBorder",
-      "FloatBorder",
-      "NormalFloat",
-      "TelescopeNormal",
-      "NvimTreeNormal",
-      "EndOfBuffer",
-      "Linehr",
-      "MsgArea",
-      "FidgetTitle",
-      "FidgetTask",
-    }
-    for _, name in ipairs(hl_group) do
-      vim.cmd(string.format("highlight %s ctermbg=none guibg=none", name))
-    end
-  end,
-})
-
 -- Statusline
-cmd({ "BufEnter", "WinResized" }, {
+cmd({ "BufEnter", "WinResized", "InsertEnter" }, {
   callback = function()
     if vim.bo.filetype == "NvimTree" then
       return
