@@ -58,8 +58,8 @@ function M.config()
           s = { "<cmd>Telescope lsp_document_symbols<cr>", "Show document symbol" },
         },
       },
-      s = {
-        name = "+Search",
+      f = {
+        name = "+Files",
         c = {
           function()
             require("configs.telescope.custom").search_config()

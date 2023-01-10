@@ -59,19 +59,20 @@ local vcs = function()
     return ""
   end
   local added, changed, removed
-  if git_info.added == 0 then
+
+  if git_info.added == 0 or git_info.added == nil then
     added = ""
   else
     added = "  " .. tostring(git_info.added)
   end
 
-  if git_info.changed == 0 then
+  if git_info.changed == 0 or git_info.changed == nil then
     changed = ""
   else
     changed = "   " .. tostring(git_info.changed)
   end
 
-  if git_info.removed == 0 then
+  if git_info.removed == 0 or git_info.removed == nil then
     removed = ""
   else
     removed = "  " .. tostring(git_info.removed)
