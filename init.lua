@@ -19,10 +19,10 @@ require("core.highlight")
 require("core.autocmd")
 
 require("catppuccin").setup({
-  flavour = "mocha", -- latte, frappe, macchiato, mocha
+  flavour = "macchiato", -- latte, frappe, macchiato, mocha
   background = { -- :h background
     light = "latte",
-    dark = "mocha",
+    dark = "macchiato",
   },
   transparent_background = true,
   term_colors = true,

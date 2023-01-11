@@ -3,7 +3,7 @@ vim.g.maplocalleader = ","
 -- local navic = require("nvim-navic")
 
 -- Overide handlers
-local signs = { Error = "✘", Warn = "▲", Info = "", Hint = "" }
+local signs = { Error = "", Warn = "▲", Info = "", Hint = "" }
 for sign, icon in pairs(signs) do
   vim.fn.sign_define("DiagnosticSign" .. sign, {
     text = icon,

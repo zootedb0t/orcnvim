@@ -35,7 +35,7 @@ local plugins = {
       require("configs.treesitter")
     end,
     dependencies = {
-      "p00f/nvim-ts-rainbow",
+      "mrjones2014/nvim-ts-rainbow",
     },
   },
   {
@@ -46,12 +46,6 @@ local plugins = {
     "neovim/nvim-lspconfig",
     dependencies = {
       { "hrsh7th/cmp-nvim-lsp" },
-      {
-        "j-hui/fidget.nvim",
-        config = function()
-          require("fidget").setup()
-        end,
-      },
     },
   },
   {
@@ -65,6 +59,13 @@ local plugins = {
     }, -- Package Manager
   },
   { "williamboman/mason-lspconfig.nvim" },
+  {
+    "j-hui/fidget.nvim",
+    config = function()
+      require("fidget").setup()
+    end,
+    event = "LspAttach",
+  },
   {
     "jose-elias-alvarez/null-ls.nvim",
     config = function()

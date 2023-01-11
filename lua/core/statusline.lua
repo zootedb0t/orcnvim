@@ -1,3 +1,7 @@
+local function isempty(s)
+  return s == nil or s == 0
+end
+
 local function update_mode_colors()
   local current_mode = vim.api.nvim_get_mode().mode
   local mode_color = "%#StatusLineAccent#"
@@ -54,25 +58,25 @@ local function filename()
 end
 
 local vcs = function()
-  local git_info = vim.b.gitsigns_status_dict or { head = "", added = 0, changed = 0, removed = 0 }
+  local git_info = vim.b.gitsigns_status_dict
   if not git_info or git_info.head == "" then
     return ""
   end
   local added, changed, removed
 
-  if git_info.added == 0 or git_info.added == nil then
+  if isempty(git_info.added) then
     added = ""
   else
     added = "  " .. tostring(git_info.added)
   end
 
-  if git_info.changed == 0 or git_info.changed == nil then
+  if isempty(git_info.changed) then
     changed = ""
   else
-    changed = "   " .. tostring(git_info.changed)
+    changed = "  " .. tostring(git_info.changed)
   end
 
-  if git_info.removed == 0 or git_info.removed == nil then
+  if isempty(git_info.removed) then
     removed = ""
   else
     removed = "  " .. tostring(git_info.removed)
