@@ -51,10 +51,11 @@ end
 
 local function filename()
   local fname = vim.fn.expand("%:t")
-  if fname == "" then
+  if fname then
+    return fname .. " "
+  else
     return ""
   end
-  return fname .. " "
 end
 
 local vcs = function()
@@ -95,11 +96,10 @@ local function lsp()
   for _, server in pairs(vim.lsp.buf_get_clients(0)) do
     table.insert(names, server.name)
   end
-  if #names == 0 then
-    return ""
-  end
   if #names > 0 then
     return "[" .. table.concat(names, " ") .. "]"
+  else
+    return ""
   end
 end
 
@@ -135,13 +135,13 @@ local function diagnostics()
   end
 
   return "%#DiagnosticError#"
-      .. errors
-      .. "%#DiagnosticWarn#"
-      .. warnings
-      .. "%#DiagnosticInfo#"
-      .. hints
-      .. "%#DiagnosticWarn#"
-      .. info
+    .. errors
+    .. "%#DiagnosticWarn#"
+    .. warnings
+    .. "%#DiagnosticInfo#"
+    .. hints
+    .. "%#DiagnosticWarn#"
+    .. info
 end
 
 local function filetype()
