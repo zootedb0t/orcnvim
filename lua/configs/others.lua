@@ -9,6 +9,17 @@ M.pair = function()
       disable_filetype = { "TelescopePrompt" },
       enable_check_bracket_line = false,
       ignored_next_char = "[%w%.]", -- will ignore alphanumeric and `.` symbol
+      fast_wrap = {
+        map = "<M-e>",
+        chars = { "{", "[", "(", '"', "'" },
+        pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
+        offset = 0,
+        end_key = "$",
+        keys = "qwertyuiopzxcvbnmasdfghjkl",
+        check_comma = true,
+        highlight = "PmenuSel",
+        highlight_grey = "LineNr",
+      },
     })
   end
 end
@@ -49,8 +60,8 @@ M.peek = function()
       throttle_time = "auto",
     })
   end
-vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
-vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
+  vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
+  vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
 end
 
 return M

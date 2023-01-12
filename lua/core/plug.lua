@@ -71,6 +71,7 @@ local plugins = {
     config = function()
       require("configs.null-ls").config()
     end,
+    event = "LspAttach",
   },
   {
     "nvim-telescope/telescope.nvim",
@@ -105,9 +106,8 @@ local plugins = {
       },
       {
         "L3MON4D3/LuaSnip",
-
         config = function()
-          require("configs.luasnip").config()
+          require("luasnip.loaders.from_vscode").lazy_load()
         end,
       },
     },
@@ -192,12 +192,6 @@ local opts = {
   },
   lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json", -- lockfile generated after running update.
   concurrency = nil, ---@type number limit the maximum amount of concurrent tasks
-  dev = {
-    -- directory where you store your local plugin projects
-    path = "~/projects",
-    ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
-    patterns = {}, -- For example {"folke"}
-  },
   install = {
     -- install missing plugins on startup. This doesn't increase startup time.
     missing = true,
