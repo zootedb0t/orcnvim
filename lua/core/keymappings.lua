@@ -1,5 +1,6 @@
 local map = vim.keymap.set
 local opt = { silent = true }
+vim.g.maplocalleader = ","
 
 -- Alternate way to save and exit
 map("n", "<C-s>", "<CMD>w<CR>", { desc = "Save File" }, opt)
@@ -72,6 +73,11 @@ cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q')
 cnoreabbrev <expr> WQ ((getcmdtype() is# ':' && getcmdline() is# 'WQ')?('wq'):('WQ'))
 cnoreabbrev <expr> Wq ((getcmdtype() is# ':' && getcmdline() is# 'Wq')?('wq'):('Wq'))
 ]])
+
+vim.keymap.set("n", "<localleader>d", vim.diagnostic.open_float, opt)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opt)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opt)
+vim.keymap.set("n", "<localleader>q", vim.diagnostic.setloclist, opt)
 
 -- Tabline
 -- map("n", "<Leader>tn", "<CMD>tabnew<CR>", { desc = "New Tab" })

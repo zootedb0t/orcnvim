@@ -1,9 +1,5 @@
 local status_ok1, mason = pcall(require, "mason")
--- local status_ok2, mason_lsp = pcall(require, "mason-lspconfig")
--- local status_ok3, lsp = pcall(require, "lspconfig")
-
 local status_ok2, mason_lsp = pcall(require, "mason-lspconfig")
-
 local servers = {
   html = {},
   cssls = {},

@@ -48,33 +48,33 @@ local plugins = {
     config = function()
       require("configs.lsp.mason")
       require("configs.lsp.handlers").setup()
+      require("configs.null-ls").config()
     end,
     dependencies = {
-      { "hrsh7th/cmp-nvim-lsp" },
+      "hrsh7th/cmp-nvim-lsp",
+      {
+        "williamboman/mason.nvim",
+        cmd = {
+          "Mason",
+          "MasonInstall",
+          "MasonUninstall",
+          "MasonUninstallAll",
+          "MasonLog",
+        }, -- Package Manager
+      },
+      "williamboman/mason-lspconfig.nvim",
+      {
+        "jose-elias-alvarez/null-ls.nvim",
+        -- config = function()
+        --   require("configs.null-ls").config()
+        -- end,
+      },
     },
   },
-  {
-    "williamboman/mason.nvim",
-    cmd = {
-      "Mason",
-      "MasonInstall",
-      "MasonUninstall",
-      "MasonUninstallAll",
-      "MasonLog",
-    }, -- Package Manager
-  },
-  { "williamboman/mason-lspconfig.nvim" },
   {
     "j-hui/fidget.nvim",
     config = function()
       require("fidget").setup()
-    end,
-    event = "LspAttach",
-  },
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    config = function()
-      require("configs.null-ls").config()
     end,
     event = "LspAttach",
   },

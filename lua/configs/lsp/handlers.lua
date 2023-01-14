@@ -50,10 +50,6 @@ local function lsp_keymap(bufnr)
   vim.keymap.set("n", "<localleader>rn", vim.lsp.buf.rename, bufopts)
   vim.keymap.set("n", "<localleader>ca", vim.lsp.buf.code_action, bufopts)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-  vim.keymap.set("n", "<localleader>d", vim.diagnostic.open_float, bufopts)
-  vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, bufopts)
-  vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bufopts)
-  vim.keymap.set("n", "<localleader>q", vim.diagnostic.setloclist, bufopts)
 end
 
 local function lsp_highlight(client, bufnr)

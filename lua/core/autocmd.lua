@@ -39,3 +39,9 @@ cmd({ "WinEnter", "BufEnter", "FileType" }, {
     vim.o.statusline = "%!luaeval('Statusline.short()')"
   end,
 })
+
+-- For suckless
+cmd({ "BufWritePost"},{
+  pattern = ".Xresources",
+  command = "!xrdb %"
+})
