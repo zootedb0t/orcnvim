@@ -44,6 +44,11 @@ local plugins = {
   },
   {
     "neovim/nvim-lspconfig",
+    event = { "BufRead", "BufNewFile" },
+    config = function()
+      require("configs.lsp.mason")
+      require("configs.lsp.handlers").setup()
+    end,
     dependencies = {
       { "hrsh7th/cmp-nvim-lsp" },
     },
@@ -76,7 +81,7 @@ local plugins = {
   {
     "nvim-telescope/telescope.nvim",
     -- event = "VimEnter",
-    -- cmd = "Telescope",
+    cmd = "Telescope",
     config = function()
       require("configs.telescope")
     end,
@@ -117,6 +122,7 @@ local plugins = {
     config = function()
       require("gitsigns").setup()
     end,
+    event = { "BufRead", "BufNewFile" },
   },
   {
     "folke/which-key.nvim",
