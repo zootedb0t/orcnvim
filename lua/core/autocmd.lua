@@ -41,7 +41,7 @@ cmd({ "WinEnter", "BufEnter", "FileType" }, {
 })
 
 -- For suckless
-cmd({ "BufWritePost"},{
+cmd({ "BufWritePost" }, {
   pattern = ".Xresources",
-  command = "!xrdb %"
+  command = "!xrdb %",
 })
