@@ -6,7 +6,34 @@ local servers = {
   tsserver = {},
   clangd = {},
   pyright = {},
-  sumneko_lua = {},
+  sumneko_lua = {
+    Lua = {
+      completion = {
+        enable = true,
+        callSnippet = "Replace",
+        showWord = "Disable",
+      },
+      runtime = {
+        version = "LuaJIT",
+        path = (function()
+          local runtime_path = vim.split(package.path, ";")
+          table.insert(runtime_path, "lua/?.lua")
+          table.insert(runtime_path, "lua/?/init.lua")
+          return runtime_path
+        end)(),
+      },
+      diagnostics = {
+        enable = true,
+        globals = {
+          "vim",
+        },
+      },
+      workspace = {
+        preloadFileSize = 400,
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+    },
+  },
 }
 
 if status_ok1 then
@@ -19,21 +46,17 @@ end
 
 if status_ok2 then
   mason_lsp.setup({
-    ensure_installed = servers,
+    ensure_installed = vim.tbl_keys(servers),
   })
 
   mason_lsp.setup_handlers({
     function(servers_name)
-      local opts = {
-        on_attach = require("configs.lsp.handlers").on_attach,
+      require("lspconfig")[servers_name].setup({
         capabilities = require("configs.lsp.handlers").capabilities,
-      }
+        on_attach = require("configs.lsp.handlers").on_attach,
+        settings = servers[servers_name],
+      })
 
-      local require_ok, server = pcall(require, "configs.lsp.settings." .. servers_name)
-      if require_ok then
-        opts = vim.tbl_deep_extend("force", server, opts)
-      end
-      require("lspconfig")[servers_name].setup(opts)
     end,
   })
 end

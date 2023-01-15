@@ -1,8 +1,10 @@
+vim.g.maplocalleader = ","
 local M = {}
 
-vim.g.maplocalleader = ","
-
-M.capabilities = require("cmp_nvim_lsp").default_capabilities()
+M.capabilities = {
+  require("cmp_nvim_lsp").default_capabilities(),
+  offsetEncoding = 'utf-8'
+}
 
 M.setup = function()
   -- Overide handlers
@@ -41,8 +43,8 @@ local function lsp_keymap(bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  -- vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-  -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
   vim.keymap.set("n", "<localleader>k", vim.lsp.buf.signature_help, bufopts)
@@ -57,13 +59,11 @@ local function lsp_highlight(client, bufnr)
     vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
     vim.api.nvim_create_autocmd("CursorHold", {
       group = "lsp_document_highlight",
-      -- pattern = "<buffer>",
       buffer = bufnr,
       callback = vim.lsp.buf.document_highlight,
     })
     vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter" }, {
       group = "lsp_document_highlight",
-      -- pattern = "<buffer>",
       buffer = bufnr,
       callback = vim.lsp.buf.clear_references,
     })
@@ -71,6 +71,7 @@ local function lsp_highlight(client, bufnr)
 end
 
 local function disable_formatting(client)
+  --TODO Give a list of servers
   if client.name == "clangd" then
     client.server_capabilities.documentFormattingProvider = false
   end

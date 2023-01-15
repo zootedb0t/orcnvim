@@ -74,6 +74,7 @@ cnoreabbrev <expr> WQ ((getcmdtype() is# ':' && getcmdline() is# 'WQ')?('wq'):('
 cnoreabbrev <expr> Wq ((getcmdtype() is# ':' && getcmdline() is# 'Wq')?('wq'):('Wq'))
 ]])
 
+-- Diagnostic keymaps
 vim.keymap.set("n", "<localleader>d", vim.diagnostic.open_float, opt)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opt)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opt)
