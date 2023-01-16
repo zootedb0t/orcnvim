@@ -43,23 +43,16 @@ function M.config()
         f = { vim.lsp.buf.format, "Format current buffer", silent = true },
         n = { "<cmd>enew<cr>", "Create new buffer" },
         r = { "<cmd>SourceFile<cr>", "Source current buffer" },
-        s = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Fuzzy find current buffer" },
       },
       l = {
         name = "+LSP",
         i = { "<cmd>LspInfo<cr>", "LSP status" },
-        d = { vim.lsp.buf.definition, "Jump to definition" },
-        D = { vim.lsp.buf.declaration, "Jump to declaration" },
-        t = { vim.lsp.buf.type_definition, "Jump to type definition" },
-        l = {
-          name = "+Lists",
-          d = { "<cmd>Telescope diagnostics<cr>", "Show diagnostic" },
-          r = { "<Cmd>Telescope lsp_references<CR>", "References" },
-          s = { "<cmd>Telescope lsp_document_symbols<cr>", "Show document symbol" },
-        },
+        d = { "<cmd>Telescope diagnostics<cr>", "Show diagnostic" },
+        r = { "<Cmd>Telescope lsp_references<CR>", "References" },
+        s = { "<cmd>Telescope lsp_document_symbols<cr>", "Show document symbol" },
       },
-      f = {
-        name = "+Files",
+      w = {
+        name = "+Workspace",
         c = {
           function()
             require("configs.telescope.custom").search_config()
@@ -78,13 +71,6 @@ function M.config()
         i = { "<cmd>Lazy install<cr>", "Install plugins" },
         s = { "<cmd>Lazy sync<cr>", "Sync Lazy" },
         u = { "<cmd>Lazy update<cr>", "Update plugins" },
-      },
-      w = {
-        name = "+Windows",
-        -- Split creation
-        s = { "<Cmd>split<CR>", "Split below" },
-        v = { "<cmd>vsplit<CR>", "Split right" },
-        q = { "<Cmd>q<CR>", "Close" },
       },
       t = {
         name = "Tab",

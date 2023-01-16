@@ -19,7 +19,7 @@ local plugins = {
   {
     "numToStr/Comment.nvim",
     -- keys = { "gc", "gb" },
-    event = { "BufRead" },
+    event = { "BufReadPost", "BufNewFile", "BufNew" },
     config = function()
       require("Comment").setup({
         ignore = "^$",
@@ -29,13 +29,14 @@ local plugins = {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    event = { "BufRead", "BufNewFile" },
+    event = { "BufRead", "BufNewFile", "BufNew" },
     opt = true,
     config = function()
       require("configs.treesitter")
     end,
     dependencies = {
       "mrjones2014/nvim-ts-rainbow",
+      "nvim-treesitter/nvim-treesitter-textobjects",
     },
   },
   {
@@ -44,7 +45,7 @@ local plugins = {
   },
   {
     "neovim/nvim-lspconfig",
-    event = { "BufRead", "BufNewFile" },
+    event = { "BufRead", "BufNewFile", "BufNew" },
     config = function()
       require("configs.lsp.mason")
       require("configs.lsp.handlers").setup()
@@ -122,7 +123,7 @@ local plugins = {
     config = function()
       require("gitsigns").setup()
     end,
-    event = { "BufRead", "BufNewFile" },
+    event = { "BufRead", "BufNewFile", "BufNew" },
   },
   {
     "folke/which-key.nvim",

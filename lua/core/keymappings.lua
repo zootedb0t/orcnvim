@@ -75,10 +75,17 @@ cnoreabbrev <expr> Wq ((getcmdtype() is# ':' && getcmdline() is# 'Wq')?('wq'):('
 ]])
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "<localleader>d", vim.diagnostic.open_float, opt)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opt)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opt)
-vim.keymap.set("n", "<localleader>q", vim.diagnostic.setloclist, opt)
+map("n", "<localleader>d", vim.diagnostic.open_float, opt)
+map("n", "[d", vim.diagnostic.goto_prev, opt)
+map("n", "]d", vim.diagnostic.goto_next, opt)
+map("n", "<localleader>q", vim.diagnostic.setloclist, opt)
+
+map('n', '<leader>/', function()
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    -- winblend = 10,
+    previewer = false,
+  })
+end, { desc = '[/] Fuzzily search in current buffer]' })
 
 -- Tabline
 -- map("n", "<Leader>tn", "<CMD>tabnew<CR>", { desc = "New Tab" })

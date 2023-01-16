@@ -29,8 +29,12 @@ local servers = {
         },
       },
       workspace = {
+        checkThirdParty = false,
         preloadFileSize = 400,
         library = vim.api.nvim_get_runtime_file("", true),
+      },
+      telemetry = {
+        enable = false,
       },
     },
   },
@@ -56,7 +60,6 @@ if status_ok2 then
         on_attach = require("configs.lsp.handlers").on_attach,
         settings = servers[servers_name],
       })
-
     end,
   })
 end
