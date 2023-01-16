@@ -270,6 +270,8 @@ local opts = {
         "loaded_getscriptPlugin", -- disable getscript
         "loaded_vimball", -- disable vimball
         "loaded_vimballPlugin", -- disable vimball
+        "loaded_netrw",
+        "loaded_netrwPlugin",
       },
     },
   },

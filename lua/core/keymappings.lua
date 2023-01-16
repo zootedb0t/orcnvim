@@ -2,12 +2,7 @@ local map = vim.keymap.set
 local opt = { silent = true }
 vim.g.maplocalleader = ","
 
--- Alternate way to save and exit
-map("n", "<C-s>", "<CMD>w<CR>", { desc = "Save File" }, opt)
-
 map("n", "<ESC>", "<CMD>noh<CR>", opt) -- Remove highlights from search result
-
-map("n", "<M-x>", "<CMD>bd!<CR>", { desc = "Delete Buffer" }, opt)
 
 -- map("n", "<BS>", "<C-^>zz", { desc = "Jump to last Buffer" }, opt) -- Jump to last buffer
 
@@ -39,8 +34,6 @@ map("n", "<C-S-Left>", "<cmd>vertical resize +5<cr>", opt)
 map("n", "<C-S-Right>", "<cmd>vertical resize -5<cr>", opt)
 map("n", "<C-S-Up>", "<cmd>resize +5<cr>", opt)
 map("n", "<C-S-Down>", "<cmd>resize -5<cr>", opt)
-
---map("n", "<leader>pl", ":PackerLoad ", { desc = "Load Plugin" }, { silent = false }) -- For Packer
 
 -- better indenting
 map("v", "<", "<gv", { desc = "Indent Left" }, opt)

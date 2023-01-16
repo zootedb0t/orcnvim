@@ -7,7 +7,7 @@
 ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║██║  ██║╚██████╗
 ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
 
-https://github.com/zootedb0t/dotfiles   ¯\_(ツ)_/¯
+https://github.com/zootedb0t/orcnvim   ¯\_(ツ)_/¯
 --]]
 
 require("core.options")
