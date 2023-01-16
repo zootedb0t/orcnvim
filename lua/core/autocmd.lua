@@ -17,7 +17,7 @@ cmd("VimLeave", {
 })
 
 -- Statusline
-cmd({ "BufEnter", "WinResized", "InsertEnter" }, {
+cmd({ "BufEnter", "WinResized", "WinEnter", "InsertEnter" }, {
   callback = function()
     if vim.bo.filetype == "NvimTree" then
       return
