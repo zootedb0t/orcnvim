@@ -1,7 +1,3 @@
-local function isempty(s)
-  return s == nil or s == 0
-end
-
 local function update_mode_colors()
   local current_mode = vim.api.nvim_get_mode().mode
   local mode_color = "%#StatusLineAccent#"
@@ -65,19 +61,19 @@ local vcs = function()
   end
   local added, changed, removed
 
-  if isempty(git_info.added) then
+  if require("core.utils.functions").isempty(git_info.added) then
     added = ""
   else
     added = "  " .. tostring(git_info.added)
   end
 
-  if isempty(git_info.changed) then
+  if require("core.utils.functions").isempty(git_info.changed) then
     changed = ""
   else
     changed = "  " .. tostring(git_info.changed)
   end
 
-  if isempty(git_info.removed) then
+  if require("core.utils.functions").isempty(git_info.removed) then
     removed = ""
   else
     removed = "  " .. tostring(git_info.removed)

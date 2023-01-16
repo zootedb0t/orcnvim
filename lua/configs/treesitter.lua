@@ -49,10 +49,10 @@ if status_ok then
     incremental_selection = {
       enable = true,
       keymaps = {
-        init_selection = "<CR>",
-        node_incremental = "<CR>",
-        scope_incremental = "<S-CR>",
-        node_decremental = "<BS>",
+        init_selection = "<c-space>",
+        node_incremental = "<c-space>",
+        scope_incremental = "<c-s>",
+        node_decremental = "<c-backspace>",
       },
     },
     indent = { enable = true, disable = { "yaml", "python", "c", "cpp" } },

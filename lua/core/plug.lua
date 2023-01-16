@@ -55,20 +55,10 @@ local plugins = {
       "hrsh7th/cmp-nvim-lsp",
       {
         "williamboman/mason.nvim",
-        cmd = {
-          "Mason",
-          "MasonInstall",
-          "MasonUninstall",
-          "MasonUninstallAll",
-          "MasonLog",
-        }, -- Package Manager
       },
       "williamboman/mason-lspconfig.nvim",
       {
         "jose-elias-alvarez/null-ls.nvim",
-        -- config = function()
-        --   require("configs.null-ls").config()
-        -- end,
       },
     },
   },
@@ -128,7 +118,7 @@ local plugins = {
   {
     "folke/which-key.nvim",
     cmd = "WhichKey",
-    keys = "<leader>",
+    -- keys = "<leader>",
     config = function()
       require("configs.whichkey").config()
     end,
