@@ -3,7 +3,7 @@ local M = {}
 
 M.capabilities = {
   require("cmp_nvim_lsp").default_capabilities(),
-  offsetEncoding = 'utf-8'
+  offsetEncoding = "utf-8",
 }
 
 M.setup = function()
@@ -70,17 +70,9 @@ local function lsp_highlight(client, bufnr)
   end
 end
 
-local function disable_formatting(client)
-  --TODO Give a list of servers
-  if client.name == "clangd" then
-    client.server_capabilities.documentFormattingProvider = false
-  end
-end
-
 M.on_attach = function(client, bufnr)
   lsp_keymap(bufnr)
   lsp_highlight(client, bufnr)
-  disable_formatting(client)
 end
 
 return M
