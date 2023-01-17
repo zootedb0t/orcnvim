@@ -177,6 +177,13 @@ local plugins = {
     "dstein64/vim-startuptime",
     cmd = "StartupTime",
   },
+  {
+    "goolord/alpha-nvim",
+    cmd = "Alpha",
+    config = function()
+      require("configs.alpha").config()
+    end,
+  },
 }
 
 local opts = {

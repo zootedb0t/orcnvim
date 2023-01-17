@@ -199,11 +199,7 @@ function Statusline.active()
 end
 
 function Statusline.inactive()
-  return " %F"
-end
-
-function Statusline.short()
-  return "%#Normal#"
+  return ""
 end
 
 return Statusline
