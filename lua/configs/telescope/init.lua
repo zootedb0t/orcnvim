@@ -68,8 +68,8 @@ telescope.setup({
     },
     file_browser = {
       theme = "ivy",
-      hijack_netrw = true,
-      files=false,
+      hijack_netrw = false,
+      files = false,
     },
   },
 })
@@ -77,3 +77,4 @@ telescope.setup({
 -- Extensions for telescope
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("file_browser")
+require("telescope").load_extension("persisted") -- To load the telescope extension

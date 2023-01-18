@@ -38,7 +38,7 @@ if status_ok then
       dashboard.button("f", "  Find File", ":Telescope find_files<CR>"),
       dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
       dashboard.button("r", "  Recent Files", ":Telescope oldfiles<CR>"),
-      dashboard.button("t", "  Find Text", ":Telescope live_grep<CR>"),
+      dashboard.button("s", "  Load Session", ":Telescope persisted<CR>"),
       dashboard.button("c", "  Configuration", ":e $MYVIMRC<CR>"),
       dashboard.button("u", "  Update Plugins", ":Lazy sync<CR>"),
       dashboard.button("q", "  Quit Neovim", ":qa!<CR>"),

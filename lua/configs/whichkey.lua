@@ -159,6 +159,11 @@ M.config = function()
       k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
       C = { "<cmd>Telescope commands<cr>", "Commands" },
     },
+    m = {
+      name = "Session Manager",
+      s = { "<cmd>SessionSave<CR>", "Save Session" },
+      l = { "<cmd>SessionLoad<CR>", "Load Saved Sessions" },
+    },
   }
   wk.setup(setup)
   wk.register(mappings, opts)

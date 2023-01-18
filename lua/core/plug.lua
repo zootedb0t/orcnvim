@@ -184,6 +184,27 @@ local plugins = {
       require("configs.alpha").config()
     end,
   },
+  {
+    "olimorris/persisted.nvim",
+    cmd = {
+      "SessionToggle",
+      "SessionStart",
+      "SessionSave",
+      "SessionLoad",
+    },
+    config = function()
+      require("persisted").setup({
+        autosave = false,
+        should_autosave = function()
+          -- do not autosave if the alpha dashboard is the current filetype
+          if vim.bo.filetype == "alpha" then
+            return false
+          end
+          return true
+        end,
+      })
+    end,
+  },
 }
 
 local opts = {
