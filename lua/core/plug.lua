@@ -49,7 +49,7 @@ local plugins = {
     config = function()
       require("configs.lsp.mason")
       require("configs.lsp.handlers").setup()
-      require("configs.null-ls").config()
+      require("configs.null-ls")
     end,
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
@@ -85,7 +85,7 @@ local plugins = {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     config = function()
-      require("configs.cmp").config()
+      require("configs.cmp")
     end,
     dependencies = {
       { "hrsh7th/cmp-path" },
@@ -129,7 +129,7 @@ local plugins = {
     tag = "nightly", -- optional, updated every week. (see issue #1193)
     cmd = "NvimTreeFindFileToggle",
     config = function()
-      require("configs.nvim-tree").config()
+      require("configs.nvim-tree")
     end,
   },
   {
@@ -257,7 +257,7 @@ local opts = {
       disabled_plugins = {
         "gzip", -- disable gzip
         "matchit",
-        "netrwPlugin",
+        -- "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",
