@@ -151,12 +151,11 @@ local function filetype()
   local fname = vim.fn.expand("%:t")
   local extension = vim.fn.expand("%:e")
   local ftype = vim.bo.filetype
-  if ftype == "" then
-    return ""
-  else
-    local icon = require("nvim-web-devicons").get_icon(fname, extension, { default = true })
-    return string.format(" %s %s ", icon, ftype)
+  local icon = require("nvim-web-devicons").get_icon(fname, extension, { default = true })
+  if require("core.utils.functions").isempty(icon) then
+    return " "
   end
+  return string.format(" %s %s ", icon, ftype)
 end
 
 local function lineinfo()
@@ -208,7 +207,7 @@ end
 
 function Statusline.draw()
   -- Add filetypes to the list for which you don't want statusline
-  local disable_statusline = { "NvimTree", "alpha", "" }
+  local disable_statusline = { "NvimTree", "alpha", "TelescopePrompt", "" }
   local buffer_type = vim.bo.filetype
   if require("core.utils.functions").ismatch(disable_statusline, buffer_type) then
     return inactive()

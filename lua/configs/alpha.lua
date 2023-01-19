@@ -56,9 +56,9 @@ if status_ok then
     end
 
     dashboard.section.footer.val = footer()
-    -- dashboard.section.footer.opts.hl = "AlphaFooter"
-    -- dashboard.section.header.opts.hl = "AlphaHeader"
-    -- dashboard.section.buttons.opts.hl = "AlphaButton"
+    dashboard.section.footer.opts.hl = "DashboardFooter"
+    dashboard.section.header.opts.hl = "DashboardHeader"
+    dashboard.section.buttons.opts.hl = "DashboarShortcut"
     dashboard.opts.opts.noautocmd = true
     alpha.setup(dashboard.opts)
   end

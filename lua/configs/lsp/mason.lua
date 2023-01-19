@@ -8,11 +8,6 @@ local servers = {
   pyright = {},
   sumneko_lua = {
     Lua = {
-      completion = {
-        enable = true,
-        callSnippet = "Replace",
-        showWord = "Disable",
-      },
       runtime = {
         version = "LuaJIT",
         path = (function()
@@ -23,15 +18,17 @@ local servers = {
         end)(),
       },
       diagnostics = {
-        enable = true,
         globals = {
           "vim",
         },
       },
       workspace = {
-        checkThirdParty = false,
-        preloadFileSize = 400,
-        library = vim.api.nvim_get_runtime_file("", true),
+        maxPreload = 5000,
+        preloadFileSize = 10000,
+        library = {
+          vim.api.nvim_get_runtime_file("", true),
+          vim.fn.expand("$VIMRUNTIME/lua/"),
+        },
       },
       telemetry = {
         enable = false,
