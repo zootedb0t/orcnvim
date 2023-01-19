@@ -1,5 +1,8 @@
 Statusline = {}
 
+-- Import highlights
+require("core.highlight").statusline_highlight()
+
 local function update_mode_colors()
   local current_mode = vim.api.nvim_get_mode().mode
   local mode_color = "%#StatusLineAccent#"
