@@ -199,7 +199,7 @@ end
 
 local function inactive()
   return table.concat({
-    "",
+    " ",
   })
 end
 

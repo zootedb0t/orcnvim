@@ -19,7 +19,7 @@ cmd("VimLeave", {
 -- Statusline
 cmd({ "BufEnter", "WinResized", "WinEnter", "ModeChanged" }, {
   callback = function()
-    vim.o.statusline = "%!luaeval('Statusline.draw()')"
+    vim.o.statusline = require("core.statusline").draw()
   end,
 })
 
