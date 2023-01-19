@@ -83,6 +83,7 @@ M.config = function()
     ["e"] = { "<cmd>NvimTreeFindFileToggle<cr>", "Toggle file explore" },
     ["d"] = { "<cmd>ChangeDirectory<cr>", "Change working directory" },
     ["w"] = { "<cmd>w!<CR>", "Save" },
+    [";"] = { "<cmd>Alpha<CR>", "Dashboard" },
     -- ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
     b = {
       name = "Buffers",

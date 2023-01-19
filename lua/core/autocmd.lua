@@ -28,3 +28,13 @@ cmd({ "BufWritePost" }, {
   pattern = ".Xresources",
   command = "!xrdb %",
 })
+
+-- Winbar
+cmd(
+  { "CursorHoldI", "CursorHold", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost", "TabClosed", "TabEnter" },
+  {
+    callback = function()
+      vim.o.winbar = require("core.winbar").winbar()
+    end,
+  }
+)

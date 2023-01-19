@@ -52,10 +52,10 @@ end
 
 local function filename()
   local fname = vim.fn.expand("%:t")
-  if fname then
-    return string.format(" %s ", fname)
+  if require("core.utils.functions").isempty(fname) then
+    return " "
   else
-    return ""
+    return string.format(" %s ", fname)
   end
 end
 
