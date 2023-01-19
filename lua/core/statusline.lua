@@ -1,3 +1,5 @@
+Statusline = {}
+
 local function update_mode_colors()
   local current_mode = vim.api.nvim_get_mode().mode
   local mode_color = "%#StatusLineAccent#"
@@ -48,7 +50,7 @@ end
 local function filename()
   local fname = vim.fn.expand("%:t")
   if fname then
-    return fname .. " "
+    return string.format(" %s ", fname)
   else
     return ""
   end
@@ -118,26 +120,28 @@ local function diagnostics()
   local info = ""
 
   if count["errors"] ~= 0 then
-    errors = "  " .. count["errors"]
+    errors = string.format("  %s", count["errors"])
   end
   if count["warnings"] ~= 0 then
-    warnings = "   " .. count["warnings"]
+    warnings = string.format("  %s", count["warnings"])
   end
   if count["hints"] ~= 0 then
-    hints = "  " .. count["hints"]
+    hints = string.format("  %s", count["hints"])
   end
   if count["info"] ~= 0 then
-    info = "  " .. count["info"]
+    info = string.format("  %s", count["info"])
   end
 
-  return "%#DiagnosticError#"
-    .. errors
-    .. "%#DiagnosticWarn#"
-    .. warnings
-    .. "%#DiagnosticInfo#"
-    .. hints
-    .. "%#DiagnosticWarn#"
-    .. info
+  return table.concat({
+    "%#DiagnosticError#"
+      .. errors
+      .. "%#DiagnosticWarn#"
+      .. warnings
+      .. "%#DiagnosticInfo#"
+      .. hints
+      .. "%#DiagnosticWarn#"
+      .. info,
+  })
 end
 
 local function filetype()
@@ -153,15 +157,10 @@ local function filetype()
 end
 
 local function lineinfo()
-  if vim.bo.filetype == "alpha" then
-    return ""
-  end
   return " %P %l:%c "
 end
 
-Statusline = {}
-
-function Statusline.active()
+local function active()
   local winwidth
   if vim.o.laststatus == 3 then
     winwidth = vim.o.columns
@@ -198,8 +197,21 @@ function Statusline.active()
   end
 end
 
-function Statusline.inactive()
-  return ""
+local function inactive()
+  return table.concat({
+    "",
+  })
+end
+
+function Statusline.draw()
+  -- Add filetypes to the list for which you don't want statusline
+  local disable_statusline = { "NvimTree", "alpha", "" }
+  local buffer_type = vim.bo.filetype
+  if require("core.utils.functions").ismatch(disable_statusline, buffer_type) then
+    return inactive()
+  else
+    return active()
+  end
 end
 
 return Statusline

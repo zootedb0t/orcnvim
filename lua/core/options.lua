@@ -46,7 +46,7 @@ local options = {
     title = true,
     jumpoptions = "stack",
     cmdheight = 0, -- Hide cmdheight after issue #16251
-    wbr = "%=%f %m", -- Winbar
+    wbr = "%=%t %m", -- Winbar
     ls = 3, -- Global statusline
     shell = "/usr/bin/bash",
     inccommand = "split", -- incrementally show result of command

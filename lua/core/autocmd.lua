@@ -19,17 +19,7 @@ cmd("VimLeave", {
 -- Statusline
 cmd({ "BufEnter", "WinResized", "WinEnter", "ModeChanged" }, {
   callback = function()
-    if vim.bo.filetype == "NvimTree" then
-      return
-    end
-    vim.o.statusline = "%!luaeval('Statusline.active()')"
-  end,
-})
-
-cmd({ "WinLeave", "BufLeave" }, {
-  pattern = "*",
-  callback = function()
-    vim.o.statusline = "%!luaeval('Statusline.inactive()')"
+    vim.o.statusline = "%!luaeval('Statusline.draw()')"
   end,
 })
 
