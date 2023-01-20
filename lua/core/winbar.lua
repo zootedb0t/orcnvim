@@ -2,10 +2,16 @@ local M = {}
 
 local function filename()
   local fname = vim.fn.expand("%:t")
-  if require("core.utils.functions").isempty(fname) then
+  local buf_option = vim.api.nvim_buf_get_option(0, "mod")
+  if require("core.utils.functions").isempty(fname) and not buf_option then
     return " "
+  elseif not require("core.utils.functions").isempty(fname) and buf_option then
+    return table.concat({
+      fname,
+      "  ",
+    })
   else
-    return string.format(" %s ", fname)
+    return string.format("%s", fname)
   end
 end
 
@@ -20,7 +26,7 @@ local function inactive()
   return " "
 end
 
-function M.winbar()
+M.draw = function()
   local disable_winabar = { "NvimTree", "alpha" }
   local buffer_type = vim.bo.filetype
   if require("core.utils.functions").ismatch(disable_winabar, buffer_type) then

@@ -17,9 +17,13 @@ cmd("VimLeave", {
 })
 
 -- Statusline
-cmd({ "BufEnter", "WinResized", "WinEnter", "ModeChanged" }, {
+cmd({ "BufEnter", "CursorHoldI", "CursorHold", "WinResized", "WinEnter", "ModeChanged" }, {
   callback = function()
-    vim.o.statusline = require("core.statusline").draw()
+    local value = require("core.statusline").draw()
+    local status_ok, _ = pcall(vim.api.nvim_set_option_value, "statusline", value, { scope = "global" })
+    if not status_ok then
+      return
+    end
   end,
 })
 
@@ -34,7 +38,11 @@ cmd(
   { "CursorHoldI", "CursorHold", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost", "TabClosed", "TabEnter" },
   {
     callback = function()
-      vim.o.winbar = require("core.winbar").winbar()
+      local value = require("core.winbar").draw()
+      local status_ok, _ = pcall(vim.api.nvim_set_option_value, "winbar", value, { scope = "local" })
+      if not status_ok then
+        return
+      end
     end,
   }
 )
