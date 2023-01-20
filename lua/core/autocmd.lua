@@ -17,7 +17,7 @@ cmd("VimLeave", {
 })
 
 -- Statusline
-cmd({ "BufEnter", "CursorHoldI", "CursorHold", "WinResized", "WinEnter", "ModeChanged" }, {
+cmd({ "BufEnter", "CursorHoldI", "CursorHold", "WinResized", "WinEnter", "ModeChanged", "InsertEnter" }, {
   callback = function()
     local value = require("core.statusline").draw()
     local status_ok, _ = pcall(vim.api.nvim_set_option_value, "statusline", value, { scope = "global" })

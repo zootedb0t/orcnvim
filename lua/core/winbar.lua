@@ -26,11 +26,17 @@ local function inactive()
   return " "
 end
 
+local function file_explorer()
+  return "%=" .. "File Explore" .. "%="
+end
+
 M.draw = function()
-  local disable_winabar = { "NvimTree", "alpha" }
+  local disable_winabar = { "alpha" }
   local buffer_type = vim.bo.filetype
   if require("core.utils.functions").ismatch(disable_winabar, buffer_type) then
     return inactive()
+  elseif vim.bo.filetype == "NvimTree" then
+    return file_explorer()
   else
     return active()
   end

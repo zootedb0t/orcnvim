@@ -207,7 +207,7 @@ end
 
 function Statusline.draw()
   -- Add filetypes to the list for which you don't want statusline
-  local disable_statusline = { "NvimTree", "alpha", "TelescopePrompt", "" }
+  local disable_statusline = { "NvimTree", "alpha", "TelescopePrompt", "lazy", "" }
   local buffer_type = vim.bo.filetype
   if require("core.utils.functions").ismatch(disable_statusline, buffer_type) then
     return inactive()
