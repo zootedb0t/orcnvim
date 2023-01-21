@@ -3,7 +3,7 @@ local M = {}
 
 M.capabilities = {
   require("cmp_nvim_lsp").default_capabilities(),
-  offsetEncoding = "utf-8",
+  offsetEncoding = "utf-16",
 }
 
 M.setup = function()

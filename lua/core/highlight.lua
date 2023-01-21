@@ -11,4 +11,8 @@ function M.statusline_highlight()
   highlight(0, "StatuslineCmdLineAccent", { fg = mocha.surface0, bg = mocha.sapphire })
 end
 
+M.winbar_highlight = function()
+  highlight(0, "WinbarFile", { fg = mocha.green })
+end
+
 return M

@@ -1,5 +1,8 @@
 Statusline = {}
 
+local is_empty = require("core.utils.functions").isempty
+local is_match = require("core.utils.functions").ismatch
+
 -- Import highlights
 require("core.highlight").statusline_highlight()
 
@@ -52,7 +55,7 @@ end
 
 local function filename()
   local fname = vim.fn.expand("%:t")
-  if require("core.utils.functions").isempty(fname) then
+  if is_empty(fname) then
     return " "
   else
     return string.format(" %s ", fname)
@@ -66,19 +69,19 @@ local vcs = function()
   end
   local added, changed, removed
 
-  if require("core.utils.functions").isempty(git_info.added) then
+  if is_empty(git_info.added) then
     added = ""
   else
     added = "  " .. tostring(git_info.added)
   end
 
-  if require("core.utils.functions").isempty(git_info.changed) then
+  if is_empty(git_info.changed) then
     changed = ""
   else
     changed = "  " .. tostring(git_info.changed)
   end
 
-  if require("core.utils.functions").isempty(git_info.removed) then
+  if is_empty(git_info.removed) then
     removed = ""
   else
     removed = "  " .. tostring(git_info.removed)
@@ -152,7 +155,7 @@ local function filetype()
   local extension = vim.fn.expand("%:e")
   local ftype = vim.bo.filetype
   local icon = require("nvim-web-devicons").get_icon(fname, extension, { default = true })
-  if require("core.utils.functions").isempty(icon) then
+  if is_empty(icon) then
     return " "
   end
   return string.format(" %s %s ", icon, ftype)
@@ -209,7 +212,7 @@ function Statusline.draw()
   -- Add filetypes to the list for which you don't want statusline
   local disable_statusline = { "NvimTree", "alpha", "TelescopePrompt", "lazy", "" }
   local buffer_type = vim.bo.filetype
-  if require("core.utils.functions").ismatch(disable_statusline, buffer_type) then
+  if is_match(disable_statusline, buffer_type) then
     return inactive()
   else
     return active()
