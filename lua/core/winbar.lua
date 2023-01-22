@@ -21,7 +21,6 @@ local function filename()
       " ",
       fname,
       "  ",
-      "%*",
     })
   else
     return table.concat({
@@ -29,7 +28,6 @@ local function filename()
       icon,
       " ",
       fname,
-      "%*",
     })
   end
 end

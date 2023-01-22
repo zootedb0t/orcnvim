@@ -203,10 +203,7 @@ local function active()
 end
 
 local function inactive()
-  return table.concat({
-    "%#Normal#",
-    " ",
-  })
+  return "%#StatuslineTransparent#"
 end
 
 function Statusline.draw()

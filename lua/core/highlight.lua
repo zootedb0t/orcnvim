@@ -9,6 +9,7 @@ function M.statusline_highlight()
   highlight(0, "StatuslineReplaceAccent", { fg = mocha.surface0, bg = mocha.blue })
   highlight(0, "StatuslineTerminalAccent", { fg = mocha.surface0, bg = mocha.yellow })
   highlight(0, "StatuslineCmdLineAccent", { fg = mocha.surface0, bg = mocha.sapphire })
+  highlight(0, "StatuslineTransparent", { fg = "NONE", bg = "NONE"})
 end
 
 M.winbar_highlight = function()
