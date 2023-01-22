@@ -204,6 +204,7 @@ end
 
 local function inactive()
   return table.concat({
+    "%#Normal#",
     " ",
   })
 end

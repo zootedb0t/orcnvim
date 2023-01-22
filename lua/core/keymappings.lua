@@ -17,23 +17,17 @@ map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map("n", "H", "^", { desc = "Goto Beginning of line" }, opt)
 map("n", "L", "$", { desc = "Goto End of line" }, opt)
 
--- resizing splits
-map("n", "<C-Up>", "<cmd>resize -2<cr>", opt)
-map("n", "<C-Down>", "<cmd>resize +2<cr>", opt)
-map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", opt)
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", opt)
+-- resizing window with <ctrl> and arrow
+map("n", "<C-Up>", "<cmd>resize +2<cr>", opt, { desc = "Increase window height" })
+map("n", "<C-Down>", "<cmd>resize -2<cr>", opt, { desc = "Decrease window height" })
+map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", opt, { desc = "Decrease window width" })
+map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", opt, { desc = "Increase window width" })
 
--- Better Window Navigation
-map("n", "<C-j>", "<C-w>j", opt)
-map("n", "<C-k>", "<C-w>k", opt)
-map("n", "<C-l>", "<C-w>l", opt)
-map("n", "<C-h>", "<C-w>h", opt)
-
--- Resizing Window
-map("n", "<C-S-Left>", "<cmd>vertical resize +5<cr>", opt)
-map("n", "<C-S-Right>", "<cmd>vertical resize -5<cr>", opt)
-map("n", "<C-S-Up>", "<cmd>resize +5<cr>", opt)
-map("n", "<C-S-Down>", "<cmd>resize -5<cr>", opt)
+-- Better Window Navigation using <ctrl> hjkl keys
+map("n", "<C-h>", "<C-w>h", opt, { desc = "Go to left window " })
+map("n", "<C-j>", "<C-w>j", opt, { desc = "Go to lower window " })
+map("n", "<C-k>", "<C-w>k", opt, { desc = "Go to upper window " })
+map("n", "<C-l>", "<C-w>l", opt, { desc = "Go to right window " })
 
 -- better indenting
 map("v", "<", "<gv", { desc = "Indent Left" }, opt)
@@ -72,13 +66,6 @@ map("n", "<localleader>d", vim.diagnostic.open_float, opt)
 map("n", "[d", vim.diagnostic.goto_prev, opt)
 map("n", "]d", vim.diagnostic.goto_next, opt)
 map("n", "<localleader>q", vim.diagnostic.setloclist, opt)
-
-map('n', '<leader>/', function()
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    -- winblend = 10,
-    previewer = false,
-  })
-end, { desc = '[/] Fuzzily search in current buffer]' })
 
 -- Tabline
 -- map("n", "<Leader>tn", "<CMD>tabnew<CR>", { desc = "New Tab" })

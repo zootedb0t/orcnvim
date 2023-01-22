@@ -82,9 +82,15 @@ M.config = function()
   local mappings = {
     ["e"] = { "<cmd>NvimTreeFindFileToggle<cr>", "Toggle file explore" },
     ["d"] = { "<cmd>ChangeDirectory<cr>", "Change working directory" },
-    ["w"] = { "<cmd>w!<CR>", "Save" },
     [";"] = { "<cmd>Alpha<CR>", "Dashboard" },
-    -- ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
+    ["/"] = {
+      function()
+        require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+          previewer = false,
+        }))
+      end,
+      "Fuzzily search in current buffer",
+    },
     b = {
       name = "Buffers",
       b = { "<cmd>Telescope buffers<cr>", "Buffers" },
@@ -92,6 +98,7 @@ M.config = function()
       d = { "<cmd>bd<cr>", "Delete buffer" },
       n = { "<cmd>enew<cr>", "Create new buffer" },
       r = { "<cmd>SourceFile<cr>", "Source current buffer" },
+      s = { "<cmd>w!<CR>", "Save" },
     },
     l = {
       name = "LSP",
@@ -133,6 +140,11 @@ M.config = function()
       h = { "<CMD>checkhealth<cr>", "Health" },
       v = { "<CMD>version<cr>", "Version" },
     },
+    m = {
+      name = "Session Manager",
+      s = { "<cmd>SessionSave<CR>", "Save Session" },
+      l = { "<cmd>SessionLoad<CR>", "Load Saved Sessions" },
+    },
     p = {
       name = "Plugin",
       c = { "<CMD>Lazy clean<cr>", "Clean" },
@@ -160,10 +172,12 @@ M.config = function()
       k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
       C = { "<cmd>Telescope commands<cr>", "Commands" },
     },
-    m = {
-      name = "Session Manager",
-      s = { "<cmd>SessionSave<CR>", "Save Session" },
-      l = { "<cmd>SessionLoad<CR>", "Load Saved Sessions" },
+    w = {
+      name = "Window",
+      b = { "<C-W>s", "Split window below" },
+      c = { "<cmd>close<CR>", "Close window" },
+      o = { "<C-W>p", "Other window" },
+      r = { "<C-W>v", "Split window right" },
     },
   }
   wk.setup(setup)
