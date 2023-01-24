@@ -16,18 +16,19 @@ local plugins = {
     "catppuccin/nvim",
     name = "catppuccin",
   },
+  { "bluz71/vim-nightfly-colors", lazy = true, priority = 1000 },
   {
     "rose-pine/neovim",
+    lazy = true,
     name = "rose-pine",
-    config = function()
-      require("rose-pine").setup()
-      vim.cmd("colorscheme rose-pine")
-    end,
+    -- config = function()
+    --   require("rose-pine").setup()
+    -- end,
   },
   {
     "numToStr/Comment.nvim",
-    -- keys = { "gc", "gb" },
-    event = { "BufReadPost", "BufNewFile", "BufNew" },
+    keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
+    -- event = { "BufReadPost", "BufNewFile", "BufNew" },
     config = function()
       require("Comment").setup({
         ignore = "^$",

@@ -2,6 +2,7 @@ Statusline = {}
 
 local is_empty = require("core.utils.functions").isempty
 local is_match = require("core.utils.functions").ismatch
+local icon = require("core.icons")
 
 -- Import highlights
 require("core.highlight").statusline_highlight()
@@ -64,31 +65,34 @@ end
 
 local vcs = function()
   local git_info = vim.b.gitsigns_status_dict
-  if not git_info or git_info.head == "" then
+  local branch
+  if is_empty(git_info) then
     return ""
+  else
+    branch = string.format("%s %s ", icon.GitBranch, git_info.head:upper())
   end
   local added, changed, removed
 
   if is_empty(git_info.added) then
     added = ""
   else
-    added = "  " .. tostring(git_info.added)
+    added = string.format("%s %s ", icon.GitAdd, git_info.added)
   end
 
   if is_empty(git_info.changed) then
     changed = ""
   else
-    changed = "  " .. tostring(git_info.changed)
+    changed = string.format("%s %s ", icon.GitChange, git_info.changed)
   end
 
   if is_empty(git_info.removed) then
     removed = ""
   else
-    removed = "  " .. tostring(git_info.removed)
+    removed = string.format("%s %s ", icon.GitDelete, git_info.removed)
   end
 
   return table.concat({
-    " " .. git_info.head:upper(),
+    branch,
     added,
     changed,
     removed,
@@ -126,27 +130,27 @@ local function diagnostics()
   local info = ""
 
   if count["errors"] ~= 0 then
-    errors = string.format("  %s", count["errors"])
+    errors = string.format("%s %s ", icon.DiagnosticError, count["errors"])
   end
   if count["warnings"] ~= 0 then
-    warnings = string.format("  %s", count["warnings"])
+    warnings = string.format("%s %s ", icon.DiagnosticWarn, count["warnings"])
   end
   if count["hints"] ~= 0 then
-    hints = string.format("  %s", count["hints"])
+    hints = string.format("%s %s ", icon.DiagnosticHint, count["hints"])
   end
   if count["info"] ~= 0 then
-    info = string.format("  %s", count["info"])
+    info = string.format("%s %s ", icon.DiagnosticInfo, count["info"])
   end
 
   return table.concat({
     "%#DiagnosticError#"
-      .. errors
-      .. "%#DiagnosticWarn#"
-      .. warnings
-      .. "%#DiagnosticInfo#"
-      .. hints
-      .. "%#DiagnosticWarn#"
-      .. info,
+        .. errors
+        .. "%#DiagnosticWarn#"
+        .. warnings
+        .. "%#DiagnosticInfo#"
+        .. hints
+        .. "%#DiagnosticWarn#"
+        .. info,
   })
 end
 
@@ -154,15 +158,15 @@ local function filetype()
   local fname = vim.fn.expand("%:t")
   local extension = vim.fn.expand("%:e")
   local ftype = vim.bo.filetype
-  local icon = require("nvim-web-devicons").get_icon(fname, extension, { default = true })
-  if is_empty(icon) then
-    return " "
+  local file_icon = require("nvim-web-devicons").get_icon(fname, extension, { default = true })
+  if is_empty(file_icon) then
+    return ""
   end
-  return string.format(" %s %s ", icon, ftype)
+  return string.format("%s %s ", file_icon, ftype)
 end
 
 local function lineinfo()
-  return " %P %l:%c "
+  return "%P %l:%c"
 end
 
 local function active()
@@ -203,7 +207,9 @@ local function active()
 end
 
 local function inactive()
-  return "%#StatuslineTransparent#"
+  -- Try this if statusline appears with normal highlight
+  -- return "%#StatuslineTransparent#"
+  return "%#Normal#"
 end
 
 function Statusline.draw()

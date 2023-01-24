@@ -5,8 +5,8 @@ local options = {
     clipboard = { "unnamedplus" }, -- Connection to the system clipboard
     completeopt = { "menu", "menuone", "noselect" }, -- Options for insert mode completion
     copyindent = true, -- Copy the previous indentation on autoindenting
-    cursorline = true, -- Highlight the text line of the cursor
-    cursorlineopt = "number", -- This looks better
+    cursorline = false, -- Highlight the text line of the cursor
+    -- cursorlineopt = "number", -- This looks better
     expandtab = true, -- Enable the use of space in tab
     fillchars = {
       eob = " ",
@@ -57,6 +57,8 @@ local options = {
     --list = true, -- Show some invisible characters
     --listchars = { tab = " ", trail = "·" },
     diffopt = vim.opt.diffopt + { "linematch:50" },
+    -- numberwidth = 3,
+    -- statuscolumn = "%=%{v:virtnum < 1 ? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s",
   },
 
   g = {

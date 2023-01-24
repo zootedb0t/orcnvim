@@ -1,3 +1,4 @@
+M = {}
 local cmd = vim.api.nvim_create_autocmd
 
 -- Highlight on yank
@@ -17,7 +18,18 @@ cmd("VimLeave", {
 })
 
 -- Statusline
-cmd({ "BufEnter", "CursorHoldI", "CursorHold", "WinResized", "WinEnter", "ModeChanged", "InsertEnter" }, {
+cmd({
+  "CursorHoldI",
+  "WinEnter",
+  "BufEnter",
+  "CursorHold",
+  "BufWinEnter",
+  "BufFilePost",
+  "InsertEnter",
+  "BufWritePost",
+  "TabClosed",
+  "TabEnter",
+}, {
   callback = function()
     local value = require("core.statusline").draw()
     local status_ok, _ = pcall(vim.api.nvim_set_option_value, "statusline", value, { scope = "global" })
@@ -34,15 +46,55 @@ cmd({ "BufWritePost" }, {
 })
 
 -- Winbar
-cmd(
-  { "CursorHoldI", "CursorHold", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost", "TabClosed", "TabEnter" },
-  {
+cmd({
+  "CursorHoldI",
+  "BufModifiedSet",
+  "CursorHold",
+  "BufWinEnter",
+  "BufFilePost",
+  "InsertEnter",
+  "BufWritePost",
+  "TabClosed",
+  "TabEnter",
+}, {
+  callback = function()
+    local value = require("core.winbar").draw()
+    local status_ok, _ = pcall(vim.api.nvim_set_option_value, "winbar", value, { scope = "local" })
+    if not status_ok then
+      return
+    end
+  end,
+})
+
+-- For transparency
+function M.enable_tranparency()
+  cmd("ColorScheme", {
+    pattern = "*",
     callback = function()
-      local value = require("core.winbar").draw()
-      local status_ok, _ = pcall(vim.api.nvim_set_option_value, "winbar", value, { scope = "local" })
-      if not status_ok then
-        return
+      local hl_group = {
+        "Normal",
+        "SignColumn",
+        -- "WhichKey",
+        -- "WhichKeyDesc",
+        -- "WhichKeyFloat",
+        -- "WhichKeyGroup",
+        -- "WhichKeyValue",
+        -- "WhichKeyBorder",
+        -- "WhichKeySeparator",
+        "NormalFloat",
+        "Float",
+        "FloatBorder",
+        "FloatShadow",
+        "NormalNC",
+        "NvimTreeNormal",
+        "EndOfBuffer",
+        "MsgArea",
+      }
+      for _, name in ipairs(hl_group) do
+        vim.cmd(string.format("highlight %s ctermbg=none guibg=none", name))
       end
     end,
-  }
-)
+  })
+end
+
+return M

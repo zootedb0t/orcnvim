@@ -1,4 +1,5 @@
 vim.g.maplocalleader = ","
+local icon = require("core.icons")
 local M = {}
 
 M.capabilities = {
@@ -8,10 +9,15 @@ M.capabilities = {
 
 M.setup = function()
   -- Overide handlers
-  local signs = { Error = "", Warn = "▲", Info = "", Hint = "" }
-  for sign, icon in pairs(signs) do
+  local signs = {
+    Error = icon.DiagnosticError,
+    Warn = icon.DiagnosticWarn,
+    Info = icon.DiagnosticInfo,
+    Hint = icon.DiagnosticHint,
+  }
+  for sign, symbol in pairs(signs) do
     vim.fn.sign_define("DiagnosticSign" .. sign, {
-      text = icon,
+      text = symbol,
       texthl = "Diagnostic" .. sign,
       -- linehl = false,
       -- numhl = "Diagnostic" .. sign,
@@ -33,8 +39,8 @@ M.setup = function()
       style = "minimal",
       border = "rounded",
       source = "always",
-      -- header = "Diagnostic",
-      header = "",
+      header = "Diagnostic",
+      -- header = "",
     },
   })
 end

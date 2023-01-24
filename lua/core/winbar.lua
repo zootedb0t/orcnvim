@@ -34,6 +34,7 @@ end
 
 local function active()
   return table.concat({
+    "%#WinbarFile#",
     "%=",
     filename(),
   })
