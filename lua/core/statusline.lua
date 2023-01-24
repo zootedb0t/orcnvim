@@ -66,29 +66,29 @@ end
 local vcs = function()
   local git_info = vim.b.gitsigns_status_dict
   local branch
+  local added, changed, removed
   if is_empty(git_info) then
     return ""
   else
-    branch = string.format("%s %s ", icon.GitBranch, git_info.head:upper())
+    branch = string.format("%s %s ", icon.git.Branch, git_info.head:upper())
   end
-  local added, changed, removed
 
   if is_empty(git_info.added) then
     added = ""
   else
-    added = string.format("%s %s ", icon.GitAdd, git_info.added)
+    added = string.format("%s %s ", icon.git.LineAdded, git_info.added)
   end
 
   if is_empty(git_info.changed) then
     changed = ""
   else
-    changed = string.format("%s %s ", icon.GitChange, git_info.changed)
+    changed = string.format("%s %s ", icon.git.LineModified, git_info.changed)
   end
 
   if is_empty(git_info.removed) then
     removed = ""
   else
-    removed = string.format("%s %s ", icon.GitDelete, git_info.removed)
+    removed = string.format("%s %s ", icon.git.LineRemoved, git_info.removed)
   end
 
   return table.concat({
@@ -130,27 +130,27 @@ local function diagnostics()
   local info = ""
 
   if count["errors"] ~= 0 then
-    errors = string.format("%s %s ", icon.DiagnosticError, count["errors"])
+    errors = string.format("%s %s ", icon.diagnostics.BoldError, count["errors"])
   end
   if count["warnings"] ~= 0 then
-    warnings = string.format("%s %s ", icon.DiagnosticWarn, count["warnings"])
+    warnings = string.format("%s %s ", icon.diagnostics.BoldWarning, count["warnings"])
   end
   if count["hints"] ~= 0 then
-    hints = string.format("%s %s ", icon.DiagnosticHint, count["hints"])
+    hints = string.format("%s %s ", icon.diagnostics.BoldHint, count["hints"])
   end
   if count["info"] ~= 0 then
-    info = string.format("%s %s ", icon.DiagnosticInfo, count["info"])
+    info = string.format("%s %s ", icon.diagnostics.BoldInformation, count["info"])
   end
 
   return table.concat({
     "%#DiagnosticError#"
-        .. errors
-        .. "%#DiagnosticWarn#"
-        .. warnings
-        .. "%#DiagnosticInfo#"
-        .. hints
-        .. "%#DiagnosticWarn#"
-        .. info,
+      .. errors
+      .. "%#DiagnosticWarn#"
+      .. warnings
+      .. "%#DiagnosticInfo#"
+      .. hints
+      .. "%#DiagnosticWarn#"
+      .. info,
   })
 end
 

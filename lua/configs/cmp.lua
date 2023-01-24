@@ -1,59 +1,11 @@
-  -- local has_words_before = function()
-  --   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  --   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-  -- end
-
-  --   פּ ﯟ   some other good icons
   local cmp_status_ok, cmp = pcall(require, "cmp")
   local snip_status_ok, luasnip = pcall(require, "luasnip")
   local autopair_ok, autopair = pcall(require, "nvim-autopairs.completion.cmp")
   if cmp_status_ok and snip_status_ok then
     local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
-    local kind_icons = {
-      -- These icons work in patched font
-      Text = "",
-      Method = "",
-      Function = "",
-      Constructor = "",
-      Field = "",
-      Variable = "",
-      Class = "",
-      Interface = "",
-      Module = "",
-      Property = "",
-      Unit = "",
-      Value = "",
-      Enum = "",
-      Keyword = "",
-      Snippet = "",
-      Color = "",
-      File = "",
-      Reference = "",
-      Folder = "",
-      EnumMember = "",
-      Constant = "",
-      Struct = "",
-      Event = "",
-      Operator = "",
-      TypeParameter = "",
-    }
+    local kind_icons = require("core.icons").kind
 
     cmp.setup({
-      -- formatting = {
-      -- 	fields = { "menu", "abbr", "kind" },
-      -- 	format = function(entry, item)
-      -- 		local menu_icon = {
-      -- 			nvim_lsp = "λ",
-      -- 			luasnip = "⋗",
-      -- 			buffer = "Ω",
-      -- 			path = "🖫",
-      -- 		}
-
-      -- 		item.menu = menu_icon[entry.source.name]
-      -- 		return item
-      -- 	end,
-      -- },
-
       formatting = {
         format = function(entry, vim_item)
           vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)

@@ -1,5 +1,5 @@
 -- Set true to make window transparent
-local transparent_window = true
+local transparent_window = false
 
 
 -- vim.g.nightflyWinSeparator = 2

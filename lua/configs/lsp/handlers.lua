@@ -10,10 +10,10 @@ M.capabilities = {
 M.setup = function()
   -- Overide handlers
   local signs = {
-    Error = icon.DiagnosticError,
-    Warn = icon.DiagnosticWarn,
-    Info = icon.DiagnosticInfo,
-    Hint = icon.DiagnosticHint,
+    Error = icon.diagnostics.BoldError,
+    Warn = icon.diagnostics.BoldWarning,
+    Info = icon.diagnostics.BoldInformation,
+    Hint = icon.diagnostics.BoldHint,
   }
   for sign, symbol in pairs(signs) do
     vim.fn.sign_define("DiagnosticSign" .. sign, {
@@ -32,7 +32,7 @@ M.setup = function()
     virtual_text = false,
     -- virtual_text = {
     --   spacing = 10,
-    --   severity_sort = "Error",
+      -- severity_sort = "Error",
     -- },
     float = {
       focusable = false,
