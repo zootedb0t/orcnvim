@@ -16,7 +16,7 @@ local plugins = {
     "catppuccin/nvim",
     name = "catppuccin",
   },
-  { "bluz71/vim-nightfly-colors", lazy = true, priority = 1000 },
+  { "bluz71/vim-nightfly-colors", as = "nightfly", lazy = true, priority = 1000 },
   {
     "rose-pine/neovim",
     lazy = true,

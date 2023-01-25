@@ -1,10 +1,8 @@
--- Set true to make window transparent
-local transparent_window = true
-
 -- NightFly theme
 vim.g.nightflyWinSeparator = 2
-vim.g.nightflyTransparent = true
+vim.g.nightflyTransparent = false
 
+-- catppuccin theme
 -- require("catppuccin").setup({
 --   flavour = "mocha", -- latte, frappe, macchiato, mocha
 --   background = { -- :h background
@@ -15,7 +13,10 @@ vim.g.nightflyTransparent = true
 --   term_colors = true,
 -- })
 
-if transparent_window then
+-- Setting colorscheme
+
+-- set transparent_nvim value in options.lua
+if vim.g.transparent_nvim then
   require("core.autocmd").enable_tranparency()
 end
 
