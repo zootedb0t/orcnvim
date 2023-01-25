@@ -31,7 +31,7 @@ cmd({
   "TabEnter",
 }, {
   callback = function()
-    local value = require("core.statusline").draw()
+    local value = require("core.ui.statusline").draw()
     local status_ok, _ = pcall(vim.api.nvim_set_option_value, "statusline", value, { scope = "global" })
     if not status_ok then
       return
@@ -58,13 +58,29 @@ cmd({
   "TabEnter",
 }, {
   callback = function()
-    local value = require("core.winbar").draw()
+    local value = require("core.ui.winbar").draw()
     local status_ok, _ = pcall(vim.api.nvim_set_option_value, "winbar", value, { scope = "local" })
     if not status_ok then
       return
     end
   end,
 })
+
+-- cmd("ColorScheme", {
+--   pattern = "*",
+--   callback = function()
+--     local hl_group = {
+--       "TelescopePromptNormal",
+--       "TelescopeNormal",
+--       "TelescopeBorder",
+--       "Float",
+--       "NormalFloat",
+--     }
+--     for _, name in ipairs(hl_group) do
+--       vim.cmd(string.format("highlight %s ctermbg=none guibg=none", name))
+--     end
+--   end,
+-- })
 
 -- For transparency
 function M.enable_tranparency()
@@ -74,13 +90,9 @@ function M.enable_tranparency()
       local hl_group = {
         "Normal",
         "SignColumn",
-        -- "WhichKey",
-        -- "WhichKeyDesc",
-        -- "WhichKeyFloat",
-        -- "WhichKeyGroup",
-        -- "WhichKeyValue",
-        -- "WhichKeyBorder",
-        -- "WhichKeySeparator",
+        "TelescopePromptNormal",
+        "TelescopeNormal",
+        "TelescopeBorder",
         "NormalFloat",
         "Float",
         "FloatBorder",
@@ -89,6 +101,8 @@ function M.enable_tranparency()
         "NvimTreeNormal",
         "EndOfBuffer",
         "MsgArea",
+        "FidgetTitle",
+        "FidgetTask",
       }
       for _, name in ipairs(hl_group) do
         vim.cmd(string.format("highlight %s ctermbg=none guibg=none", name))

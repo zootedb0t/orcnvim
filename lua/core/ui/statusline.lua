@@ -5,7 +5,7 @@ local is_match = require("core.utils.functions").ismatch
 local icon = require("core.icons")
 
 -- Import highlights
-require("core.highlight").statusline_highlight()
+require("core.ui.highlight").statusline_highlight()
 
 local function update_mode_colors()
   local current_mode = vim.api.nvim_get_mode().mode
@@ -57,7 +57,7 @@ end
 local function filename()
   local fname = vim.fn.expand("%:t")
   if is_empty(fname) then
-    return " "
+    return ""
   else
     return string.format(" %s ", fname)
   end
@@ -143,14 +143,14 @@ local function diagnostics()
   end
 
   return table.concat({
-    "%#DiagnosticError#"
-      .. errors
-      .. "%#DiagnosticWarn#"
-      .. warnings
-      .. "%#DiagnosticInfo#"
-      .. hints
-      .. "%#DiagnosticWarn#"
-      .. info,
+    "%#DiagnosticError#",
+    errors,
+    "%#DiagnosticWarn#",
+    warnings,
+    "%#DiagnosticInfo#",
+    hints,
+    "%#DiagnosticWarn#",
+    info,
   })
 end
 
@@ -199,7 +199,6 @@ local function active()
       "%#Normal#",
       diagnostics(),
       "%=",
-      -- vcs(),
       "%#Normal#",
       lineinfo(),
     })
@@ -208,8 +207,8 @@ end
 
 local function inactive()
   -- Try this if statusline appears with normal highlight
-  -- return "%#StatuslineTransparent#"
-  return "%#Normal#"
+  return "%#StatuslineTransparent#"
+  -- return "%#Normal#"
 end
 
 function Statusline.draw()

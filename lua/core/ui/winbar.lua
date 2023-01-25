@@ -1,15 +1,16 @@
 local M = {}
 
-require("core.highlight").winbar_highlight()
+require("core.ui.highlight").winbar_highlight()
 local is_empty = require("core.utils.functions").isempty
 local is_match = require("core.utils.functions").ismatch
+local icon = require("core.icons")
 
 local function filename()
   local buf_option = vim.api.nvim_buf_get_option(0, "mod")
   local fname = vim.fn.expand("%:t")
   local ftype = vim.fn.expand("%:e")
 
-  local icon, color = require("nvim-web-devicons").get_icon_color(fname, ftype, { default = true })
+  local ficon, color = require("nvim-web-devicons").get_icon_color(fname, ftype, { default = true })
   vim.api.nvim_set_hl(0, "FileIcon", { fg = color })
 
   if is_empty(fname) and not buf_option then
@@ -17,17 +18,20 @@ local function filename()
   elseif not is_empty(fname) and buf_option then
     return table.concat({
       "%#FileIcon#",
-      icon,
+      ficon,
       " ",
       fname,
-      "  ",
+      " ",
+      icon.ui.Circle,
+      " ",
     })
   else
     return table.concat({
       "%#FileIcon#",
-      icon,
+      ficon,
       " ",
       fname,
+      " ",
     })
   end
 end
@@ -45,7 +49,7 @@ local function inactive()
 end
 
 local function file_explorer()
-  return "%#WinbarFile#" .. "%=" .. "File Explore" .. "%="
+  return table.concat({ "%#WinbarFile#", "%=", icon.ui.Tree, " ", "File Explore", "%=" })
 end
 
 M.draw = function()

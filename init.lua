@@ -15,4 +15,4 @@ require("core.keymappings")
 require("core.plug")
 require("core.utils.command") -- Custom commands
 require("core.autocmd")
-require("core.colorscheme")
+require("core.ui.colorscheme") -- Colorscheme related settings
