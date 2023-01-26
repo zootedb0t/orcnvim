@@ -3,6 +3,7 @@ Statusline = {}
 local is_empty = require("core.utils.functions").isempty
 local is_match = require("core.utils.functions").ismatch
 local icon = require("core.icons")
+local space = " "
 
 -- Import highlights
 require("core.ui.highlight").statusline_highlight()
@@ -51,7 +52,7 @@ local modes = {
 
 local function mode()
   local current_mode = vim.api.nvim_get_mode().mode
-  return string.format(" %s ", modes[current_mode]):upper()
+  return string.format("%s", modes[current_mode]):upper()
 end
 
 local function filename()
@@ -59,7 +60,7 @@ local function filename()
   if is_empty(fname) then
     return ""
   else
-    return string.format(" %s ", fname)
+    return string.format("%s", fname)
   end
 end
 
@@ -139,7 +140,7 @@ local function diagnostics()
     hints = string.format("%s %s ", icon.diagnostics.BoldHint, count["hints"])
   end
   if count["info"] ~= 0 then
-    info = string.format("%s %s ", icon.diagnostics.BoldInformation, count["info"])
+    info = string.format("%s %s", icon.diagnostics.BoldInformation, count["info"])
   end
 
   return table.concat({
@@ -162,7 +163,7 @@ local function filetype()
   if is_empty(file_icon) then
     return ""
   end
-  return string.format("%s %s ", file_icon, ftype)
+  return string.format("%s %s", file_icon, ftype)
 end
 
 local function lineinfo()
@@ -173,7 +174,7 @@ local function scrollbar()
   local current_line = vim.api.nvim_win_get_cursor(0)[1]
   local total_line = vim.api.nvim_buf_line_count(0)
   local i = math.floor((current_line - 1) / total_line * #icon.line_bar) + 1 -- i value ranges from 1 to length of line_bar
-  return string.format(" %s ", icon.line_bar[i])
+  return string.format("%s", icon.line_bar[i])
 end
 
 local function active()
@@ -186,9 +187,12 @@ local function active()
   if winwidth >= 85 then
     return table.concat({
       update_mode_colors(),
+      space,
       mode(),
+      space,
       "%#Normal# ",
       filename(),
+      space,
       "%#Normal#",
       diagnostics(),
       "%#Normal#",
@@ -197,15 +201,21 @@ local function active()
       "%=",
       vcs(),
       filetype(),
+      space,
       lineinfo(),
+      space,
       "%#ScrollBar#",
       scrollbar(),
+      space,
     })
   else
     return table.concat({
       update_mode_colors(),
+      space,
       mode(),
+      space,
       "%#Normal#",
+      space,
       diagnostics(),
       "%=",
       "%#Normal#",
