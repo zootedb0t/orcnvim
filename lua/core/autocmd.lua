@@ -25,10 +25,12 @@ cmd({
   "CursorHold",
   "BufWinEnter",
   "BufFilePost",
-  "InsertEnter",
+  -- "InsertEnter",
   "BufWritePost",
   "TabClosed",
   "TabEnter",
+  "WinScrolled",
+  "ModeChanged",
 }, {
   callback = function()
     local value = require("core.ui.statusline").draw()

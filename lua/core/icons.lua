@@ -63,7 +63,7 @@ return {
     ChevronShortLeft = "",
     ChevronShortRight = "",
     ChevronShortUp = "",
-    Circle = "",
+    Circle = "",
     Close = "",
     CloudDownload = "",
     Code = "",
@@ -144,5 +144,17 @@ return {
     Repo = "",
     Octoface = "",
     Branch = "",
+  },
+
+  line_bar = {
+    "",
+    "󰪞",
+    "󰪟",
+    "󰪠",
+    "󰪡",
+    "󰪢",
+    "󰪣",
+    "󰪤",
+    "󰪥",
   },
 }

@@ -16,7 +16,7 @@ local plugins = {
     "catppuccin/nvim",
     name = "catppuccin",
   },
-  { "bluz71/vim-nightfly-colors", as = "nightfly", lazy = true, priority = 1000 },
+  { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = true, priority = 1000 },
   {
     "rose-pine/neovim",
     lazy = true,
@@ -39,7 +39,6 @@ local plugins = {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = { "BufRead", "BufNewFile", "BufNew" },
-    opt = true,
     config = function()
       require("configs.treesitter")
     end,
@@ -155,7 +154,7 @@ local plugins = {
   },
   {
     "toppair/peek.nvim",
-    run = "deno task --quiet build:fast",
+    build = "deno task --quiet build:fast",
     ft = "markdown",
     config = function()
       require("configs.others").peek()

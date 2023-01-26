@@ -169,6 +169,13 @@ local function lineinfo()
   return "%P %l:%c"
 end
 
+local function scrollbar()
+  local current_line = vim.api.nvim_win_get_cursor(0)[1]
+  local total_line = vim.api.nvim_buf_line_count(0)
+  local i = math.floor((current_line - 1) / total_line * #icon.line_bar) + 1 -- i value ranges from 1 to length of line_bar
+  return string.format(" %s ", icon.line_bar[i])
+end
+
 local function active()
   local winwidth
   if vim.o.laststatus == 3 then
@@ -191,6 +198,8 @@ local function active()
       vcs(),
       filetype(),
       lineinfo(),
+      "%#ScrollBar#",
+      scrollbar(),
     })
   else
     return table.concat({
