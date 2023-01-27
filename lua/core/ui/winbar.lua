@@ -4,6 +4,7 @@ require("core.ui.highlight").winbar_highlight()
 local is_empty = require("core.utils.functions").isempty
 local is_match = require("core.utils.functions").ismatch
 local icon = require("core.icons")
+local space = " "
 
 local function filename()
   local buf_option = vim.api.nvim_buf_get_option(0, "mod")
@@ -19,19 +20,19 @@ local function filename()
     return table.concat({
       "%#FileIcon#",
       ficon,
-      " ",
+      space,
       fname,
-      " ",
+      space,
       icon.ui.Circle,
-      " ",
+      space,
     })
   else
     return table.concat({
       "%#FileIcon#",
       ficon,
-      " ",
+      space,
       fname,
-      " ",
+      space,
     })
   end
 end
@@ -49,7 +50,7 @@ local function inactive()
 end
 
 local function file_explorer()
-  return table.concat({ "%#WinbarFile#", "%=", icon.ui.Tree, " ", "File Explore", "%=" })
+  return table.concat({ "%#WinbarFile#", "%=", icon.ui.Tree, space, "File Tree", "%=" })
 end
 
 M.draw = function()
