@@ -3,9 +3,17 @@ local snip_status_ok, luasnip = pcall(require, "luasnip")
 local autopair_ok, autopair = pcall(require, "nvim-autopairs.completion.cmp")
 local kind_icons = require("core.icons").kind
 
+local function check_back_space()
+  local col = vim.fn.col(".") - 1 -- This returns current column position
+  if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then -- vim.fn.getline gives current line
+    return true
+  else
+    return false
+  end
+end
+
 local ELLIPSIS_CHAR = "…"
 local MAX_LABEL_WIDTH = 25
-local MAX_KIND_WIDTH = 14
 
 local get_ws = function(max, len)
   return (" "):rep(max - len) -- Add whitespace (max-len) times
@@ -21,10 +29,10 @@ local format = function(entry, item)
     luasnip = "[SNIP]",
     path = "[PATH]",
   })[entry.source.name]
-  -- local kind_symbol = symbols[item.kind]
-  -- item.kind = kind_symbol .. get_ws(MAX_KIND_WIDTH, #kind_symbol)
 
+  -- #content gives size of string
   if #content > MAX_LABEL_WIDTH then
+    -- Returns string Like |strpart()| but using character index (start form 0) and length instead of byte index and length.
     item.abbr = vim.fn.strcharpart(content, 0, MAX_LABEL_WIDTH) .. ELLIPSIS_CHAR
   else
     item.abbr = content .. get_ws(MAX_LABEL_WIDTH, #content)
@@ -103,11 +111,9 @@ if cmp_status_ok and snip_status_ok then
       end),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
       ["<Tab>"] = cmp.mapping(function(fallback)
-        local col = vim.fn.col(".") - 1
-
         if cmp.visible() then
           cmp.select_next_item(cmp_select_opts)
-        elseif col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
+        elseif check_back_space() then
           fallback()
         else
           cmp.complete()
