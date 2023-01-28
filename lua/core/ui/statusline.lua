@@ -125,22 +125,27 @@ local function diagnostics()
     count[k] = vim.tbl_count(vim.diagnostic.get(0, { severity = level }))
   end
 
-  local errors = ""
-  local warnings = ""
-  local hints = ""
-  local info = ""
+  local errors, warnings, hints, info
 
   if count["errors"] ~= 0 then
-    errors = string.format("%s %s ", icon.diagnostics.BoldError, count["errors"])
+    errors = string.format("%s %s", icon.diagnostics.BoldError, count["errors"])
+  else
+    errors = ""
   end
   if count["warnings"] ~= 0 then
     warnings = string.format("%s %s ", icon.diagnostics.BoldWarning, count["warnings"])
+  else
+    warnings = ""
   end
   if count["hints"] ~= 0 then
     hints = string.format("%s %s ", icon.diagnostics.BoldHint, count["hints"])
+  else
+    hints = ""
   end
   if count["info"] ~= 0 then
     info = string.format("%s %s", icon.diagnostics.BoldInformation, count["info"])
+  else
+    info = ""
   end
 
   return table.concat({

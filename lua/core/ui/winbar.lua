@@ -6,6 +6,47 @@ local is_match = require("core.utils.functions").ismatch
 local icon = require("core.icons")
 local space = " "
 
+local status_ok_navic, navic = pcall(require, "nvim-navic")
+if not status_ok_navic then
+  return
+end
+
+navic.setup({
+  icons = {
+    File = icon.ui.File .. space,
+    Module = icon.kind.Module .. space,
+    Namespace = icon.kind.Namespace .. space,
+    Package = icon.kind.Package .. space,
+    Class = icon.kind.Class .. space,
+    Method = icon.kind.Method .. space,
+    Property = icon.kind.Property .. space,
+    Field = icon.kind.Field .. space,
+    Constructor = icon.kind.Constructor .. space,
+    Enum = icon.kind.Enum .. space,
+    Interface = icon.kind.Interface .. space,
+    Function = icon.kind.Function .. space,
+    Variable = icon.kind.Variable .. space,
+    Constant = icon.kind.Constant .. space,
+    String = icon.kind.String .. space,
+    Number = icon.kind.Number .. space,
+    Boolean = icon.kind.Boolean .. space,
+    Array = icon.kind.Array .. space,
+    Object = icon.kind.Object .. space,
+    Key = icon.kind.Key .. space,
+    Null = icon.kind.Null .. space,
+    EnumMember = icon.kind.EnumMember .. space,
+    Struct = icon.kind.Struct .. space,
+    Event = icon.kind.Event .. space,
+    Operator = icon.kind.Operator .. space,
+    TypeParameter = icon.kind.TypeParameter .. space,
+  },
+  highlight = false,
+  separator = " " .. icon.ui.ChevronRight .. " ",
+  depth_limit = 0,
+  depth_limit_indicator = "..",
+  safe_output = true,
+})
+
 local function filename()
   local buf_option = vim.api.nvim_buf_get_option(0, "mod")
   local fname = vim.fn.expand("%:t")
@@ -18,7 +59,6 @@ local function filename()
     return ""
   elseif not is_empty(fname) and buf_option then
     return table.concat({
-      "%#FileIcon#",
       ficon,
       space,
       fname,
@@ -28,7 +68,6 @@ local function filename()
     })
   else
     return table.concat({
-      "%#FileIcon#",
       ficon,
       space,
       fname,
@@ -37,10 +76,33 @@ local function filename()
   end
 end
 
+local get_gps = function()
+  local status_ok_gps, gps = pcall(require, "nvim-navic")
+  if not status_ok_gps then
+    return ""
+  end
+
+  local status_ok, gps_location = pcall(gps.get_location, {})
+  if not status_ok then
+    return ""
+  end
+
+  if not gps.is_available() or gps_location == "error" then
+    return ""
+  end
+  if not is_empty(gps_location) then
+    return icon.ui.ChevronRight .. gps_location
+  else
+    return ""
+  end
+end
+
 local function active()
   return table.concat({
-    "%#WinbarFile#",
+    "%#NavicSeparator#",
+    get_gps(),
     "%=",
+    "%#FileIcon#",
     filename(),
   })
 end
@@ -50,7 +112,7 @@ local function inactive()
 end
 
 local function file_explorer()
-  return table.concat({ "%#WinbarFile#", "%=", icon.ui.Tree, space, "File Tree", "%=" })
+  return table.concat({ "%#WinbarFile#", "%=", space, "File Tree", "%=" })
 end
 
 M.draw = function()

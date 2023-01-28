@@ -15,6 +15,7 @@ end
 
 M.winbar_highlight = function()
   highlight(0, "WinbarFile", { fg = "#A6E3A1" })
+  highlight(0, "NavicSeparator", { fg = "#89B4FA" })
 end
 
 return M

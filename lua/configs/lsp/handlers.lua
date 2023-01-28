@@ -1,6 +1,7 @@
 local M = {}
 vim.g.maplocalleader = ","
 local icon = require("core.icons")
+local navic = require("nvim-navic")
 
 M.capabilities = {
   require("cmp_nvim_lsp").default_capabilities(),
@@ -32,7 +33,7 @@ M.setup = function()
     virtual_text = false,
     -- virtual_text = {
     --   spacing = 10,
-      -- severity_sort = "Error",
+    -- severity_sort = "Error",
     -- },
     float = {
       focusable = false,
@@ -77,6 +78,9 @@ local function lsp_highlight(client, bufnr)
 end
 
 M.on_attach = function(client, bufnr)
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
   lsp_keymap(bufnr)
   lsp_highlight(client, bufnr)
 end
