@@ -12,7 +12,7 @@ local function check_back_space()
   end
 end
 
-local ELLIPSIS_CHAR = "…"
+local ELLIPSIS_CHAR = require("core.icons").ui.Ellipsis
 local MAX_LABEL_WIDTH = 25
 
 local get_ws = function(max, len)

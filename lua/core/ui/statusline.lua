@@ -177,6 +177,16 @@ local function scrollbar()
   return string.format("%s", icon.line_bar[i])
 end
 
+local function plugin_updates()
+  local update_status = require("lazy.status").has_updates()
+  local packages = require("lazy.status").updates()
+  if update_status then
+    return string.format("%s %s ", icon.ui.Package, packages)
+  else
+    return ""
+  end
+end
+
 local function active()
   local winwidth
   if vim.o.laststatus == 3 then
@@ -207,6 +217,7 @@ local function active()
       "%#ScrollBar#",
       scrollbar(),
       space,
+      plugin_updates(),
     })
   else
     return table.concat({

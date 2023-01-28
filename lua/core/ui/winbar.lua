@@ -23,7 +23,7 @@ local function filename()
       space,
       fname,
       space,
-      icon.ui.Circle,
+      icon.ui.Pencil,
       space,
     })
   else
