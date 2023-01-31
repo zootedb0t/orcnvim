@@ -128,7 +128,7 @@ local function diagnostics()
   local errors, warnings, hints, info
 
   if count["errors"] ~= 0 then
-    errors = string.format("%s %s", icon.diagnostics.BoldError, count["errors"])
+    errors = string.format("%s %s ", icon.diagnostics.BoldError, count["errors"])
   else
     errors = ""
   end
@@ -184,9 +184,8 @@ end
 
 local function plugin_updates()
   local update_status = require("lazy.status").has_updates()
-  local packages = require("lazy.status").updates()
   if update_status then
-    return string.format("%s %s ", icon.ui.Package, packages)
+    return space .. require("lazy.status").updates()
   else
     return ""
   end

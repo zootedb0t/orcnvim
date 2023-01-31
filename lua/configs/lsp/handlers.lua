@@ -6,6 +6,13 @@ local navic = require("nvim-navic")
 M.capabilities = {
   require("cmp_nvim_lsp").default_capabilities(),
   offsetEncoding = "utf-16",
+  textDocument = {
+    completion = {
+      completionItem = {
+        snippetSupport = true,
+      },
+    },
+  },
 }
 
 M.setup = function()

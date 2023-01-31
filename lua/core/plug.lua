@@ -21,9 +21,6 @@ local plugins = {
     "rose-pine/neovim",
     lazy = true,
     name = "rose-pine",
-    -- config = function()
-    --   require("rose-pine").setup()
-    -- end,
   },
   {
     "numToStr/Comment.nvim",
@@ -225,13 +222,13 @@ local opts = {
     url_format = "https://github.com/%s.git",
   },
   lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json", -- lockfile generated after running update.
-  concurrency = nil, ---@type number limit the maximum amount of concurrent tasks
-  install = {
-    -- install missing plugins on startup. This doesn't increase startup time.
-    missing = true,
-    -- try to load one of these colorschemes when starting an installation during startup
-    colorscheme = { "catppuccin" },
-  },
+  -- concurrency = nil, ---@type number limit the maximum amount of concurrent tasks
+  -- install = {
+  --   -- install missing plugins on startup. This doesn't increase startup time.
+  --   missing = true,
+  --   -- try to load one of these colorschemes when starting an installation during startup
+  --   colorscheme = { "catppuccin" },
+  -- },
   ui = {
     -- a number <1 is a percentage., >1 is a fixed size
     size = { width = 0.8, height = 0.8 },
@@ -261,10 +258,6 @@ local opts = {
       -- * diffview.nvim: will open Diffview to show the diff
       cmd = "git",
     },
-  },
-  change_detection = {
-    -- automatically check for config file changes and reload the ui
-    enabled = true,
   },
   -- lazy can generate helptags from the headings in markdown readme files,
   -- so :help works even for plugins that don't have vim docs.
@@ -300,13 +293,6 @@ local opts = {
         "loaded_netrw",
         "loaded_netrwPlugin",
       },
-    },
-    checker = {
-      -- automatically check for plugin updates
-      enabled = true,
-      concurrency = 2, ---@type number? set to 1 to check for updates very slowly
-      notify = true, -- get a notification when new updates are found
-      frequency = 3600, -- check for updates every hour
     },
   },
 }
