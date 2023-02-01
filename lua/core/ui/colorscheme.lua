@@ -1,7 +1,3 @@
--- NightFly theme
--- vim.g.nightflyWinSeparator = 2
--- vim.g.nightflyTransparent = true
-
 -- catppuccin theme
 -- require("catppuccin").setup({
 --   flavour = "mocha", -- latte, frappe, macchiato, mocha
@@ -14,15 +10,15 @@
 -- })
 
 -- Ayu theme
-local colors = require('ayu.colors')
-colors.generate()
+-- local colors = require('ayu.colors')
+-- colors.generate()
 
-require("ayu").setup({
-  mirage = false,
-  overrides = {
-    LineNr = { fg = colors.fg },
-  },
-})
+-- require("ayu").setup({
+--   mirage = false,
+--   overrides = {
+--     LineNr = { fg = colors.fg },
+--   },
+-- })
 
 -- set transparent_nvim value in options.lua
 if vim.g.transparent_nvim then
@@ -30,4 +26,4 @@ if vim.g.transparent_nvim then
 end
 
 -- Setting colorscheme
-vim.cmd("colorscheme ayu")
+vim.cmd("colorscheme nightfly")

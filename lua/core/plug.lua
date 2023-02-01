@@ -16,8 +16,8 @@ local plugins = {
     "catppuccin/nvim",
     name = "catppuccin",
   },
-  -- { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = false, priority = 1000 },
-  { "shatur/neovim-ayu", lazy = false, priority = 1000 },
+  { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = false, priority = 1000 },
+  -- { "shatur/neovim-ayu", lazy = false, priority = 1000 },
   {
     "numToStr/Comment.nvim",
     keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
@@ -292,7 +292,7 @@ local opts = {
     },
     checker = {
       enabled = true,
-      frequency = 15, -- check for updates every hour
+      frequency = 3600, -- check for updates every hour
     },
   },
 }

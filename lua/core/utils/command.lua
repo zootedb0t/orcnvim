@@ -11,3 +11,10 @@ vim.api.nvim_create_user_command("ChangeDirectory", function()
   -- require("notify")("Directory changed  ﱮ ")
   vim.cmd("echo 'Directory changed'")
 end, { desc = "Command to change directory" })
+
+-- For peek.nvim
+local status_ok, peek = pcall(require, "peek")
+if status_ok then
+  vim.api.nvim_create_user_command("PeekOpen", peek.open, {})
+  vim.api.nvim_create_user_command("PeekClose", peek.close, {})
+end

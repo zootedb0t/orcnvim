@@ -46,8 +46,7 @@ local options = {
     writebackup = false, -- Disable making a backup before overwriting a file
     title = true,
     jumpoptions = "stack",
-    cmdheight = 0, -- Hide cmdheight after issue #16251
-    -- wbr = "%=%t %m", -- Winbar
+    cmdheight = 1, -- Hide cmdheight after issue #16251
     ls = 3, -- Global statusline
     shell = "/usr/bin/bash",
     inccommand = "split", -- incrementally show result of command

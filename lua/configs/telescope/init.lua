@@ -9,8 +9,6 @@ local actions = require("telescope.actions")
 
 telescope.setup({
   defaults = {
-    prompt_prefix = "  ",
-    selection_caret = "> ",
     color_devicons = true,
     sorting_strategy = "ascending",
     vimgrep_arguments = {
@@ -54,11 +52,13 @@ telescope.setup({
       },
     },
   },
-  -- pickers = {
-  --   find_files = {
-  --     theme = "dropdown",
-  --   },
-  -- },
+  pickers = {
+    buffers = {
+      show_all_buffers = true,
+      sort_mru = true,
+      previewer = false,
+    },
+  },
   extensions = {
     fzf = {
       fuzzy = true, -- false will only do exact matching

@@ -25,7 +25,6 @@ cmd({
   "CursorHold",
   "BufWinEnter",
   "BufFilePost",
-  -- "InsertEnter",
   "BufWritePost",
   "TabClosed",
   "TabEnter",
