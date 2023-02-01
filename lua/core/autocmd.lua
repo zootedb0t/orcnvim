@@ -68,22 +68,6 @@ cmd({
   end,
 })
 
--- cmd("ColorScheme", {
---   pattern = "*",
---   callback = function()
---     local hl_group = {
---       "TelescopePromptNormal",
---       "TelescopeNormal",
---       "TelescopeBorder",
---       "Float",
---       "NormalFloat",
---     }
---     for _, name in ipairs(hl_group) do
---       vim.cmd(string.format("highlight %s ctermbg=none guibg=none", name))
---     end
---   end,
--- })
-
 -- For transparency
 function M.enable_tranparency()
   cmd("ColorScheme", {
@@ -96,15 +80,13 @@ function M.enable_tranparency()
         "TelescopeNormal",
         "TelescopeBorder",
         "NormalFloat",
-        "Float",
-        "FloatBorder",
-        "FloatShadow",
         "NormalNC",
         "NvimTreeNormal",
         "EndOfBuffer",
         "MsgArea",
         "FidgetTitle",
         "FidgetTask",
+        "VertSplit",
       }
       for _, name in ipairs(hl_group) do
         vim.cmd(string.format("highlight %s ctermbg=none guibg=none", name))

@@ -16,12 +16,8 @@ local plugins = {
     "catppuccin/nvim",
     name = "catppuccin",
   },
-  { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = true, priority = 1000 },
-  {
-    "rose-pine/neovim",
-    lazy = true,
-    name = "rose-pine",
-  },
+  -- { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = false, priority = 1000 },
+  { "shatur/neovim-ayu", lazy = false, priority = 1000 },
   {
     "numToStr/Comment.nvim",
     keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
@@ -233,7 +229,7 @@ local opts = {
     -- a number <1 is a percentage., >1 is a fixed size
     size = { width = 0.8, height = 0.8 },
     -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
-    border = "rounded",
+    -- border = "rounded",
     icons = {
       cmd = " ",
       config = "",
@@ -293,6 +289,10 @@ local opts = {
         "loaded_netrw",
         "loaded_netrwPlugin",
       },
+    },
+    checker = {
+      enabled = true,
+      frequency = 15, -- check for updates every hour
     },
   },
 }

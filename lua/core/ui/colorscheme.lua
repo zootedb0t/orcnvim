@@ -1,6 +1,6 @@
 -- NightFly theme
-vim.g.nightflyWinSeparator = 2
-vim.g.nightflyTransparent = false
+-- vim.g.nightflyWinSeparator = 2
+-- vim.g.nightflyTransparent = true
 
 -- catppuccin theme
 -- require("catppuccin").setup({
@@ -13,11 +13,21 @@ vim.g.nightflyTransparent = false
 --   term_colors = true,
 -- })
 
--- Setting colorscheme
+-- Ayu theme
+local colors = require('ayu.colors')
+colors.generate()
+
+require("ayu").setup({
+  mirage = false,
+  overrides = {
+    LineNr = { fg = colors.fg },
+  },
+})
 
 -- set transparent_nvim value in options.lua
 if vim.g.transparent_nvim then
   require("core.autocmd").enable_tranparency()
 end
 
-vim.cmd("colorscheme nightfly")
+-- Setting colorscheme
+vim.cmd("colorscheme ayu")
