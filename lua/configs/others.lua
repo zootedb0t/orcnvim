@@ -2,8 +2,8 @@ local M = {}
 
 -- For autopairs
 M.pair = function()
-  local status_ok, pairs = pcall(require, "nvim-autopairs")
-  if status_ok then
+  local pairs_ok, pairs = pcall(require, "nvim-autopairs")
+  if pairs_ok then
     pairs.setup({
       check_ts = true,
       disable_filetype = { "TelescopePrompt" },
@@ -25,24 +25,24 @@ M.pair = function()
 end
 
 M.hop = function()
-  local status_ok, hop = pcall(require, "hop")
-  if status_ok then
+  local hop_ok, hop = pcall(require, "hop")
+  if hop_ok then
     hop.setup({
       keys = "etovxqpdygfblzhckisuran",
     })
   end
 end
 
-M.web_tools = function()
-  local status_ok, web_tools = pcall(require, "web-tools")
-  if status_ok then
-    web_tools.setup()
-  end
-end
+-- M.web_tools = function()
+--   local status_ok, web_tools = pcall(require, "web-tools")
+--   if status_ok then
+--     web_tools.setup()
+--   end
+-- end
 
 M.peek = function()
-  local status_ok, peek = pcall(require, "peek")
-  if status_ok then
+  local peek_ok, peek = pcall(require, "peek")
+  if peek_ok then
     peek.setup({
       auto_load = true, -- whether to automatically load preview when
       -- entering another markdown buffer

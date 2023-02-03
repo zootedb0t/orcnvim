@@ -1,5 +1,5 @@
-local status_ok1, mason = pcall(require, "mason")
-local status_ok2, mason_lsp = pcall(require, "mason-lspconfig")
+local mason_ok, mason = pcall(require, "mason")
+local masonlsp_ok, mason_lsp = pcall(require, "mason-lspconfig")
 local servers = {
   html = {},
   cssls = {},
@@ -37,7 +37,7 @@ local servers = {
   },
 }
 
-if status_ok1 then
+if mason_ok then
   mason.setup({
     ui = {
       border = "single",
@@ -45,7 +45,7 @@ if status_ok1 then
   })
 end
 
-if status_ok2 then
+if masonlsp_ok then
   mason_lsp.setup({
     ensure_installed = vim.tbl_keys(servers),
   })

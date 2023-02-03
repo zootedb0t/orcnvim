@@ -1,6 +1,6 @@
 local M = {}
-local status_ok, alpha = pcall(require, "alpha")
-if status_ok then
+local alpha_ok, alpha = pcall(require, "alpha")
+if alpha_ok then
   M.config = function()
     local headers = {
       ["nvim"] = {

@@ -1,6 +1,6 @@
-local status_ok, tree = pcall(require, "nvim-tree")
+local tree_ok, tree = pcall(require, "nvim-tree")
 local icon = require("core.icons")
-if status_ok then
+if tree_ok then
   tree.setup({
     sync_root_with_cwd = true,
     -- open_on_setup = true,
@@ -31,6 +31,14 @@ if status_ok then
           symlink = icon.ui.FileSymlink,
           bookmark = icon.ui.BookMark,
           modified = icon.ui.Circle,
+          folder = {
+            default = icon.ui.Folder,
+            open = icon.ui.FolderOpen,
+            empty = icon.ui.EmptyFolder,
+            empty_open = icon.ui.EmptyFolderOpen,
+            symlink = icon.ui.FolderSymlink,
+            symlink_open = icon.ui.FolderSymlink,
+          },
           git = {
             unstaged = icon.git.FileUnstaged,
             staged = icon.git.FileStaged,

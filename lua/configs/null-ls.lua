@@ -1,5 +1,5 @@
-local status_ok, null_ls = pcall(require, "null-ls")
-if status_ok then
+local null_ok, null_ls = pcall(require, "null-ls")
+if null_ok then
   local formatting = null_ls.builtins.formatting
   local diagnostics = null_ls.builtins.diagnostics
   local code_action = null_ls.builtins.code_actions

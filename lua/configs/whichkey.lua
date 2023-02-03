@@ -1,6 +1,6 @@
 local M = {}
-local status_ok, wk = pcall(require, "which-key")
-if not status_ok then
+local wk_ok, wk = pcall(require, "which-key")
+if not wk_ok then
   return
 end
 
