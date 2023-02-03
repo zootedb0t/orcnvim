@@ -92,12 +92,17 @@ local function lsp_highlight(client, bufnr)
   end
 end
 
+local function disable_formatting(client)
+  client.server_capabilities.documentFormattingProvider = false
+end
+
 M.on_attach = function(client, bufnr)
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
   end
   lsp_keymap(bufnr)
   lsp_highlight(client, bufnr)
+  disable_formatting(client)
 end
 
 return M
