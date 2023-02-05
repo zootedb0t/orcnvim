@@ -5,7 +5,7 @@ local navic = require("nvim-navic")
 
 M.capabilities = {
   require("cmp_nvim_lsp").default_capabilities(),
-  offsetEncoding = "utf-8",
+  -- offsetEncoding = "utf-8",
   -- Required by css, html lsp
   textDocument = {
     completion = {

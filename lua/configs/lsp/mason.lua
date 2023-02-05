@@ -52,11 +52,17 @@ if masonlsp_ok then
 
   mason_lsp.setup_handlers({
     function(servers_name)
-      require("lspconfig")[servers_name].setup({
+      local opts = {
         capabilities = require("configs.lsp.handlers").capabilities,
         on_attach = require("configs.lsp.handlers").on_attach,
         settings = servers[servers_name],
-      })
+      }
+
+      local status_ok, server = pcall(require, "configs.lsp.settings." .. servers_name)
+      if status_ok then
+        opts = vim.tbl_deep_extend("force", server, opts)
+      end
+      require("lspconfig")[servers_name].setup(opts)
     end,
   })
 end
