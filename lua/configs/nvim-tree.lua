@@ -3,10 +3,6 @@ local icon = require("core.icons")
 if tree_ok then
   tree.setup({
     sync_root_with_cwd = true,
-    -- open_on_setup = true,
-    ignore_ft_on_setup = {
-      "alpha",
-    },
     view = {
       adaptive_size = false,
     },

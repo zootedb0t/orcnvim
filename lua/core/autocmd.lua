@@ -75,8 +75,6 @@ function M.enable_tranparency()
       local hl_group = {
         "Normal",
         "SignColumn",
-        "TelescopePromptNormal",
-        "TelescopeNormal",
         "TelescopeBorder",
         "NormalFloat",
         "NormalNC",
@@ -86,6 +84,7 @@ function M.enable_tranparency()
         "FidgetTitle",
         "FidgetTask",
         "VertSplit",
+        "FloatBorder",
       }
       for _, name in ipairs(hl_group) do
         vim.cmd(string.format("highlight %s ctermbg=none guibg=none", name))
