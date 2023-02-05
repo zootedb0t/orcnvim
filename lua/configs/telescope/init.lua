@@ -1,9 +1,12 @@
 local telescope_ok, telescope = pcall(require, "telescope")
 local actions_ok, actions = pcall(require, "telescope.actions")
+local icon = require("core.icons")
 
 if telescope_ok and actions_ok then
   telescope.setup({
     defaults = {
+      prompt_prefix = string.format("%s ", icon.ui.Search),
+      selection_caret = string.format("%s ", icon.ui.ChevronRight),
       color_devicons = true,
       sorting_strategy = "ascending",
       vimgrep_arguments = {
@@ -16,21 +19,18 @@ if telescope_ok and actions_ok then
         "--smart-case",
       },
       layout_config = {
+        horizontal = {
+          prompt_position = "top",
+          preview_width = 0.55,
+        },
+        vertical = {
+          mirror = false,
+        },
         width = 0.75,
         height = 0.65,
-        prompt_position = "top",
-        horizontal = {
-          preview_width = function(_, cols, _)
-            if cols > 200 then
-              return math.floor(cols * 0.4)
-            else
-              return math.floor(cols * 0.6)
-            end
-          end,
-        },
-        vertical = { width = 0.9, height = 0.95, preview_height = 0.5 },
-        flex = { horizontal = { preview_width = 0.9 } },
+        preview_cutoff = 120,
       },
+
       mappings = {
         i = {
           ["<C-j>"] = actions.move_selection_next,
@@ -73,5 +73,4 @@ if telescope_ok and actions_ok then
   telescope.load_extension("fzf")
   telescope.load_extension("file_browser")
   telescope.load_extension("persisted") -- To load the telescope extension
-
 end

@@ -207,6 +207,13 @@ local plugins = {
       })
     end,
   },
+  {
+    "ray-x/web-tools.nvim",
+    ft = "html",
+    config = function()
+      require("configs.others").web_tools()
+    end,
+  },
 }
 
 local opts = {

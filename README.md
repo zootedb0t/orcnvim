@@ -12,11 +12,11 @@ My neovim config.
 
 ## Requirements
 
-- Latest [neovim 0.9+](https://github.com/neovim/neovim). I use `neovim-nightly` built from source.
-- `Deno` for [peek.nvim](https://github.com/toppair/peek.nvim)
-- [ripgrep](https://github.com/BurntSushi/ripgrep)
+- Latest [neovim 0.9+](https://github.com/neovim/neovim). I use `neovim-nightly` built from [source](https://github.com/neovim/neovim/wiki/Building-Neovim).
+- `Deno` for [peek.nvim](https://github.com/toppair/peek.nvim).
+- [ripgrep](https://github.com/BurntSushi/ripgrep).
 - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts/) (for icons).
-- [mason.nvim](https://github.com/williamboman/mason.nvim) has several requirements for installing `lsp servers`. Check full list [here](https://github.com/williamboman/mason.nvim#requirements)
+- [mason.nvim](https://github.com/williamboman/mason.nvim) has several requirements for installing `lsp servers`. Check full list [here](https://github.com/williamboman/mason.nvim#requirements).
 
 ## Installation
 

@@ -40,11 +40,7 @@ navic.setup({
     Operator = icon.kind.Operator .. space,
     TypeParameter = icon.kind.TypeParameter .. space,
   },
-  highlight = false,
-  separator = " " .. icon.ui.ChevronRight .. " ",
-  depth_limit = 0,
-  depth_limit_indicator = "..",
-  safe_output = true,
+  separator = space .. icon.ui.ChevronRight .. space,
 })
 
 local function filename()
