@@ -2,13 +2,12 @@
 
 My neovim config.
 
-![Screenshot_2023-01-20-07-29-40_1920x1080](https://user-images.githubusercontent.com/62596687/213843838-96d2927a-dcb3-47c9-b9b2-e6ce9fa6ef64.png)
-
 > Transparency ON
-
-![Screenshot_2023-01-24-12-49-43_1920x1080](https://user-images.githubusercontent.com/62596687/214234012-cb628ac7-26bd-4cb8-8f30-180dd9928622.png)
+![Screenshot_2023-02-05-05-15-51_1920x1080](https://user-images.githubusercontent.com/62596687/216817008-491c5081-eb81-4b6d-99eb-bffe7980698c.png)
 
 > Transparency OFF
+![Screenshot_2023-02-05-05-09-57_1920x1080](https://user-images.githubusercontent.com/62596687/216817045-e739774a-ce26-4841-9089-3bfc155d169d.png)
+
 
 ## Requirements
 
