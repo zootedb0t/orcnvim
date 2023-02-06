@@ -220,7 +220,6 @@ local function active()
       space,
       "%#ScrollBar#",
       scrollbar(),
-      space,
       plugin_updates(),
     })
   else
