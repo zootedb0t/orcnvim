@@ -40,7 +40,8 @@ navic.setup({
     Operator = icon.kind.Operator .. space,
     TypeParameter = icon.kind.TypeParameter .. space,
   },
-  separator = space .. icon.ui.ChevronRight .. space,
+  highlight = true,
+  separator = icon.ui.ChevronRight .. space,
 })
 
 local function filename()
@@ -95,7 +96,7 @@ end
 
 local function active()
   return table.concat({
-    "%#NavicSeparator#",
+    "%#WinBar#",
     get_gps(),
     "%=",
     "%#FileIcon#",
@@ -108,7 +109,7 @@ local function inactive()
 end
 
 local function file_explorer()
-  return table.concat({ "%#WinbarFile#", "%=", space, "File Tree", "%=" })
+  return table.concat({ "%#WinbarFile#", "%=", "File Tree", "%=" })
 end
 
 M.draw = function()
