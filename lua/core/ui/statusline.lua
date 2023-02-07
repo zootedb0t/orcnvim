@@ -239,9 +239,7 @@ local function active()
 end
 
 local function inactive()
-  -- Try this if statusline appears with normal highlight
   return "%#StatuslineTransparent#"
-  -- return "%#Normal#"
 end
 
 function Statusline.draw()

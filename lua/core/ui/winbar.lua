@@ -50,7 +50,7 @@ local function filename()
   local ftype = vim.fn.expand("%:e")
 
   local ficon, color = require("nvim-web-devicons").get_icon_color(fname, ftype, { default = true })
-  vim.api.nvim_set_hl(0, "FileIcon", { fg = color })
+  vim.api.nvim_set_hl(0, "FileIcon", { fg = color, bold = true })
 
   if is_empty(fname) and not buf_option then
     return ""
