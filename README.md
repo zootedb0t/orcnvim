@@ -24,3 +24,8 @@ Make sure to remove or move the current `nvim` directory.
 ```sh
 git clone https://github.com/zootedb0t/orcnvim.git ~/.config/nvim
 ```
+
+# Credits
+Sincere appreciation to the following repositories and the entire neovim community out there.
+- [LunarVim](https://github.com/LunarVim/LunarVim/)
+- [AstroVim](https://github.com/AstroNvim/AstroNvim)
