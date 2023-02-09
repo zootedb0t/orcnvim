@@ -2,6 +2,8 @@ local cmp_status_ok, cmp = pcall(require, "cmp")
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 local autopair_ok, autopair = pcall(require, "nvim-autopairs.completion.cmp")
 local kind_icons = require("core.icons").kind
+local border_opts =
+  { border = "single", winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None" }
 
 local function check_back_space()
   local col = vim.fn.col(".") - 1 -- This returns current column position
@@ -45,6 +47,11 @@ if cmp_status_ok and snip_status_ok then
   local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
 
   cmp.setup({
+    completion = {
+      ---@usage The minimum length of a word to complete on.
+      keyword_length = 1,
+    },
+
     formatting = {
       format = format,
     },
@@ -53,15 +60,6 @@ if cmp_status_ok and snip_status_ok then
       expand = function(args)
         require("luasnip").lsp_expand(args.body)
       end,
-    },
-
-    cmp = {
-      source_priortiy = {
-        nvim_lsp = 1000,
-        snippy = 500,
-        buffer = 250,
-        path = 200,
-      },
     },
 
     mapping = {
@@ -132,11 +130,11 @@ if cmp_status_ok and snip_status_ok then
     },
 
     sources = cmp.config.sources({
-      { name = "nvim_lsp" },
-      { name = "luasnip" },
-      { name = "path" },
+      { name = "nvim_lsp", priority = 1000 },
+      { name = "luasnip", priority = 750 },
+      { name = "buffer", priority = 500 },
+      { name = "path", priority = 250 },
       { name = "nvim_lsp_signature_help" },
-      { name = "buffer", keyword_length = 2 },
     }),
 
     -- don't sort double underscore things first
@@ -152,32 +150,20 @@ if cmp_status_ok and snip_status_ok then
       },
     },
 
+    duplicates = {
+      buffer = 1,
+      path = 1,
+      nvim_lsp = 0,
+      luasnip = 1,
+    },
+
     window = {
       completion = cmp.config.window.bordered({
-        -- col_offset = 2,
         side_padding = 1,
-        border = {
-          "┌",
-          "─",
-          "┐",
-          "│",
-          "┘",
-          "─",
-          "└",
-          "│",
-        },
+        border_opts,
       }),
       documentation = cmp.config.window.bordered({
-        border = {
-          "┌",
-          "─",
-          "┐",
-          "│",
-          "┘",
-          "─",
-          "└",
-          "│",
-        },
+        border_opts,
       }),
     },
   })

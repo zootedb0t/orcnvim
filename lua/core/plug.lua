@@ -21,7 +21,6 @@ local plugins = {
   {
     "numToStr/Comment.nvim",
     keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
-    -- event = { "BufReadPost", "BufNewFile", "BufNew" },
     config = function()
       require("Comment").setup({
         ignore = "^$",
@@ -54,14 +53,10 @@ local plugins = {
     end,
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
-      {
-        "williamboman/mason.nvim",
-      },
+      "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      {
-        "jose-elias-alvarez/null-ls.nvim",
-      },
-      { "SmiteshP/nvim-navic" },
+      "jose-elias-alvarez/null-ls.nvim",
+      "SmiteshP/nvim-navic",
     },
   },
   {
@@ -73,7 +68,7 @@ local plugins = {
   },
   {
     "nvim-telescope/telescope.nvim",
-    -- event = "VimEnter",
+    lazy = true,
     cmd = "Telescope",
     config = function()
       require("configs.telescope")
@@ -166,19 +161,10 @@ local plugins = {
     end,
   },
 
-  {
-    "kyazdani42/nvim-web-devicons",
-  },
-  {
-    "nvim-lua/popup.nvim",
-  },
-  {
-    "nvim-lua/plenary.nvim",
-  },
-  {
-    "dstein64/vim-startuptime",
-    cmd = "StartupTime",
-  },
+  { "kyazdani42/nvim-web-devicons" },
+  { "nvim-lua/popup.nvim" },
+  { "nvim-lua/plenary.nvim" },
+  { "dstein64/vim-startuptime", cmd = "StartupTime" },
   {
     "goolord/alpha-nvim",
     cmd = "Alpha",
