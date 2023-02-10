@@ -9,17 +9,6 @@
 --   term_colors = true,
 -- })
 
--- Ayu theme
--- local colors = require('ayu.colors')
--- colors.generate()
-
--- require("ayu").setup({
---   mirage = false,
---   overrides = {
---     LineNr = { fg = colors.fg },
---   },
--- })
-
 -- set transparent_nvim value in options.lua
 if vim.g.transparent_nvim then
   require("core.autocmd").enable_tranparency()

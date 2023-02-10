@@ -5,6 +5,9 @@ local kind_icons = require("core.icons").kind
 local border_opts =
   { border = "single", winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None" }
 
+-- Override cmp highlight
+require("core.ui.highlight").cmp_highlight()
+
 local function check_back_space()
   local col = vim.fn.col(".") - 1 -- This returns current column position
   if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then -- vim.fn.getline gives current line

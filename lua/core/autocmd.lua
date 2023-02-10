@@ -81,8 +81,6 @@ function M.enable_tranparency()
         "NvimTreeNormal",
         "EndOfBuffer",
         "MsgArea",
-        "FidgetTitle",
-        "FidgetTask",
         "VertSplit",
         "FloatBorder",
       }

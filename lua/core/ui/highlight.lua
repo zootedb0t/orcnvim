@@ -45,4 +45,8 @@ M.winbar_highlight = function()
   highlight(0, "NavicText", { fg = "#CDD6F4" })
 end
 
+M.cmp_highlight = function()
+  highlight(0, "CmpItemMenu", { fg = "#296596" })
+end
+
 return M
