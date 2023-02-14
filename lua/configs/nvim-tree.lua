@@ -4,7 +4,9 @@ if tree_ok then
   tree.setup({
     sync_root_with_cwd = true,
     view = {
-      adaptive_size = false,
+      adaptive_size = true,
+      width = 25,
+      hide_root_folder = true,
     },
     git = {
       ignore = false, -- Show files that are not managed by git

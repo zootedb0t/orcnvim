@@ -2,8 +2,10 @@ local cmp_status_ok, cmp = pcall(require, "cmp")
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 local autopair_ok, autopair = pcall(require, "nvim-autopairs.completion.cmp")
 local kind_icons = require("core.icons").kind
-local border_opts =
-  { border = "single", winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None" }
+local border_opts = {
+  border = "single",
+  winhighlight = "Normal:CmpPmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+}
 
 -- Override cmp highlight
 require("core.ui.highlight").cmp_highlight()
