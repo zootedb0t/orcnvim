@@ -17,6 +17,13 @@ cmd("VimLeave", {
   end,
 })
 
+-- Don't continue comments
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    vim.opt.formatoptions = vim.opt.formatoptions - { "c", "r", "o" }
+  end,
+})
+
 -- Statusline
 cmd({
   "CursorHoldI",
@@ -79,6 +86,7 @@ function M.enable_tranparency()
         "NormalFloat",
         "NormalNC",
         "NvimTreeNormal",
+        "NvimTreeNormalNC",
         "EndOfBuffer",
         "MsgArea",
         "VertSplit",

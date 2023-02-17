@@ -165,6 +165,7 @@ if cmp_status_ok and snip_status_ok then
     window = {
       completion = cmp.config.window.bordered({
         side_padding = 1,
+        scrollbar = false,
         border_opts,
       }),
       documentation = cmp.config.window.bordered({
