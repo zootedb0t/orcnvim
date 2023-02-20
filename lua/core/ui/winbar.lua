@@ -88,7 +88,7 @@ local get_gps = function()
     return ""
   end
   if not is_empty(gps_location) then
-    return icon.ui.ChevronRight .. gps_location
+    return gps_location
   else
     return ""
   end

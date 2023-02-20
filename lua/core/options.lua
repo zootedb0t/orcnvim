@@ -45,7 +45,6 @@ local options = {
     wrap = false, -- Disable wrapping of lines longer than the width of window
     writebackup = false, -- Disable making a backup before overwriting a file
     title = true,
-    showbreak = string.rep(" ", 3), -- Make it so that long lines wrap smartly
     jumpoptions = "stack",
     cmdheight = 1, -- Hide cmdheight after issue #16251
     ls = 3, -- Global statusline

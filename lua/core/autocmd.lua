@@ -26,13 +26,12 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 -- Statusline
 cmd({
-  "CursorHoldI",
   "WinEnter",
   "BufEnter",
-  "CursorHold",
-  "BufWinEnter",
-  "BufFilePost",
-  "BufWritePost",
+  "CursorMoved",
+  "CursorMovedI",
+  "Filetype",
+  "VimResized",
   "TabClosed",
   "TabEnter",
   "WinScrolled",
