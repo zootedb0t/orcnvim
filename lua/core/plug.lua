@@ -200,6 +200,10 @@ local plugins = {
       require("configs.others").web_tools()
     end,
   },
+  {
+    -- WIP
+    dir = "~/Documents/repo/projects/fuzzywindow",
+  },
 }
 
 local opts = {
