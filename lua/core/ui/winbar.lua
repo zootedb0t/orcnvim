@@ -113,7 +113,7 @@ local function file_explorer()
 end
 
 M.draw = function()
-  local disable_winabar = { "alpha", "" }
+  local disable_winabar = { "alpha", "toggleterm" ,"" }
   local buffer_type = vim.bo.filetype
   if is_match(disable_winabar, buffer_type) then
     return inactive()

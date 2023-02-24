@@ -201,6 +201,21 @@ local plugins = {
     end,
   },
   {
+    "akinsho/toggleterm.nvim",
+    cmd = {
+      "ToggleTerm",
+      "TermExec",
+      "ToggleTermToggleAll",
+      "ToggleTermSendCurrentLine",
+      "ToggleTermSendVisualLines",
+      "ToggleTermSendVisualSelection",
+    },
+    -- tag = "*",
+    config = function()
+      require("configs.toogleterm")
+    end,
+  },
+  {
     -- WIP
     dir = "~/Documents/repo/projects/fuzzywindow",
   },
