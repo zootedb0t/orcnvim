@@ -215,10 +215,6 @@ local plugins = {
       require("configs.toogleterm")
     end,
   },
-  {
-    -- WIP
-    dir = "~/Documents/repo/projects/fuzzywindow",
-  },
 }
 
 local opts = {

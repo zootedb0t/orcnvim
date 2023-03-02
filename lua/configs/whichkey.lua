@@ -9,10 +9,6 @@ M.config = function()
     plugins = {
       marks = true, -- shows a list of your marks on ' and `
       registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-      spelling = {
-        enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-        suggestions = 20, -- how many suggestions should be shown in the list?
-      },
       -- the presets plugin, adds help for a bunch of default keybindings in Neovim
       -- No actual key bindings are created
       presets = {
@@ -28,17 +24,10 @@ M.config = function()
     -- add operators that will trigger motion and text object completion
     -- to enable all native operators, set the preset / operators plugin above
     -- operators = { gc = "Comments" },
-    key_labels = {
-      -- override the label used to display some keys. It doesn't effect WK in any other way.
-      -- For example:
-      -- ["<space>"] = "SPC",
-      -- ["<cr>"] = "RET",
-      -- ["<tab>"] = "TAB",
-    },
     icons = {
       breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
       separator = "➜", -- symbol used between a key and it's label
-      group = "+", -- symbol prepended to a group
+      group = "", -- symbol prepended to a group
     },
     popup_mappings = {
       scroll_down = "<c-d>", -- binding to scroll down inside the popup
@@ -69,6 +58,10 @@ M.config = function()
       i = { "j", "k" },
       v = { "j", "k" },
     },
+    disable = {
+      buftypes = {},
+      filetypes = { "help", "NivmTree" },
+    },
   }
 
   local opts = {
@@ -82,7 +75,7 @@ M.config = function()
   local mappings = {
     ["e"] = { "<cmd>NvimTreeFindFileToggle<cr>", "Toggle file explore" },
     ["d"] = { "<cmd>ChangeDirectory<cr>", "Change working directory" },
-    [";"] = { "<cmd>Alpha<CR>", "Dashboard" },
+    [";"] = { "<cmd>Alpha<CR>", "Open Dashboard" },
     ["/"] = {
       function()
         require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
@@ -92,7 +85,7 @@ M.config = function()
       "Fuzzily search in current buffer",
     },
     b = {
-      name = "Buffers",
+      name = " Buffers",
       b = { "<cmd>Telescope buffers<cr>", "Buffers" },
       c = { "<cmd>ColorizerToggle<cr>", "Attach colorizer" },
       d = { "<cmd>bd<cr>", "Delete buffer" },
@@ -101,7 +94,7 @@ M.config = function()
       s = { "<cmd>wa!<CR>", "Save" },
     },
     l = {
-      name = "LSP",
+      name = " LSP",
       a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
       d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
       w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
@@ -127,7 +120,7 @@ M.config = function()
       e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
     },
     n = {
-      name = "Neovim",
+      name = " Neovim",
       c = {
         function()
           require("configs.telescope.custom").search_config()
@@ -141,12 +134,12 @@ M.config = function()
       v = { "<CMD>version<cr>", "Version" },
     },
     m = {
-      name = "Session Manager",
+      name = "󰚭 Session Manager",
       s = { "<cmd>SessionSave<CR>", "Save Session" },
       l = { "<cmd>Telescope persisted<CR>", "Load Saved Sessions" },
     },
     p = {
-      name = "Plugin",
+      name = " Plugin",
       c = { "<CMD>Lazy clean<cr>", "Clean" },
       C = { "<CMD>Lazy check<cr>", "Check" },
       d = { "<CMD>Lazy debug<cr>", "Debug" },
@@ -159,7 +152,7 @@ M.config = function()
       u = { "<CMD>Lazy update<cr>", "Update" },
     },
     s = {
-      name = "Search",
+      name = " Search",
       b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
       f = { "<cmd>Telescope find_files<cr>", "Find File" },
       g = { "<Cmd>Telescope live_grep<CR>", "Grep in cwd" },
@@ -173,7 +166,7 @@ M.config = function()
       C = { "<cmd>Telescope commands<cr>", "Commands" },
     },
     w = {
-      name = "Window",
+      name = " Window",
       b = { "<C-W>s", "Split window below" },
       c = { "<cmd>close<CR>", "Close window" },
       o = { "<C-W>p", "Other window" },
