@@ -6,6 +6,7 @@ local servers = {
   tsserver = {},
   clangd = {},
   pyright = {},
+  eslint = {},
   lua_ls = {
     Lua = {
       runtime = {

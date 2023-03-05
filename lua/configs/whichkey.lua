@@ -84,6 +84,10 @@ M.config = function()
       end,
       "Fuzzily search in current buffer",
     },
+    a = {
+      name = " Actions",
+      s = { "<cmd>ToggleStatusline<cr>", "Toggle Statusline" },
+    },
     b = {
       name = " Buffers",
       b = { "<cmd>Telescope buffers<cr>", "Buffers" },

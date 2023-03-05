@@ -48,10 +48,10 @@ map("x", "K", ":move '<-2<CR>gv-gv", opt)
 map("x", "J", ":move '>+1<CR>gv-gv", opt)
 
 -- navigate within insert mode
-map("i", "<C-h>", "<Left>") -- "   move left"
-map("i", "<C-l>", "<Right>") -- " move right"
-map("i", "<C-j>", "<Down>") -- " move down"
-map("i", "<C-k>", "<Up>") -- " move up" },
+-- map("i", "<C-h>", "<Left>") -- "   move left"
+-- map("i", "<C-l>", "<Right>") -- " move right"
+-- map("i", "<C-j>", "<Down>") -- " move down"
+-- map("i", "<C-k>", "<Up>") -- " move up" },
 
 -- Prevent typo when pressing `wq` or `q`
 vim.cmd([[
