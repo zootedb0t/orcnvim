@@ -86,6 +86,7 @@ M.config = function()
     },
     a = {
       name = " Actions",
+      n = { "<cmd>ToggleNumber<cr>", "Toggle Number" },
       s = { "<cmd>ToggleStatusline<cr>", "Toggle Statusline" },
     },
     b = {

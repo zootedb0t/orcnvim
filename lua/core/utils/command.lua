@@ -26,3 +26,14 @@ vim.api.nvim_create_user_command("ToggleStatusline", function()
     vim.opt.laststatus = 3
   end
 end, { desc = "Toggle statusline" })
+
+--- Change the number display modes
+vim.api.nvim_create_user_command("ToggleNumber", function()
+  local number = vim.wo.number -- local to window
+  local relativenumber = vim.wo.relativenumber -- local to window
+  if number and relativenumber then
+    vim.wo.relativenumber = false
+  elseif number then
+    vim.wo.relativenumber = true
+  end
+end, { desc = "Toggle Number" })
