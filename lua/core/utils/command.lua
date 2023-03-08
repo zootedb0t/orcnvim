@@ -37,3 +37,16 @@ vim.api.nvim_create_user_command("ToggleNumber", function()
     vim.wo.relativenumber = true
   end
 end, { desc = "Toggle Number" })
+
+-- Qucikfix window
+vim.api.nvim_create_user_command("QuickFixToggle", function()
+  local windows = vim.fn.getwininfo()
+  for i = 1, #windows do
+    local tbl = windows[i]
+    if tbl.quickfix == 1 then
+      vim.cmd([[cclose]])
+    else
+      vim.cmd([[copen]])
+    end
+  end
+end, { desc = "Toggle Qucikfix" })
