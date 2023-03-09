@@ -45,16 +45,25 @@ navic.setup({
 })
 
 local function filename()
-  local buf_option = vim.api.nvim_buf_get_option(0, "mod")
+  local buf_mod = vim.api.nvim_buf_get_option(0, "mod")
   local fname = vim.fn.expand("%:t")
   local ftype = vim.fn.expand("%:e")
-
-  local ficon, color = require("nvim-web-devicons").get_icon_color(fname, ftype, { default = true })
-  vim.api.nvim_set_hl(0, "FileIcon", { fg = color, bold = true })
-
-  if is_empty(fname) and not buf_option then
+  local status_ok, devicons = pcall(require, "nvim-web-devicons")
+  if not status_ok then
+    vim.notify("nvim-web-devicons is not installed.")
     return ""
-  elseif not is_empty(fname) and buf_option then
+  end
+
+  local ficon, color = devicons.get_icon_color(fname, ftype, { default = true })
+  if is_empty(ficon) or is_empty(color) then
+    return ""
+  else
+    vim.api.nvim_set_hl(0, "FileIcon", { fg = color, bold = true })
+  end
+
+  if is_empty(fname) and not buf_mod then
+    return ""
+  elseif not is_empty(fname) and buf_mod then
     return table.concat({
       ficon,
       space,
@@ -113,7 +122,7 @@ local function file_explorer()
 end
 
 M.draw = function()
-  local disable_winabar = { "alpha", "toggleterm" ,"" }
+  local disable_winabar = { "alpha", "toggleterm", "" }
   local buffer_type = vim.bo.filetype
   if is_match(disable_winabar, buffer_type) then
     return inactive()

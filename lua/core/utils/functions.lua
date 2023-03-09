@@ -12,4 +12,17 @@ function M.ismatch(table, value)
   end
 end
 
+function M.get_icons(filename, extension)
+  local status_ok, devicons = pcall(require, "nvim-web-devicons")
+  if not status_ok then
+    vim.notify("nvim-web-devicons is not installed")
+    return ""
+  end
+  local file_icon = devicons.get_icon(filename, extension, { default = true })
+  if M.isempty(file_icon) then
+    return ""
+  end
+  return file_icon
+end
+
 return M

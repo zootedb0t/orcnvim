@@ -52,7 +52,7 @@ local modes = {
 
 local function mode()
   local current_mode = vim.api.nvim_get_mode().mode
-  return string.format("%s", modes[current_mode]):upper()
+  return string.format("%s", modes[current_mode])
 end
 
 local function filename()
@@ -71,7 +71,9 @@ local vcs = function()
   if is_empty(git_info) then
     return ""
   else
+    -- Both are same. : pass the object as the self parameter when you call a function.
     branch = string.format("%s %s ", icon.git.Branch, git_info.head:upper())
+    -- branch = string.format("%s %s ", icon.git.Branch, git_info.head.upper(git_info.head))
   end
 
   if is_empty(git_info.added) then
@@ -164,10 +166,7 @@ local function filetype()
   local fname = vim.fn.expand("%:t")
   local extension = vim.fn.expand("%:e")
   local ftype = vim.bo.filetype
-  local file_icon = require("nvim-web-devicons").get_icon(fname, extension, { default = true })
-  if is_empty(file_icon) then
-    return ""
-  end
+  local file_icon = require("core.utils.functions").get_icons(fname, extension)
   return string.format("%s %s", file_icon, ftype)
 end
 
@@ -220,6 +219,7 @@ local function active()
       space,
       "%#ScrollBar#",
       scrollbar(),
+      "%#Normal#",
       space,
       plugin_updates(),
     })

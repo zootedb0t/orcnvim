@@ -41,7 +41,7 @@ end, { desc = "Toggle Number" })
 -- Qucikfix window
 vim.api.nvim_create_user_command("QuickFixToggle", function()
   local windows = vim.fn.getwininfo()
-  for i = 1, #windows do
+  for i = 1, vim.tbl_count(windows) do
     local tbl = windows[i]
     if tbl.quickfix == 1 then
       vim.cmd([[cclose]])
