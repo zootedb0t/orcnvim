@@ -165,8 +165,8 @@ end
 local function filetype()
   local fname = vim.fn.expand("%:t")
   local extension = vim.fn.expand("%:e")
-  local ftype = vim.bo.filetype
-  local file_icon = require("core.utils.functions").get_icons(fname, extension)
+  local ftype = vim.bo.filetype:upper()
+  local file_icon = require("core.utils.functions").get_icons(fname, extension).icon
   return string.format("%s %s", file_icon, ftype)
 end
 
@@ -174,11 +174,21 @@ local function lineinfo()
   return "%P %l:%c"
 end
 
-local function scrollbar()
-  local current_line = vim.api.nvim_win_get_cursor(0)[1]
-  local total_line = vim.api.nvim_buf_line_count(0)
-  local i = math.floor((current_line - 1) / total_line * #icon.line_bar) + 1 -- i value ranges from 1 to length of line_bar
-  return string.format("%s", icon.line_bar[i])
+-- local function scrollbar()
+--   local current_line = vim.api.nvim_win_get_cursor(0)[1]
+--   local total_line = vim.api.nvim_buf_line_count(0)
+--   local i = math.floor((current_line - 1) / total_line * #icon.line_bar) + 1 -- i value ranges from 1 to length of line_bar
+--   return string.format("%s", icon.line_bar[i])
+-- end
+
+local function searchcount()
+  if vim.v.hlsearch == 0 then
+    return ""
+  end
+
+  local result = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
+  local denominator = math.min(result.total, result.maxcount)
+  return string.format(" 󰱽 [%d/%d] ", result.current, denominator)
 end
 
 local function plugin_updates()
@@ -216,11 +226,12 @@ local function active()
       filetype(),
       space,
       lineinfo(),
-      space,
+      -- space,
       "%#ScrollBar#",
-      scrollbar(),
+      -- scrollbar(),
+      -- space,
+      searchcount(),
       "%#Normal#",
-      space,
       plugin_updates(),
     })
   else

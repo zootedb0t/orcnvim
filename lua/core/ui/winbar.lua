@@ -47,25 +47,15 @@ navic.setup({
 local function filename()
   local buf_mod = vim.api.nvim_buf_get_option(0, "mod")
   local fname = vim.fn.expand("%:t")
-  local ftype = vim.fn.expand("%:e")
-  local status_ok, devicons = pcall(require, "nvim-web-devicons")
-  if not status_ok then
-    vim.notify("nvim-web-devicons is not installed.")
-    return ""
-  end
-
-  local ficon, color = devicons.get_icon_color(fname, ftype, { default = true })
-  if is_empty(ficon) or is_empty(color) then
-    return ""
-  else
-    vim.api.nvim_set_hl(0, "FileIcon", { fg = color, bold = true })
-  end
+  local extension = vim.fn.expand("%:e")
+  local devicon = require("core.utils.functions").get_icons(fname, extension)
+  vim.api.nvim_set_hl(0, "FileIcon", { fg = devicon.highlight, bold = true })
 
   if is_empty(fname) and not buf_mod then
     return ""
   elseif not is_empty(fname) and buf_mod then
     return table.concat({
-      ficon,
+      devicon.icon,
       space,
       fname,
       space,
@@ -74,7 +64,7 @@ local function filename()
     })
   else
     return table.concat({
-      ficon,
+      devicon.icon,
       space,
       fname,
       space,

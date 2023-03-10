@@ -18,11 +18,11 @@ function M.get_icons(filename, extension)
     vim.notify("nvim-web-devicons is not installed")
     return ""
   end
-  local file_icon = devicons.get_icon(filename, extension, { default = true })
-  if M.isempty(file_icon) then
+  local file_icon, color = devicons.get_icon_color(filename, extension, { default = true })
+  if M.isempty(file_icon) and M.isempty(color) then
     return ""
   end
-  return file_icon
+  return { icon = file_icon, highlight = color }
 end
 
 return M
