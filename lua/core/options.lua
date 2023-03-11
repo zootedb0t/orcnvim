@@ -48,7 +48,7 @@ local options = {
     jumpoptions = "stack",
     cmdheight = 0, -- Hide cmdheight after issue #16251
     ls = 3, -- Global statusline
-    shell = "/usr/bin/bash",
+    shell = "/usr/bin/sh",
     inccommand = "split", -- incrementally show result of command
     -- Ignore compiled files
     wildignore = vim.opt.wildignore + { "*.o", "*~", "*.pyc", "*pycache*" },
@@ -59,6 +59,7 @@ local options = {
     diffopt = vim.opt.diffopt + { "linematch:50" },
     -- numberwidth = 3,
     -- statuscolumn = "%=%{v:virtnum < 1 ? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s",
+    synmaxcol = 120,
   },
 
   g = {

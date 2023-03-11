@@ -44,9 +44,9 @@ vim.api.nvim_create_user_command("QuickFixToggle", function()
   for i = 1, vim.tbl_count(windows) do
     local tbl = windows[i]
     if tbl.quickfix == 1 then
-      vim.cmd([[cclose]])
+      vim.cmd("cclose")
     else
-      vim.cmd([[copen]])
+      vim.cmd("horizontal botright copen")
     end
   end
 end, { desc = "Toggle Qucikfix" })

@@ -10,7 +10,14 @@ function M.statusline_highlight()
   highlight(0, "StatuslineCmdLineAccent", { fg = "#313244", bg = "#89B4FA", bold = true })
   -- Some colorscheme(like rose-pine) were drawing empty statusline for floating window like telescope, lazy. This fixes that
   highlight(0, "StatuslineTransparent", {})
-  highlight(0, "ScrollBar", { fg = "#A6E3A1" })
+  highlight(0, "StatusLineOthers", { link = "Type" })
+  highlight(0, "StatusLineGit", { link = "Constant" })
+  highlight(0, "StatusLineGitAdd", { link = "GitSignsAdd" })
+  highlight(0, "StatusLineGitChange", { link = "GitSignsChange" })
+  highlight(0, "StatusLineGitRemove", { link = "GitSignsDelete" })
+  highlight(0, "StatusLineInfo", { link = "Error" })
+  highlight(0, "StatusLinePackage", { link = "Constant" })
+  highlight(0, "StatusLineLsp", { link = "Operator" })
 end
 
 M.winbar_highlight = function()

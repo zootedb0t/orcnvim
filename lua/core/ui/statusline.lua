@@ -3,7 +3,6 @@ Statusline = {}
 local is_empty = require("core.utils.functions").isempty
 local is_match = require("core.utils.functions").ismatch
 local icon = require("core.icons")
-local space = " "
 
 -- Import highlights
 require("core.ui.highlight").statusline_highlight()
@@ -52,7 +51,7 @@ local modes = {
 
 local function mode()
   local current_mode = vim.api.nvim_get_mode().mode
-  return string.format("%s", modes[current_mode])
+  return string.format(" %s ", modes[current_mode]) .. "%#Normal#"
 end
 
 local function filename()
@@ -60,7 +59,7 @@ local function filename()
   if is_empty(fname) then
     return ""
   else
-    return string.format("%s", fname)
+    return "%#Normal#" .. string.format(" %s ", fname)
   end
 end
 
@@ -91,14 +90,19 @@ local vcs = function()
   if is_empty(git_info.removed) then
     removed = ""
   else
-    removed = string.format("%s %s ", icon.git.LineRemoved, git_info.removed)
+    removed = string.format("%s %s", icon.git.LineRemoved, git_info.removed)
   end
 
   return table.concat({
+    "%#StatusLineGit#",
     branch,
+    "%#StatusLineGitAdd#",
     added,
+    "%#StatusLineGitChange#",
     changed,
+    "%#StatusLineGitRemove#",
     removed,
+    "%#Normal#",
   })
 end
 
@@ -108,7 +112,7 @@ local function lsp()
     table.insert(names, server.name)
   end
   if #names > 0 then
-    return "[" .. table.concat(names, " ") .. "]"
+    return "%#StatusLineLsp#" .. "[ " .. table.concat(names, " ") .. "]"
   else
     return ""
   end
@@ -159,6 +163,7 @@ local function diagnostics()
     hints,
     "%#DiagnosticWarn#",
     info,
+    "%#Normal#",
   })
 end
 
@@ -166,12 +171,13 @@ local function filetype()
   local fname = vim.fn.expand("%:t")
   local extension = vim.fn.expand("%:e")
   local ftype = vim.bo.filetype:upper()
-  local file_icon = require("core.utils.functions").get_icons(fname, extension).icon
-  return string.format("%s %s", file_icon, ftype)
+  local devicon = require("core.utils.functions").get_icons(fname, extension)
+  vim.api.nvim_set_hl(0, "FileIcon", { fg = devicon.highlight })
+  return "%#FileIcon#" .. string.format(" %s %s ", devicon.icon, ftype)
 end
 
 local function lineinfo()
-  return "%P %l:%c"
+  return "%#StatusLineInfo#" .. "%P %l:%c "
 end
 
 -- local function scrollbar()
@@ -188,13 +194,13 @@ local function searchcount()
 
   local result = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
   local denominator = math.min(result.total, result.maxcount)
-  return string.format(" 󰱽 [%d/%d] ", result.current, denominator)
+  return "%#StatusLineOthers#" .. string.format(" 󰱽 [%d/%d] ", result.current, denominator)
 end
 
 local function plugin_updates()
   local update_status = require("lazy.status").has_updates()
   if update_status then
-    return space .. require("lazy.status").updates()
+    return "%#StatusLineOthers#" .. require("lazy.status").updates()
   else
     return ""
   end
@@ -210,42 +216,26 @@ local function active()
   if winwidth >= 85 then
     return table.concat({
       update_mode_colors(),
-      space,
       mode(),
-      space,
-      "%#Normal# ",
       filename(),
-      space,
-      "%#Normal#",
       diagnostics(),
-      "%#Normal#",
       "%=",
       lsp(),
       "%=",
       vcs(),
       filetype(),
-      space,
       lineinfo(),
-      -- space,
-      "%#ScrollBar#",
-      -- scrollbar(),
-      -- space,
       searchcount(),
-      "%#Normal#",
       plugin_updates(),
     })
   else
     return table.concat({
       update_mode_colors(),
-      space,
       mode(),
-      space,
-      "%#Normal#",
-      space,
       diagnostics(),
       "%=",
-      "%#Normal#",
       lineinfo(),
+      searchcount(),
     })
   end
 end

@@ -49,7 +49,7 @@ local function filename()
   local fname = vim.fn.expand("%:t")
   local extension = vim.fn.expand("%:e")
   local devicon = require("core.utils.functions").get_icons(fname, extension)
-  vim.api.nvim_set_hl(0, "FileIcon", { fg = devicon.highlight, bold = true })
+  vim.api.nvim_set_hl(0, "FileIconWinBar", { fg = devicon.highlight, bold = true })
 
   if is_empty(fname) and not buf_mod then
     return ""
@@ -98,7 +98,7 @@ local function active()
     "%#WinBar#",
     get_gps(),
     "%=",
-    "%#FileIcon#",
+    "%#FileIconWinBar#",
     filename(),
   })
 end
