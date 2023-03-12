@@ -173,7 +173,7 @@ local function filetype()
   local ftype = vim.bo.filetype:upper()
   local devicon = require("core.utils.functions").get_icons(fname, extension)
   vim.api.nvim_set_hl(0, "FileIcon", { fg = devicon.highlight })
-  return "%#FileIcon#" .. string.format(" %s %s ", devicon.icon, ftype)
+  return "%#FileIcon#" .. string.format("%s %s ", devicon.icon, ftype)
 end
 
 local function lineinfo()

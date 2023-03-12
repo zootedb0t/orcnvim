@@ -1,6 +1,7 @@
 local M = {}
 local wk_ok, wk = pcall(require, "which-key")
-if not wk_ok then
+local icon_ok, icon = pcall(require, "core.icons")
+if not wk_ok or not icon_ok then
   return
 end
 
@@ -85,13 +86,13 @@ M.config = function()
       "Fuzzily search in current buffer",
     },
     a = {
-      name = " Actions",
+      name = icon.ui.Rocket .. " Actions",
       n = { "<cmd>ToggleNumber<cr>", "Toggle Number" },
       q = { "<cmd>QuickFixToggle<cr>", "Toggle Quickfix window" },
       s = { "<cmd>ToggleStatusline<cr>", "Toggle Statusline" },
     },
     b = {
-      name = " Buffers",
+      name = icon.ui.File .. " Buffers",
       b = { "<cmd>Telescope buffers<cr>", "Buffers" },
       c = { "<cmd>ColorizerToggle<cr>", "Attach colorizer" },
       d = { "<cmd>bd<cr>", "Delete buffer" },
@@ -100,7 +101,7 @@ M.config = function()
       s = { "<cmd>wa!<CR>", "Save" },
     },
     l = {
-      name = " LSP",
+      name = icon.ui.Code .. " LSP",
       a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
       d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
       w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
@@ -126,7 +127,7 @@ M.config = function()
       e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
     },
     n = {
-      name = " Neovim",
+      name = icon.ui.Neovim .. " Neovim",
       c = {
         function()
           require("configs.telescope.custom").search_config()
@@ -140,12 +141,12 @@ M.config = function()
       v = { "<CMD>version<cr>", "Version" },
     },
     m = {
-      name = "󰚭 Session Manager",
+      name = icon.ui.Timer .. " Session Manager",
       s = { "<cmd>SessionSave<CR>", "Save Session" },
       l = { "<cmd>Telescope persisted<CR>", "Load Saved Sessions" },
     },
     p = {
-      name = " Plugin",
+      name = icon.ui.Spanner .. " Plugin",
       c = { "<CMD>Lazy clean<cr>", "Clean" },
       C = { "<CMD>Lazy check<cr>", "Check" },
       d = { "<CMD>Lazy debug<cr>", "Debug" },
@@ -158,7 +159,7 @@ M.config = function()
       u = { "<CMD>Lazy update<cr>", "Update" },
     },
     s = {
-      name = " Search",
+      name = icon.ui.Search .. " Search",
       b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
       f = { "<cmd>Telescope find_files<cr>", "Find File" },
       g = { "<Cmd>Telescope live_grep<CR>", "Grep in cwd" },
@@ -172,7 +173,7 @@ M.config = function()
       C = { "<cmd>Telescope commands<cr>", "Commands" },
     },
     w = {
-      name = " Window",
+      name = icon.ui.Window .. " Window",
       b = { "<C-W>s", "Split window below" },
       c = { "<cmd>close<CR>", "Close window" },
       o = { "<C-W>p", "Other window" },

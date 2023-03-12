@@ -18,11 +18,15 @@ My neovim config.
 
 ## Installation
 
-Make sure to remove or move the current `nvim` directory.
+Make sure to remove or move the current `nvim` directory present in `.config`.
 
 ```sh
 git clone https://github.com/zootedb0t/orcnvim.git ~/.config/nvim
 ```
+
+## Features
+- Lazy load plugins for faster startup time.
+- Custom `statusline` and `winbar`.
 
 # Credits
 
