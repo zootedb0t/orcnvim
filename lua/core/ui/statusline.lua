@@ -66,26 +66,25 @@ end
 local vcs = function()
   local git_info = vim.b.gitsigns_status_dict
   local render_vcs = {}
-  local branch, added, changed, removed
 
   if is_empty(git_info) then
     return ""
   else
-    branch = string.format("%s %s", icon.git.Branch, git_info.head:upper())
-    table.insert(render_vcs, branch)
+    table.insert(render_vcs, string.format("%s %s", icon.git.Branch, git_info.head:upper()))
     if not is_empty(git_info.added) then
-      added = "%#StatusLineGitAdd#" .. string.format("%s %s", icon.git.LineAdded, git_info.added)
-      table.insert(render_vcs, added)
+      table.insert(render_vcs, "%#StatusLineGitAdd#" .. string.format("%s %s", icon.git.LineAdded, git_info.added))
     end
-
     if not is_empty(git_info.changed) then
-      changed = "%#StatusLineGitChange#" .. string.format("%s %s", icon.git.LineModified, git_info.changed)
-      table.insert(render_vcs, changed)
+      table.insert(
+        render_vcs,
+        "%#StatusLineGitChange#" .. string.format("%s %s", icon.git.LineModified, git_info.changed)
+      )
     end
-
     if not is_empty(git_info.removed) then
-      removed = "%#StatusLineGitRemove#" .. string.format("%s %s", icon.git.LineRemoved, git_info.removed)
-      table.insert(render_vcs, removed)
+      table.insert(
+        render_vcs,
+        "%#StatusLineGitRemove#" .. string.format("%s %s", icon.git.LineRemoved, git_info.removed)
+      )
     end
   end
   return table.concat(render_vcs, " ") .. "%#Normal#"
@@ -117,23 +116,26 @@ local function diagnostics()
     count[k] = vim.tbl_count(vim.diagnostic.get(0, { severity = level }))
   end
 
-  local errors, warnings, hints, info
-
   if count["errors"] ~= 0 then
-    errors = "%#DiagnosticError#" .. string.format("%s %s", icon.diagnostics.BoldError, count["errors"])
-    table.insert(render_diag, errors)
+    table.insert(
+      render_diag,
+      "%#DiagnosticError#" .. string.format("%s %s", icon.diagnostics.BoldError, count["errors"])
+    )
   end
   if count["warnings"] ~= 0 then
-    warnings = "%#DiagnosticWarn#" .. string.format("%s %s", icon.diagnostics.BoldWarning, count["warnings"])
-    table.insert(render_diag, warnings)
+    table.insert(
+      render_diag,
+      "%#DiagnosticWarn#" .. string.format("%s %s", icon.diagnostics.BoldWarning, count["warnings"])
+    )
   end
   if count["hints"] ~= 0 then
-    hints = "%#DiagnosticInfo#" .. string.format("%s %s", icon.diagnostics.BoldHint, count["hints"])
-    table.insert(render_diag, hints)
+    table.insert(render_diag, "%#DiagnosticInfo#" .. string.format("%s %s", icon.diagnostics.BoldHint, count["hints"]))
   end
   if count["info"] ~= 0 then
-    info = "%#DiagnosticWarn#" .. string.format("%s %s", icon.diagnostics.BoldInformation, count["info"])
-    table.insert(render_diag, info)
+    table.insert(
+      render_diag,
+      "%#DiagnosticWarn#" .. string.format("%s %s", icon.diagnostics.BoldInformation, count["info"])
+    )
   end
 
   return table.concat(render_diag, " ") .. "%#Normal#"
