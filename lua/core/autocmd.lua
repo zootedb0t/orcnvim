@@ -13,7 +13,8 @@ cmd("TextYankPost", {
 cmd("VimLeave", {
   pattern = "*",
   callback = function()
-    vim.opt.guicursor = vim.opt.guicursor + { "a:ver25-blink100" }
+    -- vim.opt.guicursor = vim.opt.guicursor + { "a:ver25-blink100" }  -- Verical cursor
+    vim.opt.guicursor = vim.opt.guicursor + { "a:block-blink100" } -- Block cursor
   end,
 })
 
@@ -36,6 +37,7 @@ cmd({
   "TabEnter",
   "WinScrolled",
   "ModeChanged",
+  "LspAttach",
 }, {
   callback = function()
     local value = require("core.ui.statusline").draw()

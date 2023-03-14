@@ -65,45 +65,30 @@ end
 
 local vcs = function()
   local git_info = vim.b.gitsigns_status_dict
-  local branch
-  local added, changed, removed
+  local render_vcs = {}
+  local branch, added, changed, removed
+
   if is_empty(git_info) then
     return ""
   else
-    -- Both are same. : pass the object as the self parameter when you call a function.
-    branch = string.format("%s %s ", icon.git.Branch, git_info.head:upper())
-    -- branch = string.format("%s %s ", icon.git.Branch, git_info.head.upper(git_info.head))
-  end
+    branch = string.format("%s %s", icon.git.Branch, git_info.head:upper())
+    table.insert(render_vcs, branch)
+    if not is_empty(git_info.added) then
+      added = "%#StatusLineGitAdd#" .. string.format("%s %s", icon.git.LineAdded, git_info.added)
+      table.insert(render_vcs, added)
+    end
 
-  if is_empty(git_info.added) then
-    added = ""
-  else
-    added = string.format("%s %s ", icon.git.LineAdded, git_info.added)
-  end
+    if not is_empty(git_info.changed) then
+      changed = "%#StatusLineGitChange#" .. string.format("%s %s", icon.git.LineModified, git_info.changed)
+      table.insert(render_vcs, changed)
+    end
 
-  if is_empty(git_info.changed) then
-    changed = ""
-  else
-    changed = string.format("%s %s ", icon.git.LineModified, git_info.changed)
+    if not is_empty(git_info.removed) then
+      removed = "%#StatusLineGitRemove#" .. string.format("%s %s", icon.git.LineRemoved, git_info.removed)
+      table.insert(render_vcs, removed)
+    end
   end
-
-  if is_empty(git_info.removed) then
-    removed = ""
-  else
-    removed = string.format("%s %s", icon.git.LineRemoved, git_info.removed)
-  end
-
-  return table.concat({
-    "%#StatusLineGit#",
-    branch,
-    "%#StatusLineGitAdd#",
-    added,
-    "%#StatusLineGitChange#",
-    changed,
-    "%#StatusLineGitRemove#",
-    removed,
-    "%#Normal#",
-  })
+  return table.concat(render_vcs, " ") .. "%#Normal#"
 end
 
 local function lsp()
@@ -120,6 +105,7 @@ end
 
 local function diagnostics()
   local count = {}
+  local render_diag = {}
   local levels = {
     errors = "Error",
     warnings = "Warn",
@@ -134,37 +120,23 @@ local function diagnostics()
   local errors, warnings, hints, info
 
   if count["errors"] ~= 0 then
-    errors = string.format("%s %s ", icon.diagnostics.BoldError, count["errors"])
-  else
-    errors = ""
+    errors = "%#DiagnosticError#" .. string.format("%s %s", icon.diagnostics.BoldError, count["errors"])
+    table.insert(render_diag, errors)
   end
   if count["warnings"] ~= 0 then
-    warnings = string.format("%s %s ", icon.diagnostics.BoldWarning, count["warnings"])
-  else
-    warnings = ""
+    warnings = "%#DiagnosticWarn#" .. string.format("%s %s", icon.diagnostics.BoldWarning, count["warnings"])
+    table.insert(render_diag, warnings)
   end
   if count["hints"] ~= 0 then
-    hints = string.format("%s %s ", icon.diagnostics.BoldHint, count["hints"])
-  else
-    hints = ""
+    hints = "%#DiagnosticInfo#" .. string.format("%s %s", icon.diagnostics.BoldHint, count["hints"])
+    table.insert(render_diag, hints)
   end
   if count["info"] ~= 0 then
-    info = string.format("%s %s", icon.diagnostics.BoldInformation, count["info"])
-  else
-    info = ""
+    info = "%#DiagnosticWarn#" .. string.format("%s %s", icon.diagnostics.BoldInformation, count["info"])
+    table.insert(render_diag, info)
   end
 
-  return table.concat({
-    "%#DiagnosticError#",
-    errors,
-    "%#DiagnosticWarn#",
-    warnings,
-    "%#DiagnosticInfo#",
-    hints,
-    "%#DiagnosticWarn#",
-    info,
-    "%#Normal#",
-  })
+  return table.concat(render_diag, " ") .. "%#Normal#"
 end
 
 local function filetype()
@@ -173,7 +145,7 @@ local function filetype()
   local ftype = vim.bo.filetype:upper()
   local devicon = require("core.utils.functions").get_icons(fname, extension)
   vim.api.nvim_set_hl(0, "FileIcon", { fg = devicon.highlight })
-  return "%#FileIcon#" .. string.format("%s %s ", devicon.icon, ftype)
+  return "%#FileIcon#" .. string.format(" %s %s ", devicon.icon, ftype)
 end
 
 local function lineinfo()
