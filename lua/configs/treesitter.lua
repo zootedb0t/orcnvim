@@ -10,7 +10,7 @@ if ts_ok then
       "css",
       "go",
       "html",
-      "javascript",
+      -- "javascript", -- Very buggy.
       "java",
       "jsdoc",
       "json",

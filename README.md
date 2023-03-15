@@ -30,7 +30,7 @@ git clone https://github.com/zootedb0t/orcnvim.git ~/.config/nvim
 - Lazy load plugins for faster startup time. Thanks to [lazy.nvim](https://github.com/folke/lazy.nvim/)
 - Custom `statusline` and `winbar`.
 - Autocompletion using [cmp](https://github.com/hrsh7th/nvim-cmp).
-- Syntax highlighting using[tree-sitter](https://github.com/nvim-treesitter/nvim-treesitter).
+- Syntax highlighting using [tree-sitter](https://github.com/nvim-treesitter/nvim-treesitter).
 - Formatting and linting using [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim).
 
 # Credits

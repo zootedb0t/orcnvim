@@ -151,7 +151,7 @@ local function filetype()
 end
 
 local function lineinfo()
-  return "%#StatusLineInfo#" .. "%P %l:%c "
+  return "%#StatusLineInfo#" .. "%P %l:%c"
 end
 
 -- local function scrollbar()
@@ -168,13 +168,13 @@ local function searchcount()
 
   local result = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
   local denominator = math.min(result.total, result.maxcount)
-  return "%#StatusLineOthers#" .. string.format(" 󰱽 [%d/%d] ", result.current, denominator)
+  return "%#StatusLineOthers#" .. string.format(" 󰱽 [%d/%d]", result.current, denominator)
 end
 
 local function plugin_updates()
   local update_status = require("lazy.status").has_updates()
   if update_status then
-    return "%#StatusLineOthers#" .. require("lazy.status").updates()
+    return "%#StatusLineOthers#" .. " " .. require("lazy.status").updates()
   else
     return ""
   end

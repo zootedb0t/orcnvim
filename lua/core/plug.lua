@@ -35,8 +35,8 @@ local plugins = {
       require("configs.treesitter")
     end,
     dependencies = {
-      "mrjones2014/nvim-ts-rainbow",
-      "nvim-treesitter/nvim-treesitter-textobjects",
+    "mrjones2014/nvim-ts-rainbow",
+    "nvim-treesitter/nvim-treesitter-textobjects",
     },
   },
   {
