@@ -51,7 +51,7 @@ local modes = {
 
 local function mode()
   local current_mode = vim.api.nvim_get_mode().mode
-  return string.format(" %s ", modes[current_mode]) .. "%#Normal#"
+  return string.format("%s ", modes[current_mode]) .. "%#Normal#"
 end
 
 local function filename()
@@ -59,7 +59,7 @@ local function filename()
   if is_empty(fname) then
     return ""
   else
-    return "%#Normal#" .. string.format(" %s ", fname)
+    return "%#Normal#" .. string.format("%s", fname)
   end
 end
 
@@ -147,7 +147,7 @@ local function filetype()
   local ftype = vim.bo.filetype:upper()
   local devicon = require("core.utils.functions").get_icons(fname, extension)
   vim.api.nvim_set_hl(0, "FileIcon", { fg = devicon.highlight })
-  return "%#FileIcon#" .. string.format(" %s %s ", devicon.icon, ftype)
+  return "%#FileIcon#" .. string.format("%s %s", devicon.icon, ftype)
 end
 
 local function lineinfo()
@@ -168,13 +168,13 @@ local function searchcount()
 
   local result = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
   local denominator = math.min(result.total, result.maxcount)
-  return "%#StatusLineOthers#" .. string.format(" 󰱽 [%d/%d]", result.current, denominator)
+  return "%#StatusLineOthers#" .. string.format("󰱽 [%d/%d]", result.current, denominator)
 end
 
 local function plugin_updates()
   local update_status = require("lazy.status").has_updates()
   if update_status then
-    return "%#StatusLineOthers#" .. " " .. require("lazy.status").updates()
+    return "%#StatusLineOthers#" .. require("lazy.status").updates()
   else
     return ""
   end
@@ -182,35 +182,39 @@ end
 
 local function active()
   local winwidth
+  local normal_statusline = {
+    update_mode_colors(),
+    mode(),
+    filename(),
+    diagnostics(),
+    "%=",
+    lsp(),
+    "%=",
+    vcs(),
+    filetype(),
+    lineinfo(),
+    plugin_updates(),
+    searchcount(),
+  }
+
+  local short_statusline = {
+    update_mode_colors(),
+    mode(),
+    diagnostics(),
+    "%=",
+    lineinfo(),
+    searchcount(),
+  }
+
   if vim.o.laststatus == 3 then
     winwidth = vim.o.columns
   else
     winwidth = vim.api.nvim_win_get_width(0)
   end
   if winwidth >= 85 then
-    return table.concat({
-      update_mode_colors(),
-      mode(),
-      filename(),
-      diagnostics(),
-      "%=",
-      lsp(),
-      "%=",
-      vcs(),
-      filetype(),
-      lineinfo(),
-      searchcount(),
-      plugin_updates(),
-    })
+    return table.concat(normal_statusline, " ")
   else
-    return table.concat({
-      update_mode_colors(),
-      mode(),
-      diagnostics(),
-      "%=",
-      lineinfo(),
-      searchcount(),
-    })
+    return table.concat(short_statusline, " ")
   end
 end
 
