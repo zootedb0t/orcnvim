@@ -15,9 +15,9 @@ function M.statusline_highlight()
   highlight(0, "StatusLineGitAdd", { link = "GitSignsAdd" })
   highlight(0, "StatusLineGitChange", { link = "GitSignsChange" })
   highlight(0, "StatusLineGitRemove", { link = "GitSignsDelete" })
-  highlight(0, "StatusLineInfo", { link = "Error" })
+  highlight(0, "StatusLineInfo", { link = "Character" })
   highlight(0, "StatusLinePackage", { link = "Constant" })
-  highlight(0, "StatusLineLsp", { link = "Operator" })
+  highlight(0, "StatusLineLsp", { link = "Identifier" })
 end
 
 M.winbar_highlight = function()

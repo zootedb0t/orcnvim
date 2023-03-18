@@ -70,7 +70,7 @@ local vcs = function()
   if is_empty(git_info) then
     return ""
   else
-    table.insert(render_vcs, string.format("%s %s", icon.git.Branch, git_info.head:upper()))
+    table.insert(render_vcs, "%#StatusLineGit#" .. string.format("%s %s", icon.git.Branch, git_info.head:upper()))
     if not is_empty(git_info.added) then
       table.insert(render_vcs, "%#StatusLineGitAdd#" .. string.format("%s %s", icon.git.LineAdded, git_info.added))
     end
@@ -193,8 +193,8 @@ local function active()
     vcs(),
     filetype(),
     lineinfo(),
-    plugin_updates(),
     searchcount(),
+    plugin_updates(),
   }
 
   local short_statusline = {
@@ -202,8 +202,8 @@ local function active()
     mode(),
     diagnostics(),
     "%=",
-    lineinfo(),
     searchcount(),
+    lineinfo(),
   }
 
   if vim.o.laststatus == 3 then
@@ -212,9 +212,19 @@ local function active()
     winwidth = vim.api.nvim_win_get_width(0)
   end
   if winwidth >= 85 then
-    return table.concat(normal_statusline, " ")
+    return table.concat(
+      vim.tbl_filter(function(val)
+        return not is_empty(val)
+      end, normal_statusline),
+      " "
+    )
   else
-    return table.concat(short_statusline, " ")
+    return table.concat(
+      vim.tbl_filter(function(val)
+        return not is_empty(val)
+      end, short_statusline),
+      " "
+    )
   end
 end
 
