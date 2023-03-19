@@ -3,25 +3,23 @@ vim.g.maplocalleader = ","
 local icon = require("core.icons")
 local navic = require("nvim-navic")
 
-M.capabilities = {
-  require("cmp_nvim_lsp").default_capabilities(),
-  -- offsetEncoding = "utf-8",
-  -- Required by css, html lsp
-  textDocument = {
-    completion = {
-      completionItem = {
-        snippetSupport = true,
-        resolveSupport = {
-          properties = {
-            "documentation",
-            "detail",
-            "additionalTextEdits",
-          },
-        },
-      },
+function M.capabilities()
+  local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+  if status_ok then
+    return cmp_nvim_lsp.default_capabilities()
+  end
+
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {
+      "documentation",
+      "detail",
+      "additionalTextEdits",
     },
-  },
-}
+  }
+  return capabilities
+end
 
 M.setup = function()
   -- Overide handlers
@@ -61,20 +59,23 @@ M.setup = function()
   })
 end
 
-local function lsp_keymap(bufnr)
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set("n", "<localleader>k", vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set("n", "<localleader>D", vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set("n", "<localleader>rn", vim.lsp.buf.rename, bufopts)
-  vim.keymap.set("n", "<localleader>ca", vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-end
+-- Mappings.
+-- See `:help vim.lsp.*` for documentation on any of the below functions
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local bufnr = args.buf
+    local bufopts = { buffer = bufnr }
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set("n", "<localleader>k", vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set("n", "<localleader>D", vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set("n", "<localleader>rn", vim.lsp.buf.rename, bufopts)
+    vim.keymap.set("n", "<localleader>ca", vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+  end,
+})
 
 local function lsp_highlight(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
@@ -100,7 +101,6 @@ M.on_attach = function(client, bufnr)
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
   end
-  lsp_keymap(bufnr)
   lsp_highlight(client, bufnr)
   disable_formatting(client)
 end

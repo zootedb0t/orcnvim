@@ -1,13 +1,13 @@
 -- Source Lua file
 vim.api.nvim_create_user_command("SourceFile", function()
   vim.cmd([[luafile %]])
-  vim.cmd("echo 'File Reloaded'")
+  vim.notify("File Reloaded")
 end, { desc = "Source Current Buffer" })
 
 -- Change directory
 vim.api.nvim_create_user_command("ChangeDirectory", function()
   vim.cmd([[lcd%:p:h]])
-  vim.cmd("echo 'Directory changed'")
+  vim.notify("Directory changed")
 end, { desc = "Command to change directory" })
 
 -- For peek.nvim
@@ -27,7 +27,7 @@ vim.api.nvim_create_user_command("ToggleStatusline", function()
   end
 end, { desc = "Toggle statusline" })
 
---- Change the number display modes
+--- Change the number column between relative and fixed
 vim.api.nvim_create_user_command("ToggleNumber", function()
   local number = vim.wo.number -- local to window
   local relativenumber = vim.wo.relativenumber -- local to window
@@ -46,7 +46,7 @@ vim.api.nvim_create_user_command("QuickFixToggle", function()
     if tbl.quickfix == 1 then
       vim.cmd("cclose")
     else
-      vim.cmd("horizontal botright copen")
+      vim.cmd("horizontal botright copen") -- Open quickfix window horizontally
     end
   end
 end, { desc = "Toggle Qucikfix" })

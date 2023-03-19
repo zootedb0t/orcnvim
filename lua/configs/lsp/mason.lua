@@ -54,7 +54,7 @@ if masonlsp_ok then
   mason_lsp.setup_handlers({
     function(servers_name)
       local opts = {
-        capabilities = require("configs.lsp.handlers").capabilities,
+        capabilities = require("configs.lsp.handlers").capabilities(),
         on_attach = require("configs.lsp.handlers").on_attach,
         settings = servers[servers_name],
       }

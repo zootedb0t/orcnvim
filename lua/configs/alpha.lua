@@ -44,7 +44,7 @@ if alpha_ok then
       dashboard.button("q", "  Quit Neovim", ":qa!<CR>"),
     }
 
-    local footer = function()
+    dashboard.section.footer.val = function()
       local version = " " .. vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch
       local lazy_ok, lazy = pcall(require, "lazy")
       if lazy_ok then
@@ -55,7 +55,6 @@ if alpha_ok then
       end
     end
 
-    dashboard.section.footer.val = footer()
     dashboard.section.footer.opts.hl = "DashboardFooter"
     dashboard.section.header.opts.hl = "DashboardHeader"
     dashboard.section.buttons.opts.hl = "DashboarShortcut"
