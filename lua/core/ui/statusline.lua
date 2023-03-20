@@ -51,7 +51,11 @@ local modes = {
 
 local function mode()
   local current_mode = vim.api.nvim_get_mode().mode
-  return string.format("%s ", modes[current_mode]) .. "%#Normal#"
+  return table.concat({
+    update_mode_colors(),
+    modes[current_mode],
+    "%#Normal#",
+  }, " ")
 end
 
 local function filename()
@@ -59,7 +63,7 @@ local function filename()
   if is_empty(fname) then
     return ""
   else
-    return "%#Normal#" .. string.format("%s", fname)
+    return string.format("%s", fname)
   end
 end
 
@@ -182,29 +186,6 @@ end
 
 local function active()
   local winwidth
-  local normal_statusline = {
-    update_mode_colors(),
-    mode(),
-    filename(),
-    diagnostics(),
-    "%=",
-    lsp(),
-    "%=",
-    vcs(),
-    filetype(),
-    lineinfo(),
-    searchcount(),
-    plugin_updates(),
-  }
-
-  local short_statusline = {
-    update_mode_colors(),
-    mode(),
-    diagnostics(),
-    "%=",
-    searchcount(),
-    lineinfo(),
-  }
 
   if vim.o.laststatus == 3 then
     winwidth = vim.o.columns
@@ -215,14 +196,32 @@ local function active()
     return table.concat(
       vim.tbl_filter(function(val)
         return not is_empty(val)
-      end, normal_statusline),
+      end, {
+        mode(),
+        filename(),
+        diagnostics(),
+        "%=",
+        lsp(),
+        "%=",
+        vcs(),
+        filetype(),
+        lineinfo(),
+        searchcount(),
+        plugin_updates(),
+      }),
       " "
     )
   else
     return table.concat(
       vim.tbl_filter(function(val)
         return not is_empty(val)
-      end, short_statusline),
+      end, {
+        mode(),
+        diagnostics(),
+        "%=",
+        searchcount(),
+        lineinfo(),
+      }),
       " "
     )
   end
