@@ -41,7 +41,7 @@ if ts_ok then
     },
     rainbow = {
       enable = true,
-      extended_mode = true,
+      -- extended_mode = true,
     },
     incremental_selection = {
       enable = true,

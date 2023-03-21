@@ -35,7 +35,7 @@ local plugins = {
       require("configs.treesitter")
     end,
     dependencies = {
-    "mrjones2014/nvim-ts-rainbow",
+    "HiPhish/nvim-ts-rainbow2",
     "nvim-treesitter/nvim-treesitter-textobjects",
     },
   },

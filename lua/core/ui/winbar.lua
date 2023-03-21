@@ -55,20 +55,17 @@ local function filename()
     return ""
   elseif not is_empty(fname) and buf_mod then
     return table.concat({
+      "%#FileIconWinBar#",
       devicon.icon,
-      space,
       fname,
-      space,
       icon.ui.Pencil,
-      space,
-    })
+    }, " ")
   else
     return table.concat({
+      "%#FileIconWinBar#",
       devicon.icon,
-      space,
       fname,
-      space,
-    })
+    }, " ")
   end
 end
 
@@ -98,9 +95,8 @@ local function active()
     "%#WinBar#",
     get_gps(),
     "%=",
-    "%#FileIconWinBar#",
     filename(),
-  })
+  }, " ")
 end
 
 local function inactive()
