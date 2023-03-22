@@ -100,6 +100,14 @@ M.config = function()
       r = { "<cmd>SourceFile<cr>", "Source current buffer" },
       s = { "<cmd>wa!<CR>", "Save" },
     },
+    g = {
+      name = icon.git.Octoface .. " Git Actions",
+      c = { "<cmd>Gitsigns preview_hunk<cr>", "Preview current hunk" },
+      d = { "<cmd>Gitsigns diffthis<cr>", "Current buffer diff" },
+      n = { "<cmd>Gitsigns next_hunk<cr>", "Show next hunk" },
+      p = { "<cmd>Gitsigns prev_hunk<cr>", "Show previous hunk" },
+      q = { "<cmd>Gitsigns setqflist<cr>", "Show quickfix list" },
+    },
     l = {
       name = icon.ui.Code .. " LSP",
       a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
