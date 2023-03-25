@@ -217,10 +217,11 @@ local plugins = {
     end,
   },
   {
-    "akinsho/bufferline.nvim",
+    "romgrk/barbar.nvim",
     config = function()
       require("configs.bufferline")
     end,
+    cmd = { "BarbarEnable" },
   },
 }
 

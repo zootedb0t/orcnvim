@@ -53,6 +53,24 @@ M.winbar_highlight = function()
   highlight(0, "NavicText", { link = "@variable" })
 end
 
+M.bufferline = function()
+  highlight(0, "BufferVisible", {})
+  highlight(0, "BufferVisibleIndex", {})
+  highlight(0, "BufferVisibleMod", {})
+  highlight(0, "BufferVisibleSign", {})
+  highlight(0, "BufferVisibleTarget", {})
+  highlight(0, "BufferInactiveIndex", {})
+  highlight(0, "BufferInactiveMod", {})
+  highlight(0, "BufferInactiveTarget", {})
+  highlight(0, "BufferTabpages", {})
+  highlight(0, "BufferTabpageFill", {})
+  highlight(0, "BufferCurrent", {})
+  highlight(0, "BufferCurrentMod", { fg = "#FB4934" })
+  highlight(0, "BufferCurrentSign", { fg = "#A6E3A1" })
+  highlight(0, "BufferInactive", {})
+  highlight(0, "BufferInactiveSign", {})
+end
+
 M.cmp_highlight = function()
   highlight(0, "CmpItemMenu", { link = "Type" })
 end

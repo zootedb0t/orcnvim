@@ -1,15 +1,9 @@
-local status_ok, bufferline = pcall(require, "bufferline")
+local status_ok, line = pcall(require, "bufferline")
+require("core.ui.highlight").bufferline()
+
 if status_ok then
-  bufferline.setup({
-    options = {
-      offsets = {
-        {
-          filetype = "NvimTree",
-          text = "",
-          -- highlight = "PanelHeading",
-          padding = 1,
-        },
-      },
-    },
+  line.setup({
+    animation = true,
+    exclude_ft = { "" },
   })
 end
