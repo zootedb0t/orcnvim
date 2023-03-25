@@ -12,11 +12,12 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 local plugins = {
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-  },
-  { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = false, priority = 1000 },
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  -- },
+  -- { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = true, priority = 1000 },
+  { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = true, priority = 1000 },
   -- { "shatur/neovim-ayu", lazy = false, priority = 1000 },
   {
     "numToStr/Comment.nvim",
@@ -35,8 +36,8 @@ local plugins = {
       require("configs.treesitter")
     end,
     dependencies = {
-    "HiPhish/nvim-ts-rainbow2",
-    "nvim-treesitter/nvim-treesitter-textobjects",
+      "HiPhish/nvim-ts-rainbow2",
+      "nvim-treesitter/nvim-treesitter-textobjects",
     },
   },
   {
@@ -213,6 +214,12 @@ local plugins = {
     -- tag = "*",
     config = function()
       require("configs.toogleterm")
+    end,
+  },
+  {
+    "akinsho/bufferline.nvim",
+    config = function()
+      require("configs.bufferline")
     end,
   },
 }

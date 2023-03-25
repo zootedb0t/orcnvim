@@ -15,5 +15,6 @@ end
 -- })
 
 -- Setting colorscheme
-vim.cmd("colorscheme nightfly")
+-- vim.cmd("colorscheme nightfly")
+vim.cmd("colorscheme moonfly")
 -- vim.cmd("colorscheme catppuccin")
