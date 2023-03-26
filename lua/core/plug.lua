@@ -48,17 +48,28 @@ local plugins = {
     "neovim/nvim-lspconfig",
     event = { "BufRead", "BufNewFile", "BufNew" },
     config = function()
-      require("configs.lsp.mason")
       require("configs.lsp.handlers").setup()
-      require("configs.null-ls")
     end,
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-      "jose-elias-alvarez/null-ls.nvim",
       "SmiteshP/nvim-navic",
     },
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require("configs.lsp.mason")
+    end,
+  },
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    config = function()
+      require("configs.null-ls")
+    end,
+  },
+  {
+    "williamboman/mason.nvim",
+    build = ":MasonUpdate", -- :MasonUpdate updates registry contents
   },
   {
     "j-hui/fidget.nvim",

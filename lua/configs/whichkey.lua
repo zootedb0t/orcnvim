@@ -87,6 +87,7 @@ M.config = function()
     },
     a = {
       name = icon.ui.Rocket .. " Actions",
+      b = { "<cmd>BarbarEnable<cr>", "Enable Tabline" },
       n = { "<cmd>ToggleNumber<cr>", "Toggle Number" },
       q = { "<cmd>QuickFixToggle<cr>", "Toggle Quickfix window" },
       s = { "<cmd>ToggleStatusline<cr>", "Toggle Statusline" },
