@@ -16,7 +16,7 @@ if null_ok then
       formatting.prettierd,
       -- code_action.eslint_d,
       code_action.eslint,
-      diagnostics.eslint,
+      -- diagnostics.eslint,
       diagnostics.shellcheck,
       formatting.shfmt,
       formatting.astyle.with({ extra_args = { "-A3", "-t8", "-p", "-xg", "-H", "-j", "-xB" } }),
