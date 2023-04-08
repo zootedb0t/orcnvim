@@ -18,7 +18,6 @@ local plugins = {
   -- },
   -- { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = true, priority = 1000 },
   { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = true, priority = 1000 },
-  -- { "shatur/neovim-ayu", lazy = false, priority = 1000 },
   {
     "numToStr/Comment.nvim",
     keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
@@ -51,24 +50,32 @@ local plugins = {
       require("configs.lsp.handlers").setup()
     end,
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
+      "cmp-nvim-lsp",
       "SmiteshP/nvim-navic",
+      "mason-lspconfig.nvim",
+      "null-ls.nvim",
     },
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    lazy = true,
     config = function()
       require("configs.lsp.mason")
     end,
+    dependencies = {
+      "mason.nvim",
+    },
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
+    lazy = true,
     config = function()
       require("configs.null-ls")
     end,
   },
   {
     "williamboman/mason.nvim",
+    lazy = true,
     build = ":MasonUpdate", -- :MasonUpdate updates registry contents
   },
   {
@@ -97,24 +104,38 @@ local plugins = {
       require("configs.cmp")
     end,
     dependencies = {
-      { "hrsh7th/cmp-path" },
-      { "hrsh7th/cmp-buffer" },
-      { "hrsh7th/cmp-nvim-lsp" },
-      { "saadparwaiz1/cmp_luasnip" },
-      { "rafamadriz/friendly-snippets" },
-      { "hrsh7th/cmp-nvim-lsp-signature-help" },
-      {
-        "windwp/nvim-autopairs",
-        config = function()
-          require("configs.others").pair()
-        end,
-      },
-      {
-        "L3MON4D3/LuaSnip",
-        config = function()
-          require("luasnip.loaders.from_vscode").lazy_load()
-        end,
-      },
+      "cmp-path",
+      "cmp-buffer",
+      "cmp-nvim-lsp",
+      "cmp_luasnip",
+      "cmp-nvim-lsp-signature-help",
+      "nvim-autopairs",
+      "LuaSnip",
+    },
+  },
+  { "hrsh7th/cmp-path", lazy = true },
+  { "hrsh7th/cmp-buffer", lazy = true },
+  { "hrsh7th/cmp-nvim-lsp", lazy = true },
+  { "saadparwaiz1/cmp_luasnip", lazy = true },
+  { "rafamadriz/friendly-snippets", lazy = true },
+  { "hrsh7th/cmp-nvim-lsp-signature-help", lazy = true },
+  { "rafamadriz/friendly-snippets", lazy = true },
+  { "hrsh7th/cmp-nvim-lsp-signature-help", lazy = true },
+  {
+    "windwp/nvim-autopairs",
+    config = function()
+      require("configs.others").pair()
+    end,
+    lazy = true,
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    lazy = true,
+    config = function()
+      require("luasnip.loaders.from_vscode").lazy_load()
+    end,
+    dependencies = {
+      "friendly-snippets",
     },
   },
   {
@@ -133,7 +154,6 @@ local plugins = {
     end,
   },
   {
-
     "nvim-tree/nvim-tree.lua",
     tag = "nightly", -- optional, updated every week. (see issue #1193)
     cmd = "NvimTreeFindFileToggle",
@@ -173,9 +193,8 @@ local plugins = {
     end,
   },
 
-  { "kyazdani42/nvim-web-devicons" },
-  { "nvim-lua/popup.nvim" },
-  { "nvim-lua/plenary.nvim" },
+  { "kyazdani42/nvim-web-devicons", lazy = true },
+  { "nvim-lua/plenary.nvim", lazy = true },
   { "dstein64/vim-startuptime", cmd = "StartupTime" },
   {
     "goolord/alpha-nvim",

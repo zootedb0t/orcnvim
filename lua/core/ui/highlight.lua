@@ -69,6 +69,13 @@ M.bufferline = function()
   highlight(0, "BufferCurrentSign", { fg = "#A6E3A1" })
   highlight(0, "BufferInactive", {})
   highlight(0, "BufferInactiveSign", {})
+  highlight(0, "BufferInactiveIcon", {})
+  highlight(0, "BufferCurrentIcon", {})
+  highlight(0, "BufferVisibleIcon", {})
+  highlight(0, "BufferAlternateIcon", {})
+  highlight(0, "BufferDefaultCurrentIcon", {})
+  highlight(0, "BufferDefaultInactiveIcon", {})
+  highlight(0, "BufferDefaultVisible", {})
 end
 
 M.cmp_highlight = function()

@@ -192,7 +192,7 @@ local function active()
   else
     winwidth = vim.api.nvim_win_get_width(0)
   end
-  if winwidth >= 85 then
+  if winwidth >= 90 then
     return table.concat(
       vim.tbl_filter(function(val)
         return not is_empty(val)
