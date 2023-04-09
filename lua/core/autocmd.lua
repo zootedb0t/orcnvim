@@ -125,6 +125,7 @@ function M.enable_tranparency()
         "MsgArea",
         "VertSplit",
         "FloatBorder",
+        "LineNr",
       }
       for _, name in ipairs(hl_group) do
         vim.cmd(string.format("highlight %s ctermbg=none guibg=none", name))
