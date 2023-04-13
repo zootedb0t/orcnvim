@@ -26,6 +26,7 @@ if ts_ok then
       "gitignore",
       "diff",
       "fish",
+      "vimdoc",
     },
     autotag = {
       enable = true,

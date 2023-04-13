@@ -19,10 +19,18 @@ cmd("VimLeave", {
 })
 
 -- Don't continue comments
-vim.api.nvim_create_autocmd("BufEnter", {
+cmd("BufEnter", {
   callback = function()
     vim.opt.formatoptions = vim.opt.formatoptions - { "c", "r", "o" }
   end,
+})
+
+-- Equalize splites
+cmd("VimResized",{
+  callback = function ()
+    vim.cmd("wincmd =")
+  end,
+  desc = "Equalize Splits"
 })
 
 -- Statusline
