@@ -38,7 +38,11 @@ if ts_ok then
       },
     },
     highlight = {
-      enable = true, -- false will disable the whole extension
+      enable = true,
+      disable = function(_, bufnr)
+        local max_filesize = 100 * 1024 -- 100 KB
+        return vim.fn.getfsize(vim.fn.bufname(bufnr)) > max_filesize
+      end,
     },
     rainbow = {
       enable = true,
