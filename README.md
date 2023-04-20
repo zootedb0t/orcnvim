@@ -1,4 +1,4 @@
-# orcnvim
+# orcnvim [![](https://img.shields.io/static/v1?label=Neovim&message=0.10&color=brightgreen&style=for-the-badge&logo=neovim)](https://github.com/neovim/neovim)
 
 My neovim config.
 
