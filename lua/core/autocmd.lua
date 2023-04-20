@@ -26,11 +26,11 @@ cmd("BufEnter", {
 })
 
 -- Equalize splites
-cmd("VimResized",{
-  callback = function ()
+cmd("VimResized", {
+  callback = function()
     vim.cmd("wincmd =")
   end,
-  desc = "Equalize Splits"
+  desc = "Equalize Splits",
 })
 
 -- Statusline
@@ -59,7 +59,10 @@ cmd({
 -- For suckless
 cmd({ "BufWritePost" }, {
   pattern = ".Xresources",
-  command = "!xrdb %",
+  callback = function()
+    vim.cmd("!xrdb %")
+    vim.cmd("!pidof st | xargs kill -s USR1")
+  end,
 })
 
 -- Winbar

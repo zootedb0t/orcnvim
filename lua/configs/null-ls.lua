@@ -10,7 +10,7 @@ if null_ok then
       formatting.stylua,
       -- diagnostics.luacheck,
       formatting.black.with({ extra_args = { "--fast" } }),
-      -- diagnostics.pylint,
+      diagnostics.pylint,
       -- formatting.clang_format,
       -- diagnostics.cppcheck,
       formatting.prettierd,
