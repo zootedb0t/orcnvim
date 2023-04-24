@@ -1,16 +1,13 @@
-# orcnvim [![](https://img.shields.io/static/v1?label=Neovim&message=0.10&color=brightgreen&style=for-the-badge&logo=neovim)](https://github.com/neovim/neovim)
+# orcnvim [![](https://img.shields.io/static/v1?label=Neovim&message=0.10&color=brightgreen&style=flat&logo=neovim)](https://github.com/neovim/neovim) ![](https://img.shields.io/badge/Lua-blue.svg?style=flat&logo=lua) 
 
 My neovim config.
 
 > Transparency ON
 > ![Screenshot_2023-02-05-05-15-51_1920x1080](https://user-images.githubusercontent.com/62596687/216817008-491c5081-eb81-4b6d-99eb-bffe7980698c.png)
 
-> Transparency OFF
-> ![Screenshot_2023-02-05-05-09-57_1920x1080](https://user-images.githubusercontent.com/62596687/216817045-e739774a-ce26-4841-9089-3bfc155d169d.png)
-
 ## Requirements
 
-- Latest [neovim 0.9+](https://github.com/neovim/neovim). I use `neovim-nightly` built from [source](https://github.com/neovim/neovim/wiki/Building-Neovim).
+- Latest [neovim 0.10+](https://github.com/neovim/neovim). I use `neovim-nightly` built from [source](https://github.com/neovim/neovim/wiki/Building-Neovim).
 - `Deno` for [peek.nvim](https://github.com/toppair/peek.nvim).
 - [ripgrep](https://github.com/BurntSushi/ripgrep).
 - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts/) (for icons).
