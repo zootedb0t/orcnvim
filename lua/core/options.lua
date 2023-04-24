@@ -50,15 +50,12 @@ local options = {
     ls = 3, -- Global statusline
     shell = "/usr/bin/sh",
     inccommand = "split", -- incrementally show result of command
-    -- Ignore compiled files
-    wildignore = vim.opt.wildignore + { "*.o", "*~", "*.pyc", "*pycache*" },
-    -- Cool floating window popup menu for completion on command line
-    wildoptions = "pum",
+    wildignore = vim.opt.wildignore + { "*.o", "*~", "*.pyc", "*pycache*" }, -- Ignore compiled files
+    wildoptions = "pum", -- Cool floating window popup menu for completion on command line
     --list = true, -- Show some invisible characters
     --listchars = { tab = " ", trail = "·" },
     diffopt = vim.opt.diffopt + { "linematch:50" },
     -- numberwidth = 3,
-    -- statuscolumn = "%=%{v:virtnum < 1 ? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s",
     synmaxcol = 120,
   },
 

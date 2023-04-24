@@ -86,6 +86,22 @@ cmd({
   end,
 })
 
+-- Statuscolumn
+cmd({
+  "WinEnter",
+  "FileType",
+  "BufEnter",
+  "WinClosed",
+}, {
+  callback = function()
+    local value = require("core.ui.statuscolumn").statuscolumn()
+    local status_ok, _ = pcall(vim.api.nvim_set_option_value, "stc", value, { scope = "local" })
+    if not status_ok then
+      return
+    end
+  end,
+})
+
 -- vim.api.nvim_create_autocmd("FileType", {
 --   callback = function(tbl)
 --     local set_offset = require("bufferline.api").set_offset
