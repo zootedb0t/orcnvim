@@ -49,21 +49,20 @@ end
 if masonlsp_ok then
   mason_lsp.setup({
     ensure_installed = vim.tbl_keys(servers),
-  })
+    handlers = {
+      function(servers_name)
+        local opts = {
+          capabilities = require("configs.lsp.handlers").capabilities(),
+          on_attach = require("configs.lsp.handlers").on_attach,
+          settings = servers[servers_name],
+        }
 
-  mason_lsp.setup_handlers({
-    function(servers_name)
-      local opts = {
-        capabilities = require("configs.lsp.handlers").capabilities(),
-        on_attach = require("configs.lsp.handlers").on_attach,
-        settings = servers[servers_name],
-      }
-
-      local status_ok, server = pcall(require, "configs.lsp.settings." .. servers_name)
-      if status_ok then
-        opts = vim.tbl_deep_extend("force", server, opts)
-      end
-      require("lspconfig")[servers_name].setup(opts)
-    end,
+        local status_ok, server = pcall(require, "configs.lsp.settings." .. servers_name)
+        if status_ok then
+          opts = vim.tbl_deep_extend("force", server, opts)
+        end
+        require("lspconfig")[servers_name].setup(opts)
+      end,
+    },
   })
 end

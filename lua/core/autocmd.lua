@@ -87,20 +87,20 @@ cmd({
 })
 
 -- Statuscolumn
-cmd({
-  "WinEnter",
-  "FileType",
-  "BufEnter",
-  "WinClosed",
-}, {
-  callback = function()
-    local value = require("core.ui.statuscolumn").statuscolumn()
-    local status_ok, _ = pcall(vim.api.nvim_set_option_value, "stc", value, { scope = "local" })
-    if not status_ok then
-      return
-    end
-  end,
-})
+if vim.g.statuscolumn then
+  cmd({
+    "WinEnter",
+    "FileType",
+  }, {
+    callback = function()
+      local value = require("core.ui.statuscolumn").statuscolumn()
+      local status_ok, _ = pcall(vim.api.nvim_set_option_value, "stc", value, { scope = "local" })
+      if not status_ok then
+        return
+      end
+    end,
+  })
+end
 
 -- vim.api.nvim_create_autocmd("FileType", {
 --   callback = function(tbl)
@@ -132,8 +132,8 @@ cmd({
 --   pattern = "NvimTree", -- or any other filetree's `ft`
 -- })
 
--- For transparency
-function M.enable_tranparency()
+-- For colorscheme that don't support transparency. Set transparent_nvim value in options.lua.
+if vim.g.transparent_nvim then
   cmd("ColorScheme", {
     pattern = "*",
     callback = function()
@@ -160,5 +160,3 @@ function M.enable_tranparency()
     end,
   })
 end
-
-return M
