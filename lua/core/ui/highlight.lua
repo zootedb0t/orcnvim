@@ -82,4 +82,8 @@ M.cmp_highlight = function()
   highlight(0, "CmpItemMenu", { link = "Type" })
 end
 
+M.str_highlight = function()
+  highlight(0, "Column", { link = "Constant" })
+end
+
 return M
