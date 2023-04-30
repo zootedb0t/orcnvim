@@ -33,6 +33,15 @@ cmd("VimResized", {
   desc = "Equalize Splits",
 })
 
+-- Disable diagnostic for rofi config
+cmd("BufEnter", {
+  pattern = "*.rasi",
+  callback = function()
+    vim.diagnostic.disable()
+  end,
+  desc = "No Lsp error for rofi config",
+})
+
 -- Statusline
 cmd({
   "WinEnter",
