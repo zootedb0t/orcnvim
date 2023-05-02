@@ -2,8 +2,7 @@
 
 My neovim config.
 
-> Transparency ON
-> ![Screenshot_2023-02-05-05-15-51_1920x1080](https://user-images.githubusercontent.com/62596687/216817008-491c5081-eb81-4b6d-99eb-bffe7980698c.png)
+![Screenshot_2023-05-02-12-02-38_](https://user-images.githubusercontent.com/62596687/235631968-191dcd01-aaa8-4063-9bc4-235436d68fa6.png)
 
 ## Requirements
 
