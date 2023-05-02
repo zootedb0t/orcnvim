@@ -12,12 +12,8 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 local plugins = {
-  -- {
-  --   "catppuccin/nvim",
-  --   name = "catppuccin",
-  -- },
-  -- { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = true, priority = 1000 },
-  { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = true, priority = 1000 },
+  { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
+  { "maxmx03/fluoromachine.nvim", lazy = false },
   {
     "numToStr/Comment.nvim",
     keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
