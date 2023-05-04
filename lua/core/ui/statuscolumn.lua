@@ -3,7 +3,7 @@ local M = {}
 require("core.ui.highlight").str_highlight()
 local is_match = require("core.utils.functions").ismatch
 local disable_statuscolumn =
-  { "alpha", "toggleterm", "NvimTree", "WhichKey", "TelescopePrompt", "TelescopeResults", "lazy", "help", "" }
+  { "alpha", "toggleterm", "NvimTree", "WhichKey", "TelescopePrompt", "TelescopeResults", "lazy", "help", "mason", "" }
 
 function M.statuscolumn()
   local buffer_type = vim.api.nvim_buf_get_option(0, "ft")

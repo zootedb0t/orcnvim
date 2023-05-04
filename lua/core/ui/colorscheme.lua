@@ -3,7 +3,8 @@
 require("fluoromachine").setup({
   glow = true,
   theme = "fluoromachine", -- Choose between retrowave, fluoromachine
-  transparent = true,
+  brightness = 0.04,
+  transparent = "full",
 })
 
 vim.cmd("colorscheme fluoromachine")

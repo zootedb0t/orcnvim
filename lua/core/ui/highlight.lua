@@ -1,15 +1,45 @@
 local M = {}
 local highlight = vim.api.nvim_set_hl
+local get_highlight = vim.api.nvim_get_hl_by_name
+
+-- No need to hardcode colors
+local colors = {
+  stl = get_highlight("Keyword", true),
+  stl_insert = get_highlight("Function", true),
+  stl_visual = get_highlight("@attribute", true),
+  stl_replace = get_highlight("Float", true),
+  stl_terminal = get_highlight("Conditional", true),
+  stl_cmd = get_highlight("Boolean", true),
+}
 
 function M.statusline_highlight()
-  highlight(0, "StatusLineAccent", { fg = "#313244", bg = "#A6E3A1", bold = true })
-  highlight(0, "StatuslineInsertAccent", { fg = "#313244", bg = "#FF8F40", bold = true })
-  highlight(0, "StatuslineVisualAccent", { fg = "#313244", bg = "#D96C75", bold = true })
-  highlight(0, "StatuslineReplaceAccent", { fg = "#313244", bg = "#89B4FA", bold = true })
-  highlight(0, "StatuslineTerminalAccent", { fg = "#313244", bg = "#FB4934", bold = true })
-  highlight(0, "StatuslineCmdLineAccent", { fg = "#313244", bg = "#89B4FA", bold = true })
-  -- Some colorscheme(like rose-pine) were drawing empty statusline for floating window like telescope, lazy. This fixes that
-  highlight(0, "StatuslineTransparent", {})
+  highlight(0, "StatusLineAccent", { fg = colors.stl.foreground, bg = colors.stl.background, bold = true })
+  highlight(
+    0,
+    "StatuslineInsertAccent",
+    { fg = colors.stl_insert.foreground, bg = colors.stl_insert.background, bold = true }
+  )
+  highlight(
+    0,
+    "StatuslineVisualAccent",
+    { fg = colors.stl_visual.foreground, bg = colors.stl_visual.background, bold = true }
+  )
+  highlight(
+    0,
+    "StatuslineReplaceAccent",
+    { fg = colors.stl_replace.foreground, bg = colors.stl_replace.background, bold = true }
+  )
+  highlight(
+    0,
+    "StatuslineTerminalAccent",
+    { fg = colors.stl_terminal.foreground, bg = colors.stl_terminal.background, bold = true }
+  )
+  highlight(
+    0,
+    "StatuslineCmdLineAccent",
+    { fg = colors.stl_cmd.foreground, bg = colors.stl_cmd.background, bold = true }
+  )
+  highlight(0, "StatuslineTransparent", {}) -- Some colorscheme(like rose-pine) were drawing empty statusline for floating window like telescope, lazy. This fixes that
   highlight(0, "StatusLineOthers", { link = "Type" })
   highlight(0, "StatusLineGit", { link = "Constant" })
   highlight(0, "StatusLineGitAdd", { link = "GitSignsAdd" })
@@ -24,7 +54,6 @@ M.winbar_highlight = function()
   highlight(0, "WinbarFile", { link = "Identifier" })
   highlight(0, "WinBarNC", {})
   highlight(0, "WinBar", {})
-  -- highlight(0, "NavicSeparator", { fg = "#89B4FA", bg = "NONE" })
   highlight(0, "NavicSeparator", { link = "Type" })
   highlight(0, "NavicIconsFile", { link = "Identifier" })
   highlight(0, "NavicIconsModule", { link = "Conditional" })

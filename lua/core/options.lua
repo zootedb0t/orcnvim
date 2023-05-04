@@ -56,7 +56,6 @@ local options = {
     --listchars = { tab = " ", trail = "·" },
     diffopt = vim.opt.diffopt + { "linematch:50" },
     -- numberwidth = 3,
-    synmaxcol = 120,
   },
 
   g = {
