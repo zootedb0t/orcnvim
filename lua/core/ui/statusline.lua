@@ -96,7 +96,7 @@ end
 
 local function lsp()
   local names = {}
-  for _, server in pairs(vim.lsp.buf_get_clients(0)) do
+  for _, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
     table.insert(names, server.name)
   end
   if #names > 0 then
