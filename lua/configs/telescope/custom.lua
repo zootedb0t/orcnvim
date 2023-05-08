@@ -1,4 +1,4 @@
--- my telescope customization 
+-- my telescope customization
 local builtin = require("telescope.builtin")
 
 local M = {}

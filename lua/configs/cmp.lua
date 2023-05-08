@@ -39,7 +39,8 @@ local format = function(entry, item)
 
   -- #content gives size of string
   if #content > MAX_LABEL_WIDTH then
-    -- Returns string Like |strpart()| but using character index (start form 0) and length instead of byte index and length.
+    -- Returns string Like |strpart()| but using character index (start form 0) and length instead
+    -- of byte index and length.
     item.abbr = vim.fn.strcharpart(content, 0, MAX_LABEL_WIDTH) .. ELLIPSIS_CHAR
   else
     item.abbr = content .. get_ws(MAX_LABEL_WIDTH, #content)
