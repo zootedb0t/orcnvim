@@ -1,4 +1,4 @@
-# orcnvim [![](https://img.shields.io/static/v1?label=Neovim&message=0.10&color=brightgreen&style=flat&logo=neovim)](https://github.com/neovim/neovim) ![](https://img.shields.io/badge/Lua-blue.svg?style=flat&logo=lua) 
+# orcnvim [![](https://img.shields.io/static/v1?label=Neovim&message=0.10&color=brightgreen&style=flat&logo=neovim)](https://github.com/neovim/neovim) ![](https://img.shields.io/badge/Lua-blue.svg?style=flat&logo=lua) [![Luacheck](https://github.com/zootedb0t/orcnvim/actions/workflows/luacheck.yml/badge.svg)](https://github.com/zootedb0t/orcnvim/actions/workflows/luacheck.yml)
 
 My neovim config.
 
