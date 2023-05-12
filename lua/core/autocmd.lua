@@ -42,29 +42,6 @@ cmd("BufEnter", {
   desc = "No Lsp error for rofi config",
 })
 
--- Statusline
-cmd({
-  "WinEnter",
-  "BufEnter",
-  "CursorMoved",
-  "CursorMovedI",
-  "Filetype",
-  "VimResized",
-  "TabClosed",
-  "TabEnter",
-  "WinScrolled",
-  "ModeChanged",
-  "LspAttach",
-}, {
-  callback = function()
-    local value = require("core.ui.statusline").draw()
-    local status_ok, _ = pcall(vim.api.nvim_set_option_value, "statusline", value, { scope = "global" })
-    if not status_ok then
-      return
-    end
-  end,
-})
-
 -- For suckless
 cmd({ "BufWritePost" }, {
   pattern = ".Xresources",
@@ -73,43 +50,6 @@ cmd({ "BufWritePost" }, {
     vim.cmd("!pidof st | xargs kill -s USR1")
   end,
 })
-
--- Winbar
-cmd({
-  "CursorHoldI",
-  "BufModifiedSet",
-  "CursorHold",
-  "BufWinEnter",
-  "BufFilePost",
-  "InsertEnter",
-  "BufWritePost",
-  "TabClosed",
-  "TabEnter",
-}, {
-  callback = function()
-    local value = require("core.ui.winbar").draw()
-    local status_ok, _ = pcall(vim.api.nvim_set_option_value, "winbar", value, { scope = "local" })
-    if not status_ok then
-      return
-    end
-  end,
-})
-
--- Statuscolumn
-if vim.g.statuscolumn then
-  cmd({
-    "WinEnter",
-    "FileType",
-  }, {
-    callback = function()
-      local value = require("core.ui.statuscolumn").statuscolumn()
-      local status_ok, _ = pcall(vim.api.nvim_set_option_value, "stc", value, { scope = "local" })
-      if not status_ok then
-        return
-      end
-    end,
-  })
-end
 
 -- vim.api.nvim_create_autocmd("FileType", {
 --   callback = function(tbl)

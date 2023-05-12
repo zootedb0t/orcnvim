@@ -14,7 +14,7 @@ vim.opt.runtimepath:prepend(lazypath)
 local plugins = {
   { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
   { "maxmx03/fluoromachine.nvim", lazy = false },
-  { "lunarvim/horizon.nvim", lazy = false },
+  { "ChristianChiarulli/onedark.nvim", lazy = false },
   {
     "numToStr/Comment.nvim",
     keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },

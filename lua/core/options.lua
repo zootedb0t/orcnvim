@@ -55,14 +55,15 @@ local options = {
     --list = true, -- Show some invisible characters
     --listchars = { tab = " ", trail = "·" },
     diffopt = vim.opt.diffopt + { "linematch:50" },
-    -- numberwidth = 3,
+    statusline = "%{%v:lua.require'core.ui.statusline'.draw()%}",
+    winbar = "%{%v:lua.require'core.ui.winbar'.draw()%}",
+    statuscolumn = "%{%v:lua.require'core.ui.statuscolumn'.draw()%}",
   },
 
   g = {
     highlighturl_enabled = true, -- highlight URLs by default
     mapleader = " ",
     transparent_nvim = true, -- Set true to make window transparent
-    statuscolumn = true, -- Set true to enable statuscolumn
   },
 }
 
