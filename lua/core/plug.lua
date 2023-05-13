@@ -260,7 +260,7 @@ local opts = {
     timeout = 300, -- kill processes that take more than 2 minutes
     url_format = "https://github.com/%s.git",
   },
-  lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json", -- lockfile generated after running update.
+  lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json", -- lockfile generated after running update.
   -- concurrency = nil, ---@type number limit the maximum amount of concurrent tasks
   install = {
     -- install missing plugins on startup. This doesn't increase startup time.
