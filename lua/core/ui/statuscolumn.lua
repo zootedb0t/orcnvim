@@ -17,7 +17,7 @@ local disable_statuscolumn = {
 }
 
 -- TODO Convert return into more readable statement
-local stc = function()
+local function stc()
   -- local lnum, rnum= vim.v.lnum, vim.v.relnum
   local num, relnum = vim.opt.number:get(), vim.opt.relativenumber:get()
   if num and relnum then
@@ -32,7 +32,7 @@ function M.draw()
   if is_match(disable_statuscolumn, buffer_type) then
     return ""
   else
-    return stc
+    return stc()
   end
 end
 

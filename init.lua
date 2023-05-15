@@ -7,7 +7,7 @@
 ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║██║  ██║╚██████╗
 ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
 
-https://github.com/zootedb0t/orcnvim   ¯\_(ツ)_/¯
+https://github.com/zootedb0t/orcnvim
 --]]
 
 if vim.loader then
