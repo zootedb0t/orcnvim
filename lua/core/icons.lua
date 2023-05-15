@@ -149,7 +149,7 @@ return {
     Diff = "",
     Repo = "",
     Octoface = "",
-    Branch = "󰊢",
+    Branch = "",
   },
 
   line_bar = {
