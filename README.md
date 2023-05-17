@@ -2,6 +2,9 @@
 
 My neovim config.
 
+![Screenshot_2023-05-17-02-03-52_](https://github.com/zootedb0t/orcnvim/assets/62596687/9d14cec5-4d3a-4684-9006-e30e02871473)
+
+
 ![Screenshot_2023-05-02-12-02-38_](https://user-images.githubusercontent.com/62596687/235631968-191dcd01-aaa8-4063-9bc4-235436d68fa6.png)
 
 ## Requirements
