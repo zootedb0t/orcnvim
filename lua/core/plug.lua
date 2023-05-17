@@ -12,9 +12,9 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 local plugins = {
-  { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
-  { "maxmx03/fluoromachine.nvim", lazy = false },
-  { "ChristianChiarulli/onedark.nvim", lazy = false },
+  { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = true },
+  { "maxmx03/fluoromachine.nvim", lazy = true, priority = 1000 },
+  { "ChristianChiarulli/onedark.nvim", lazy = true },
   {
     "numToStr/Comment.nvim",
     keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
@@ -27,7 +27,7 @@ local plugins = {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    event = { "BufRead", "BufNewFile", "BufNew" },
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("configs.treesitter")
     end,
@@ -42,7 +42,7 @@ local plugins = {
   },
   {
     "neovim/nvim-lspconfig",
-    event = { "BufRead", "BufNewFile", "BufNew" },
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("configs.lsp.handlers").setup()
     end,
@@ -101,23 +101,15 @@ local plugins = {
       require("configs.cmp")
     end,
     dependencies = {
-      "cmp-path",
-      "cmp-buffer",
-      "cmp-nvim-lsp",
-      "cmp_luasnip",
-      "cmp-nvim-lsp-signature-help",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-nvim-lsp",
+      "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
       "nvim-autopairs",
       "LuaSnip",
     },
   },
-  { "hrsh7th/cmp-path", lazy = true },
-  { "hrsh7th/cmp-buffer", lazy = true },
-  { "hrsh7th/cmp-nvim-lsp", lazy = true },
-  { "saadparwaiz1/cmp_luasnip", lazy = true },
-  { "rafamadriz/friendly-snippets", lazy = true },
-  { "hrsh7th/cmp-nvim-lsp-signature-help", lazy = true },
-  { "rafamadriz/friendly-snippets", lazy = true },
-  { "hrsh7th/cmp-nvim-lsp-signature-help", lazy = true },
   {
     "windwp/nvim-autopairs",
     config = function()
@@ -132,7 +124,7 @@ local plugins = {
       require("luasnip.loaders.from_vscode").lazy_load()
     end,
     dependencies = {
-      "friendly-snippets",
+      "rafamadriz/friendly-snippets",
     },
   },
   {
@@ -140,7 +132,7 @@ local plugins = {
     config = function()
       require("gitsigns").setup()
     end,
-    event = { "BufRead", "BufNewFile", "BufNew" },
+    event = { "BufReadPre", "BufNewFile" },
   },
   {
     "folke/which-key.nvim",
@@ -266,7 +258,7 @@ local opts = {
     -- install missing plugins on startup. This doesn't increase startup time.
     missing = true,
     -- try to load one of these colorschemes when starting an installation during startup
-    colorscheme = { "nightfly", "catppuccin" },
+    colorscheme = { "moonfly" },
   },
   ui = {
     -- a number <1 is a percentage., >1 is a fixed size

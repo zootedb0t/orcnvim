@@ -115,4 +115,10 @@ M.str_highlight = function()
   highlight(0, "Column", { link = "Constant" })
 end
 
+M.alpha = function ()
+  highlight(0, "AlphaHeader", { link = "Constant" })
+  highlight(0, "AlphaShortcut", { link = "Type" })
+  highlight(0, "AlphaFooter", { link = "Function" })
+end
+
 return M

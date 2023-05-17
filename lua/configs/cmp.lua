@@ -64,7 +64,7 @@ if cmp_status_ok and snip_status_ok then
 
     snippet = {
       expand = function(args)
-        require("luasnip").lsp_expand(args.body)
+        luasnip.lsp_expand(args.body)
       end,
     },
 

@@ -55,6 +55,8 @@ M.peek = function()
       -- amount of bytes in size
       throttle_time = "auto",
     })
+    vim.api.nvim_create_user_command("PeekOpen", peek.open, {})
+    vim.api.nvim_create_user_command("PeekClose", peek.close, {})
   end
 end
 
