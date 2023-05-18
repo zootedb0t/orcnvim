@@ -50,7 +50,6 @@ local plugins = {
       "cmp-nvim-lsp",
       "SmiteshP/nvim-navic",
       "mason-lspconfig.nvim",
-      "null-ls.nvim",
     },
   },
   {
@@ -65,10 +64,13 @@ local plugins = {
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
-    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("configs.null-ls")
     end,
+    dependencies = {
+      "mason.nvim",
+    },
   },
   {
     "williamboman/mason.nvim",
@@ -136,7 +138,6 @@ local plugins = {
   },
   {
     "folke/which-key.nvim",
-    cmd = "WhichKey",
     keys = "<leader>",
     config = function()
       require("configs.whichkey").config()
@@ -214,13 +215,6 @@ local plugins = {
     end,
   },
   {
-    "ray-x/web-tools.nvim",
-    ft = "html",
-    config = function()
-      require("configs.others").web_tools()
-    end,
-  },
-  {
     "akinsho/toggleterm.nvim",
     cmd = {
       "ToggleTerm",
@@ -235,13 +229,13 @@ local plugins = {
       require("configs.toogleterm")
     end,
   },
-  {
-    "romgrk/barbar.nvim",
-    config = function()
-      require("configs.bufferline")
-    end,
-    cmd = { "BarbarEnable" },
-  },
+  -- {
+  --   "romgrk/barbar.nvim",
+  --   config = function()
+  --     require("configs.bufferline")
+  --   end,
+  --   cmd = { "BarbarEnable" },
+  -- },
 }
 
 local opts = {

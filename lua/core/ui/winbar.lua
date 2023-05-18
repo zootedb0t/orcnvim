@@ -100,7 +100,7 @@ local function active()
 end
 
 local function inactive()
-  return ""
+  return "%#WinBar#" .. ""
 end
 
 local function file_explorer()
