@@ -16,27 +16,27 @@ function M.statusline_highlight()
   highlight(0, "StatusLineAccent", { fg = colors.stl.foreground, bg = colors.stl.background, bold = true })
   highlight(
     0,
-    "StatuslineInsertAccent",
+    "StatusLineInsertAccent",
     { fg = colors.stl_insert.foreground, bg = colors.stl_insert.background, bold = true }
   )
   highlight(
     0,
-    "StatuslineVisualAccent",
+    "StatusLineVisualAccent",
     { fg = colors.stl_visual.foreground, bg = colors.stl_visual.background, bold = true }
   )
   highlight(
     0,
-    "StatuslineReplaceAccent",
+    "StatusLineReplaceAccent",
     { fg = colors.stl_replace.foreground, bg = colors.stl_replace.background, bold = true }
   )
   highlight(
     0,
-    "StatuslineTerminalAccent",
+    "StatusLineTerminalAccent",
     { fg = colors.stl_terminal.foreground, bg = colors.stl_terminal.background, bold = true }
   )
   highlight(
     0,
-    "StatuslineCmdLineAccent",
+    "StatusLineCmdLineAccent",
     { fg = colors.stl_cmd.foreground, bg = colors.stl_cmd.background, bold = true }
   )
   highlight(0, "StatuslineTransparent", {}) -- Some colorscheme were drawing empty statusline for floating window like telescope, lazy. This fixes that
@@ -45,7 +45,7 @@ function M.statusline_highlight()
   highlight(0, "StatusLineGitAdd", { link = "GitSignsAdd" })
   highlight(0, "StatusLineGitChange", { link = "GitSignsChange" })
   highlight(0, "StatusLineGitRemove", { link = "GitSignsDelete" })
-  highlight(0, "StatusLineInfo", { link = "Character" })
+  highlight(0, "StatusLineInfo", { link = "@character.special" })
   highlight(0, "StatusLinePackage", { link = "Constant" })
   highlight(0, "StatusLineLsp", { link = "Identifier" })
 end
@@ -82,31 +82,6 @@ M.winbar_highlight = function()
   highlight(0, "NavicText", { link = "@variable" })
 end
 
-M.bufferline = function()
-  highlight(0, "BufferVisible", {})
-  highlight(0, "BufferVisibleIndex", {})
-  highlight(0, "BufferVisibleMod", {})
-  highlight(0, "BufferVisibleSign", {})
-  highlight(0, "BufferVisibleTarget", {})
-  highlight(0, "BufferInactiveIndex", {})
-  highlight(0, "BufferInactiveMod", {})
-  highlight(0, "BufferInactiveTarget", {})
-  highlight(0, "BufferTabpages", {})
-  highlight(0, "BufferTabpageFill", {})
-  highlight(0, "BufferCurrent", {})
-  highlight(0, "BufferCurrentMod", { fg = "#FB4934" })
-  highlight(0, "BufferCurrentSign", { fg = "#A6E3A1" })
-  highlight(0, "BufferInactive", {})
-  highlight(0, "BufferInactiveSign", {})
-  highlight(0, "BufferInactiveIcon", {})
-  highlight(0, "BufferCurrentIcon", {})
-  highlight(0, "BufferVisibleIcon", {})
-  highlight(0, "BufferAlternateIcon", {})
-  highlight(0, "BufferDefaultCurrentIcon", {})
-  highlight(0, "BufferDefaultInactiveIcon", {})
-  highlight(0, "BufferDefaultVisible", {})
-end
-
 M.cmp_highlight = function()
   highlight(0, "CmpItemMenu", { link = "Type" })
 end
@@ -115,7 +90,7 @@ M.str_highlight = function()
   highlight(0, "Column", { link = "Constant" })
 end
 
-M.alpha = function ()
+M.alpha = function()
   highlight(0, "AlphaHeader", { link = "Constant" })
   highlight(0, "AlphaShortcut", { link = "Type" })
   highlight(0, "AlphaFooter", { link = "Function" })

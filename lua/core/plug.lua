@@ -108,16 +108,16 @@ local plugins = {
       "hrsh7th/cmp-nvim-lsp",
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp-signature-help",
-      "nvim-autopairs",
       "LuaSnip",
     },
   },
   {
-    "windwp/nvim-autopairs",
+    "echasnovski/mini.pairs",
     config = function()
-      require("configs.others").pair()
+      require("mini.pairs").setup()
     end,
-    lazy = true,
+    version = false,
+    event = "VeryLazy",
   },
   {
     "L3MON4D3/LuaSnip",

@@ -11,39 +11,55 @@ local function update_mode_colors()
   local current_mode = vim.api.nvim_get_mode().mode
   local mode_color = "%#StatusLineAccent#"
   if current_mode == "n" then
-    mode_color = "%#StatuslineAccent#"
+    mode_color = "%#StatusLineAccent#"
   elseif current_mode == "i" or current_mode == "ic" then
-    mode_color = "%#StatuslineInsertAccent#"
+    mode_color = "%#StatusLineInsertAccent#"
   elseif current_mode == "v" or current_mode == "V" or current_mode == "" then
-    mode_color = "%#StatuslineVisualAccent#"
+    mode_color = "%#StatusLineVisualAccent#"
   elseif current_mode == "R" then
-    mode_color = "%#StatuslineReplaceAccent#"
+    mode_color = "%#StatusLineReplaceAccent#"
   elseif current_mode == "c" then
-    mode_color = "%#StatuslineCmdLineAccent#"
+    mode_color = "%#StatusLineCmdLineAccent#"
   elseif current_mode == "t" then
-    mode_color = "%#StatuslineTerminalAccent#"
+    mode_color = "%#StatusLineTerminalAccent#"
   end
   return mode_color
 end
 
 local modes = {
   ["n"] = "NORMAL",
-  ["no"] = "NORMAL",
+  ["no"] = "O-PENDING",
+  ["nov"] = "O-PENDING",
+  ["noV"] = "O-PENDING",
+  ["no\22"] = "O-PENDING",
+  ["niI"] = "NORMAL",
+  ["niR"] = "NORMAL",
+  ["niV"] = "NORMAL",
+  ["nt"] = "NORMAL",
+  ["ntT"] = "NORMAL",
   ["v"] = "VISUAL",
-  ["V"] = "VISUAL LINE",
-  [""] = "VISUAL BLOCK",
+  ["vs"] = "VISUAL",
+  ["V"] = "V-LINE",
+  ["Vs"] = "V-LINE",
+  ["\22"] = "V-BLOCK",
+  ["\22s"] = "V-BLOCK",
   ["s"] = "SELECT",
-  ["S"] = "SELECT LINE",
-  [""] = "SELECT BLOCK",
+  ["S"] = "S-LINE",
+  ["\19"] = "S-BLOCK",
   ["i"] = "INSERT",
   ["ic"] = "INSERT",
+  ["ix"] = "INSERT",
   ["R"] = "REPLACE",
-  ["Rv"] = "VISUAL REPLACE",
+  ["Rc"] = "REPLACE",
+  ["Rx"] = "REPLACE",
+  ["Rv"] = "V-REPLACE",
+  ["Rvc"] = "V-REPLACE",
+  ["Rvx"] = "V-REPLACE",
   ["c"] = "COMMAND",
-  ["cv"] = "VIM EX",
+  ["cv"] = "EX",
   ["ce"] = "EX",
-  ["r"] = "PROMPT",
-  ["rm"] = "MOAR",
+  ["r"] = "REPLACE",
+  ["rm"] = "MORE",
   ["r?"] = "CONFIRM",
   ["!"] = "SHELL",
   ["t"] = "TERMINAL",
@@ -51,11 +67,15 @@ local modes = {
 
 local function mode()
   local current_mode = vim.api.nvim_get_mode().mode
-  return table.concat({
-    update_mode_colors(),
-    modes[current_mode],
-    "%#Normal#",
-  }, " ")
+  if modes[current_mode] == nil then
+    return ""
+  else
+    return table.concat({
+      update_mode_colors(),
+      modes[current_mode],
+      "%#Normal#",
+    }, "")
+  end
 end
 
 local function filename()

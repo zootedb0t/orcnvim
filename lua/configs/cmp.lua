@@ -1,6 +1,5 @@
 local cmp_status_ok, cmp = pcall(require, "cmp")
 local snip_status_ok, luasnip = pcall(require, "luasnip")
-local autopair_ok, autopair = pcall(require, "nvim-autopairs.completion.cmp")
 local kind_icons = require("core.icons").kind
 local border_opts = {
   border = "single",
@@ -174,7 +173,4 @@ if cmp_status_ok and snip_status_ok then
       }),
     },
   })
-end
-if autopair_ok then
-  cmp.event:on("confirm_done", autopair.on_confirm_done({ map_char = { tex = "" } }))
 end

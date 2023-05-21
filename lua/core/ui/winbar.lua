@@ -6,44 +6,6 @@ local is_match = require("core.utils.functions").ismatch
 local icon = require("core.icons")
 local space = " "
 
-local status_ok_navic, navic = pcall(require, "nvim-navic")
-if not status_ok_navic then
-  return
-end
-
-navic.setup({
-  icons = {
-    File = icon.ui.File .. space,
-    Module = icon.kind.Module .. space,
-    Namespace = icon.kind.Namespace .. space,
-    Package = icon.kind.Package .. space,
-    Class = icon.kind.Class .. space,
-    Method = icon.kind.Method .. space,
-    Property = icon.kind.Property .. space,
-    Field = icon.kind.Field .. space,
-    Constructor = icon.kind.Constructor .. space,
-    Enum = icon.kind.Enum .. space,
-    Interface = icon.kind.Interface .. space,
-    Function = icon.kind.Function .. space,
-    Variable = icon.kind.Variable .. space,
-    Constant = icon.kind.Constant .. space,
-    String = icon.kind.String .. space,
-    Number = icon.kind.Number .. space,
-    Boolean = icon.kind.Boolean .. space,
-    Array = icon.kind.Array .. space,
-    Object = icon.kind.Object .. space,
-    Key = icon.kind.Key .. space,
-    Null = icon.kind.Null .. space,
-    EnumMember = icon.kind.EnumMember .. space,
-    Struct = icon.kind.Struct .. space,
-    Event = icon.kind.Event .. space,
-    Operator = icon.kind.Operator .. space,
-    TypeParameter = icon.kind.TypeParameter .. space,
-  },
-  highlight = true,
-  separator = icon.ui.ChevronRight .. space,
-})
-
 local function filename()
   local buf_mod = vim.api.nvim_buf_get_option(0, "mod")
   local fname = vim.fn.expand("%:t")
@@ -71,6 +33,38 @@ end
 
 local get_gps = function()
   local status_ok_gps, gps = pcall(require, "nvim-navic")
+  gps.setup({
+    icons = {
+      File = icon.ui.File .. space,
+      Module = icon.kind.Module .. space,
+      Namespace = icon.kind.Namespace .. space,
+      Package = icon.kind.Package .. space,
+      Class = icon.kind.Class .. space,
+      Method = icon.kind.Method .. space,
+      Property = icon.kind.Property .. space,
+      Field = icon.kind.Field .. space,
+      Constructor = icon.kind.Constructor .. space,
+      Enum = icon.kind.Enum .. space,
+      Interface = icon.kind.Interface .. space,
+      Function = icon.kind.Function .. space,
+      Variable = icon.kind.Variable .. space,
+      Constant = icon.kind.Constant .. space,
+      String = icon.kind.String .. space,
+      Number = icon.kind.Number .. space,
+      Boolean = icon.kind.Boolean .. space,
+      Array = icon.kind.Array .. space,
+      Object = icon.kind.Object .. space,
+      Key = icon.kind.Key .. space,
+      Null = icon.kind.Null .. space,
+      EnumMember = icon.kind.EnumMember .. space,
+      Struct = icon.kind.Struct .. space,
+      Event = icon.kind.Event .. space,
+      Operator = icon.kind.Operator .. space,
+      TypeParameter = icon.kind.TypeParameter .. space,
+    },
+    highlight = true,
+    separator = icon.ui.ChevronRight .. space,
+  })
   if not status_ok_gps then
     return ""
   end
@@ -84,7 +78,7 @@ local get_gps = function()
     return ""
   end
   if not is_empty(gps_location) then
-    return gps_location .. space
+    return gps_location
   else
     return ""
   end

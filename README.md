@@ -4,7 +4,6 @@ My neovim config.
 
 ![Screenshot_2023-05-17-02-03-52_](https://github.com/zootedb0t/orcnvim/assets/62596687/9d14cec5-4d3a-4684-9006-e30e02871473)
 
-
 ![Screenshot_2023-05-02-12-02-38_](https://user-images.githubusercontent.com/62596687/235631968-191dcd01-aaa8-4063-9bc4-235436d68fa6.png)
 
 ## Requirements
@@ -20,19 +19,23 @@ My neovim config.
 ## Installation
 
 Make sure to remove or move the current `nvim` directory present in `.config`.
+
 ```sh
 git clone --depth 1 https://github.com/zootedb0t/orcnvim.git ~/.config/nvim
 ```
 
 If you are using `nvim-0.9+` then you can use `NVIM_APPNAME`.
+
 ```sh
 git clone --depth 1 https://github.com/zootedb0t/orcnvim.git ~/.config/orcnvim
 ```
+
 Now set environment variable `$NVIM_APPNAME=orcnvim`. Start `neovim` now `orcnvim` configration will be used.
 
 ## Features
+
 - Lazy load plugins for faster startup time. Thanks to [lazy.nvim](https://github.com/folke/lazy.nvim/)
-- Custom `statusline` and `winbar`.
+- Custom `Statuscolumn`, `Winbar` and `Statusline`.
 - Autocompletion using [cmp](https://github.com/hrsh7th/nvim-cmp).
 - Syntax highlighting using [tree-sitter](https://github.com/nvim-treesitter/nvim-treesitter).
 - Formatting and linting using [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim).

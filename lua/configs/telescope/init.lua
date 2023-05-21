@@ -1,8 +1,10 @@
 local telescope_ok, telescope = pcall(require, "telescope")
-local actions_ok, actions = pcall(require, "telescope.actions")
 local icon = require("core.icons")
 
-if telescope_ok and actions_ok then
+if telescope_ok then
+  local actions = require("telescope.actions")
+  local builtin = require("telescope.builtin")
+
   telescope.setup({
     defaults = {
       prompt_prefix = string.format("%s ", icon.ui.Search),
@@ -38,6 +40,12 @@ if telescope_ok and actions_ok then
           ["<C-d>"] = actions.delete_buffer,
           ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
           ["<CR>"] = actions.select_default,
+          -- Show dotfiles
+          ["<a-h>"] = function()
+            builtin.find_files({
+              hidden = true,
+            })
+          end,
         },
         n = {
           ["<C-j>"] = actions.move_selection_next,
