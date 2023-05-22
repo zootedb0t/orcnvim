@@ -37,10 +37,6 @@ local plugins = {
       "windwp/nvim-ts-autotag",
     },
   },
-  -- {
-  --   "windwp/nvim-ts-autotag",
-  -- ft = { "html", "javascript", "typescript", "markdown" },
-  -- },
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },

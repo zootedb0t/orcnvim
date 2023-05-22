@@ -7,7 +7,7 @@ local icon = require("core.icons")
 local space = " "
 
 local function filename()
-  local buf_mod = vim.api.nvim_buf_get_option(0, "mod")
+  local buf_mod = vim.bo.modified
   local fname = vim.fn.expand("%:t")
   local extension = vim.fn.expand("%:e")
   local devicon = require("core.utils.functions").get_icons(fname, extension)
