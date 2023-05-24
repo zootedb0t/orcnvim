@@ -54,13 +54,17 @@ if masonlsp_ok then
         local opts = {
           capabilities = require("configs.lsp.handlers").capabilities(),
           on_attach = require("configs.lsp.handlers").on_attach,
+          on_new_config = function(config)
+            if servers_name == "clangd" then
+              config.cmd = {
+                "clangd",
+                "--offset-encoding=utf-16",
+              }
+            end
+          end,
           settings = servers[servers_name],
         }
 
-        local status_ok, server = pcall(require, "configs.lsp.settings." .. servers_name)
-        if status_ok then
-          opts = vim.tbl_deep_extend("force", server, opts)
-        end
         require("lspconfig")[servers_name].setup(opts)
       end,
     },
