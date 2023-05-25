@@ -18,10 +18,10 @@ local plugins = {
   {
     "numToStr/Comment.nvim",
     keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
-    config = function()
-      require("Comment").setup({
+    opts = function()
+      return {
         ignore = "^$",
-      })
+      }
     end,
   },
   {
@@ -76,14 +76,11 @@ local plugins = {
   },
   {
     "j-hui/fidget.nvim",
-    config = function()
-      require("fidget").setup()
-    end,
     event = "LspAttach",
+    opts = {},
   },
   {
     "nvim-telescope/telescope.nvim",
-    lazy = true,
     cmd = "Telescope",
     config = function()
       require("configs.telescope")
@@ -110,11 +107,9 @@ local plugins = {
   },
   {
     "echasnovski/mini.pairs",
-    config = function()
-      require("mini.pairs").setup()
-    end,
-    version = false,
     event = "VeryLazy",
+    opts = {},
+    version = false,
   },
   {
     "L3MON4D3/LuaSnip",
@@ -128,10 +123,8 @@ local plugins = {
   },
   {
     "lewis6991/gitsigns.nvim",
-    config = function()
-      require("gitsigns").setup()
-    end,
     event = { "BufReadPre", "BufNewFile" },
+    opts = {},
   },
   {
     "folke/which-key.nvim",
@@ -156,27 +149,32 @@ local plugins = {
       vim.keymap.set("n", ",w", "<CMD>HopWord<CR>")
     end,
     cmd = "HopWord",
-    config = function()
-      require("configs.others").hop()
+    opts = function()
+      return {
+        keys = "etovxqpdygfblzhckisuran",
+      }
     end,
   },
   {
     "toppair/peek.nvim",
     build = "deno task --quiet build:fast",
     ft = "markdown",
+    opts = {},
     config = function()
-      require("configs.others").peek()
+      local peek = require("peek")
+      vim.api.nvim_create_user_command("PeekOpen", peek.open, {})
+      vim.api.nvim_create_user_command("PeekClose", peek.close, {})
     end,
   },
   {
     "NvChad/nvim-colorizer.lua",
     cmd = "ColorizerToggle",
-    config = function()
-      require("colorizer").setup({
+    opts = function()
+      return {
         user_default_options = {
           names = false,
         },
-      })
+      }
     end,
   },
 
@@ -198,8 +196,8 @@ local plugins = {
       "SessionSave",
       "SessionLoad",
     },
-    config = function()
-      require("persisted").setup({
+    opts = function()
+      return {
         autosave = false,
         should_autosave = function()
           -- do not autosave if the alpha dashboard is the current filetype
@@ -208,7 +206,7 @@ local plugins = {
           end
           return true
         end,
-      })
+      }
     end,
   },
   {
@@ -221,18 +219,17 @@ local plugins = {
       "ToggleTermSendVisualLines",
       "ToggleTermSendVisualSelection",
     },
-    -- tag = "*",
-    config = function()
-      require("configs.toogleterm")
+    opts = function()
+      return {
+        size = 15,
+        insert_mappings = true, -- whether or not the open mapping applies in insert mode
+        close_on_exit = true, -- close the terminal window when the process exits
+        open_mapping = [[<c-\>]],
+        border = "double",
+        shell = "/usr/bin/fish",
+      }
     end,
   },
-  -- {
-  --   "romgrk/barbar.nvim",
-  --   config = function()
-  --     require("configs.bufferline")
-  --   end,
-  --   cmd = { "BarbarEnable" },
-  -- },
 }
 
 local opts = {
