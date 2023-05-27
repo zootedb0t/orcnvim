@@ -12,9 +12,27 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 local plugins = {
-  { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = true },
-  { "maxmx03/fluoromachine.nvim", lazy = true, priority = 1000 },
-  { "ChristianChiarulli/onedark.nvim", lazy = true },
+  {
+    "bluz71/vim-moonfly-colors",
+    name = "moonfly",
+    lazy = true,
+    config = function()
+      vim.g.moonflyTransparent = true
+      vim.g.moonflyUnderlineMatchParen = true
+    end,
+  },
+  {
+    "maxmx03/fluoromachine.nvim",
+    lazy = true,
+    priority = 1000,
+    opts = function()
+      return {
+        theme = "delta", -- Choose between retrowave, fluoromachine, delta
+        brightness = 0.04,
+        transparent = "full",
+      }
+    end,
+  },
   {
     "numToStr/Comment.nvim",
     keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
@@ -107,7 +125,7 @@ local plugins = {
   },
   {
     "echasnovski/mini.pairs",
-    event = "VeryLazy",
+    event = { "BufReadPost", "BufNewFile" },
     opts = {},
     version = false,
   },
@@ -146,9 +164,9 @@ local plugins = {
     "phaazon/hop.nvim",
     branch = "v2", -- optional but strongly recommended
     init = function()
-      vim.keymap.set("n", ",w", "<CMD>HopWord<CR>")
+      vim.keymap.set("n", ",w", "<CMD>HopAnywhere<CR>")
     end,
-    cmd = "HopWord",
+    cmd = "HopAnywhere",
     opts = function()
       return {
         keys = "etovxqpdygfblzhckisuran",
@@ -246,7 +264,7 @@ local opts = {
     -- install missing plugins on startup. This doesn't increase startup time.
     missing = true,
     -- try to load one of these colorschemes when starting an installation during startup
-    colorscheme = { "moonfly" },
+    colorscheme = { "fluoromachine" },
   },
   ui = {
     -- a number <1 is a percentage., >1 is a fixed size
