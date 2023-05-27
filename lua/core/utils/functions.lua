@@ -5,8 +5,8 @@ function M.isempty(s)
 end
 
 function M.ismatch(table, value)
-  for key, _ in pairs(table) do
-    if table[key] == value then
+  for _, val in ipairs(table) do
+    if val == value then
       return true
     end
   end
@@ -23,6 +23,13 @@ function M.get_icons(filename, extension)
     return ""
   end
   return { icon = file_icon, highlight = color }
+end
+
+function M.disable()
+  return {
+    "alpha",
+    "toggleterm",
+  }
 end
 
 return M

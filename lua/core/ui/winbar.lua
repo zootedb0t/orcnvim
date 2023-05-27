@@ -3,6 +3,8 @@ local M = {}
 require("core.ui.highlight").winbar_highlight()
 local is_empty = require("core.utils.functions").isempty
 local is_match = require("core.utils.functions").ismatch
+-- Add filetypes to the list for which you don't want statusline
+local disable_winbar = vim.tbl_extend("force", require("core.utils.functions").disable(), { "" })
 local icon = require("core.icons")
 local space = " "
 
@@ -102,11 +104,10 @@ local function file_explorer()
 end
 
 M.draw = function()
-  local disable_winabar = { "alpha", "toggleterm", "" }
   local buffer_type = vim.bo.filetype
-  if is_match(disable_winabar, buffer_type) then
+  if is_match(disable_winbar, buffer_type) then
     return inactive()
-  elseif vim.bo.filetype == "NvimTree" then
+  elseif buffer_type == "NvimTree" then
     return file_explorer()
   else
     return active()

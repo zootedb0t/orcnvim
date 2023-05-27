@@ -2,6 +2,13 @@ Statusline = {}
 
 local is_empty = require("core.utils.functions").isempty
 local is_match = require("core.utils.functions").ismatch
+-- Add filetypes to the list for which you don't want statusline
+local disable_statusline = vim.tbl_extend("force", require("core.utils.functions").disable(), {
+  "TelescopePrompt",
+  "lazy",
+  "NvimTree",
+  "",
+})
 local icon = require("core.icons")
 
 -- Import highlights
@@ -252,8 +259,6 @@ local function inactive()
 end
 
 function Statusline.draw()
-  -- Add filetypes to the list for which you don't want statusline
-  local disable_statusline = { "NvimTree", "alpha", "TelescopePrompt", "lazy", "toggleterm", "" }
   local buffer_type = vim.bo.filetype
   if is_match(disable_statusline, buffer_type) then
     return inactive()

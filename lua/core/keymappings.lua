@@ -67,6 +67,5 @@ map("n", "[d", vim.diagnostic.goto_prev, opt)
 map("n", "]d", vim.diagnostic.goto_next, opt)
 map("n", "<localleader>q", vim.diagnostic.setloclist, opt)
 
--- Tabline
--- map("n", "<Leader>tn", "<CMD>tabnew<CR>", { desc = "New Tab" })
--- map("n", "<Leader>tc", "<CMD>tabclose<CR>", { desc = "Change Tab Name" })
+-- For hop.nvim
+map("n", ",w", "<CMD>HopAnywhere<CR>", { desc = "HopAnywhere in buffer" })
