@@ -3,8 +3,7 @@ local M = {}
 require("core.ui.highlight").winbar_highlight()
 local is_empty = require("core.utils.functions").isempty
 local is_match = require("core.utils.functions").ismatch
--- Add filetypes to the list for which you don't want statusline
-local disable_winbar = vim.tbl_extend("force", require("core.utils.functions").disable(), { "" })
+local disable_winbar = require("core.utils.functions").disable()
 local icon = require("core.icons")
 local space = " "
 

@@ -1,5 +1,6 @@
 local M = {}
 
+-- 's' is not table, if table use 'vim.tbl_isempty()' instead
 function M.isempty(s)
   return s == nil or s == 0 or s == ""
 end
@@ -29,6 +30,7 @@ function M.disable()
   return {
     "alpha",
     "toggleterm",
+    "",
   }
 end
 

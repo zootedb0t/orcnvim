@@ -2,16 +2,18 @@ local M = {}
 
 require("core.ui.highlight").str_highlight()
 local is_match = require("core.utils.functions").ismatch
--- Add filetypes to the list for which you don't want statuscolumn
-local disable_statuscolumn = vim.tbl_extend("force", require("core.utils.functions").disable(), {
+-- Add filetypes to the list for which you don't want statuscolumn before unpack statement
+local disable_statuscolumn = {
   "TelescopePrompt",
   "lazy",
   "NvimTree",
   "help",
   "mason",
   "netrw",
-  "",
-})
+  unpack(require("core.utils.functions").disable()),
+}
+
+-- table.insert(disable_statuscolumn, "alpha")
 
 -- TODO Convert return into more readable statement
 local function stc()

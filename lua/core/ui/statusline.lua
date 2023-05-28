@@ -2,13 +2,13 @@ Statusline = {}
 
 local is_empty = require("core.utils.functions").isempty
 local is_match = require("core.utils.functions").ismatch
--- Add filetypes to the list for which you don't want statusline
-local disable_statusline = vim.tbl_extend("force", require("core.utils.functions").disable(), {
+-- Add filetypes to the list for which you don't want statusline before unpack statement
+local disable_statusline = {
   "TelescopePrompt",
   "lazy",
   "NvimTree",
-  "",
-})
+  unpack(require("core.utils.functions").disable()),
+}
 local icon = require("core.icons")
 
 -- Import highlights
