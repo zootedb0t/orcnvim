@@ -1,5 +1,8 @@
 Statusline = {}
 
+-- Import highlights
+require("core.ui.highlight").statusline_highlight()
+local icon = require("core.icons")
 local is_empty = require("core.utils.functions").isempty
 local is_match = require("core.utils.functions").ismatch
 -- Add filetypes to the list for which you don't want statusline before unpack statement
@@ -9,10 +12,6 @@ local disable_statusline = {
   "NvimTree",
   unpack(require("core.utils.functions").disable()),
 }
-local icon = require("core.icons")
-
--- Import highlights
-require("core.ui.highlight").statusline_highlight()
 
 local function update_mode_colors()
   local current_mode = vim.api.nvim_get_mode().mode

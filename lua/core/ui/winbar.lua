@@ -1,8 +1,10 @@
 local M = {}
 
+-- Import highlights
 require("core.ui.highlight").winbar_highlight()
 local is_empty = require("core.utils.functions").isempty
 local is_match = require("core.utils.functions").ismatch
+local devicon = require("core.utils.functions").get_icons
 local disable_winbar = require("core.utils.functions").disable()
 local icon = require("core.icons")
 local space = " "
@@ -11,22 +13,22 @@ local function filename()
   local buf_mod = vim.bo.modified
   local fname = vim.fn.expand("%:t")
   local extension = vim.fn.expand("%:e")
-  local devicon = require("core.utils.functions").get_icons(fname, extension)
-  vim.api.nvim_set_hl(0, "FileIconWinBar", { fg = devicon.highlight, bold = true })
+  local fileicon_hl = devicon(fname, extension)
+  vim.api.nvim_set_hl(0, "FileIconWinBar", { fg = fileicon_hl.highlight, bold = true })
 
   if is_empty(fname) and not buf_mod then
     return ""
   elseif not is_empty(fname) and buf_mod then
     return table.concat({
       "%#FileIconWinBar#",
-      devicon.icon,
+      fileicon_hl.icon,
       fname,
       icon.ui.Pencil,
     }, " ")
   else
     return table.concat({
       "%#FileIconWinBar#",
-      devicon.icon,
+      fileicon_hl.icon,
       fname,
     }, " ")
   end
