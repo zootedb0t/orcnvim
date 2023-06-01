@@ -160,17 +160,6 @@ local plugins = {
     end,
   },
   {
-
-    "phaazon/hop.nvim",
-    branch = "v2", -- optional but strongly recommended
-    cmd = "HopAnywhere",
-    opts = function()
-      return {
-        keys = "etovxqpdygfblzhckisuran",
-      }
-    end,
-  },
-  {
     "toppair/peek.nvim",
     build = "deno task --quiet build:fast",
     ft = "markdown",

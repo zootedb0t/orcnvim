@@ -66,6 +66,3 @@ map("n", "<localleader>d", vim.diagnostic.open_float, opt)
 map("n", "[d", vim.diagnostic.goto_prev, opt)
 map("n", "]d", vim.diagnostic.goto_next, opt)
 map("n", "<localleader>q", vim.diagnostic.setloclist, opt)
-
--- For hop.nvim
-map("n", ",w", "<CMD>HopAnywhere<CR>", { desc = "HopAnywhere in buffer" })
