@@ -1,13 +1,16 @@
 local cmp_status_ok, cmp = pcall(require, "cmp")
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 local kind_icons = require("core.icons").kind
+local ELLIPSIS_CHAR = require("core.icons").ui.Ellipsis
+local MAX_LABEL_WIDTH = 25
+
+-- Override cmp highlight
+require("core.ui.highlight").cmp_highlight()
+
 local border_opts = {
   border = "single",
   winhighlight = "Normal:CmpPmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
 }
-
--- Override cmp highlight
-require("core.ui.highlight").cmp_highlight()
 
 local function check_back_space()
   local col = vim.fn.col(".") - 1 -- This returns current column position
@@ -17,9 +20,6 @@ local function check_back_space()
     return false
   end
 end
-
-local ELLIPSIS_CHAR = require("core.icons").ui.Ellipsis
-local MAX_LABEL_WIDTH = 25
 
 local get_ws = function(max, len)
   return (" "):rep(max - len) -- Add whitespace (max-len) times

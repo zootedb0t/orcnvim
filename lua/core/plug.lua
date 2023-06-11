@@ -95,6 +95,7 @@ local plugins = {
   {
     "j-hui/fidget.nvim",
     event = "LspAttach",
+    tag = "legacy",
     opts = {},
   },
   {

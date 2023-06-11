@@ -98,7 +98,6 @@ M.config = function()
       c = { "<cmd>ColorizerToggle<cr>", "Attach colorizer" },
       d = { "<cmd>bd<cr>", "Delete buffer" },
       n = { "<cmd>enew<cr>", "Create new buffer" },
-      r = { "<cmd>SourceFile<cr>", "Source current buffer" },
       s = { "<cmd>wa!<CR>", "Save" },
     },
     g = {

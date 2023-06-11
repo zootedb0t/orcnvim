@@ -1,9 +1,3 @@
--- Source Lua file
-vim.api.nvim_create_user_command("SourceFile", function()
-  vim.cmd([[luafile %]])
-  vim.notify("File Reloaded")
-end, { desc = "Source Current Buffer" })
-
 -- Change directory
 vim.api.nvim_create_user_command("ChangeDirectory", function()
   vim.cmd([[lcd%:p:h]])
