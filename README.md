@@ -16,12 +16,13 @@
 ## 🛒 Requirements
 
 - Latest [neovim 0.10+](https://github.com/neovim/neovim). I use `neovim-nightly` built from [source](https://github.com/neovim/neovim/wiki/Building-Neovim).
-- `Node`, `Deno` for [peek.nvim](https://github.com/toppair/peek.nvim).
-- [ripgrep](https://github.com/BurntSushi/ripgrep).
+- `Node` for installing lsp-servers.
+- `Deno` for [peek.nvim](https://github.com/toppair/peek.nvim).
 - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts/) for icons.
 - [mason.nvim](https://github.com/williamboman/mason.nvim) has several requirements for installing `lsp servers` like `npm`, `cargo` etc. Check full list [here](https://github.com/williamboman/mason.nvim#requirements).
 - [Tree-sitter-cli](https://github.com/tree-sitter/tree-sitter/tree/master/cli) install it using `npm` or `cargo`.
 - Clipboard tools like `xclip` or `wl-clipboard` for integration with system clipboard.
+- `fd` and `ripgrep` for [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim).
 
 ## 📦 Installation
 

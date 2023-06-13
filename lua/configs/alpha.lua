@@ -55,16 +55,10 @@ if alpha_ok then
     }
 
     dashboard.section.footer.val = function()
-      local version = " " .. vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch
-      local lazy_ok, lazy = pcall(require, "lazy")
-      if lazy_ok then
-        local lazy_stat = lazy.stats()
-        local total_plugins = lazy_stat.count
-        local startuptime = (math.floor(lazy_stat.startuptime * 100 + 0.5) / 100)
-        return " Orcnvim loaded " .. total_plugins .. " plugins in " .. startuptime .. "ms"
-      else
-        return version
-      end
+      local stats = require("lazy").stats()
+      local total_plugins = stats.count
+      local startuptime = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+      return " Orcnvim" .. total_plugins .. " plugins in " .. startuptime .. "ms"
     end
 
     dashboard.section.footer.opts.hl = "AlphaFooter"
