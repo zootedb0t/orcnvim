@@ -235,6 +235,15 @@ local plugins = {
       }
     end,
   },
+  {
+    "nanozuki/tabby.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("tabby.tabline").use_preset("tab_only", {
+        nerdfont = true, -- whether use nerdfont
+      })
+    end,
+  },
 }
 
 local opts = {
