@@ -34,6 +34,9 @@ local servers = {
       telemetry = {
         enable = false,
       },
+      hint = {
+        enable = true,
+      },
     },
   },
 }

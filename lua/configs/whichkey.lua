@@ -112,6 +112,7 @@ M.config = function()
       name = icon.ui.Code .. " LSP",
       a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
       d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
+      h = { "<cmd>lua vim.lsp.buf.inlay_hint(0)<cr>", "Toggle Inlay Hint" },
       w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
       f = { vim.lsp.buf.format, "Format current buffer", silent = true },
       i = { "<cmd>LspInfo<cr>", "Info" },
