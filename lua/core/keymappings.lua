@@ -2,6 +2,9 @@ local map = vim.keymap.set
 local opt = { silent = true }
 vim.g.maplocalleader = ","
 
+
+
+
 map("n", "<ESC>", "<CMD>noh<CR>", opt) -- Remove highlights from search result
 
 -- map("n", "<BS>", "<C-^>zz", { desc = "Jump to last Buffer" }, opt) -- Jump to last buffer
@@ -66,3 +69,5 @@ map("n", "<localleader>d", vim.diagnostic.open_float, opt)
 map("n", "[d", vim.diagnostic.goto_prev, opt)
 map("n", "]d", vim.diagnostic.goto_next, opt)
 map("n", "<localleader>q", vim.diagnostic.setloclist, opt)
+
+map({ "i", "n" }, "<C-s>", "<cmd>w<cr>", { desc = "Save Current Buffer" }, opt)

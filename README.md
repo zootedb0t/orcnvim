@@ -32,7 +32,7 @@ Make sure to remove or move the current `nvim` directory present in `.config`.
 git clone --depth 1 https://github.com/zootedb0t/orcnvim.git ~/.config/nvim
 ```
 
-If you are using `nvim-0.9+` then you can use `NVIM_APPNAME`.
+If you are using `nvim-0.10+` then you can use `NVIM_APPNAME`.
 
 ```sh
 git clone --depth 1 https://github.com/zootedb0t/orcnvim.git ~/.config/orcnvim
