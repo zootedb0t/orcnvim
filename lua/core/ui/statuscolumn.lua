@@ -8,7 +8,6 @@ local disable_statuscolumn = {
   "lazy",
   "NvimTree",
   "help",
-  "mason",
   "netrw",
   unpack(require("core.utils.functions").disable()),
 }

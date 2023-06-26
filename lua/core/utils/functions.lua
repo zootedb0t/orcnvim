@@ -30,6 +30,7 @@ function M.disable()
   return {
     "alpha",
     "toggleterm",
+    "mason",
     "",
   }
 end

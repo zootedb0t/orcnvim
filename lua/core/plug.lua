@@ -247,7 +247,6 @@ local plugins = {
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    --@type Flash.Config
     opts = {},
     keys = {
       {
@@ -297,6 +296,10 @@ local opts = {
     enabled = true,
     frequency = 3600, -- check for updates every hour
     notify = false,
+  },
+  install = {
+    -- try to load one of these colorschemes when starting an installation during startup
+    colorscheme = { "fluoromachine" },
   },
 }
 
