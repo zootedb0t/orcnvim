@@ -13,6 +13,18 @@ vim.opt.runtimepath:prepend(lazypath)
 
 local plugins = {
   {
+    "zootedb0t/citruszest.nvim",
+    name = "citruszest",
+    lazy = true,
+    priority = 1000,
+    config = function()
+      local cz = require("citruszest")
+      cz.setup({
+        transparent = true,
+      })
+    end,
+  },
+  {
     "bluz71/vim-moonfly-colors",
     name = "moonfly",
     lazy = true,
@@ -24,7 +36,6 @@ local plugins = {
   {
     "maxmx03/fluoromachine.nvim",
     lazy = true,
-    priority = 1000,
     opts = function()
       return {
         theme = "retrowave", -- Choose between retrowave, fluoromachine, delta

@@ -63,7 +63,7 @@ local options = {
   g = {
     highlighturl_enabled = true, -- highlight URLs by default
     mapleader = " ",
-    transparent_nvim = true, -- Set true to make window transparent
+    transparent_nvim = false, -- Set true to make window transparent
   },
 }
 

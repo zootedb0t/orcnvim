@@ -30,5 +30,6 @@ if vim.g.transparent_nvim then
 end
 
 -- Setting colorscheme
-vim.cmd("colorscheme fluoromachine")
+-- vim.cmd("colorscheme fluoromachine")
+vim.cmd("colorscheme citruszest")
 -- vim.cmd("colorscheme moonfly")

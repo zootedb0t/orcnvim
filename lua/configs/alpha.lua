@@ -58,7 +58,7 @@ if alpha_ok then
       local stats = require("lazy").stats()
       local total_plugins = stats.count
       local startuptime = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-      return " Orcnvim" .. total_plugins .. " plugins in " .. startuptime .. "ms"
+      return " Orcnvim " .. total_plugins .. " plugins in " .. startuptime .. "ms"
     end
 
     dashboard.section.footer.opts.hl = "AlphaFooter"
