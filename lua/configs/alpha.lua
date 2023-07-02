@@ -1,5 +1,5 @@
 local M = {}
-require("core.ui.highlight").alpha() -- Import highlight
+-- require("core.ui.highlight").alpha() -- Import highlight
 local alpha_ok, alpha = pcall(require, "alpha")
 if alpha_ok then
   M.config = function()
@@ -55,9 +55,9 @@ if alpha_ok then
     }
 
     dashboard.section.footer.val = function()
-      local stats = require("lazy").stats()
-      local total_plugins = stats.count
-      local startuptime = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+      local plugin_stat = require("lazy").stats()
+      local total_plugins = plugin_stat.count
+      local startuptime = (math.floor(plugin_stat.startuptime * 100 + 0.5) / 100)
       return " Orcnvim " .. total_plugins .. " plugins in " .. startuptime .. "ms"
     end
 

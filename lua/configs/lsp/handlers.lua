@@ -21,18 +21,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-local function lsp_highlight(client, bufnr)
+local function lsp_highlight(client)
   if client.server_capabilities.documentHighlightProvider then
-    vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
+    vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
     vim.api.nvim_create_autocmd("CursorHold", {
+      callback = function()
+        vim.lsp.buf.document_highlight(0)
+      end,
       group = "lsp_document_highlight",
-      buffer = bufnr,
-      callback = vim.lsp.buf.document_highlight,
     })
     vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter" }, {
+      callback = function()
+        vim.lsp.buf.clear_references(0)
+      end,
       group = "lsp_document_highlight",
-      buffer = bufnr,
-      callback = vim.lsp.buf.clear_references,
     })
   end
 end
@@ -101,7 +103,7 @@ M.on_attach = function(client, bufnr)
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
   end
-  lsp_highlight(client, bufnr)
+  lsp_highlight(client)
   disable_formatting(client)
 end
 

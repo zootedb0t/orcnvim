@@ -14,15 +14,12 @@ vim.opt.runtimepath:prepend(lazypath)
 local plugins = {
   {
     "zootedb0t/citruszest.nvim",
-    name = "citruszest",
+    -- dir = "~/Documents/repos/citruszest.nvim", -- Local version
     lazy = true,
     priority = 1000,
-    config = function()
-      local cz = require("citruszest")
-      cz.setup({
-        transparent = true,
-      })
-    end,
+    opts = {
+      transparent = true,
+    },
   },
   {
     "bluz71/vim-moonfly-colors",
@@ -44,6 +41,7 @@ local plugins = {
       }
     end,
   },
+
   {
     "numToStr/Comment.nvim",
     keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
@@ -53,6 +51,7 @@ local plugins = {
       }
     end,
   },
+
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -66,6 +65,7 @@ local plugins = {
       "windwp/nvim-ts-autotag",
     },
   },
+
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
@@ -78,6 +78,7 @@ local plugins = {
       "mason-lspconfig.nvim",
     },
   },
+
   {
     "williamboman/mason-lspconfig.nvim",
     lazy = true,
@@ -88,6 +89,7 @@ local plugins = {
       "mason.nvim",
     },
   },
+
   {
     "jose-elias-alvarez/null-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
@@ -98,17 +100,20 @@ local plugins = {
       "mason.nvim",
     },
   },
+
   {
     "williamboman/mason.nvim",
     lazy = true,
     build = ":MasonUpdate", -- :MasonUpdate updates registry contents
   },
+
   {
     "j-hui/fidget.nvim",
     event = "LspAttach",
     tag = "legacy",
     opts = {},
   },
+
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
@@ -120,6 +125,7 @@ local plugins = {
       { "nvim-telescope/telescope-file-browser.nvim" },
     },
   },
+
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -135,12 +141,14 @@ local plugins = {
       "LuaSnip",
     },
   },
+
   {
     "echasnovski/mini.pairs",
     event = { "BufReadPost", "BufNewFile" },
     opts = {},
     version = false,
   },
+
   {
     "L3MON4D3/LuaSnip",
     lazy = true,
@@ -151,11 +159,13 @@ local plugins = {
       "rafamadriz/friendly-snippets",
     },
   },
+
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
     opts = {},
   },
+
   {
     "folke/which-key.nvim",
     keys = "<leader>",
@@ -163,6 +173,7 @@ local plugins = {
       require("configs.whichkey").config()
     end,
   },
+
   {
     "nvim-tree/nvim-tree.lua",
     tag = "nightly", -- optional, updated every week. (see issue #1193)
@@ -171,6 +182,7 @@ local plugins = {
       require("configs.nvim-tree")
     end,
   },
+
   {
     "toppair/peek.nvim",
     build = "deno task --quiet build:fast",
@@ -182,6 +194,7 @@ local plugins = {
       vim.api.nvim_create_user_command("PeekClose", peek.close, {})
     end,
   },
+
   {
     "NvChad/nvim-colorizer.lua",
     cmd = "ColorizerToggle",
@@ -197,6 +210,7 @@ local plugins = {
   { "kyazdani42/nvim-web-devicons", lazy = true },
   { "nvim-lua/plenary.nvim", lazy = true },
   { "dstein64/vim-startuptime", cmd = "StartupTime" },
+
   {
     "goolord/alpha-nvim",
     cmd = "Alpha",
@@ -204,6 +218,7 @@ local plugins = {
       require("configs.alpha").config()
     end,
   },
+
   {
     "olimorris/persisted.nvim",
     cmd = {
@@ -225,6 +240,7 @@ local plugins = {
       }
     end,
   },
+
   {
     "akinsho/toggleterm.nvim",
     cmd = {
@@ -246,6 +262,7 @@ local plugins = {
       }
     end,
   },
+
   {
     "nanozuki/tabby.nvim",
     event = "VeryLazy",
@@ -255,6 +272,7 @@ local plugins = {
       })
     end,
   },
+
   {
     "folke/flash.nvim",
     event = "VeryLazy",
