@@ -58,6 +58,7 @@ local options = {
     statusline = "%{%v:lua.require'core.ui.statusline'.draw()%}",
     winbar = "%{%v:lua.require'core.ui.winbar'.draw()%}",
     statuscolumn = "%{%v:lua.require'core.ui.statuscolumn'.draw()%}",
+    numberwidth = 3,
   },
 
   g = {

@@ -13,8 +13,8 @@ vim.opt.runtimepath:prepend(lazypath)
 
 local plugins = {
   {
-    "zootedb0t/citruszest.nvim",
-    -- dir = "~/Documents/repos/citruszest.nvim", -- Local version
+    -- "zootedb0t/citruszest.nvim",
+    dir = "~/Documents/repos/citruszest.nvim", -- Local version
     lazy = true,
     priority = 1000,
     opts = {

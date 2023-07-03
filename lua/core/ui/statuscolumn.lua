@@ -12,8 +12,6 @@ local disable_statuscolumn = {
   unpack(require("core.utils.functions").disable()),
 }
 
--- table.insert(disable_statuscolumn, "alpha")
-
 -- TODO Convert return into more readable statement
 local function stc()
   local num, relnum = vim.opt.number:get(), vim.opt.relativenumber:get()

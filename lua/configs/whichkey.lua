@@ -185,7 +185,7 @@ M.config = function()
       name = icon.ui.Window .. " Window",
       b = { "<C-W>s", "Split window below" },
       c = { "<cmd>close<CR>", "Close window" },
-      o = { "<C-W>p", "Other window" },
+      o = { "<C-W>p", "Jump to other window" },
       r = { "<C-W>v", "Split window right" },
     },
   }
