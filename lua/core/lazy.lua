@@ -15,7 +15,7 @@ local plugins = {
   {
     -- "zootedb0t/citruszest.nvim",
     dir = "~/Documents/repos/citruszest.nvim", -- Local version
-    lazy = true,
+    lazy = false,
     priority = 1000,
     opts = {
       transparent = true,
@@ -24,7 +24,7 @@ local plugins = {
   {
     "bluz71/vim-moonfly-colors",
     name = "moonfly",
-    lazy = true,
+    lazy = false,
     config = function()
       vim.g.moonflyTransparent = true
       vim.g.moonflyUnderlineMatchParen = true
@@ -32,14 +32,12 @@ local plugins = {
   },
   {
     "maxmx03/fluoromachine.nvim",
-    lazy = true,
-    opts = function()
-      return {
-        theme = "retrowave", -- Choose between retrowave, fluoromachine, delta
-        brightness = 0.04,
-        transparent = "full",
-      }
-    end,
+    lazy = false,
+    opts = {
+      theme = "retrowave", -- Choose between retrowave, fluoromachine, delta
+      brightness = 0.04,
+      transparent = "full",
+    },
   },
 
   {
@@ -60,7 +58,7 @@ local plugins = {
       require("configs.treesitter")
     end,
     dependencies = {
-      "HiPhish/nvim-ts-rainbow2",
+      "hiphish/rainbow-delimiters.nvim",
       "nvim-treesitter/nvim-treesitter-textobjects",
       "windwp/nvim-ts-autotag",
     },
