@@ -23,20 +23,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 local function lsp_highlight(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
-    vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+    vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
+    vim.api.nvim_clear_autocmds({
+      buffer = bufnr,
+      group = "lsp_document_highlight",
+    })
     vim.api.nvim_create_autocmd("CursorHold", {
       buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.document_highlight()
-      end,
       group = "lsp_document_highlight",
+      callback = vim.lsp.buf.document_highlight,
     })
     vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter" }, {
       buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.clear_references()
-      end,
       group = "lsp_document_highlight",
+      callback = vim.lsp.buf.clear_references,
     })
   end
 end

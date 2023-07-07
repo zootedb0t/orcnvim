@@ -21,24 +21,24 @@ local plugins = {
       transparent = true,
     },
   },
-  {
-    "bluz71/vim-moonfly-colors",
-    name = "moonfly",
-    lazy = false,
-    config = function()
-      vim.g.moonflyTransparent = true
-      vim.g.moonflyUnderlineMatchParen = true
-    end,
-  },
-  {
-    "maxmx03/fluoromachine.nvim",
-    lazy = false,
-    opts = {
-      theme = "retrowave", -- Choose between retrowave, fluoromachine, delta
-      brightness = 0.04,
-      transparent = "full",
-    },
-  },
+  -- {
+  --   "bluz71/vim-moonfly-colors",
+  --   name = "moonfly",
+  --   lazy = false,
+  --   config = function()
+  --     vim.g.moonflyTransparent = true
+  --     vim.g.moonflyUnderlineMatchParen = true
+  --   end,
+  -- },
+  -- {
+  --   "maxmx03/fluoromachine.nvim",
+  --   lazy = false,
+  --   opts = {
+  --     theme = "fluoromachine", -- Choose between retrowave, fluoromachine, delta
+  --     brightness = 0.04,
+  --     transparent = "full",
+  --   },
+  -- },
 
   {
     "numToStr/Comment.nvim",
