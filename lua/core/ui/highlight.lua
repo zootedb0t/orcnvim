@@ -47,7 +47,7 @@ function M.statusline_highlight()
   highlight(0, "StatusLineGitRemove", { link = "GitSignsDelete" })
   highlight(0, "StatusLineInfo", { link = "@character.special" })
   highlight(0, "StatusLinePackage", { link = "Constant" })
-  highlight(0, "StatusLineLsp", { link = "Identifier" })
+  highlight(0, "StatusLineLsp", { link = "Conditional" })
 end
 
 M.winbar_highlight = function()
