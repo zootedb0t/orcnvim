@@ -102,6 +102,7 @@ M.config = function()
     },
     g = {
       name = icon.git.Octoface .. " Git Actions",
+      b = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Show inline blame" },
       c = { "<cmd>Gitsigns preview_hunk<cr>", "Preview current hunk" },
       d = { "<cmd>Gitsigns diffthis<cr>", "Current buffer diff" },
       n = { "<cmd>Gitsigns next_hunk<cr>", "Show next hunk" },

@@ -1,9 +1,6 @@
 local map = vim.keymap.set
-local opt = { silent = true }
+local opt = { noremap = true, silent = true }
 vim.g.maplocalleader = ","
-
-
-
 
 map("n", "<ESC>", "<CMD>noh<CR>", opt) -- Remove highlights from search result
 
@@ -14,11 +11,22 @@ map("n", "Q", "<Nop>", opt)
 map("n", "q:", "<Nop>", opt)
 
 -- Remap for dealing with word wrap
-map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+map(
+  "n",
+  "k",
+  "v:count == 0 ? 'gk' : 'k'",
+  vim.tbl_extend("force", opt, { expr = true, desc = "Check for line wrapping" })
+)
 
-map("n", "H", "^", { desc = "Goto Beginning of line" }, opt)
-map("n", "L", "$", { desc = "Goto End of line" }, opt)
+map(
+  "n",
+  "j",
+  "v:count == 0 ? 'gj' : 'j'",
+  vim.tbl_extend("force", opt, { expr = true, desc = "Check for line wrapping" })
+)
+
+map("n", "H", "^", { desc = "goto beginning of line" }, opt)
+map("n", "L", "$", { desc = "goto end of line" }, opt)
 
 -- resizing window with <ctrl> and arrow
 map("n", "<C-Up>", "<cmd>resize +2<cr>", opt, { desc = "Increase window height" })
@@ -33,18 +41,18 @@ map("n", "<C-k>", "<C-w>k", opt, { desc = "Go to upper window " })
 map("n", "<C-l>", "<C-w>l", opt, { desc = "Go to right window " })
 
 -- better indenting
-map("v", "<", "<gv", { desc = "Indent Left" }, opt)
-map("v", ">", ">gv", { desc = "Indent Right" }, opt)
+map("v", "<", "<gv", opt, { desc = "Indent Left" })
+map("v", ">", ">gv", opt, { desc = "Indent Right" })
 
 -- Replace selected text without yanking it
-map("v", "p", '"_dP', { desc = "Paste without yanking" }, opt)
-map("v", "P", '"_dp', { desc = "Paste without yanking" }, opt)
+map("v", "p", '"_dP', opt, { desc = "Paste without yanking" })
+map("v", "P", '"_dp', opt, { desc = "Paste without yanking" })
 
 -- Move line(s) up and down
-map("n", "<M-j>", ":m .+1<CR>==", { silent = true, desc = "Bubble line down" }, opt)
-map("n", "<M-k>", ":m .-2<CR>==", { silent = true, desc = "Bubble line up" }, opt)
-map("v", "<M-j>", ":m '>+1<CR>==gv=gv", { silent = true, desc = "Bubble line down" }, opt)
-map("v", "<M-k>", ":m '<-2<CR>==gv=gv", { silent = true, desc = "Bubble line up" }, opt)
+map("n", "<M-j>", ":m .+1<CR>==", opt, { desc = "Move line down" })
+map("n", "<M-k>", ":m .-2<CR>==", opt, { desc = "Move line up" })
+map("v", "<M-j>", ":m '>+1<CR>==gv=gv", opt, { desc = "Move line down" })
+map("v", "<M-k>", ":m '<-2<CR>==gv=gv", opt, { desc = "Move line up" })
 
 -- Move selected line / block of text in visual mode
 map("x", "K", ":move '<-2<CR>gv-gv", opt)
@@ -70,4 +78,4 @@ map("n", "[d", vim.diagnostic.goto_prev, opt)
 map("n", "]d", vim.diagnostic.goto_next, opt)
 map("n", "<localleader>q", vim.diagnostic.setloclist, opt)
 
-map({ "i", "n" }, "<C-s>", "<cmd>w<cr>", { desc = "Save Current Buffer" }, opt)
+map({ "i", "n" }, "<C-s>", "<cmd>w<cr>", opt, { desc = "Save Current Buffer" })

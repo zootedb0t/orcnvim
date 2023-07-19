@@ -21,15 +21,7 @@ local plugins = {
       transparent = true,
     },
   },
-  -- {
-  --   "bluz71/vim-moonfly-colors",
-  --   name = "moonfly",
-  --   lazy = false,
-  --   config = function()
-  --     vim.g.moonflyTransparent = true
-  --     vim.g.moonflyUnderlineMatchParen = true
-  --   end,
-  -- },
+
   -- {
   --   "maxmx03/fluoromachine.nvim",
   --   lazy = false,
@@ -326,7 +318,7 @@ local opts = {
   },
   install = {
     -- try to load one of these colorschemes when starting an installation during startup
-    colorscheme = { "fluoromachine" },
+    colorscheme = { "citruszest" },
   },
 }
 

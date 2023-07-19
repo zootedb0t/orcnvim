@@ -13,7 +13,7 @@
 
 ![Screenshot_2023-05-02-12-02-38_](https://user-images.githubusercontent.com/62596687/235631968-191dcd01-aaa8-4063-9bc4-235436d68fa6.png)
 
-## 🛒 Requirements
+## :golf: Requirements
 
 - Latest [neovim 0.10+](https://github.com/neovim/neovim). I use `neovim-nightly` built from [source](https://github.com/neovim/neovim/wiki/Building-Neovim).
 - `Node` for installing lsp-servers.
@@ -24,7 +24,7 @@
 - Clipboard tools like `xclip` or `wl-clipboard` for integration with system clipboard.
 - `fd` and `ripgrep` for [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim).
 
-## 📦 Installation
+## :pushpin: Installation
 
 Make sure to remove or move the current `nvim` directory present in `.config`.
 
@@ -40,7 +40,7 @@ git clone --depth 1 https://github.com/zootedb0t/orcnvim.git ~/.config/orcnvim
 
 Now set environment variable `$NVIM_APPNAME=orcnvim`. Start `neovim` now `orcnvim` configration will be used.
 
-## 📋 Features
+## :scroll: Features
 
 - Support `neovim` built-in `lsp`.
 - Lazy load plugins for faster startup time. Thanks to [lazy.nvim](https://github.com/folke/lazy.nvim/)
@@ -49,7 +49,7 @@ Now set environment variable `$NVIM_APPNAME=orcnvim`. Start `neovim` now `orcnvi
 - Syntax highlighting using [tree-sitter](https://github.com/nvim-treesitter/nvim-treesitter).
 - Formatting and linting using [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim).
 
-# 👏 Credits
+# :clap: Credits
 
 Sincere appreciation to the following repositories and the entire neovim community out there.
 
