@@ -46,7 +46,8 @@ if ts_ok then
     },
     rainbow = {
       enable = true,
-      -- extended_mode = true,
+      extended_mode = true,
+      max_file_lines = 2000,
     },
     incremental_selection = {
       enable = true,
@@ -57,18 +58,10 @@ if ts_ok then
         enable = true,
         lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
         keymaps = {
-          ["ak"] = "@block.outer",
-          ["ik"] = "@block.inner",
-          ["ac"] = "@class.outer",
-          ["ic"] = "@class.inner",
-          ["a?"] = "@conditional.outer",
-          ["i?"] = "@conditional.inner",
           ["af"] = "@function.outer",
           ["if"] = "@function.inner",
-          ["al"] = "@loop.outer",
-          ["il"] = "@loop.inner",
-          ["aa"] = "@parameter.outer",
-          ["ia"] = "@parameter.inner",
+          ["ac"] = "@class.outer",
+          ["ic"] = "@class.inner",
         },
       },
       move = {

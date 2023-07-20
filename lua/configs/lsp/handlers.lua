@@ -19,7 +19,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<localleader>r", vim.lsp.buf.references, bufopts)
   end,
 })
-
 local function lsp_highlight(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
@@ -83,19 +82,8 @@ end
 M.capabilities = function()
   local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
   if status_ok then
-    return cmp_nvim_lsp.default_capabilities()
+    return cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
   end
-
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
-    },
-  }
-  return capabilities
 end
 
 M.on_attach = function(client, bufnr)
