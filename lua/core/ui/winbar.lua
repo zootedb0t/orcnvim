@@ -2,10 +2,10 @@ local M = {}
 
 -- Import highlights
 require("core.ui.highlight").winbar_highlight()
-local is_empty = require("core.utils.functions").isempty
-local is_match = require("core.utils.functions").ismatch
-local devicon = require("core.utils.functions").get_icons
-local disable_winbar = require("core.utils.functions").disable()
+local is_empty = require("core.utils").isempty
+local is_match = require("core.utils").ismatch
+local devicon = require("core.utils").get_icons
+local disable_winbar = require("core.utils").disable()
 local icon = require("core.icons")
 local space = " "
 

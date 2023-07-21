@@ -75,7 +75,12 @@ M.config = function()
   }
   local mappings = {
     ["e"] = { "<cmd>NvimTreeFindFileToggle<cr>", "Toggle file explore" },
-    ["d"] = { "<cmd>ChangeDirectory<cr>", "Change working directory" },
+    ["d"] = {
+      function()
+        require("core.utils").change_root_directory()
+      end,
+      "Change working directory",
+    },
     [";"] = { "<cmd>Alpha<CR>", "Open Dashboard" },
     ["/"] = {
       function()
@@ -87,10 +92,25 @@ M.config = function()
     },
     a = {
       name = icon.ui.Rocket .. " Actions",
-      b = { "<cmd>BarbarEnable<cr>", "Enable Tabline" },
-      n = { "<cmd>ToggleNumber<cr>", "Toggle Number" },
-      q = { "<cmd>QuickFixToggle<cr>", "Toggle Quickfix window" },
-      s = { "<cmd>ToggleStatusline<cr>", "Toggle Statusline" },
+      n = {
+        function()
+          require("core.utils").toggle_number()
+        end,
+        "Toggle Line Numbers",
+      },
+      q = {
+        function()
+          require("core.utils").quickfix_toggle()
+        end,
+        "Toggle Quickfix window",
+      },
+      s = {
+        function()
+          require("core.utils").toggle_statusline()
+        end,
+        "Toggle Statusline",
+      },
+      t = { "<cmd>tabnew<cr>", "Open New Tab" },
     },
     b = {
       name = icon.ui.File .. " Buffers",

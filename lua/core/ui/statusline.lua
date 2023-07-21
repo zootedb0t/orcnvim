@@ -3,14 +3,14 @@ Statusline = {}
 -- Import highlights
 require("core.ui.highlight").statusline_highlight()
 local icon = require("core.icons")
-local is_empty = require("core.utils.functions").isempty
-local is_match = require("core.utils.functions").ismatch
+local is_empty = require("core.utils").isempty
+local is_match = require("core.utils").ismatch
 -- Add filetypes to the list for which you don't want statusline before unpack statement
 local disable_statusline = {
   "TelescopePrompt",
   "lazy",
   "NvimTree",
-  unpack(require("core.utils.functions").disable()),
+  unpack(require("core.utils").disable()),
 }
 
 local function update_mode_colors()
@@ -175,7 +175,7 @@ local function filetype()
   local fname = vim.fn.expand("%:t")
   local extension = vim.fn.expand("%:e")
   local ftype = vim.bo.filetype:upper()
-  local devicon = require("core.utils.functions").get_icons(fname, extension)
+  local devicon = require("core.utils").get_icons(fname, extension)
   vim.api.nvim_set_hl(0, "FileIcon", { fg = devicon.highlight })
   return "%#FileIcon#" .. string.format("%s %s", devicon.icon, ftype)
 end

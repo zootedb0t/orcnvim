@@ -2,7 +2,6 @@ local M = {}
 local highlight = vim.api.nvim_set_hl
 local get_highlight = vim.api.nvim_get_hl_by_name
 
--- No need to hardcode colors for statusline
 local colors = {
   stl = get_highlight("Keyword", true),
   stl_insert = get_highlight("Function", true),

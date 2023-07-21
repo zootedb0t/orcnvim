@@ -1,7 +1,7 @@
 local M = {}
 
 require("core.ui.highlight").str_highlight()
-local is_match = require("core.utils.functions").ismatch
+local is_match = require("core.utils").ismatch
 -- Add filetypes to the list for which you don't want statuscolumn before unpack statement
 local disable_statuscolumn = {
   "TelescopePrompt",
@@ -9,7 +9,7 @@ local disable_statuscolumn = {
   "NvimTree",
   "help",
   "netrw",
-  unpack(require("core.utils.functions").disable()),
+  unpack(require("core.utils").disable()),
 }
 
 -- TODO Convert return into more readable statement
