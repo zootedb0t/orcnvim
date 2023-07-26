@@ -19,6 +19,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<localleader>r", vim.lsp.buf.references, bufopts)
   end,
 })
+
+-- Highlight current word under cursor
 local function lsp_highlight(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
@@ -39,6 +41,7 @@ local function lsp_highlight(client, bufnr)
   end
 end
 
+-- Disable lsp-server formatting. Instead use something like null-ls
 local function disable_formatting(client)
   client.server_capabilities.documentFormattingProvider = false
 end

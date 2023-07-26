@@ -19,6 +19,9 @@ local plugins = {
     priority = 1000,
     opts = {
       transparent = true,
+      style = {
+        Identifier = { bold = true },
+      },
     },
   },
 
