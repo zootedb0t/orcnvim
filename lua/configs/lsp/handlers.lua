@@ -47,6 +47,14 @@ local function disable_formatting(client)
 end
 
 M.setup = function()
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = "single",
+  })
+
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+    border = "single",
+  })
+
   -- Overide handlers
   local signs = {
     Error = icon.diagnostics.BoldError,
@@ -54,10 +62,12 @@ M.setup = function()
     Info = icon.diagnostics.BoldInformation,
     Hint = icon.diagnostics.BoldHint,
   }
-  for sign, symbol in pairs(signs) do
-    vim.fn.sign_define("DiagnosticSign" .. sign, {
+  for type, symbol in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, {
       text = symbol,
-      texthl = "Diagnostic" .. sign,
+      texthl = hl,
+      numhl = hl,
     })
   end
 
@@ -80,6 +90,7 @@ M.setup = function()
       -- header = "",
     },
   })
+  require("lspconfig.ui.windows").default_options.border = "single"
 end
 
 M.capabilities = function()

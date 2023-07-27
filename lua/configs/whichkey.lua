@@ -195,7 +195,6 @@ M.config = function()
       g = { "<Cmd>Telescope live_grep<CR>", "Grep in cwd" },
       h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
       H = { "<cmd>Telescope highlights<cr>", "Find highlight groups" },
-      M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
       r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
       R = { "<cmd>Telescope registers<cr>", "Registers" },
       t = { "<cmd>Telescope live_grep<cr>", "Text" },
