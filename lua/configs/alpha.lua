@@ -1,10 +1,11 @@
 local M = {}
 -- require("core.ui.highlight").alpha() -- Import highlight
+local plugin_stat = require("lazy").stats()
 local alpha_ok, alpha = pcall(require, "alpha")
 if alpha_ok then
   M.config = function()
     local headers = {
-      ["nvim"] = [[
+      nvim = [[
 ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
 ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
 ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
@@ -12,7 +13,7 @@ if alpha_ok then
 ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
       ]],
-      ["pacman"] = [[
+      pacman = [[
              ██████
          ████▒▒▒▒▒▒████
        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒██
@@ -29,16 +30,13 @@ if alpha_ok then
  ████  ██▒▒██  ██▒▒▒▒██  ██▒▒██
  ██      ██      ████      ████
       ]],
-      ["orcnvim"] = [[
-
-
+      orcnvim = [[
  ██████╗ ██████╗  ██████╗███╗   ██╗██╗   ██╗██╗███╗   ███╗
 ██╔═══██╗██╔══██╗██╔════╝████╗  ██║██║   ██║██║████╗ ████║
 ██║   ██║██████╔╝██║     ██╔██╗ ██║██║   ██║██║██╔████╔██║
 ██║   ██║██╔══██╗██║     ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║
 ╚██████╔╝██║  ██║╚██████╗██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║
  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
-
      ]],
     }
     local dashboard = require("alpha.themes.dashboard")
@@ -55,7 +53,6 @@ if alpha_ok then
     }
 
     dashboard.section.footer.val = function()
-      local plugin_stat = require("lazy").stats()
       local total_plugins = plugin_stat.count
       local startuptime = (math.floor(plugin_stat.startuptime * 100 + 0.5) / 100)
       return " Orcnvim " .. total_plugins .. " plugins in " .. startuptime .. "ms"
