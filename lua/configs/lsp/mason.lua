@@ -27,16 +27,12 @@ local servers = {
         maxPreload = 5000,
         preloadFileSize = 10000,
         library = {
+          vim.fn.expand("$VIMRUNTIME"),
           vim.api.nvim_get_runtime_file("", true),
-          vim.fn.expand("$VIMRUNTIME/lua/"),
         },
       },
-      telemetry = {
-        enable = false,
-      },
-      hint = {
-        enable = true,
-      },
+      telemetry = { enable = false },
+      hint = { enable = true },
     },
   },
 }

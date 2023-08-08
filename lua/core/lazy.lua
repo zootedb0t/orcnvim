@@ -13,12 +13,14 @@ vim.opt.runtimepath:prepend(lazypath)
 
 local plugins = {
   {
-    -- "zootedb0t/citruszest.nvim",
-    dir = "~/Documents/repos/citruszest.nvim", -- Local version
+    "zootedb0t/citruszest.nvim",
+    dev = true,
     lazy = false,
     priority = 1000,
     opts = {
-      transparent = true,
+      option = {
+        transparent = true,
+      },
       style = {
         Identifier = { bold = true },
       },
@@ -322,6 +324,9 @@ local opts = {
   install = {
     -- try to load one of these colorschemes when starting an installation during startup
     colorscheme = { "citruszest" },
+  },
+  dev = {
+    path = "~/Documents/repos/",
   },
 }
 
