@@ -72,7 +72,7 @@ M.setup = function()
   end
 
   vim.diagnostic.config({
-    -- underline = true,
+    underline = false,
     signs = true,
     severity_sort = true,
     update_in_insert = false,
@@ -82,12 +82,9 @@ M.setup = function()
     -- severity_sort = "Error",
     -- },
     float = {
-      focusable = false,
-      style = "minimal",
+      focusable = true,
       border = "single",
-      source = "always",
-      header = "Diagnostic",
-      -- header = "",
+      source = "if_many",
     },
   })
   require("lspconfig.ui.windows").default_options.border = "single"

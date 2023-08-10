@@ -28,10 +28,8 @@ local servers = {
         preloadFileSize = 10000,
         library = {
           vim.fn.expand("$VIMRUNTIME"),
-          vim.api.nvim_get_runtime_file("", true),
         },
       },
-      telemetry = { enable = false },
       hint = { enable = true },
     },
   },
