@@ -328,6 +328,9 @@ local opts = {
   dev = {
     path = "~/Documents/repos/",
   },
+  ui = {
+    border = "single",
+  },
 }
 
 local status_ok, lazy = pcall(require, "lazy")
