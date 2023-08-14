@@ -30,6 +30,15 @@ if status_ok then
           }
         end,
       },
+      markdown = {
+        require("formatter.filetypes.markdown").prettierd,
+      },
+      c = {
+        require("formatter.filetypes.c").clangformat,
+      },
+      cpp = {
+        require("formatter.filetypes.c").clangformat,
+      },
     },
   })
 end

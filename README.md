@@ -47,7 +47,7 @@ Now set environment variable `$NVIM_APPNAME=orcnvim`. Start `neovim` now `orcnvi
 - Custom `Statuscolumn`, `Winbar` and `Statusline`.
 - Autocompletion using [cmp](https://github.com/hrsh7th/nvim-cmp).
 - Syntax highlighting using [tree-sitter](https://github.com/nvim-treesitter/nvim-treesitter).
-- Formatting and linting using [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim).
+- Support [Formatting](https://github.com/mhartington/formatter.nvim) and [linting](https://github.com/mfussenegger/nvim-lint).
 
 # :clap: Credits
 
