@@ -86,17 +86,6 @@ local plugins = {
   },
 
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("configs.null-ls")
-    end,
-    dependencies = {
-      "mason.nvim",
-    },
-  },
-
-  {
     "williamboman/mason.nvim",
     lazy = true,
     build = ":MasonUpdate", -- :MasonUpdate updates registry contents
@@ -296,6 +285,14 @@ local plugins = {
     event = "VeryLazy",
     config = function()
       require("configs.lint")
+    end,
+  },
+
+  {
+    "mhartington/formatter.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("configs.format")
     end,
   },
 }

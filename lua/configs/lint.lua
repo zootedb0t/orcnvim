@@ -14,7 +14,7 @@ if status_ok then
     typescript = {
       "eslint_d",
     },
-    html = {
+    htmldjango = {
       "djlint",
     },
   }
