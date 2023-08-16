@@ -78,7 +78,8 @@ M.setup = function()
     update_in_insert = false,
     virtual_text = false,
     -- virtual_text = {
-    --   spacing = 10,
+    -- virt_text_pos = "right_align",
+    -- spacing = 10,
     -- severity_sort = "Error",
     -- },
     float = {
