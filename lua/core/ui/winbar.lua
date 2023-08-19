@@ -1,7 +1,6 @@
 local M = {}
 
 -- Import highlights
-require("core.ui.highlight").winbar_highlight()
 local is_empty = require("core.utils").isempty
 local is_match = require("core.utils").ismatch
 local devicon = require("core.utils").get_icons
