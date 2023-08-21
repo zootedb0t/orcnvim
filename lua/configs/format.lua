@@ -39,6 +39,9 @@ if status_ok then
       cpp = {
         require("formatter.filetypes.c").clangformat,
       },
+      javascript = {
+        require("formatter.filetypes.javascript").prettierd,
+      },
     },
   })
 end
