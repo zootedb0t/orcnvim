@@ -92,7 +92,7 @@ M.config = function()
     },
     a = {
       name = icon.ui.Rocket .. " Actions",
-      n = {
+      l = {
         function()
           require("core.utils").toggle_number()
         end,
@@ -110,7 +110,8 @@ M.config = function()
         end,
         "Toggle Statusline",
       },
-      t = { "<cmd>tabnew<cr>", "Open New Tab" },
+      n = { "<cmd>tabnew<cr>", "Open New Tab" },
+      t = { "<cmd>ToggleTerm<cr>", "Open Terminal" },
     },
     b = {
       name = icon.ui.File .. " Buffers",
@@ -135,7 +136,7 @@ M.config = function()
       d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
       h = { "<cmd>lua vim.lsp.inlay_hint(0)<cr>", "Toggle Inlay Hint" },
       w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
-      f = { "<cmd>FormatWrite<cr>", "Format current buffer", },
+      f = { "<cmd>FormatWrite<cr>", "Format current buffer" },
       i = { "<cmd>LspInfo<cr>", "Info" },
       I = { "<cmd>Mason<cr>", "Mason Info" },
       j = {
