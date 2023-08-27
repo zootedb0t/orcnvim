@@ -6,7 +6,6 @@ if tree_ok then
     view = {
       adaptive_size = true,
       width = 25,
-      hide_root_folder = true,
     },
     git = {
       ignore = false, -- Show files that are not managed by git
@@ -23,6 +22,7 @@ if tree_ok then
           none = " ",
         },
       },
+      root_folder_label = false,
       icons = {
         glyphs = {
           default = icon.kind.File,

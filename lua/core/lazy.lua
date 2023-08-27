@@ -160,7 +160,6 @@ local plugins = {
 
   {
     "nvim-tree/nvim-tree.lua",
-    tag = "nightly", -- optional, updated every week. (see issue #1193)
     cmd = "NvimTreeFindFileToggle",
     config = function()
       require("configs.nvim-tree")
