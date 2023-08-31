@@ -42,6 +42,9 @@ if status_ok then
       javascript = {
         require("formatter.filetypes.javascript").prettierd,
       },
+      json = {
+        require("formatter.filetypes.javascript").prettierd,
+      },
     },
   })
 end
