@@ -1,5 +1,4 @@
 local M = {}
--- require("core.ui.highlight").alpha() -- Import highlight
 local plugin_stat = require("lazy").stats()
 local alpha_ok, alpha = pcall(require, "alpha")
 if alpha_ok then
