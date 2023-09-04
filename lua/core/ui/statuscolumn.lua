@@ -1,6 +1,5 @@
 local M = {}
 
-require("core.ui.highlight").stc_highlight()
 local is_match = require("core.utils").ismatch
 -- Add filetypes to the list for which you don't want statuscolumn before unpack statement
 local disable_statuscolumn = {

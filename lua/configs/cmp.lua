@@ -4,22 +4,10 @@ local kind_icons = require("core.icons").kind
 local ELLIPSIS_CHAR = require("core.icons").ui.Ellipsis
 local MAX_LABEL_WIDTH = 25
 
--- Override cmp highlight
-require("core.ui.highlight").cmp_highlight()
-
 local border_opts = {
   border = "single",
   winhighlight = "Normal:CmpPmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
 }
-
-local function check_back_space()
-  local col = vim.fn.col(".") - 1 -- This returns current column position
-  if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then -- vim.fn.getline gives current line
-    return true
-  else
-    return false
-  end
-end
 
 local get_ws = function(max, len)
   return (" "):rep(max - len) -- Add whitespace (max-len) times
@@ -70,19 +58,11 @@ if cmp_status_ok and snip_status_ok then
     mapping = {
       ["<Up>"] = cmp.mapping.select_prev_item(),
       ["<Down>"] = cmp.mapping.select_next_item(),
-      ["<C-p>"] = cmp.mapping.select_prev_item(),
       ["<C-n>"] = cmp.mapping.select_next_item(),
-      ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-      -- toggle completion
-      ["<C-e>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.close()
-          fallback()
-        else
-          cmp.complete()
-        end
-      end),
+      ["<C-p>"] = cmp.mapping.select_prev_item(),
+      ["<C-u>"] = cmp.mapping.scroll_docs(4),
+      ["<C-f>"] = cmp.mapping.scroll_docs(-4),
+      ["<C-e>"] = cmp.mapping.abort(),
 
       -- go to next placeholder in the snippet
       ["<C-d>"] = cmp.mapping(function(fallback)
@@ -113,11 +93,9 @@ if cmp_status_ok and snip_status_ok then
         end
       end),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-      ["<Tab>"] = cmp.mapping(function(fallback)
+      ["<Tab>"] = cmp.mapping(function()
         if cmp.visible() then
           cmp.select_next_item(cmp_select_opts)
-        elseif check_back_space() then
-          fallback()
         else
           cmp.complete()
         end
@@ -125,11 +103,9 @@ if cmp_status_ok and snip_status_ok then
 
       -- when menu is visible, navigate to previous item on list
       -- else, revert to default behavior
-      ["<S-Tab>"] = cmp.mapping(function(fallback)
+      ["<S-Tab>"] = cmp.mapping(function()
         if cmp.visible() then
           cmp.select_prev_item(cmp_select_opts)
-        else
-          fallback()
         end
       end, { "i", "s" }),
     },

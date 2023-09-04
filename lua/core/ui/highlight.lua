@@ -29,12 +29,4 @@ function M.statusline_highlight()
   highlight(0, "StatusLineLsp", { link = "Conditional" })
 end
 
-M.cmp_highlight = function()
-  highlight(0, "CmpItemMenu", { link = "Type" })
-end
-
-M.stc_highlight = function()
-  highlight(0, "Column", { link = "Constant" })
-end
-
 return M
