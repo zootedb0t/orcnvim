@@ -74,7 +74,7 @@ return {
     Ellipsis = "",
     EmptyFolder = "",
     EmptyFolderOpen = "",
-    File = "󰈙",
+    File = "󰈚",
     FileSymlink = "",
     Files = "",
     FindFile = "󰈞",

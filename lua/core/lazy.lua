@@ -346,7 +346,6 @@ local opts = {
       lazy = icons.ui.Timer,
       loaded = icons.ui.Check,
       not_loaded = icons.ui.Hourglass,
-      plugin = icons.ui.Package,
       runtime = icons.ui.Fire,
       source = icons.ui.Code,
       start = icons.ui.BoxChecked,
