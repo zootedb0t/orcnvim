@@ -32,6 +32,7 @@ local servers = {
       hint = { enable = true },
     },
   },
+  hls = {},
 }
 
 if mason_ok then

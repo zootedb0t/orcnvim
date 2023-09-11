@@ -27,6 +27,7 @@ if ts_ok then
       "diff",
       "fish",
       "vimdoc",
+      "haskell",
     },
     autotag = {
       enable = true,

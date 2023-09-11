@@ -24,6 +24,7 @@ if tree_ok then
       },
       root_folder_label = false,
       icons = {
+        git_placement = "after",
         glyphs = {
           default = icon.kind.File,
           symlink = icon.ui.FileSymlink,

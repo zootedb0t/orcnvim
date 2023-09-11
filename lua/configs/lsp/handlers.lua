@@ -103,7 +103,7 @@ M.on_attach = function(client, bufnr)
     navic.attach(client, bufnr)
   end
   lsp_highlight(client, bufnr)
-  disable_formatting(client)
+  -- disable_formatting(client)
 end
 
 return M
