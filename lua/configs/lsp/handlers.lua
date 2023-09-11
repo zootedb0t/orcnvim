@@ -42,9 +42,9 @@ local function lsp_highlight(client, bufnr)
 end
 
 -- Disable lsp-server formatting. Instead use something like null-ls
-local function disable_formatting(client)
-  client.server_capabilities.documentFormattingProvider = false
-end
+-- local function disable_formatting(client)
+--   client.server_capabilities.documentFormattingProvider = false
+-- end
 
 M.setup = function()
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
