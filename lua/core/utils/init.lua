@@ -82,7 +82,7 @@ function M.format_buffer()
   local server = { "hls" }
   local active_server = vim.lsp.get_clients({ bufnr = 0 })[1].name
   if M.ismatch(server, active_server) then
-    vim.cmd("lua vim.lsp.buf.format()")
+    vim.cmd("lua vim.lsp.buf.format({async = true})")
   else
     vim.cmd("FormatWrite")
   end

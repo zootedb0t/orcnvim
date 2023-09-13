@@ -13,12 +13,6 @@ local get_ws = function(max, len)
   return (" "):rep(max - len) -- Add whitespace (max-len) times
 end
 
-local has_words_before = function()
-  local unpack = unpack or table.unpack
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
 -- Format for cmp popup menu to have fixed width
 local format = function(entry, item)
   local content = item.abbr
@@ -62,8 +56,6 @@ if cmp_status_ok and snip_status_ok then
     mapping = {
       ["<Up>"] = cmp.mapping.select_prev_item(),
       ["<Down>"] = cmp.mapping.select_next_item(),
-      ["<C-n>"] = cmp.mapping.select_next_item(),
-      ["<C-p>"] = cmp.mapping.select_prev_item(),
       ["<C-u>"] = cmp.mapping.scroll_docs(4),
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
       ["<C-e>"] = cmp.mapping.abort(),
@@ -77,26 +69,41 @@ if cmp_status_ok and snip_status_ok then
           fallback()
         end
       end),
+
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-      ["<Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-        elseif luasnip.expand_or_jumpable() then
-          luasnip.expand_or_jump()
-        elseif has_words_before() then
-          cmp.complete()
+
+      -- go to next placeholder in the snippet
+      ["<C-n>"] = cmp.mapping(function(fallback)
+        if luasnip.jumpable(1) then
+          luasnip.jump(1)
         else
           fallback()
         end
       end, { "i", "s" }),
 
-      ["<S-Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) then
+      -- go to previous placeholder in the snippet
+      ["<C-p>"] = cmp.mapping(function(fallback)
+        if luasnip.jumpable(-1) then
           luasnip.jump(-1)
         else
           fallback()
+        end
+      end, { "i", "s" }),
+
+      ["<Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        else
+          -- cmp.complete()
+          fallback()
+        end
+      end, { "i", "s" }),
+
+      -- when menu is visible, navigate to previous item on list
+      -- else, revert to default behavior
+      ["<S-Tab>"] = cmp.mapping(function()
+        if cmp.visible() then
+          cmp.select_prev_item()
         end
       end, { "i", "s" }),
     },
