@@ -76,16 +76,4 @@ function M.change_root_directory()
   vim.notify("Directory changed")
 end
 
--- Format Buffer
-function M.format_buffer()
-  -- list of servers whose builtin formatting is needed
-  local server = { "hls" }
-  local active_server = vim.lsp.get_clients({ bufnr = 0 })[1].name
-  if M.ismatch(server, active_server) then
-    vim.cmd("lua vim.lsp.buf.format({async = true})")
-  else
-    vim.cmd("FormatWrite")
-  end
-end
-
 return M

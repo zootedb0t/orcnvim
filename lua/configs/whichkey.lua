@@ -139,7 +139,8 @@ M.config = function()
       -- f = { "<cmd>FormatWrite<cr>", "Format current buffer" },
       f = {
         function()
-          require("core.utils").format_buffer()
+          -- require("core.utils").format_buffer()
+          require("conform").format()
         end,
         "Format current buffer",
       },
