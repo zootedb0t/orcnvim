@@ -136,13 +136,11 @@ M.config = function()
       d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
       h = { "<cmd>lua vim.lsp.inlay_hint(0)<cr>", "Toggle Inlay Hint" },
       w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
-      -- f = { "<cmd>FormatWrite<cr>", "Format current buffer" },
       f = {
         function()
-          -- require("core.utils").format_buffer()
-          require("conform").format()
+          require("conform").format({ lsp_fallback = true })
         end,
-        "Format current buffer",
+        "󰒕 Format current buffer",
       },
       i = { "<cmd>LspInfo<cr>", "Info" },
       I = { "<cmd>Mason<cr>", "Mason Info" },

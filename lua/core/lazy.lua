@@ -288,14 +288,6 @@ local plugins = {
     end,
   },
 
-  -- {
-  --   "mhartington/formatter.nvim",
-  --   event = "VeryLazy",
-  --   config = function()
-  --     require("configs.format")
-  --   end,
-  -- },
-
   {
     "stevearc/conform.nvim",
     event = "VeryLazy",
