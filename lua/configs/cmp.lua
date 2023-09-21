@@ -94,13 +94,11 @@ if cmp_status_ok and snip_status_ok then
         if cmp.visible() then
           cmp.select_next_item()
         else
-          -- cmp.complete()
           fallback()
         end
       end, { "i", "s" }),
 
       -- when menu is visible, navigate to previous item on list
-      -- else, revert to default behavior
       ["<S-Tab>"] = cmp.mapping(function()
         if cmp.visible() then
           cmp.select_prev_item()
@@ -109,32 +107,12 @@ if cmp_status_ok and snip_status_ok then
     },
 
     sources = cmp.config.sources({
-      { name = "nvim_lsp", priority = 1000 },
-      { name = "luasnip", priority = 750 },
-      { name = "buffer", priority = 500 },
-      { name = "path", priority = 250 },
+      { name = "nvim_lsp" },
+      { name = "luasnip" },
+      { name = "buffer" },
+      { name = "path" },
       { name = "nvim_lsp_signature_help" },
     }),
-
-    -- don't sort double underscore things first
-    sorting = {
-      comparators = {
-        cmp.config.compare.offset,
-        cmp.config.compare.exact,
-        cmp.config.compare.score,
-        cmp.config.compare.kind,
-        cmp.config.compare.sort_text,
-        cmp.config.compare.length,
-        cmp.config.compare.order,
-      },
-    },
-
-    duplicates = {
-      buffer = 1,
-      path = 1,
-      nvim_lsp = 0,
-      luasnip = 1,
-    },
 
     window = {
       completion = cmp.config.window.bordered({

@@ -56,7 +56,7 @@ local plugins = {
       require("configs.treesitter")
     end,
     dependencies = {
-      "hiphish/rainbow-delimiters.nvim",
+      -- "hiphish/rainbow-delimiters.nvim",
       "nvim-treesitter/nvim-treesitter-textobjects",
       "windwp/nvim-ts-autotag",
     },
