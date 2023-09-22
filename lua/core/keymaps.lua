@@ -60,15 +60,10 @@ cnoreabbrev <expr> WQ ((getcmdtype() is# ':' && getcmdline() is# 'WQ')?('wq'):('
 cnoreabbrev <expr> Wq ((getcmdtype() is# ':' && getcmdline() is# 'Wq')?('wq'):('Wq'))
 ]])
 
--- Diagnostic keymaps
-map("n", "<localleader>d", vim.diagnostic.open_float, { desc = "Open Diagnostic Float Window" })
-map("n", "[d", vim.diagnostic.goto_prev, { desc = "Goto previous diagnostic" })
-map("n", "]d", vim.diagnostic.goto_next, { desc = "Goto next diagnostic" })
-map("n", "<localleader>q", vim.diagnostic.setloclist, { desc = "Show diagnostic in quickfix list" })
-
+-- Save Buffer
 map({ "i", "n" }, "<C-s>", "<cmd>w<cr>", { desc = "Save Current Buffer" })
 
--- For tabs
+-- Jump between tabs
 map("n", "<M-1>", "1gt", { desc = "Gota 1st tab" })
 map("n", "<M-2>", "2gt", { desc = "Gota 2st tab" })
 map("n", "<M-3>", "3gt", { desc = "Gota 3st tab" })

@@ -100,20 +100,20 @@ local vcs = function()
   if is_empty(git_info) then
     return ""
   else
-    table.insert(render_vcs, "%#StatusLineGit#" .. string.format("%s %s", icon.git.Branch, git_info.head:upper()))
+    table.insert(render_vcs, "%#DevIconGitLogo#" .. string.format("%s %s", icon.git.Branch, git_info.head:upper()))
     if not is_empty(git_info.added) then
-      table.insert(render_vcs, "%#StatusLineGitAdd#" .. string.format("%s %s", icon.git.LineAdded, git_info.added))
+      table.insert(render_vcs, "%#GitSignsAdd#" .. string.format("%s %s", icon.git.LineAdded, git_info.added))
     end
     if not is_empty(git_info.changed) then
       table.insert(
         render_vcs,
-        "%#StatusLineGitChange#" .. string.format("%s %s", icon.git.LineModified, git_info.changed)
+        "%#GitSignsChange#" .. string.format("%s %s", icon.git.LineModified, git_info.changed)
       )
     end
     if not is_empty(git_info.removed) then
       table.insert(
         render_vcs,
-        "%#StatusLineGitRemove#" .. string.format("%s %s", icon.git.LineRemoved, git_info.removed)
+        "%#GitSignsDelete#" .. string.format("%s %s", icon.git.LineRemoved, git_info.removed)
       )
     end
   end
@@ -126,7 +126,7 @@ local function lsp()
     table.insert(names, server.name)
   end
   if #names > 0 then
-    return "%#StatusLineLsp#" .. "[ " .. table.concat(names, " ") .. "]"
+    return "%#Conditional#" .. "[ " .. table.concat(names, " ") .. "]"
   else
     return ""
   end
@@ -181,7 +181,7 @@ local function filetype()
 end
 
 local function lineinfo()
-  return "%#StatusLineInfo#" .. "%P %l:%c"
+  return "%#Define#" .. "%P %l:%c"
 end
 
 -- local function scrollbar()
@@ -198,13 +198,13 @@ local function searchcount()
 
   local result = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
   local denominator = math.min(result.total, result.maxcount)
-  return "%#StatusLineOthers#" .. string.format("󰱽 [%d/%d]", result.current, denominator)
+  return "%#Type#" .. string.format("󰱽 [%d/%d]", result.current, denominator)
 end
 
 local function plugin_updates()
   local update_status = require("lazy.status").has_updates()
   if update_status then
-    return "%#StatusLineOthers#" .. require("lazy.status").updates()
+    return "%#LazyH1#" .. require("lazy.status").updates()
   else
     return ""
   end
