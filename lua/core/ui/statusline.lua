@@ -105,16 +105,10 @@ local vcs = function()
       table.insert(render_vcs, "%#GitSignsAdd#" .. string.format("%s %s", icon.git.LineAdded, git_info.added))
     end
     if not is_empty(git_info.changed) then
-      table.insert(
-        render_vcs,
-        "%#GitSignsChange#" .. string.format("%s %s", icon.git.LineModified, git_info.changed)
-      )
+      table.insert(render_vcs, "%#GitSignsChange#" .. string.format("%s %s", icon.git.LineModified, git_info.changed))
     end
     if not is_empty(git_info.removed) then
-      table.insert(
-        render_vcs,
-        "%#GitSignsDelete#" .. string.format("%s %s", icon.git.LineRemoved, git_info.removed)
-      )
+      table.insert(render_vcs, "%#GitSignsDelete#" .. string.format("%s %s", icon.git.LineRemoved, git_info.removed))
     end
   end
   return table.concat(render_vcs, " ") .. "%#Normal#"
@@ -204,7 +198,7 @@ end
 local function plugin_updates()
   local update_status = require("lazy.status").has_updates()
   if update_status then
-    return "%#LazyH1#" .. require("lazy.status").updates()
+    return "%#Conditional#" .. require("lazy.status").updates()
   else
     return ""
   end

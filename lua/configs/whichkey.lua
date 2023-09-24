@@ -207,13 +207,6 @@ M.config = function()
       k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
       C = { "<cmd>Telescope commands<cr>", "Commands" },
     },
-    w = {
-      name = icon.ui.Window .. " Window",
-      b = { "<C-W>s", "Split window below" },
-      c = { "<cmd>close<CR>", "Close window" },
-      o = { "<C-W>p", "Jump to other window" },
-      r = { "<C-W>v", "Split window right" },
-    },
   }
   wk.setup(setup)
   wk.register(mappings, opts)

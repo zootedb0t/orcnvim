@@ -137,10 +137,10 @@ return {
   },
 
   git = {
-    LineAdded = "",
+    LineAdded = "",
     LineModified = "",
-    LineRemoved = "",
-    FileDeleted = "",
+    LineRemoved = "",
+    FileDeleted = "󰗨",
     FileIgnored = "",
     FileRenamed = "",
     FileStaged = "S",

@@ -1,47 +1,54 @@
 local M = {}
-vim.g.maplocalleader = ","
 local icon = require("core.icons")
 local navic = require("nvim-navic")
 local methods = vim.lsp.protocol.Methods
+local map = vim.keymap.set
 
 -- Mappings.
 -- See `:help vim.lsp.*` for documentation on any of the below functions
 vim.api.nvim_create_autocmd("LspAttach", {
+  desc = "Configure LSP keymaps",
   callback = function(args)
-    local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    local bufopts = { buffer = bufnr }
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+    local bufnr = args.buf
     if client then
-      if client.supports_method(methods.textDocument_definition) then
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-      end
-      if client.supports_method(methods.textDocument_definition) then
-        vim.keymap.set("n", "<localleader>k", vim.lsp.buf.signature_help, bufopts)
-      end
       if client.supports_method(methods.textDocument_codeAction) then
-        vim.keymap.set("n", "<localleader>rn", vim.lsp.buf.rename, bufopts)
+        map({ "n", "v" }, "<localleader>ca", vim.lsp.buf.code_action, { desc = "Code actions", buffer = bufnr })
       end
-      if client.supports_method(methods.textDocument_codeAction) then
-        vim.keymap.set({ "n", "v" }, "<localleader>ca", vim.lsp.buf.code_action, bufopts)
+
+      if client.supports_method(methods.textDocument_rename) then
+        map("n", "<localleader>cr", vim.lsp.buf.rename, { desc = "Rename", buffer = bufnr })
       end
-      if client.supports_method(methods.textDocument_codeLens) then
-        vim.keymap.set("n", "<localleader>cl", vim.lsp.codelens.run, bufopts)
+
+      if client.supports_method(methods.textDocument_signatureHelp) then
+        map({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = bufnr })
       end
+
+      if client.supports_method(methods.textDocument_declaration) then
+        map("n", "gD", vim.lsp.buf.declaration, { desc = "Declaration", buffer = bufnr })
+      end
+
+      if client.supports_method(methods.textDocument_definition) then
+        map("n", "gd", vim.lsp.buf.definition, { desc = "Definition", buffer = bufnr })
+      end
+
       if client.supports_method(methods.textDocument_implementation) then
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+        map("n", "gi", vim.lsp.textDocument_implementation, { desc = "Implementation", buffer = bufnr })
       end
+
       if client.supports_method(methods.textDocument_typeDefinition) then
-        vim.keymap.set("n", "<localleader>D", vim.lsp.buf.type_definition, bufopts)
+        map("n", "<localleader>D", vim.lsp.buf.type_definition, { desc = "Type Definition", buffer = bufnr })
       end
-      if client.supports_method(methods.textDocument_references) then
-        vim.keymap.set("n", "<localleader>r", vim.lsp.buf.references, bufopts)
+
+      if client.supports_method(methods.textDocument_hover) then
+        map("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = bufnr })
       end
+
+      map("n", "<localleader>d", vim.diagnostic.open_float, { desc = "Open Diagnostic Float Window" })
+      map("n", "[d", vim.diagnostic.goto_prev, { desc = "Goto previous diagnostic" })
+      map("n", "]d", vim.diagnostic.goto_next, { desc = "Goto next diagnostic" })
+      map("n", "<localleader>q", vim.diagnostic.setloclist, { desc = "Show diagnostic in quickfix list" })
     end
-    vim.keymap.set("n", "<localleader>d", vim.diagnostic.open_float, { desc = "Open Diagnostic Float Window" })
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Goto previous diagnostic" })
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Goto next diagnostic" })
-    vim.keymap.set("n", "<localleader>q", vim.diagnostic.setloclist, { desc = "Show diagnostic in quickfix list" })
   end,
 })
 
@@ -102,11 +109,6 @@ M.setup = function()
     severity_sort = true,
     update_in_insert = false,
     virtual_text = false,
-    -- virtual_text = {
-    -- virt_text_pos = "right_align",
-    -- spacing = 10,
-    -- severity_sort = "Error",
-    -- },
     float = {
       focusable = true,
       border = "single",

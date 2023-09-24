@@ -1,9 +1,6 @@
 local map = vim.keymap.set
-vim.g.maplocalleader = ","
 
 map("n", "<ESC>", "<CMD>noh<CR>") -- Remove highlights from search result
-
--- map("n", "<BS>", "<C-^>zz", { desc = "Jump to last Buffer" }, opt) -- Jump to last buffer
 
 -- Remove annoying exmode
 map("n", "Q", "<Nop>")
@@ -17,7 +14,7 @@ map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Check for line
 map("n", "H", "^", { desc = "goto beginning of line" })
 map("n", "L", "$", { desc = "goto end of line" })
 
--- resizing window with <ctrl> and arrow
+-- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
 map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
@@ -60,10 +57,31 @@ cnoreabbrev <expr> WQ ((getcmdtype() is# ':' && getcmdline() is# 'WQ')?('wq'):('
 cnoreabbrev <expr> Wq ((getcmdtype() is# ':' && getcmdline() is# 'Wq')?('wq'):('Wq'))
 ]])
 
--- Save Buffer
+-- Buffer Actions
+map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+map("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 map({ "i", "n" }, "<C-s>", "<cmd>w<cr>", { desc = "Save Current Buffer" })
+-- map("n", "<BS>", "<C-^>zz", { desc = "Jump to last Buffer" }, opt) -- Jump to last buffer
 
 -- Jump between tabs
 map("n", "<M-1>", "1gt", { desc = "Gota 1st tab" })
 map("n", "<M-2>", "2gt", { desc = "Gota 2st tab" })
 map("n", "<M-3>", "3gt", { desc = "Gota 3st tab" })
+
+-- Terminal Mapping(From lazyvim)
+map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
+map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
+map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
+map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
+map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
+
+-- windows
+map("n", "<leader>ww", "<C-W>p", { desc = "Other window", remap = true })
+map("n", "<leader>wd", "<C-W>c", { desc = "Delete window", remap = true })
+map("n", "<leader>w-", "<C-W>s", { desc = "Split window below", remap = true })
+map("n", "<leader>w|", "<C-W>v", { desc = "Split window right", remap = true })
+map("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
+map("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
+
+-- vim.keymap.set("n", "<localleader>d", vim.diagnostic.open_float, { desc = "Open Diagnostic Float Window" })
