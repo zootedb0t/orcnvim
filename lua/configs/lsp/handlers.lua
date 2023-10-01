@@ -17,19 +17,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
       end
 
       if client.supports_method(methods.textDocument_rename) then
-        map("n", "<localleader>cr", vim.lsp.buf.rename, { desc = "Rename", buffer = bufnr })
+        map("n", "<localleader>rn", vim.lsp.buf.rename, { desc = "Rename", buffer = bufnr })
       end
 
       if client.supports_method(methods.textDocument_signatureHelp) then
-        map({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = bufnr })
+        map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = bufnr })
       end
 
       if client.supports_method(methods.textDocument_declaration) then
-        map("n", "gD", vim.lsp.buf.declaration, { desc = "Declaration", buffer = bufnr })
+        map("n", "gD", vim.lsp.buf.declaration, { desc = "Methods Declaration", buffer = bufnr })
       end
 
       if client.supports_method(methods.textDocument_definition) then
-        map("n", "gd", vim.lsp.buf.definition, { desc = "Definition", buffer = bufnr })
+        map("n", "gd", vim.lsp.buf.definition, { desc = "Methods Definition", buffer = bufnr })
       end
 
       if client.supports_method(methods.textDocument_implementation) then
