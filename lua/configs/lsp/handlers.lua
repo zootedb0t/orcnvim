@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       end
 
       if client.supports_method(methods.textDocument_implementation) then
-        map("n", "gi", vim.lsp.textDocument_implementation, { desc = "Implementation", buffer = bufnr })
+        map("n", "gi", vim.lsp.buf.implementation, { desc = "Implementation", buffer = bufnr })
       end
 
       if client.supports_method(methods.textDocument_typeDefinition) then

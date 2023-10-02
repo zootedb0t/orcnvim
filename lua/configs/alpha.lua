@@ -60,7 +60,7 @@ if alpha_ok then
     dashboard.section.footer.val = function()
       local total_plugins = plugin_stat.count
       local startuptime = (math.floor(plugin_stat.startuptime * 100 + 0.5) / 100)
-      return " Orcnvim " .. total_plugins .. " plugins in " .. startuptime .. "ms"
+      return "Loaded " .. total_plugins .. " plugins in 󰔛 " .. startuptime .. "ms"
     end
 
     dashboard.section.footer.opts.hl = "AlphaFooter"
