@@ -1,7 +1,7 @@
 <h1 dir="auto" align="center">📝 Orcnvim</h1>
 
 <p align="center">
-    <a href="https://www.neovim.io"><img alt="Neovim" src="https://img.shields.io/static/v1?label=Neovim&message=0.10&color=brightgreen&style=for-the-badge&logo=neovim" style="max-width:100%"></a>
+    <a href="https://www.neovim.io"><img alt="Neovim" src="https://img.shields.io/static/v1?label=Neovim&message=nightly&color=brightgreen&style=for-the-badge&logo=neovim" style="max-width:100%"></a>
     <a href="https://www.lua.org/"><img alt="Lua" src="https://img.shields.io/badge/Lua-blue.svg?style=for-the-badge&logo=lua" style="max-width:100%"></a>
     <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" rel="nofollow"><img alt="GPLv3" src="https://img.shields.io/badge/License-GPLv3-blue.svg?style=for-the-badge" style="max-width: 100%;"></a>
 </p>
@@ -47,7 +47,7 @@ Now set environment variable `$NVIM_APPNAME=orcnvim`. Start `neovim` now `orcnvi
 - Custom `Statuscolumn`, `Winbar` and `Statusline`.
 - Autocompletion using [cmp](https://github.com/hrsh7th/nvim-cmp).
 - Syntax highlighting using [tree-sitter](https://github.com/nvim-treesitter/nvim-treesitter).
-- Support [Formatting](https://github.com/mhartington/formatter.nvim) and [linting](https://github.com/mfussenegger/nvim-lint).
+- Support [Formatting](https://github.com/stevearc/conform.nvim) and [linting](https://github.com/nvimtools/none-ls.nvim).
 
 # :clap: Credits
 
