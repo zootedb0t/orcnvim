@@ -11,14 +11,14 @@ local options = {
     expandtab = true, -- Enable the use of space in tab
     fillchars = {
       eob = " ",
-      horiz = "━", -- '▃',--'═', --'─',
-      horizup = "┻", -- '╩',-- '┴',
-      horizdown = "┳", -- '╦', --'┬',
-      vert = "┃", -- '▐', --'║', --'┃',
-      vertleft = "┨", -- '╣', --'┤',
-      vertright = "┣", -- '╠', --'├',
-      verthoriz = "╋", -- '╬',--'┼','
-    }, -- Disable `~` on nonexistent lines
+      horiz = "━", -- '═','─', '━'
+      horizup = "┻", -- '╩','┴','┻'
+      horizdown = "┳", -- '╦', '┬','┳'
+      vert = "▐", -- '▐', '║'
+      vertleft = "┨", -- '╣', '┤','┨'
+      vertright = "┣", -- '╠', '├','┣'
+      verthoriz = "╋", -- '╬','┼','╋'
+    },
     history = 100, -- Number of commands to remember in a history table
     ignorecase = true, -- Case insensitive searching
     mouse = "nv", -- Enable mouse support
@@ -57,6 +57,9 @@ local options = {
     winbar = "%{%v:lua.require'core.ui.winbar'.draw()%}",
     statuscolumn = "%{%v:lua.require'core.ui.statuscolumn'.draw()%}",
     numberwidth = 3,
+    foldexpr = "v:lua.vim.treesitter.foldexpr()",
+    foldtext = "v:lua.vim.treesitter.foldtext()",
+    smoothscroll = true,
   },
 
   g = {

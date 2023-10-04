@@ -32,7 +32,7 @@ local plugins = {
   --   "maxmx03/fluoromachine.nvim",
   --   lazy = false,
   --   opts = {
-  --     theme = "fluoromachine", -- Choose between retrowave, fluoromachine, delta
+  --     theme = "retrowave", -- Choose between retrowave, fluoromachine, delta
   --     brightness = 0.04,
   --     transparent = "full",
   --   },
@@ -281,19 +281,22 @@ local plugins = {
   },
 
   {
-    "mfussenegger/nvim-lint",
-    event = "VeryLazy",
-    config = function()
-      require("configs.lint")
-    end,
-  },
-
-  {
     "stevearc/conform.nvim",
     event = "VeryLazy",
     config = function()
       require("configs.conform")
     end,
+  },
+
+  {
+    "nvimtools/none-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("configs.null-ls")
+    end,
+    dependencies = {
+      "mason.nvim",
+    },
   },
 }
 

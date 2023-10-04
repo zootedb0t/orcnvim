@@ -50,3 +50,8 @@ cmd({ "BufWritePost" }, {
   end,
   desc = "Reload st terminal",
 })
+
+-- Update statusline highlight.
+cmd("ColorScheme", {
+  callback = require("core.ui.highlight").statusline_highlight,
+})
