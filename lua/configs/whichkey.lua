@@ -8,57 +8,30 @@ end
 M.config = function()
   local setup = {
     plugins = {
-      marks = true, -- shows a list of your marks on ' and `
-      registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-      -- the presets plugin, adds help for a bunch of default keybindings in Neovim
-      -- No actual key bindings are created
       presets = {
-        operators = false, -- adds help for operators like d, y and registers them for motion / text object completion
-        motions = false, -- adds help for motions
-        text_objects = false, -- help for text objects triggered after entering an operator
-        windows = true, -- default bindings on <c-w>
-        nav = false, -- misc bindings to work with windows
-        z = false, -- bindings for folds, spelling and others prefixed with z
-        g = false, -- bindings for prefixed with g
+        text_objects = false,
       },
     },
-    -- add operators that will trigger motion and text object completion
-    -- to enable all native operators, set the preset / operators plugin above
-    -- operators = { gc = "Comments" },
     icons = {
-      breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-      separator = "➜", -- symbol used between a key and it's label
-      group = "", -- symbol prepended to a group
+      breadcrumb = "»",
+      separator = "",
     },
     popup_mappings = {
-      scroll_down = "<c-d>", -- binding to scroll down inside the popup
-      scroll_up = "<c-u>", -- binding to scroll up inside the popup
+      scroll_down = "<c-d>",
+      scroll_up = "<c-u>",
     },
     window = {
       border = "none", -- none, single, double, shadow
       position = "bottom", -- bottom, top
-      margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-      padding = { 2, 0, 2, 0 }, -- extra window padding [top, right, bottom, left]
       winblend = 0,
     },
     layout = {
-      height = { min = 4, max = 25 }, -- min and max height of the columns
-      width = { min = 20, max = 50 }, -- min and max width of the columns
-      spacing = 3, -- spacing between columns
-      align = "center", -- align columns left, center or right
+      spacing = 3,
+      align = "center",
     },
-    ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
-    hidden = { "<silent>", ":", "<Cmd>", "<cr>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-    show_help = true, -- show help message on the command line when the popup is visible
-    triggers = "auto", -- automatically setup triggers
-    -- triggers = {"<leader>"} -- or specify a list manually
-    triggers_blacklist = {
-      -- list of mode / prefixes that should never be hooked by WhichKey
-      -- this is mostly relevant for key maps that start with a native binding
-      -- most people should not need to change this
-      i = { "j", "k" },
-      v = { "j", "k" },
-    },
+    ignore_missing = true,
+    show_help = true,
+    triggers = "auto",
     disable = {
       buftypes = {},
       filetypes = { "help", "NivmTree" },
@@ -133,14 +106,14 @@ M.config = function()
     l = {
       name = icon.ui.Code .. " LSP",
       a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-      d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
+      d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Current Buffer Diagnostics" },
       h = { "<cmd>lua vim.lsp.inlay_hint(0)<cr>", "Toggle Inlay Hint" },
-      w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
+      w = { "<cmd>Telescope diagnostics<cr>", "Show Workspace Diagnostics" },
       f = {
         function()
           require("conform").format({ lsp_fallback = true })
         end,
-        "󰒕 Format current buffer",
+        "Format current buffer",
       },
       i = { "<cmd>LspInfo<cr>", "Info" },
       I = { "<cmd>Mason<cr>", "Mason Info" },
@@ -170,11 +143,10 @@ M.config = function()
         end,
         "Neovim configs",
       },
-      s = { "<CMD>StartupTime<cr>", "StartupTime" },
-      i = { "<CMD>Inspect<cr>", "Inspect" }, -- only available on neovim 0.9
-      u = { "<CMD>Update<cr>", "Update" },
-      h = { "<CMD>checkhealth<cr>", "Health" },
-      v = { "<CMD>version<cr>", "Version" },
+      s = { "<cmd>StartupTime<cr>", "StartupTime" },
+      i = { "<cmd>Inspect<cr>", "Inspect" },
+      h = { "<cmd>checkhealth<cr>", "Health" },
+      v = { "<cmd>version<cr>", "Version" },
     },
     m = {
       name = icon.ui.Timer .. " Session Manager",
@@ -182,17 +154,17 @@ M.config = function()
       l = { "<cmd>Telescope persisted<CR>", "Load Saved Sessions" },
     },
     p = {
-      name = icon.ui.Spanner .. " Plugin",
-      c = { "<CMD>Lazy clean<cr>", "Clean" },
-      C = { "<CMD>Lazy check<cr>", "Check" },
-      d = { "<CMD>Lazy debug<cr>", "Debug" },
-      i = { "<CMD>Lazy install<cr>", "Install" },
-      s = { "<CMD>Lazy sync<cr>", "Sync" },
-      l = { "<CMD>Lazy log<cr>", "Log" },
-      h = { "<CMD>Lazy home<cr>", "Home" },
-      H = { "<CMD>Lazy help<cr>", "Help" },
-      p = { "<CMD>Lazy profile<cr>", "Profile" },
-      u = { "<CMD>Lazy update<cr>", "Update" },
+      name = icon.ui.Spanner .. " Plugin Manager",
+      c = { "<cmd>Lazy clean<cr>", "Clean" },
+      C = { "<cmd>Lazy check<cr>", "Check" },
+      d = { "<cmd>Lazy debug<cr>", "Debug" },
+      i = { "<cmd>Lazy install<cr>", "Install" },
+      s = { "<cmd>Lazy sync<cr>", "Sync" },
+      l = { "<cmd>Lazy log<cr>", "Log" },
+      h = { "<cmd>Lazy home<cr>", "Home" },
+      H = { "<cmd>Lazy help<cr>", "Help" },
+      p = { "<cmd>Lazy profile<cr>", "Profile" },
+      u = { "<cmd>Lazy update<cr>", "Update" },
     },
     s = {
       name = icon.ui.Search .. " Search",
@@ -202,10 +174,9 @@ M.config = function()
       h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
       H = { "<cmd>Telescope highlights<cr>", "Find highlight groups" },
       r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
-      R = { "<cmd>Telescope registers<cr>", "Registers" },
-      t = { "<cmd>Telescope live_grep<cr>", "Text" },
-      k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-      C = { "<cmd>Telescope commands<cr>", "Commands" },
+      R = { "<cmd>Telescope registers<cr>", "Search registers" },
+      k = { "<cmd>Telescope keymaps<cr>", "Search Keymaps" },
+      C = { "<cmd>Telescope commands<cr>", "Search Commands" },
     },
   }
   wk.setup(setup)

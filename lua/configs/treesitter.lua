@@ -48,7 +48,7 @@ if ts_ok then
     rainbow = {
       enable = true,
       extended_mode = true,
-      max_file_lines = 2000,
+      max_file_lines = 1000,
     },
     incremental_selection = {
       enable = true,
@@ -57,7 +57,7 @@ if ts_ok then
     textobjects = {
       select = {
         enable = true,
-        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+        lookahead = true,
         keymaps = {
           ["af"] = "@function.outer",
           ["if"] = "@function.inner",
@@ -67,26 +67,29 @@ if ts_ok then
       },
       move = {
         enable = true,
-        set_jumps = true, -- whether to set jumps in the jumplist
         goto_next_start = {
-          ["]k"] = { query = "@block.outer", desc = "Next block start" },
-          ["]f"] = { query = "@function.outer", desc = "Next function start" },
-          ["]a"] = { query = "@parameter.inner", desc = "Next parameter start" },
+          ["]f"] = { query = "@function.outer", desc = "Start of function start" },
+          ["]b"] = { query = "@block.outer", desc = "Start of block" },
+          ["]p"] = { query = "@parameter.inner", desc = "Start of parameter" },
+          ["]c"] = { query = "@class.outer", desc = "Start of class" },
         },
         goto_next_end = {
-          ["]K"] = { query = "@block.outer", desc = "Next block end" },
-          ["]F"] = { query = "@function.outer", desc = "Next function end" },
-          ["]A"] = { query = "@parameter.inner", desc = "Next parameter end" },
+          ["]F"] = { query = "@function.outer", desc = "End of function" },
+          ["]B"] = { query = "@block.outer", desc = "End of block" },
+          ["]P"] = { query = "@parameter.inner", desc = "End of parameter" },
+          ["]C"] = { query = "@class.outer", desc = "End of class" },
         },
         goto_previous_start = {
-          ["[k"] = { query = "@block.outer", desc = "Previous block start" },
           ["[f"] = { query = "@function.outer", desc = "Previous function start" },
-          ["[a"] = { query = "@parameter.inner", desc = "Previous parameter start" },
+          ["[b"] = { query = "@block.outer", desc = "Previous block start" },
+          ["[p"] = { query = "@parameter.inner", desc = "Previous parameter start" },
+          ["[c"] = { query = "@class.outer", desc = "Previous class" },
         },
         goto_previous_end = {
-          ["[K"] = { query = "@block.outer", desc = "Previous block end" },
           ["[F"] = { query = "@function.outer", desc = "Previous function end" },
-          ["[A"] = { query = "@parameter.inner", desc = "Previous parameter end" },
+          ["[B"] = { query = "@block.outer", desc = "Previous block end" },
+          ["[P"] = { query = "@parameter.inner", desc = "Previous parameter end" },
+          ["[C"] = { query = "@class.outer", desc = "Previous class end" },
         },
       },
     },

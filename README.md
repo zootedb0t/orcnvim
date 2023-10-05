@@ -15,7 +15,7 @@
 
 ## :golf: Requirements
 
-- Latest [neovim 0.10+](https://github.com/neovim/neovim). I use `neovim-nightly` built from [source](https://github.com/neovim/neovim/wiki/Building-Neovim).
+- Latest [neovim-nightly](https://github.com/neovim/neovim/wiki/Building-Neovim).
 - `Node` for installing lsp-servers.
 - `Deno` for [peek.nvim](https://github.com/toppair/peek.nvim).
 - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts/) for icons.
@@ -42,7 +42,7 @@ Now set environment variable `$NVIM_APPNAME=orcnvim`. Start `neovim` now `orcnvi
 
 ## :scroll: Features
 
-- Support `neovim` built-in `lsp`.
+- Support `neovim` built-in [lsp](https://github.com/neovim/nvim-lspconfig).
 - Lazy load plugins for faster startup time. Thanks to [lazy.nvim](https://github.com/folke/lazy.nvim/)
 - Custom `Statuscolumn`, `Winbar` and `Statusline`.
 - Autocompletion using [cmp](https://github.com/hrsh7th/nvim-cmp).
