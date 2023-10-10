@@ -1,5 +1,5 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local icons = require("core.icons")
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -12,31 +12,34 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
-local plugins = {
-  {
-    "zootedb0t/citruszest.nvim",
-    dev = true,
-    lazy = false,
-    priority = 1000,
-    opts = {
-      option = {
-        transparent = true,
-      },
-      style = {
-        Identifier = { bold = true },
-      },
-    },
-  },
-
+local plugin = {
   -- {
-  --   "maxmx03/fluoromachine.nvim",
+  --   "zootedb0t/citruszest.nvim",
+  --   dev = true,
   --   lazy = false,
+  --   priority = 1000,
   --   opts = {
-  --     theme = "retrowave", -- Choose between retrowave, fluoromachine, delta
-  --     brightness = 0.04,
-  --     transparent = "full",
+  --     option = {
+  --       transparent = true,
+  --     },
+  --     style = {
+  --       Identifier = { bold = true },
+  --     },
   --   },
   -- },
+
+  {
+    "maxmx03/fluoromachine.nvim",
+    lazy = false,
+    -- opts = {
+    --   theme = "retrowave", -- Choose between retrowave, fluoromachine, delta
+    --   brightness = 0.04,
+    --   transparent = "full",
+    -- },
+    config = function()
+      vim.cmd("colorscheme fluoromachine")
+    end,
+  },
 
   {
     "numToStr/Comment.nvim",
@@ -53,7 +56,7 @@ local plugins = {
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     config = function()
-      require("configs.treesitter")
+      require("plugins.treesitter")
     end,
     dependencies = {
       "hiphish/rainbow-delimiters.nvim",
@@ -66,7 +69,7 @@ local plugins = {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      require("configs.lsp.handlers").setup()
+      require("plugins.lsp.handlers").setup()
     end,
     dependencies = {
       "cmp-nvim-lsp",
@@ -79,7 +82,7 @@ local plugins = {
     "williamboman/mason-lspconfig.nvim",
     lazy = true,
     config = function()
-      require("configs.lsp.mason")
+      require("plugins.lsp.mason")
     end,
     dependencies = {
       "mason.nvim",
@@ -103,10 +106,10 @@ local plugins = {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     config = function()
-      require("configs.telescope")
+      require("plugins.telescope")
     end,
     dependencies = {
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      { "nvim-telescope/telescope-fzf-native.nvim",  build = "make" },
       { "nvim-telescope/telescope-file-browser.nvim" },
     },
   },
@@ -115,7 +118,7 @@ local plugins = {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     config = function()
-      require("configs.cmp")
+      require("plugins.cmp")
     end,
     dependencies = {
       "hrsh7th/cmp-path",
@@ -155,7 +158,7 @@ local plugins = {
     "folke/which-key.nvim",
     keys = "<leader>",
     config = function()
-      require("configs.whichkey").config()
+      require("plugins.whichkey")
     end,
   },
 
@@ -163,7 +166,7 @@ local plugins = {
     "nvim-tree/nvim-tree.lua",
     cmd = "NvimTreeFindFileToggle",
     config = function()
-      require("configs.nvim-tree")
+      require("plugins.nvim-tree")
     end,
   },
 
@@ -192,14 +195,14 @@ local plugins = {
   },
 
   { "nvim-tree/nvim-web-devicons", lazy = true },
-  { "nvim-lua/plenary.nvim", lazy = true },
-  { "dstein64/vim-startuptime", cmd = "StartupTime" },
+  { "nvim-lua/plenary.nvim",       lazy = true },
+  { "dstein64/vim-startuptime",    cmd = "StartupTime" },
 
   {
     "goolord/alpha-nvim",
     cmd = "Alpha",
     config = function()
-      require("configs.alpha").config()
+      require("plugins.alpha").config()
     end,
   },
 
@@ -239,7 +242,7 @@ local plugins = {
       return {
         size = 15,
         insert_mappings = true, -- whether or not the open mapping applies in insert mode
-        close_on_exit = true, -- close the terminal window when the process exits
+        close_on_exit = true,   -- close the terminal window when the process exits
         open_mapping = [[<c-\>]],
         border = "double",
         shell = "/usr/bin/fish",
@@ -282,9 +285,9 @@ local plugins = {
 
   {
     "stevearc/conform.nvim",
-    event = "VeryLazy",
+    event = { 'LspAttach', 'BufWritePre' },
     config = function()
-      require("configs.conform")
+      require("plugins.conform")
     end,
   },
 
@@ -292,7 +295,7 @@ local plugins = {
     "nvimtools/none-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      require("configs.null-ls")
+      require("plugins.null-ls")
     end,
     dependencies = {
       "mason.nvim",
@@ -314,11 +317,11 @@ local opts = {
         "tohtml",
         "tutor",
         "zipPlugin",
-        "loaded_2html_plugin", -- disable 2html
-        "loaded_getscript", -- disable getscript
+        "loaded_2html_plugin",    -- disable 2html
+        "loaded_getscript",       -- disable getscript
         "loaded_getscriptPlugin", -- disable getscript
-        "loaded_vimball", -- disable vimball
-        "loaded_vimballPlugin", -- disable vimball
+        "loaded_vimball",         -- disable vimball
+        "loaded_vimballPlugin",   -- disable vimball
         -- "loaded_netrw",
         -- "loaded_netrwPlugin",
       },
@@ -357,9 +360,4 @@ local opts = {
   },
 }
 
-local status_ok, lazy = pcall(require, "lazy")
-if not status_ok then
-  return
-end
-
-lazy.setup(plugins, opts)
+require("lazy").setup(plugin, opts)
