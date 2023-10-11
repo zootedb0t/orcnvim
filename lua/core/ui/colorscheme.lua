@@ -31,4 +31,4 @@ end
 
 -- Setting colorscheme
 -- vim.cmd("colorscheme fluoromachine")
--- vim.cmd("colorscheme citruszest")
+vim.cmd("colorscheme citruszest")

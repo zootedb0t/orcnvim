@@ -60,6 +60,7 @@ local mappings = {
   },
   a = {
     name = icon.ui.Rocket .. " Actions",
+    c = { "<cmd>fclose<cr>", " Close floating window" }, -- Only in nightly
     l = {
       function()
         require("core.utils").toggle_number()
@@ -134,7 +135,7 @@ local mappings = {
     name = icon.ui.Neovim .. " Neovim",
     c = {
       function()
-        require("configs.telescope.custom").search_config()
+        require("plugins.telescope.custom").search_config()
       end,
       "Neovim configs",
     },

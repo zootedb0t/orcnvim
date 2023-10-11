@@ -57,7 +57,7 @@ cmp.setup({
     ["<Down>"] = cmp.mapping.select_next_item(),
     ["<C-u>"] = cmp.mapping.scroll_docs(4),
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-e>"] = cmp.mapping.abort(),
+    ["<C-c>"] = cmp.mapping.abort(),
 
     ["<CR>"] = cmp.mapping(function(fallback)
       if cmp.visible() and cmp.get_selected_entry() then
@@ -98,9 +98,13 @@ cmp.setup({
     end, { "i", "s" }),
 
     -- when menu is visible, navigate to previous item on list
-    ["<S-Tab>"] = cmp.mapping(function()
-      if cmp.visible() then
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      elseif cmp.visible() then
         cmp.select_prev_item()
+      else
+        fallback()
       end
     end, { "i", "s" }),
   },

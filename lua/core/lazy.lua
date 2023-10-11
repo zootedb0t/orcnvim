@@ -13,33 +13,30 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 local plugin = {
+  {
+    "zootedb0t/citruszest.nvim",
+    dev = true,
+    lazy = false,
+    priority = 1000,
+    opts = {
+      option = {
+        transparent = true,
+      },
+      style = {
+        Identifier = { bold = true },
+      },
+    },
+  },
+
   -- {
-  --   "zootedb0t/citruszest.nvim",
-  --   dev = true,
+  --   "maxmx03/fluoromachine.nvim",
   --   lazy = false,
-  --   priority = 1000,
   --   opts = {
-  --     option = {
-  --       transparent = true,
-  --     },
-  --     style = {
-  --       Identifier = { bold = true },
-  --     },
+  --     theme = "retrowave", -- Choose between retrowave, fluoromachine, delta
+  --     brightness = 0.04,
+  --     transparent = "full",
   --   },
   -- },
-
-  {
-    "maxmx03/fluoromachine.nvim",
-    lazy = false,
-    -- opts = {
-    --   theme = "retrowave", -- Choose between retrowave, fluoromachine, delta
-    --   brightness = 0.04,
-    --   transparent = "full",
-    -- },
-    config = function()
-      vim.cmd("colorscheme fluoromachine")
-    end,
-  },
 
   {
     "numToStr/Comment.nvim",

@@ -14,6 +14,10 @@ map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Check for line
 map("n", "H", "^", { desc = "goto beginning of line" })
 map("n", "L", "$", { desc = "goto end of line" })
 
+-- BASH-style movement in insert mode
+vim.keymap.set("i", "<C-a>", "<C-o>^")
+vim.keymap.set("i", "<C-e>", "<C-o>$")
+
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
@@ -83,5 +87,3 @@ map("n", "<leader>w-", "<C-W>s", { desc = "Split window below", remap = true })
 map("n", "<leader>w|", "<C-W>v", { desc = "Split window right", remap = true })
 map("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
 map("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
-
--- vim.keymap.set("n", "<localleader>d", vim.diagnostic.open_float, { desc = "Open Diagnostic Float Window" })
