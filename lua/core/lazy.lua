@@ -106,7 +106,7 @@ local plugin = {
       require("plugins.telescope")
     end,
     dependencies = {
-      { "nvim-telescope/telescope-fzf-native.nvim",  build = "make" },
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       { "nvim-telescope/telescope-file-browser.nvim" },
     },
   },
@@ -192,14 +192,14 @@ local plugin = {
   },
 
   { "nvim-tree/nvim-web-devicons", lazy = true },
-  { "nvim-lua/plenary.nvim",       lazy = true },
-  { "dstein64/vim-startuptime",    cmd = "StartupTime" },
+  { "nvim-lua/plenary.nvim", lazy = true },
+  { "dstein64/vim-startuptime", cmd = "StartupTime" },
 
   {
-    "goolord/alpha-nvim",
-    cmd = "Alpha",
+    "nvimdev/dashboard-nvim",
+    cmd = "Dashboard",
     config = function()
-      require("plugins.alpha").config()
+      require("plugins.dashboard")
     end,
   },
 
@@ -216,7 +216,7 @@ local plugin = {
         autosave = false,
         should_autosave = function()
           -- do not autosave if the alpha dashboard is the current filetype
-          if vim.bo.filetype == "alpha" then
+          if vim.bo.filetype == "dashboard" then
             return false
           end
           return true
@@ -239,7 +239,7 @@ local plugin = {
       return {
         size = 15,
         insert_mappings = true, -- whether or not the open mapping applies in insert mode
-        close_on_exit = true,   -- close the terminal window when the process exits
+        close_on_exit = true, -- close the terminal window when the process exits
         open_mapping = [[<c-\>]],
         border = "double",
         shell = "/usr/bin/fish",
@@ -282,9 +282,9 @@ local plugin = {
 
   {
     "stevearc/conform.nvim",
-    event = { 'LspAttach', 'BufWritePre' },
+    event = { "LspAttach", "BufWritePre" },
     config = function()
-      require("plugins.conform")
+      require("plugins.conform").config()
     end,
   },
 
@@ -314,11 +314,11 @@ local opts = {
         "tohtml",
         "tutor",
         "zipPlugin",
-        "loaded_2html_plugin",    -- disable 2html
-        "loaded_getscript",       -- disable getscript
+        "loaded_2html_plugin", -- disable 2html
+        "loaded_getscript", -- disable getscript
         "loaded_getscriptPlugin", -- disable getscript
-        "loaded_vimball",         -- disable vimball
-        "loaded_vimballPlugin",   -- disable vimball
+        "loaded_vimball", -- disable vimball
+        "loaded_vimballPlugin", -- disable vimball
         -- "loaded_netrw",
         -- "loaded_netrwPlugin",
       },

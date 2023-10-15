@@ -49,7 +49,7 @@ local mappings = {
     end,
     "Change working directory",
   },
-  [";"] = { "<cmd>Alpha<CR>", "Open Dashboard" },
+  [";"] = { "<cmd>Dashboard<CR>", "Open Dashboard" },
   ["/"] = {
     function()
       require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
@@ -107,7 +107,7 @@ local mappings = {
     w = { "<cmd>Telescope diagnostics<cr>", "Show Workspace Diagnostics" },
     f = {
       function()
-        require("conform").format({ lsp_fallback = true })
+        require("plugins.conform").format()
       end,
       "Format current buffer",
     },
