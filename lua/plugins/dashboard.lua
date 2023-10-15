@@ -43,10 +43,10 @@ local db_config = {
     header = vim.split(logo, "\n"),
     center = {
       {
-        icon = icons.ui.Files,
-        desc = " Search Buffer",
-        key = "b",
-        action = "Telescope buffers",
+        icon = icons.ui.NewFile,
+        desc = " New File",
+        key = "n",
+        action = "ene | startinsert",
       },
       {
         icon = icons.ui.Telescope,
@@ -55,16 +55,16 @@ local db_config = {
         action = "Telescope find_files",
       },
       {
+        icon = icons.ui.Files,
+        desc = " Search Buffer",
+        key = "b",
+        action = "Telescope buffers",
+      },
+      {
         icon = icons.ui.History,
         desc = " Recent Files",
         key = "r",
         action = "Telescope oldfiles",
-      },
-      {
-        icon = icons.ui.NewFile,
-        desc = " New File",
-        key = "n",
-        action = "ene | startinsert",
       },
       {
         icon = icons.ui.Hourglass,
@@ -85,7 +85,17 @@ local db_config = {
         action = "qa",
       },
     },
-    footer = {},
+    footer = function()
+      local footer = {}
+      footer[1] = os.date("󰃭 %a,%d %b \t 󱑎 %H:%M")
+      footer[2] = " v"
+        .. vim.version().major
+        .. "."
+        .. vim.version().minor
+        .. "-"
+        .. vim.version().prerelease
+      return footer
+    end,
   },
 }
 
