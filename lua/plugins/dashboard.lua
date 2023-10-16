@@ -43,44 +43,52 @@ local db_config = {
     header = vim.split(logo, "\n"),
     center = {
       {
-        icon = icons.ui.NewFile,
-        desc = " New File",
+        icon = icons.ui.NewFile .. " ",
+        desc = "New File",
         key = "n",
         action = "ene | startinsert",
       },
       {
-        icon = icons.ui.Telescope,
-        desc = " Find File",
+        icon = icons.ui.Telescope .. " ",
+        desc = "Find File",
         key = "f",
         action = "Telescope find_files",
       },
       {
-        icon = icons.ui.Files,
-        desc = " Search Buffer",
+        icon = icons.ui.Files .. " ",
+        desc = "Search Buffer",
         key = "b",
         action = "Telescope buffers",
       },
       {
-        icon = icons.ui.History,
-        desc = " Recent Files",
+        icon = icons.ui.Gear .. " ",
+        desc = "Edit Config",
+        key = "c",
+        action = function()
+          require("plugins.telescope.custom").search_config()
+        end,
+      },
+      {
+        icon = icons.ui.History .. " ",
+        desc = "Recent Files",
         key = "r",
         action = "Telescope oldfiles",
       },
       {
-        icon = icons.ui.Hourglass,
-        desc = " Load Session",
+        icon = icons.ui.Hourglass .. " ",
+        desc = "Load Session",
         key = "s",
         action = "Telescope persisted",
       },
       {
-        icon = icons.ui.Package,
-        desc = " Lazy Plugin",
+        icon = icons.ui.Package .. " ",
+        desc = "Lazy Plugin",
         key = "l",
         action = "Lazy",
       },
       {
-        icon = icons.ui.Exit,
-        desc = " Quit",
+        icon = icons.ui.Exit .. " ",
+        desc = "Quit",
         key = "q",
         action = "qa",
       },
@@ -88,12 +96,7 @@ local db_config = {
     footer = function()
       local footer = {}
       footer[1] = os.date("󰃭 %a,%d %b \t 󱑎 %H:%M")
-      footer[2] = " v"
-        .. vim.version().major
-        .. "."
-        .. vim.version().minor
-        .. "-"
-        .. vim.version().prerelease
+      footer[2] = " v" .. vim.version().major .. "." .. vim.version().minor .. "-" .. vim.version().prerelease
       return footer
     end,
   },

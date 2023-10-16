@@ -1,5 +1,3 @@
-local M = {}
-
 local options = {
   opt = {
     clipboard = { "unnamedplus" }, -- Connection to the system clipboard
@@ -63,7 +61,6 @@ local options = {
   },
 
   g = {
-    highlighturl_enabled = true, -- highlight URLs by default
     mapleader = " ",
     maplocalleader = ",",
     transparent_nvim = false, -- Set true to make window transparent
@@ -75,5 +72,3 @@ for scope, table in pairs(options) do
     vim[scope][setting] = value
   end
 end
-
-return M

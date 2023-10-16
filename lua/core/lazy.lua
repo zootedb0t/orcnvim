@@ -63,6 +63,14 @@ local plugin = {
   },
 
   {
+    "nvim-treesitter/nvim-treesitter-context",
+    cmd = "TSContextToggle",
+    config = function()
+      require("plugins.ts-context")
+    end,
+  },
+
+  {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
@@ -164,18 +172,6 @@ local plugin = {
     cmd = "NvimTreeFindFileToggle",
     config = function()
       require("plugins.nvim-tree")
-    end,
-  },
-
-  {
-    "toppair/peek.nvim",
-    build = "deno task --quiet build:fast",
-    ft = "markdown",
-    opts = {},
-    config = function()
-      local peek = require("peek")
-      vim.api.nvim_create_user_command("PeekOpen", peek.open, {})
-      vim.api.nvim_create_user_command("PeekClose", peek.close, {})
     end,
   },
 

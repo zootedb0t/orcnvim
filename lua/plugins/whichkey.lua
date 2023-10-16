@@ -89,6 +89,7 @@ local mappings = {
     d = { "<cmd>bd<cr>", "Delete buffer" },
     n = { "<cmd>enew<cr>", "Create new buffer" },
     s = { "<cmd>wa!<CR>", "Save" },
+    t = { "<cmd>TSContextToggle<cr>", "Treesitter Context" },
   },
   g = {
     name = icon.git.Octoface .. " Git Actions",
