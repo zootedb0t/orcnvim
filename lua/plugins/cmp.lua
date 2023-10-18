@@ -4,13 +4,8 @@ local kind_icons = require("core.icons").kind
 local ELLIPSIS_CHAR = require("core.icons").ui.Ellipsis
 local MAX_LABEL_WIDTH = 25
 
-local border_opts = {
-  border = "single",
-  winhighlight = "Normal:CmpPmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-}
-
 local get_ws = function(max, len)
-  return (" "):rep(max - len) -- Add whitespace (max-len) times
+  return string.rep(" ", (max - len))
 end
 
 -- Format for cmp popup menu to have fixed width
@@ -32,16 +27,10 @@ local format = function(entry, item)
   else
     item.abbr = content .. get_ws(MAX_LABEL_WIDTH, #content)
   end
-
   return item
 end
 
 cmp.setup({
-  completion = {
-    ---@usage The minimum length of a word to complete on.
-    keyword_length = 1,
-  },
-
   formatting = {
     format = format,
   },
@@ -53,60 +42,43 @@ cmp.setup({
   },
 
   mapping = {
-    ["<Up>"] = cmp.mapping.select_prev_item(),
-    ["<Down>"] = cmp.mapping.select_next_item(),
+    ["<C-p>"] = cmp.mapping.select_prev_item(),
+    ["<C-n>"] = cmp.mapping.select_next_item(),
     ["<C-u>"] = cmp.mapping.scroll_docs(4),
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-c>"] = cmp.mapping.abort(),
 
-    ["<CR>"] = cmp.mapping(function(fallback)
-      if cmp.visible() and cmp.get_selected_entry() then
-        cmp.confirm({ select = false })
-      elseif cmp.visible() then
-        cmp.close()
-      else
-        fallback()
-      end
-    end),
-
+    ["<CR>"] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true,
+    }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-
-    -- go to next placeholder in the snippet
-    ["<C-n>"] = cmp.mapping(function(fallback)
-      if luasnip.jumpable(1) then
-        luasnip.jump(1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-
-    -- go to previous placeholder in the snippet
-    ["<C-p>"] = cmp.mapping(function(fallback)
-      if luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
 
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
+      elseif require("luasnip").expand_or_jumpable() then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
       else
         fallback()
       end
-    end, { "i", "s" }),
+    end, {
+      "i",
+      "s",
+    }),
 
-    -- when menu is visible, navigate to previous item on list
     ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      elseif cmp.visible() then
+      if cmp.visible() then
         cmp.select_prev_item()
+      elseif require("luasnip").jumpable(-1) then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
       else
         fallback()
       end
-    end, { "i", "s" }),
+    end, {
+      "i",
+      "s",
+    }),
   },
 
   sources = cmp.config.sources({
@@ -119,12 +91,12 @@ cmp.setup({
 
   window = {
     completion = cmp.config.window.bordered({
-      side_padding = 1,
       scrollbar = false,
-      border_opts,
+      winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel",
+      border = "single",
     }),
     documentation = cmp.config.window.bordered({
-      border_opts,
+      border = "single",
     }),
   },
 })

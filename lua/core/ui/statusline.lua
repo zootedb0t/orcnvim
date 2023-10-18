@@ -248,7 +248,7 @@ local function active()
 end
 
 local function inactive()
-  return "%#StatuslineTransparent#"
+  return "%#Normal#"
 end
 
 function Statusline.draw()

@@ -96,7 +96,13 @@ local db_config = {
     footer = function()
       local footer = {}
       footer[1] = os.date("󰃭 %a,%d %b \t 󱑎 %H:%M")
-      footer[2] = " v" .. vim.version().major .. "." .. vim.version().minor .. "-" .. vim.version().prerelease
+      footer[2] = icons.ui.Neovim
+        .. " "
+        .. vim.version().major
+        .. "."
+        .. vim.version().minor
+        .. "-"
+        .. vim.version().prerelease
       return footer
     end,
   },

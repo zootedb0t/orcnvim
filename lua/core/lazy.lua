@@ -22,9 +22,6 @@ local plugin = {
       option = {
         transparent = true,
       },
-      style = {
-        Identifier = { bold = true },
-      },
     },
   },
 
@@ -293,6 +290,16 @@ local plugin = {
     dependencies = {
       "mason.nvim",
     },
+  },
+
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && npm install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
   },
 }
 

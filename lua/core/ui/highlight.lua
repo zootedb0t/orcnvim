@@ -22,7 +22,6 @@ function M.statusline_highlight()
     { fg = colors.stl_terminal.fg, bg = colors.stl_terminal.bg, bold = true }
   )
   set_highlight(0, "StatusLineCmdLineAccent", { fg = colors.stl_cmd.fg, bg = colors.stl_cmd.bg, bold = true })
-  set_highlight(0, "StatuslineTransparent", {}) -- Some colorscheme were drawing empty statusline for floating window like telescope, lazy. This fixes that
 end
 
 return M

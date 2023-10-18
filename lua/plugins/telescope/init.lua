@@ -31,7 +31,7 @@ telescope.setup({
       height = 0.65,
       preview_cutoff = 120,
     },
-
+    borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
     mappings = {
       i = {
         ["<C-j>"] = actions.move_selection_next,

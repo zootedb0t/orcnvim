@@ -17,7 +17,6 @@
 
 - Latest [neovim-nightly](https://github.com/neovim/neovim/wiki/Building-Neovim).
 - `Node` for installing lsp-servers.
-- `Deno` for [peek.nvim](https://github.com/toppair/peek.nvim).
 - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts/) for icons.
 - [mason.nvim](https://github.com/williamboman/mason.nvim) has several requirements for installing `lsp servers` like `npm`, `cargo` etc. Check full list [here](https://github.com/williamboman/mason.nvim#requirements).
 - [Tree-sitter-cli](https://github.com/tree-sitter/tree-sitter/tree/master/cli) install it using `npm` or `cargo`.
