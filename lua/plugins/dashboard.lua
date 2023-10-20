@@ -110,6 +110,7 @@ local db_config = {
 
 for _, button in ipairs(db_config.config.center) do
   button.desc = button.desc .. string.rep(" ", 30 - #button.desc)
+  button.key_format = "%s"
 end
 
 require("dashboard").setup(db_config)

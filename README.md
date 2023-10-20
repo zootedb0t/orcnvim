@@ -37,7 +37,7 @@ If you are using `nvim-0.10+` then you can use `NVIM_APPNAME`.
 git clone --depth 1 https://github.com/zootedb0t/orcnvim.git ~/.config/orcnvim
 ```
 
-Now set environment variable `$NVIM_APPNAME=orcnvim`. Start `neovim` now `orcnvim` configration will be used.
+Now set environment variable `$NVIM_APPNAME=orcnvim`. Start `neovim` now `orcnvim` configuration will be used.
 
 ## :scroll: Features
 
@@ -46,7 +46,7 @@ Now set environment variable `$NVIM_APPNAME=orcnvim`. Start `neovim` now `orcnvi
 - Custom `Statuscolumn`, `Winbar` and `Statusline`.
 - Autocompletion using [cmp](https://github.com/hrsh7th/nvim-cmp).
 - Syntax highlighting using [tree-sitter](https://github.com/nvim-treesitter/nvim-treesitter).
-- Support [Formatting](https://github.com/stevearc/conform.nvim) and [linting](https://github.com/nvimtools/none-ls.nvim).
+- Support [Formatting](https://github.com/stevearc/conform.nvim) and [Linting](https://github.com/nvimtools/none-ls.nvim).
 
 # :clap: Credits
 

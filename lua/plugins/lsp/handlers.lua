@@ -99,7 +99,7 @@ M.setup = function()
     vim.fn.sign_define(hl, {
       text = symbol,
       texthl = hl,
-      numhl = hl,
+      -- numhl = hl,
     })
   end
 

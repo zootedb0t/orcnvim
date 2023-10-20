@@ -9,13 +9,6 @@ local options = {
     expandtab = true, -- Enable the use of space in tab
     fillchars = {
       eob = " ",
-      horiz = "━", -- '═','─', '━'
-      horizup = "┻", -- '╩','┴','┻'
-      horizdown = "┳", -- '╦', '┬','┳'
-      vert = "▐", -- '▐', '║', '│'
-      vertleft = "┨", -- '╣', '┤','┨'
-      vertright = "┣", -- '╠', '├','┣'
-      verthoriz = "╋", -- '╬','┼','╋'
     },
     history = 100, -- Number of commands to remember in a history table
     ignorecase = true, -- Case insensitive searching
