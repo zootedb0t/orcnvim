@@ -48,7 +48,7 @@ local plugin = {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
+    event = "VeryLazy",
     config = function()
       require("plugins.treesitter")
     end,
@@ -69,12 +69,11 @@ local plugin = {
 
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
+    ft = require("core.utils").lsp_filetype(),
     config = function()
       require("plugins.lsp.handlers").setup()
     end,
     dependencies = {
-      "cmp-nvim-lsp",
       "SmiteshP/nvim-navic",
       "mason-lspconfig.nvim",
     },
@@ -128,13 +127,12 @@ local plugin = {
       "hrsh7th/cmp-nvim-lsp",
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp-signature-help",
-      "LuaSnip",
     },
   },
 
   {
     "altermo/ultimate-autopair.nvim",
-    event = { "InsertEnter", "CmdlineEnter" },
+    event = { "InsertEnter" },
     branch = "v0.6",
     opts = {},
   },
@@ -275,7 +273,7 @@ local plugin = {
 
   {
     "stevearc/conform.nvim",
-    event = { "LspAttach", "BufWritePre" },
+    event = "VeryLazy",
     config = function()
       require("plugins.conform").config()
     end,
@@ -283,23 +281,22 @@ local plugin = {
 
   {
     "nvimtools/none-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    ft = require("core.utils").lint_filetype(),
     config = function()
       require("plugins.null-ls")
     end,
     dependencies = {
-      "mason.nvim",
+      "mason-lspconfig.nvim",
     },
   },
 
   {
     "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = "markdown",
     build = "cd app && npm install",
     init = function()
       vim.g.mkdp_filetypes = { "markdown" }
     end,
-    ft = { "markdown" },
   },
 }
 

@@ -60,7 +60,7 @@ local mappings = {
   },
   a = {
     name = icon.ui.Rocket .. " Actions",
-    c = { "<cmd>fclose<cr>", " Close floating window" }, -- Only in nightly
+    c = { "<cmd>fclose<cr>", "Close floating window" }, -- Only in nightly
     l = {
       function()
         require("core.utils").toggle_number()
@@ -87,6 +87,8 @@ local mappings = {
     b = { "<cmd>Telescope buffers<cr>", "Buffers" },
     c = { "<cmd>ColorizerToggle<cr>", "Attach colorizer" },
     d = { "<cmd>bd<cr>", "Delete buffer" },
+    l = { "<cmd>bnext<cr>", "Next Buffer" },
+    h = { "<cmd>bprevious<cr>", "Next Buffer" },
     n = { "<cmd>enew<cr>", "Create new buffer" },
     s = { "<cmd>wa!<CR>", "Save" },
     t = { "<cmd>TSContextToggle<cr>", "Treesitter Context" },

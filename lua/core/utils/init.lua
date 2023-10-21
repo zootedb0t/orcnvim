@@ -76,4 +76,24 @@ function M.change_root_directory()
   vim.notify("Directory changed")
 end
 
+-- Enable lsp for only these filetypes
+function M.lsp_filetype()
+  return {
+    "c",
+    "cpp",
+    "css",
+    "haskell",
+    "html",
+    "javascript",
+    "lua",
+    "python",
+    "typescript",
+  }
+end
+
+-- Enable linting for only these filetypes
+function M.lint_filetype()
+  return { "python", "sh", "javascript", "typescript", "htmldjango" }
+end
+
 return M
