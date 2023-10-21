@@ -9,7 +9,7 @@
     <a href="https://github.com/zootedb0t/orcnvim/actions/workflows/luacheck.yml"><img alt="Luacheck" src="https://github.com/zootedb0t/orcnvim/actions/workflows/luacheck.yml/badge.svg" style="max-width:100%"></a>
 </p>
 
-![Screenshot_2023-10-15-09-06-47_1920x1080](https://github.com/zootedb0t/orcnvim/assets/62596687/a4e0de48-2bbe-4a53-861b-348c8e2e4cfb)
+![Screenshot_2023-10-21-10-40-54_1920x1080](https://github.com/zootedb0t/orcnvim/assets/62596687/c26bcfe8-1acb-4004-8483-3d4e06db265b)
 
 ![Screenshot_2023-05-02-12-02-38_](https://user-images.githubusercontent.com/62596687/235631968-191dcd01-aaa8-4063-9bc4-235436d68fa6.png)
 
