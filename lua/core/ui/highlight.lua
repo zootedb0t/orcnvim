@@ -4,8 +4,8 @@ local set_highlight = vim.api.nvim_set_hl
 
 function M.statusline_highlight()
   local colors = {
-    stl = get_highlight(0, { name = "Keyword" }),
-    stl_insert = get_highlight(0, { name = "Function" }),
+    stl = get_highlight(0, { name = "Function" }),
+    stl_insert = get_highlight(0, { name = "Keyword" }),
     stl_visual = get_highlight(0, { name = "@attribute", link = false }),
     stl_replace = get_highlight(0, { name = "Float" }),
     stl_terminal = get_highlight(0, { name = "Conditional" }),

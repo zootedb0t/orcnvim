@@ -15,7 +15,7 @@ local disable_statusline = {
 
 local function update_mode_colors()
   local current_mode = vim.api.nvim_get_mode().mode
-  local mode_color = "%#StatusLineAccent#"
+  local mode_color = ""
   if current_mode == "n" then
     mode_color = "%#StatusLineAccent#"
   elseif current_mode == "i" or current_mode == "ic" then
