@@ -1,37 +1,13 @@
 local mason = require("mason")
 local mason_lsp = require("mason-lspconfig")
+local capabilities = require("plugins.lsp.handlers").capabilities()
 local servers = {
   html = {},
   cssls = {},
   tsserver = {},
   clangd = {},
   pyright = {},
-  lua_ls = {
-    Lua = {
-      runtime = {
-        version = "LuaJIT",
-        path = (function()
-          local runtime_path = vim.split(package.path, ";")
-          table.insert(runtime_path, "lua/?.lua")
-          table.insert(runtime_path, "lua/?/init.lua")
-          return runtime_path
-        end)(),
-      },
-      diagnostics = {
-        globals = {
-          "vim",
-        },
-      },
-      workspace = {
-        maxPreload = 5000,
-        preloadFileSize = 10000,
-        library = {
-          vim.fn.expand("$VIMRUNTIME"),
-        },
-      },
-      hint = { enable = true },
-    },
-  },
+  lua_ls = {},
   hls = {},
 }
 
@@ -48,20 +24,55 @@ mason_lsp.setup({
   handlers = {
     function(servers_name)
       local opts = {
-        capabilities = require("plugins.lsp.handlers").capabilities(),
-        on_attach = require("plugins.lsp.handlers").on_attach,
-        on_new_config = function(config)
-          if servers_name == "clangd" then
-            config.cmd = {
-              "clangd",
-              "--offset-encoding=utf-16",
-            }
-          end
-        end,
-        settings = servers[servers_name],
+        capabilities = capabilities,
       }
-
       require("lspconfig")[servers_name].setup(opts)
+    end,
+    clangd = function()
+      require("lspconfig").clangd.setup({
+        capabilities = capabilities,
+        -- Prevents the 'multiple different client offset_encodings detected for buffer' warning.
+        offsetEncoding = { "utf-16" },
+      })
+      cmd = {
+        "clangd",
+        "--clang-tidy",
+        "--header-insertion=iwyu",
+        "--completion-style=detailed",
+        "--function-arg-placeholders",
+        "--fallback-style=none",
+      }
+    end,
+    lua_ls = function()
+      require("lspconfig").lua_ls.setup({
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            runtime = {
+              version = "LuaJIT",
+              path = (function()
+                local runtime_path = vim.split(package.path, ";")
+                table.insert(runtime_path, "lua/?.lua")
+                table.insert(runtime_path, "lua/?/init.lua")
+                return runtime_path
+              end)(),
+            },
+            diagnostics = {
+              globals = {
+                "vim",
+              },
+            },
+            workspace = {
+              maxPreload = 5000,
+              preloadFileSize = 10000,
+              library = {
+                vim.fn.expand("$VIMRUNTIME"),
+              },
+            },
+            hint = { enable = true },
+          },
+        },
+      })
     end,
   },
 })

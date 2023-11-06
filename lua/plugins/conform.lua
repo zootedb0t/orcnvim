@@ -12,7 +12,6 @@ function M.config()
       html = { "prettierd" },
       markdown = { "prettierd" },
       json = { "prettierd" },
-      ["*"] = { "trim_whitespace" },
       htmldjango = { "djlint" },
     },
   })
