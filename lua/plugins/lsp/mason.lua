@@ -30,18 +30,17 @@ mason_lsp.setup({
     end,
     clangd = function()
       require("lspconfig").clangd.setup({
+        cmd = {
+          "clangd",
+          "--clang-tidy",
+          "--header-insertion=iwyu",
+          "--completion-style=detailed",
+          "--function-arg-placeholders",
+          "--fallback-style=none",
+        },
         capabilities = capabilities,
-        -- Prevents the 'multiple different client offset_encodings detected for buffer' warning.
         offsetEncoding = { "utf-16" },
       })
-      cmd = {
-        "clangd",
-        "--clang-tidy",
-        "--header-insertion=iwyu",
-        "--completion-style=detailed",
-        "--function-arg-placeholders",
-        "--fallback-style=none",
-      }
     end,
     lua_ls = function()
       require("lspconfig").lua_ls.setup({
