@@ -11,12 +11,13 @@
 
 ![Screenshot_2023-10-21-10-40-54_1920x1080](https://github.com/zootedb0t/orcnvim/assets/62596687/c26bcfe8-1acb-4004-8483-3d4e06db265b)
 
-![Screenshot_2023-05-02-12-02-38_](https://user-images.githubusercontent.com/62596687/235631968-191dcd01-aaa8-4063-9bc4-235436d68fa6.png)
+![Screenshot_2023-11-09-07-13-41_1920x1080](https://github.com/zootedb0t/orcnvim/assets/62596687/481a9128-a540-428e-b083-725f21c4f4f2)
 
 ## :golf: Requirements
 
 - Latest [neovim-nightly](https://github.com/neovim/neovim/wiki/Building-Neovim).
 - `Node` for installing lsp-servers.
+- `deno` for [peek.nvim](https://github.com/toppair/peek.nvim).
 - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts/) for icons.
 - [mason.nvim](https://github.com/williamboman/mason.nvim) has several requirements for installing `lsp servers` like `npm`, `cargo` etc. Check full list [here](https://github.com/williamboman/mason.nvim#requirements).
 - [Tree-sitter-cli](https://github.com/tree-sitter/tree-sitter/tree/master/cli) install it using `npm` or `cargo`.
