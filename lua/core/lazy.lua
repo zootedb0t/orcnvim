@@ -63,7 +63,7 @@ local plugin = {
     "nvim-treesitter/nvim-treesitter-context",
     cmd = "TSContextToggle",
     config = function()
-      require("plugins.ts-context")
+      require("plugins.others").treesitter_context()
     end,
   },
 
@@ -291,11 +291,11 @@ local plugin = {
   },
 
   {
-    "iamcco/markdown-preview.nvim",
+    "toppair/peek.nvim",
     ft = "markdown",
-    build = "cd app && npm install",
-    init = function()
-      vim.g.mkdp_filetypes = { "markdown" }
+    build = "deno task --quiet build:fast",
+    config = function()
+      require("plugins.others").peek()
     end,
   },
 }

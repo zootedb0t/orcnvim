@@ -23,10 +23,9 @@ mason_lsp.setup({
   ensure_installed = vim.tbl_keys(servers),
   handlers = {
     function(servers_name)
-      local opts = {
+      require("lspconfig")[servers_name].setup({
         capabilities = capabilities,
-      }
-      require("lspconfig")[servers_name].setup(opts)
+      })
     end,
     clangd = function()
       require("lspconfig").clangd.setup({

@@ -4,54 +4,6 @@ local navic = require("nvim-navic")
 local methods = vim.lsp.protocol.Methods
 local map = vim.keymap.set
 
--- Mappings.
--- See `:help vim.lsp.*` for documentation on any of the below functions
-vim.api.nvim_create_autocmd("LspAttach", {
-  desc = "Configure LSP keymaps",
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    local bufnr = args.buf
-    if client then
-      if client.supports_method(methods.textDocument_codeAction) then
-        map({ "n", "v" }, "<localleader>ca", vim.lsp.buf.code_action, { desc = "Code actions", buffer = bufnr })
-      end
-
-      if client.supports_method(methods.textDocument_rename) then
-        map("n", "<localleader>rn", vim.lsp.buf.rename, { desc = "Rename", buffer = bufnr })
-      end
-
-      if client.supports_method(methods.textDocument_signatureHelp) then
-        map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = bufnr })
-      end
-
-      if client.supports_method(methods.textDocument_declaration) then
-        map("n", "gD", vim.lsp.buf.declaration, { desc = "Methods Declaration", buffer = bufnr })
-      end
-
-      if client.supports_method(methods.textDocument_definition) then
-        map("n", "gd", vim.lsp.buf.definition, { desc = "Methods Definition", buffer = bufnr })
-      end
-
-      if client.supports_method(methods.textDocument_implementation) then
-        map("n", "gi", vim.lsp.buf.implementation, { desc = "Implementation", buffer = bufnr })
-      end
-
-      if client.supports_method(methods.textDocument_typeDefinition) then
-        map("n", "<localleader>D", vim.lsp.buf.type_definition, { desc = "Type Definition", buffer = bufnr })
-      end
-
-      if client.supports_method(methods.textDocument_hover) then
-        map("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = bufnr })
-      end
-
-      map("n", "<localleader>d", vim.diagnostic.open_float, { desc = "Open Diagnostic Float Window" })
-      map("n", "[d", vim.diagnostic.goto_prev, { desc = "Goto previous diagnostic" })
-      map("n", "]d", vim.diagnostic.goto_next, { desc = "Goto next diagnostic" })
-      map("n", "<localleader>q", vim.diagnostic.setloclist, { desc = "Show diagnostic in quickfix list" })
-    end
-  end,
-})
-
 -- Highlight current word under cursor
 local function lsp_highlight(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
@@ -77,6 +29,21 @@ end
 -- local function disable_formatting(client)
 --   client.server_capabilities.documentFormattingProvider = false
 -- end
+
+local function on_attach(client, bufnr)
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
+  lsp_highlight(client, bufnr)
+  -- disable_formatting(client)
+end
+
+M.capabilities = function()
+  local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+  if status_ok then
+    return cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
+  end
+end
 
 M.setup = function()
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -128,19 +95,53 @@ M.setup = function()
   require("lspconfig.ui.windows").default_options.border = "single"
 end
 
-M.capabilities = function()
-  local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-  if status_ok then
-    return cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
-  end
-end
+vim.api.nvim_create_autocmd("LspAttach", {
+  desc = "Configure LSP On Attach",
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    local bufnr = args.buf
+    -- Mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    if client then
+      if client.supports_method(methods.textDocument_codeAction) then
+        map({ "n", "v" }, "<localleader>ca", vim.lsp.buf.code_action, { desc = "Code actions", buffer = bufnr })
+      end
 
-M.on_attach = function(client, bufnr)
-  if client.server_capabilities.documentSymbolProvider then
-    navic.attach(client, bufnr)
-  end
-  lsp_highlight(client, bufnr)
-  -- disable_formatting(client)
-end
+      if client.supports_method(methods.textDocument_rename) then
+        map("n", "<localleader>rn", vim.lsp.buf.rename, { desc = "Rename", buffer = bufnr })
+      end
+
+      if client.supports_method(methods.textDocument_signatureHelp) then
+        map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = bufnr })
+      end
+
+      if client.supports_method(methods.textDocument_declaration) then
+        map("n", "gD", vim.lsp.buf.declaration, { desc = "Methods Declaration", buffer = bufnr })
+      end
+
+      if client.supports_method(methods.textDocument_definition) then
+        map("n", "gd", vim.lsp.buf.definition, { desc = "Methods Definition", buffer = bufnr })
+      end
+
+      if client.supports_method(methods.textDocument_implementation) then
+        map("n", "gi", vim.lsp.buf.implementation, { desc = "Implementation", buffer = bufnr })
+      end
+
+      if client.supports_method(methods.textDocument_typeDefinition) then
+        map("n", "<localleader>D", vim.lsp.buf.type_definition, { desc = "Type Definition", buffer = bufnr })
+      end
+
+      if client.supports_method(methods.textDocument_hover) then
+        map("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = bufnr })
+      end
+
+      map("n", "<localleader>d", vim.diagnostic.open_float, { desc = "Open Diagnostic Float Window" })
+      map("n", "[d", vim.diagnostic.goto_prev, { desc = "Goto previous diagnostic" })
+      map("n", "]d", vim.diagnostic.goto_next, { desc = "Goto next diagnostic" })
+      map("n", "<localleader>q", vim.diagnostic.setloclist, { desc = "Show diagnostic in quickfix list" })
+    end
+    on_attach(client, bufnr)
+  end,
+})
 
 return M
