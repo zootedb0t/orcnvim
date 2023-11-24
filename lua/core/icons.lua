@@ -92,7 +92,7 @@ return {
     LineMiddle = "│",
     List = "",
     Lock = "",
-    Neovim = "",
+    Neovim = "",
     NewFile = "",
     Note = "",
     Package = "",
