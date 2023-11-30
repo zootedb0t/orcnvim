@@ -56,10 +56,10 @@ M.setup = function()
 
   -- Overide handlers
   local signs = {
-    Error = icon.diagnostics.BoldError,
-    Warn = icon.diagnostics.BoldWarning,
-    Info = icon.diagnostics.BoldInformation,
-    Hint = icon.diagnostics.BoldHint,
+    Error = icon.diagnostics.Error,
+    Warn = icon.diagnostics.Warning,
+    Info = icon.diagnostics.Information,
+    Hint = icon.diagnostics.Hint,
   }
   for type, symbol in pairs(signs) do
     local hl = "DiagnosticSign" .. type

@@ -143,22 +143,22 @@ local function diagnostics()
   if count["errors"] ~= 0 then
     table.insert(
       render_diag,
-      "%#DiagnosticError#" .. string.format("%s %s", icon.diagnostics.BoldError, count["errors"])
+      "%#DiagnosticError#" .. string.format("%s %s", icon.diagnostics.Error, count["errors"])
     )
   end
   if count["warnings"] ~= 0 then
     table.insert(
       render_diag,
-      "%#DiagnosticWarn#" .. string.format("%s %s", icon.diagnostics.BoldWarning, count["warnings"])
+      "%#DiagnosticWarn#" .. string.format("%s %s", icon.diagnostics.Warning, count["warnings"])
     )
   end
   if count["hints"] ~= 0 then
-    table.insert(render_diag, "%#DiagnosticInfo#" .. string.format("%s %s", icon.diagnostics.BoldHint, count["hints"]))
+    table.insert(render_diag, "%#DiagnosticInfo#" .. string.format("%s %s", icon.diagnostics.Hint, count["hints"]))
   end
   if count["info"] ~= 0 then
     table.insert(
       render_diag,
-      "%#DiagnosticWarn#" .. string.format("%s %s", icon.diagnostics.BoldInformation, count["info"])
+      "%#DiagnosticWarn#" .. string.format("%s %s", icon.diagnostics.Information, count["info"])
     )
   end
 

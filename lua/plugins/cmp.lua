@@ -1,7 +1,6 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
-local kind_icons = require("core.icons").kind
-local ELLIPSIS_CHAR = require("core.icons").ui.Ellipsis
+local icons = require("core.icons")
 local MAX_LABEL_WIDTH = 25
 
 local get_ws = function(max, len)
@@ -9,21 +8,21 @@ local get_ws = function(max, len)
 end
 
 -- Format for cmp popup menu to have fixed width
-local format = function(entry, item)
+local format = function(_, item)
   local content = item.abbr
-  item.kind = string.format("%s %s", kind_icons[item.kind], item.kind)
-  item.menu = ({
-    buffer = "[BUF]",
-    nvim_lsp = "[LSP]",
-    luasnip = "[SNIP]",
-    path = "[PATH]",
-  })[entry.source.name]
+  item.kind = string.format("%s %s", icons.kind[item.kind], item.kind)
+  -- item.menu = ({
+  --   buffer = "[buf]",
+  --   nvim_lsp = "[lsp]",
+  --   luasnip = "[snip]",
+  --   path = "[path]",
+  -- })[entry.source.name]
 
   -- #content gives size of string
   if #content > MAX_LABEL_WIDTH then
     -- Returns string Like |strpart()| but using character index (start form 0) and length instead
     -- of byte index and length.
-    item.abbr = vim.fn.strcharpart(content, 0, MAX_LABEL_WIDTH) .. ELLIPSIS_CHAR
+    item.abbr = vim.fn.strcharpart(content, 0, MAX_LABEL_WIDTH) .. icons.ui.Ellipsis
   else
     item.abbr = content .. get_ws(MAX_LABEL_WIDTH, #content)
   end
