@@ -35,40 +35,39 @@ end
 
 local get_gps = function()
   local status_ok_gps, gps = pcall(require, "nvim-navic")
-  gps.setup({
-    icons = {
-      File = icon.ui.File .. space,
-      Module = icon.kind.Module .. space,
-      Namespace = icon.kind.Namespace .. space,
-      Package = icon.kind.Package .. space,
-      Class = icon.kind.Class .. space,
-      Method = icon.kind.Method .. space,
-      Property = icon.kind.Property .. space,
-      Field = icon.kind.Field .. space,
-      Constructor = icon.kind.Constructor .. space,
-      Enum = icon.kind.Enum .. space,
-      Interface = icon.kind.Interface .. space,
-      Function = icon.kind.Function .. space,
-      Variable = icon.kind.Variable .. space,
-      Constant = icon.kind.Constant .. space,
-      String = icon.kind.String .. space,
-      Number = icon.kind.Number .. space,
-      Boolean = icon.kind.Boolean .. space,
-      Array = icon.kind.Array .. space,
-      Object = icon.kind.Object .. space,
-      Key = icon.kind.Key .. space,
-      Null = icon.kind.Null .. space,
-      EnumMember = icon.kind.EnumMember .. space,
-      Struct = icon.kind.Struct .. space,
-      Event = icon.kind.Event .. space,
-      Operator = icon.kind.Operator .. space,
-      TypeParameter = icon.kind.TypeParameter .. space,
-    },
-    highlight = true,
-    separator = icon.ui.ChevronRight .. space,
-  })
-  if not status_ok_gps then
-    return ""
+  if status_ok_gps then
+    gps.setup({
+      icons = {
+        File = icon.ui.File .. space,
+        Module = icon.kind.Module .. space,
+        Namespace = icon.kind.Namespace .. space,
+        Package = icon.kind.Package .. space,
+        Class = icon.kind.Class .. space,
+        Method = icon.kind.Method .. space,
+        Property = icon.kind.Property .. space,
+        Field = icon.kind.Field .. space,
+        Constructor = icon.kind.Constructor .. space,
+        Enum = icon.kind.Enum .. space,
+        Interface = icon.kind.Interface .. space,
+        Function = icon.kind.Function .. space,
+        Variable = icon.kind.Variable .. space,
+        Constant = icon.kind.Constant .. space,
+        String = icon.kind.String .. space,
+        Number = icon.kind.Number .. space,
+        Boolean = icon.kind.Boolean .. space,
+        Array = icon.kind.Array .. space,
+        Object = icon.kind.Object .. space,
+        Key = icon.kind.Key .. space,
+        Null = icon.kind.Null .. space,
+        EnumMember = icon.kind.EnumMember .. space,
+        Struct = icon.kind.Struct .. space,
+        Event = icon.kind.Event .. space,
+        Operator = icon.kind.Operator .. space,
+        TypeParameter = icon.kind.TypeParameter .. space,
+      },
+      highlight = true,
+      click = true,
+    })
   end
 
   local status_ok, gps_location = pcall(gps.get_location, {})
