@@ -96,4 +96,12 @@ function M.lint_filetype()
   return { "python", "sh", "javascript", "typescript", "htmldjango" }
 end
 
+function M.inlay_hint()
+  if vim.lsp.inlay_hint.is_enabled(0) then
+    vim.lsp.inlay_hint.enable(0, false)
+  else
+    vim.lsp.inlay_hint.enable(0, true)
+  end
+end
+
 return M

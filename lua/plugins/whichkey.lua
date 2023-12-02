@@ -106,7 +106,12 @@ local mappings = {
     name = icon.ui.Code .. " LSP",
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
     d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Current Buffer Diagnostics" },
-    h = { "<cmd>lua vim.lsp.inlay_hint(0)<cr>", "Toggle Inlay Hint" },
+    h = {
+      function()
+        require("core.utils").inlay_hint()
+      end,
+      "Toggle Inlay Hint",
+    },
     w = { "<cmd>Telescope diagnostics<cr>", "Show Workspace Diagnostics" },
     f = {
       function()
