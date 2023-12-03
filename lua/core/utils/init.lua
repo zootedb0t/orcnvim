@@ -97,11 +97,8 @@ function M.lint_filetype()
 end
 
 function M.inlay_hint()
-  if vim.lsp.inlay_hint.is_enabled(0) then
-    vim.lsp.inlay_hint.enable(0, false)
-  else
-    vim.lsp.inlay_hint.enable(0, true)
-  end
+  local inlay_hint_status = vim.lsp.inlay_hint.is_enabled(0)
+  vim.lsp.inlay_hint.enable(0, not inlay_hint_status)
 end
 
 return M
