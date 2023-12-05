@@ -96,6 +96,7 @@ function M.lint_filetype()
   return { "python", "sh", "javascript", "typescript", "htmldjango" }
 end
 
+-- Toggle Lsp-Inlay Hint
 function M.inlay_hint()
   local inlay_hint_status = vim.lsp.inlay_hint.is_enabled(0)
   vim.lsp.inlay_hint.enable(0, not inlay_hint_status)

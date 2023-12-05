@@ -87,11 +87,10 @@ end
 
 local function active()
   return table.concat({
-    "%#WinBar#",
     get_gps(),
     "%=",
     filename(),
-  }, " ")
+  }, "")
 end
 
 local function inactive()

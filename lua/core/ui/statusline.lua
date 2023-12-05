@@ -5,6 +5,7 @@ require("core.ui.highlight").statusline_highlight()
 local icon = require("core.icons")
 local is_empty = require("core.utils").isempty
 local is_match = require("core.utils").ismatch
+local devicon = require("core.utils").get_icons
 -- Add filetypes to the list for which you don't want statusline before unpack statement
 local disable_statusline = {
   "TelescopePrompt",
@@ -93,25 +94,26 @@ local function filename()
   end
 end
 
-local vcs = function()
+local git = function()
   local git_info = vim.b.gitsigns_status_dict
-  local render_vcs = {}
+  local git_icon = devicon("git", "")
+  local render_git = {}
 
   if is_empty(git_info) then
     return ""
   else
-    table.insert(render_vcs, "%#DevIconGitLogo#" .. string.format("%s %s", icon.git.Branch, git_info.head:upper()))
+    table.insert(render_git, "%#DevIconGitLogo#" .. string.format("%s %s", git_icon.icon, git_info.head))
     if not is_empty(git_info.added) then
-      table.insert(render_vcs, "%#GitSignsAdd#" .. string.format("%s %s", icon.git.LineAdded, git_info.added))
+      table.insert(render_git, "%#GitSignsAdd#" .. string.format("%s %s", icon.git.LineAdded, git_info.added))
     end
     if not is_empty(git_info.changed) then
-      table.insert(render_vcs, "%#GitSignsChange#" .. string.format("%s %s", icon.git.LineModified, git_info.changed))
+      table.insert(render_git, "%#GitSignsChange#" .. string.format("%s %s", icon.git.LineModified, git_info.changed))
     end
     if not is_empty(git_info.removed) then
-      table.insert(render_vcs, "%#GitSignsDelete#" .. string.format("%s %s", icon.git.LineRemoved, git_info.removed))
+      table.insert(render_git, "%#GitSignsDelete#" .. string.format("%s %s", icon.git.LineRemoved, git_info.removed))
     end
   end
-  return table.concat(render_vcs, " ") .. "%#Normal#"
+  return table.concat(render_git, " ") .. "%#Normal#"
 end
 
 local function lsp()
@@ -141,10 +143,7 @@ local function diagnostics()
   end
 
   if count["errors"] ~= 0 then
-    table.insert(
-      render_diag,
-      "%#DiagnosticError#" .. string.format("%s %s", icon.diagnostics.Error, count["errors"])
-    )
+    table.insert(render_diag, "%#DiagnosticError#" .. string.format("%s %s", icon.diagnostics.Error, count["errors"]))
   end
   if count["warnings"] ~= 0 then
     table.insert(
@@ -169,9 +168,9 @@ local function filetype()
   local fname = vim.fn.expand("%:t")
   local extension = vim.fn.expand("%:e")
   local ftype = vim.bo.filetype:upper()
-  local devicon = require("core.utils").get_icons(fname, extension)
-  vim.api.nvim_set_hl(0, "FileIcon", { fg = devicon.highlight })
-  return "%#FileIcon#" .. string.format("%s %s", devicon.icon, ftype)
+  local file_icon = devicon(fname, extension)
+  vim.api.nvim_set_hl(0, "FileIcon", { fg = file_icon.highlight })
+  return "%#FileIcon#" .. string.format("%s %s", file_icon.icon, ftype)
 end
 
 local function lineinfo()
@@ -198,7 +197,7 @@ end
 local function plugin_updates()
   local update_status = require("lazy.status").has_updates()
   if update_status then
-    return "%#Conditional#" .. require("lazy.status").updates()
+    return "%#Boolean#" .. require("lazy.status").updates()
   else
     return ""
   end
@@ -223,7 +222,7 @@ local function active()
         "%=",
         lsp(),
         "%=",
-        vcs(),
+        git(),
         filetype(),
         lineinfo(),
         searchcount(),
