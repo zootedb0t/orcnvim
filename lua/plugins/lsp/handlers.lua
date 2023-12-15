@@ -54,25 +54,24 @@ M.setup = function()
     border = "single",
   })
 
-  -- Overide handlers
+  -- Define signs-icons
   local signs = {
-    Error = icon.diagnostics.Error,
-    Warn = icon.diagnostics.Warning,
-    Info = icon.diagnostics.Information,
-    Hint = icon.diagnostics.Hint,
+    ERROR = icon.diagnostics.Error,
+    WARN = icon.diagnostics.Warning,
+    INFO = icon.diagnostics.Information,
+    HINT = icon.diagnostics.Hint,
   }
-  for type, symbol in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, {
-      text = symbol,
-      texthl = hl,
-      -- numhl = hl,
-    })
-  end
 
   vim.diagnostic.config({
     underline = false,
-    signs = true,
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = signs.ERROR,
+        [vim.diagnostic.severity.WARN] = signs.WARN,
+        [vim.diagnostic.severity.INFO] = signs.INFO,
+        [vim.diagnostic.severity.HINT] = signs.HINT,
+      },
+    },
     severity_sort = true,
     update_in_insert = false,
     virtual_text = false,
@@ -81,14 +80,8 @@ M.setup = function()
       border = "single",
       source = "if_many",
       prefix = function(diag)
-        local severity_icon = {
-          ERROR = signs.Error,
-          WARN = signs.Warn,
-          INFO = signs.Info,
-          HINT = signs.Hint,
-        }
         local severity = vim.diagnostic.severity[diag.severity]
-        return string.format(" %s ", severity_icon[severity]), "Diagnostic" .. severity
+        return string.format(" %s ", signs[severity]), "Diagnostic" .. severity
       end,
     },
   })

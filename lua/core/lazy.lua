@@ -21,7 +21,6 @@ local plugin = {
     opts = {
       option = {
         transparent = true,
-        bold = false,
       },
     },
   },
