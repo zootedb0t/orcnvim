@@ -54,8 +54,8 @@ M.setup = function()
     border = "single",
   })
 
-  -- Define signs-icons
-  local signs = {
+  -- Define lsp signs
+  local lsp_signs = {
     ERROR = icon.diagnostics.Error,
     WARN = icon.diagnostics.Warning,
     INFO = icon.diagnostics.Information,
@@ -66,10 +66,10 @@ M.setup = function()
     underline = false,
     signs = {
       text = {
-        [vim.diagnostic.severity.ERROR] = signs.ERROR,
-        [vim.diagnostic.severity.WARN] = signs.WARN,
-        [vim.diagnostic.severity.INFO] = signs.INFO,
-        [vim.diagnostic.severity.HINT] = signs.HINT,
+        lsp_signs.ERROR,
+        lsp_signs.WARN,
+        lsp_signs.INFO,
+        lsp_signs.HINT,
       },
     },
     severity_sort = true,
@@ -81,7 +81,7 @@ M.setup = function()
       source = "if_many",
       prefix = function(diag)
         local severity = vim.diagnostic.severity[diag.severity]
-        return string.format(" %s ", signs[severity]), "Diagnostic" .. severity
+        return string.format(" %s ", lsp_signs[severity]), "Diagnostic" .. severity
       end,
     },
   })
