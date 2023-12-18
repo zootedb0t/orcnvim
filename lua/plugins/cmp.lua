@@ -8,7 +8,7 @@ local get_ws = function(max, len)
 end
 
 -- Format for cmp popup menu to have fixed width
-local format = function(_, item)
+local menu_format = function(_, item)
   local content = item.abbr
   item.kind = string.format("%s %s", icons.kind[item.kind], item.kind)
   -- item.menu = ({
@@ -31,7 +31,7 @@ end
 
 cmp.setup({
   formatting = {
-    format = format,
+    format = menu_format,
   },
 
   snippet = {
@@ -89,13 +89,10 @@ cmp.setup({
   }),
 
   window = {
-    completion = cmp.config.window.bordered({
-      scrollbar = false,
+    completion = {
       winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel",
-      border = "single",
-    }),
-    documentation = cmp.config.window.bordered({
-      border = "single",
-    }),
+      scrollbar = false,
+      -- border = "single",
+    },
   },
 })

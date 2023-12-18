@@ -1,7 +1,7 @@
 local options = {
   opt = {
     clipboard = { "unnamedplus" }, -- Connection to the system clipboard
-    completeopt = { "menu", "menuone" }, -- Options for insert mode completion
+    completeopt = { "menu", "popup" }, -- Options for insert mode completion
     copyindent = true, -- Copy the previous indentation on autoindenting
     cursorline = true, -- Highlight the text line of the cursor
     cursorlineopt = "number", -- This looks better
