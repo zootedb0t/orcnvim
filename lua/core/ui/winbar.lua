@@ -23,6 +23,7 @@ local function filename()
       fileicon_hl.icon,
       fname,
       icon.ui.Pencil,
+      " ",
     }, " ")
   else
     return table.concat({

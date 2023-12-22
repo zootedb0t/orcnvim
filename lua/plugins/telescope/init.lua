@@ -6,8 +6,8 @@ local builtin = require("telescope.builtin")
 
 telescope.setup({
   defaults = {
-    prompt_prefix = string.format("%s ", icon.ui.Search),
-    selection_caret = string.format("%s ", icon.ui.ChevronRight),
+    prompt_prefix = icon.ui.Search .. " ",
+    selection_caret = icon.ui.ChevronRight .. " ",
     color_devicons = true,
     sorting_strategy = "ascending",
     vimgrep_arguments = {
@@ -79,4 +79,4 @@ telescope.setup({
 -- Extensions for telescope
 telescope.load_extension("fzf")
 telescope.load_extension("file_browser")
-telescope.load_extension("persisted") -- To load the telescope extension
+telescope.load_extension("persisted")

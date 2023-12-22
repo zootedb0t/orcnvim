@@ -90,7 +90,7 @@ local function filename()
   if is_empty(fname) then
     return ""
   else
-    return string.format("%s", fname)
+    return fname
   end
 end
 
@@ -113,14 +113,14 @@ local git = function()
       table.insert(render_git, "%#GitSignsDelete#" .. string.format("%s %s", icon.git.LineRemoved, git_info.removed))
     end
   end
-  return table.concat(render_git, " ") .. "%#Normal#"
+  -- return table.concat(render_git, " ") .. "%#Normal#"
+  return table.concat(render_git, " ")
 end
 
 local function lsp()
-  local names = {}
-  for _, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
-    table.insert(names, server.name)
-  end
+  local names = vim.tbl_map(function(server)
+    return server.name
+  end, vim.lsp.get_clients({ bufnr = 0 }))
   if #names > 0 then
     return "%#Conditional#" .. "[ " .. table.concat(names, " ") .. "]"
   else
@@ -161,7 +161,8 @@ local function diagnostics()
     )
   end
 
-  return table.concat(render_diag, " ") .. "%#Normal#"
+  -- return table.concat(render_diag, " ") .. "%#Normal#"
+  return table.concat(render_diag, " ")
 end
 
 local function filetype()
