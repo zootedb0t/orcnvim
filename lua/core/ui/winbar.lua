@@ -1,6 +1,6 @@
 local M = {}
 
--- Import highlights
+-- Import highlights, icons and functions
 local is_empty = require("core.utils").isempty
 local is_match = require("core.utils").ismatch
 local devicon = require("core.utils").get_icons
@@ -79,6 +79,7 @@ local get_gps = function()
   if not gps.is_available() or gps_location == "error" then
     return ""
   end
+
   if not is_empty(gps_location) then
     return gps_location
   else
@@ -95,11 +96,11 @@ local function active()
 end
 
 local function inactive()
-  return "%#WinBar#" .. ""
+  return "%#WinBar#"
 end
 
 local function file_explorer()
-  return table.concat({ "%#WinbarFile#", "%=", "File Tree", "%=" })
+  return "%#WinbarFile#%= File Tree%="
 end
 
 M.draw = function()

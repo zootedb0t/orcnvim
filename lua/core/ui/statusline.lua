@@ -1,6 +1,6 @@
 Statusline = {}
 
--- Import highlights
+-- Import highlights, icons and function
 require("core.ui.highlight").statusline_highlight()
 local icon = require("core.icons")
 local is_empty = require("core.utils").isempty
@@ -11,7 +11,7 @@ local disable_statusline = {
   "TelescopePrompt",
   "lazy",
   "NvimTree",
-  unpack(require("core.utils").disable()),
+  unpack(require("core.utils").disable() or {}),
 }
 
 local function update_mode_colors()
@@ -74,46 +74,40 @@ local modes = {
 
 local function mode()
   local current_mode = vim.api.nvim_get_mode().mode
-  if modes[current_mode] == nil then
-    return ""
-  else
-    return table.concat({
-      update_mode_colors(),
-      modes[current_mode],
-      "%#Normal#",
-    }, "")
-  end
+  local mode_text = modes[current_mode] or ""
+  return table.concat({
+    update_mode_colors(),
+    mode_text,
+    "%#Normal#",
+  })
 end
 
 local function filename()
   local fname = vim.fn.expand("%:t")
-  if is_empty(fname) then
-    return ""
-  else
-    return fname
-  end
+  return not is_empty(fname) and fname or ""
 end
 
 local git = function()
   local git_info = vim.b.gitsigns_status_dict
   local git_icon = devicon("git", "")
-  local render_git = {}
 
-  if is_empty(git_info) then
+  if not git_info or vim.tbl_isempty(git_info) then
     return ""
-  else
-    table.insert(render_git, "%#DevIconGitLogo#" .. string.format("%s %s", git_icon.icon, git_info.head))
-    if not is_empty(git_info.added) then
-      table.insert(render_git, "%#GitSignsAdd#" .. string.format("%s %s", icon.git.LineAdded, git_info.added))
-    end
-    if not is_empty(git_info.changed) then
-      table.insert(render_git, "%#GitSignsChange#" .. string.format("%s %s", icon.git.LineModified, git_info.changed))
-    end
-    if not is_empty(git_info.removed) then
-      table.insert(render_git, "%#GitSignsDelete#" .. string.format("%s %s", icon.git.LineRemoved, git_info.removed))
-    end
   end
-  -- return table.concat(render_git, " ") .. "%#Normal#"
+
+  local render_git = {
+    string.format("%%#DevIconGitLogo#%s %s", git_icon.icon, git_info.head),
+  }
+
+  if not is_empty(git_info.added) then
+    table.insert(render_git, string.format("%%#GitSignsAdd#%s %s", icon.git.LineAdded, git_info.added))
+  end
+  if not is_empty(git_info.changed) then
+    table.insert(render_git, string.format("%%#GitSignsChange#%s %s", icon.git.LineModified, git_info.changed))
+  end
+  if not is_empty(git_info.removed) then
+    table.insert(render_git, string.format("%%#GitSignsDelete#%s %s", icon.git.LineRemoved, git_info.removed))
+  end
   return table.concat(render_git, " ")
 end
 
@@ -121,11 +115,8 @@ local function lsp()
   local names = vim.tbl_map(function(server)
     return server.name
   end, vim.lsp.get_clients({ bufnr = 0 }))
-  if #names > 0 then
-    return "%#Conditional#" .. "[ " .. table.concat(names, " ") .. "]"
-  else
-    return ""
-  end
+
+  return #names > 0 and "%#Conditional#" .. "[ " .. table.concat(names, " ") .. "]" or ""
 end
 
 local function diagnostics()
@@ -142,26 +133,18 @@ local function diagnostics()
     count[k] = vim.tbl_count(vim.diagnostic.get(0, { severity = level }))
   end
 
-  if count["errors"] ~= 0 then
-    table.insert(render_diag, "%#DiagnosticError#" .. string.format("%s %s", icon.diagnostics.Error, count["errors"]))
+  if count["errors"] > 0 then
+    table.insert(render_diag, string.format("%%#DiagnosticError#%s %s", icon.diagnostics.Error, count["errors"]))
   end
-  if count["warnings"] ~= 0 then
-    table.insert(
-      render_diag,
-      "%#DiagnosticWarn#" .. string.format("%s %s", icon.diagnostics.Warning, count["warnings"])
-    )
+  if count["warnings"] > 0 then
+    table.insert(render_diag, string.format("%%#DiagnosticWarn#%s %s", icon.diagnostics.Warning, count["warnings"]))
   end
-  if count["hints"] ~= 0 then
-    table.insert(render_diag, "%#DiagnosticInfo#" .. string.format("%s %s", icon.diagnostics.Hint, count["hints"]))
+  if count["hints"] > 0 then
+    table.insert(render_diag, string.format("%%#DiagnosticInfo#%s %s", icon.diagnostics.Hint, count["hints"]))
   end
-  if count["info"] ~= 0 then
-    table.insert(
-      render_diag,
-      "%#DiagnosticWarn#" .. string.format("%s %s", icon.diagnostics.Information, count["info"])
-    )
+  if count["info"] > 0 then
+    table.insert(render_diag, string.format("%%#DiagnosticWarn#%s %s", icon.diagnostics.Information, count["info"]))
   end
-
-  -- return table.concat(render_diag, " ") .. "%#Normal#"
   return table.concat(render_diag, " ")
 end
 
@@ -171,11 +154,11 @@ local function filetype()
   local ftype = vim.bo.filetype:upper()
   local file_icon = devicon(fname, extension)
   vim.api.nvim_set_hl(0, "FileIcon", { fg = file_icon.highlight })
-  return "%#FileIcon#" .. string.format("%s %s", file_icon.icon, ftype)
+  return string.format("%%#FileIcon#%s %s", file_icon.icon, ftype)
 end
 
 local function lineinfo()
-  return "%#Define#" .. "%P %l:%c"
+  return "%#Define#%P %l:%c"
 end
 
 -- local function scrollbar()
@@ -186,22 +169,14 @@ end
 -- end
 
 local function searchcount()
-  if vim.v.hlsearch == 0 then
-    return ""
-  end
-
   local result = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
   local denominator = math.min(result.total, result.maxcount)
-  return "%#Type#" .. string.format("󰱽 [%d/%d]", result.current, denominator)
+  return vim.v.hlsearch > 0 and string.format("%%#Type#󰱽 [%d/%d]", result.current, denominator) or ""
 end
 
 local function plugin_updates()
-  local update_status = require("lazy.status").has_updates()
-  if update_status then
-    return "%#Boolean#" .. require("lazy.status").updates()
-  else
-    return ""
-  end
+  local lazy_info = require("lazy.status")
+  return lazy_info.has_updates() and "%#Boolean#" .. lazy_info.updates() or ""
 end
 
 local function active()
@@ -212,6 +187,7 @@ local function active()
   else
     winwidth = vim.api.nvim_win_get_width(0)
   end
+
   if winwidth >= 90 then
     return table.concat(
       vim.tbl_filter(function(val)
@@ -253,11 +229,7 @@ end
 
 function Statusline.draw()
   local buffer_type = vim.bo.filetype
-  if is_match(disable_statusline, buffer_type) then
-    return inactive()
-  else
-    return active()
-  end
+  return is_match(disable_statusline, buffer_type) and inactive() or active()
 end
 
 return Statusline
