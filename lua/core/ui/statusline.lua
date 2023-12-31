@@ -99,15 +99,15 @@ local git = function()
     string.format("%%#DevIconGitLogo#%s %s", git_icon.icon, git_info.head),
   }
 
-  if not is_empty(git_info.added) then
-    table.insert(render_git, string.format("%%#GitSignsAdd#%s %s", icon.git.LineAdded, git_info.added))
+  local function addGitHighlight(highlightGroup, iconValue, infoType)
+    if not is_empty(infoType) then
+      table.insert(render_git, string.format("%%#%s#%s %s", highlightGroup, iconValue, infoType))
+    end
   end
-  if not is_empty(git_info.changed) then
-    table.insert(render_git, string.format("%%#GitSignsChange#%s %s", icon.git.LineModified, git_info.changed))
-  end
-  if not is_empty(git_info.removed) then
-    table.insert(render_git, string.format("%%#GitSignsDelete#%s %s", icon.git.LineRemoved, git_info.removed))
-  end
+
+  addGitHighlight("GitSignsAdd", icon.git.LineAdded, git_info.added)
+  addGitHighlight("GitSignsChange", icon.git.LineModified, git_info.changed)
+  addGitHighlight("GitSignsDelete", icon.git.LineRemoved, git_info.removed)
   return table.concat(render_git, " ")
 end
 
@@ -133,18 +133,16 @@ local function diagnostics()
     count[k] = vim.tbl_count(vim.diagnostic.get(0, { severity = level }))
   end
 
-  if count["errors"] > 0 then
-    table.insert(render_diag, string.format("%%#DiagnosticError#%s %s", icon.diagnostics.Error, count["errors"]))
+  local function diagnosticCount(highlightGroup, iconValue, type)
+    if count[type] > 0 then
+      table.insert(render_diag, string.format("%%#%s#%s %s", highlightGroup, iconValue, count[type]))
+    end
   end
-  if count["warnings"] > 0 then
-    table.insert(render_diag, string.format("%%#DiagnosticWarn#%s %s", icon.diagnostics.Warning, count["warnings"]))
-  end
-  if count["hints"] > 0 then
-    table.insert(render_diag, string.format("%%#DiagnosticInfo#%s %s", icon.diagnostics.Hint, count["hints"]))
-  end
-  if count["info"] > 0 then
-    table.insert(render_diag, string.format("%%#DiagnosticWarn#%s %s", icon.diagnostics.Information, count["info"]))
-  end
+
+  diagnosticCount("DiagnosticError", icon.diagnostics.Error, "errors")
+  diagnosticCount("DiagnosticWarn", icon.diagnostics.Warning, "warnings")
+  diagnosticCount("DiagnosticHint", icon.diagnostics.Hint, "hints")
+  diagnosticCount("DiagnosticWarn", icon.diagnostics.Information, "info")
   return table.concat(render_diag, " ")
 end
 
