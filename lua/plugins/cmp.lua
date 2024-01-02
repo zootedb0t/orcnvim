@@ -92,7 +92,7 @@ cmp.setup({
     completion = {
       winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel",
       scrollbar = false,
-      -- border = "single",
+      border = "single",
     },
   },
 })

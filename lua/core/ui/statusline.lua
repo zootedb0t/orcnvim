@@ -178,47 +178,37 @@ local function plugin_updates()
 end
 
 local function active()
-  local winwidth
-
-  if vim.o.laststatus == 3 then
-    winwidth = vim.o.columns
-  else
-    winwidth = vim.api.nvim_win_get_width(0)
-  end
-
+  local parts
+  local winwidth = vim.o.laststatus == 3 and vim.o.columns or vim.api.nvim_win_get_width(0)
   if winwidth >= 90 then
-    return table.concat(
-      vim.tbl_filter(function(val)
-        return not is_empty(val)
-      end, {
-        mode(),
-        filename(),
-        diagnostics(),
-        "%=",
-        lsp(),
-        "%=",
-        git(),
-        filetype(),
-        lineinfo(),
-        searchcount(),
-        plugin_updates(),
-      }),
-      " "
-    )
+    parts = {
+      mode(),
+      filename(),
+      diagnostics(),
+      "%=",
+      lsp(),
+      "%=",
+      git(),
+      filetype(),
+      lineinfo(),
+      searchcount(),
+      plugin_updates(),
+    }
   else
-    return table.concat(
-      vim.tbl_filter(function(val)
-        return not is_empty(val)
-      end, {
-        mode(),
-        diagnostics(),
-        "%=",
-        searchcount(),
-        lineinfo(),
-      }),
-      " "
-    )
+    parts = {
+      mode(),
+      diagnostics(),
+      "%=",
+      searchcount(),
+      lineinfo(),
+    }
   end
+  return table.concat(
+    vim.tbl_filter(function(val)
+      return not is_empty(val)
+    end, parts),
+    " "
+  )
 end
 
 local function inactive()
