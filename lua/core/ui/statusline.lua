@@ -120,30 +120,24 @@ local function lsp()
 end
 
 local function diagnostics()
-  local count = {}
-  local render_diag = {}
-  local levels = {
-    errors = "Error",
-    warnings = "Warn",
-    info = "Info",
-    hints = "Hint",
-  }
+  local renderDiagnostics = {}
+  local severity = vim.diagnostic.severity
+  local buffer_diagnostic = vim.diagnostic.count(0)
 
-  for k, level in pairs(levels) do
-    count[k] = vim.tbl_count(vim.diagnostic.get(0, { severity = level }))
-  end
-
-  local function diagnosticCount(highlightGroup, iconValue, type)
-    if count[type] > 0 then
-      table.insert(render_diag, string.format("%%#%s#%s %s", highlightGroup, iconValue, count[type]))
+  local function diagnosticHighlight(highlightGroup, iconValue, type)
+    if not is_empty(buffer_diagnostic[type]) then
+      table.insert(
+        renderDiagnostics,
+        string.format("%%#%s#%s %s", highlightGroup, iconValue, buffer_diagnostic[type] or "")
+      )
     end
   end
 
-  diagnosticCount("DiagnosticError", icon.diagnostics.Error, "errors")
-  diagnosticCount("DiagnosticWarn", icon.diagnostics.Warning, "warnings")
-  diagnosticCount("DiagnosticHint", icon.diagnostics.Hint, "hints")
-  diagnosticCount("DiagnosticWarn", icon.diagnostics.Information, "info")
-  return table.concat(render_diag, " ")
+  diagnosticHighlight("DiagnosticError", icon.diagnostics.Error, severity.ERROR)
+  diagnosticHighlight("DiagnosticWarn", icon.diagnostics.Warning, severity.WARN)
+  diagnosticHighlight("DiagnosticHint", icon.diagnostics.Hint, severity.HINT)
+  diagnosticHighlight("DiagnosticInfo", icon.diagnostics.Information, severity.INFO)
+  return table.concat(renderDiagnostics, " ")
 end
 
 local function filetype()
