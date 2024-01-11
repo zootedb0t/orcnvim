@@ -133,11 +133,15 @@ local function diagnostics()
     end
   end
 
-  diagnosticHighlight("DiagnosticError", icon.diagnostics.Error, severity.ERROR)
-  diagnosticHighlight("DiagnosticWarn", icon.diagnostics.Warning, severity.WARN)
-  diagnosticHighlight("DiagnosticHint", icon.diagnostics.Hint, severity.HINT)
-  diagnosticHighlight("DiagnosticInfo", icon.diagnostics.Information, severity.INFO)
-  return table.concat(renderDiagnostics, " ")
+  if buffer_diagnostic == nil then
+    return ""
+  else
+    diagnosticHighlight("DiagnosticError", icon.diagnostics.Error, severity.ERROR)
+    diagnosticHighlight("DiagnosticWarn", icon.diagnostics.Warning, severity.WARN)
+    diagnosticHighlight("DiagnosticHint", icon.diagnostics.Hint, severity.HINT)
+    diagnosticHighlight("DiagnosticInfo", icon.diagnostics.Information, severity.INFO)
+    return table.concat(renderDiagnostics, " ")
+  end
 end
 
 local function filetype()

@@ -21,6 +21,7 @@ if vim.g.transparent_nvim then
         "VertSplit",
         "FloatBorder",
         "LineNr",
+        "WinBar",
       }
       for _, name in ipairs(hl_group) do
         vim.cmd(string.format("highlight %s ctermbg=none guibg=none", name))
@@ -30,4 +31,4 @@ if vim.g.transparent_nvim then
 end
 
 -- Setting colorscheme
-vim.cmd("colorscheme citruszest")
+vim.cmd.colorscheme "citruszest"

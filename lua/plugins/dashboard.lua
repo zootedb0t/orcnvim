@@ -1,4 +1,5 @@
 local icons = require("core.icons")
+local oogway = require("oogway")
 local headers = {
   orcnvim = [[
  ██████╗ ██████╗  ██████╗███╗   ██╗██╗   ██╗██╗███╗   ███╗
@@ -19,7 +20,7 @@ local headers = {
   ]],
 }
 
-local logo = string.rep("\n", 2) .. headers.orcnvim_new .. "\n"
+local logo = string.rep("\n", 1) .. headers.orcnvim_new .. "\n"
 
 local db_config = {
   theme = "doom",
@@ -79,7 +80,8 @@ local db_config = {
     },
     footer = function()
       return {
-        os.date("󱑎 %H:%M \t 󰃭 %a,%d %b "),
+        -- os.date("󱑎 %H:%M \t 󰃭 %a,%d %b "),
+        oogway.what_is_your_wisdom(),
         icons.ui.Neovim .. " " .. vim.version().major .. "." .. vim.version().minor .. "-" .. vim.version().prerelease,
       }
     end,
