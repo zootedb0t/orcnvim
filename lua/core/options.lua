@@ -49,7 +49,7 @@ local options = {
     foldlevelstart = 99,
     foldmethod = "expr",
     foldexpr = "v:lua.vim.treesitter.foldexpr()",
-    foldtext = "v:lua.vim.treesitter.foldtext()",
+    foldtext = "",
     smoothscroll = true,
   },
 
