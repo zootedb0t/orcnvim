@@ -26,6 +26,7 @@ require("nvim-treesitter.configs").setup({
     "fish",
     "vimdoc",
     "haskell",
+    "hyprlang",
   },
   autotag = {
     enable = true,
