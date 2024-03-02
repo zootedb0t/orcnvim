@@ -29,20 +29,6 @@ mason_lsp.setup({
         capabilities = capabilities,
       })
     end,
-    clangd = function()
-      require("lspconfig").clangd.setup({
-        cmd = {
-          "clangd",
-          "--clang-tidy",
-          "--header-insertion=iwyu",
-          "--completion-style=detailed",
-          "--function-arg-placeholders",
-          "--fallback-style=none",
-        },
-        capabilities = capabilities,
-        offsetEncoding = { "utf-16" },
-      })
-    end,
     lua_ls = function()
       require("lspconfig").lua_ls.setup({
         capabilities = capabilities,
