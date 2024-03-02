@@ -88,12 +88,13 @@ function M.lsp_filetype()
     "lua",
     "python",
     "typescript",
+    "sh",
   }
 end
 
 -- Enable linting for only these filetypes
 function M.lint_filetype()
-  return { "python", "sh", "javascript", "typescript", "htmldjango" }
+  return { "python", "htmldjango" }
 end
 
 -- Toggle Lsp-Inlay Hint

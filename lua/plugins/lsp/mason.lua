@@ -9,6 +9,8 @@ local servers = {
   pyright = {},
   lua_ls = {},
   hls = {},
+  eslint = {},
+  bashls = {},
 }
 
 mason.setup({
