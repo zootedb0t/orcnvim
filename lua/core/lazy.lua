@@ -192,9 +192,6 @@ local plugin = {
     config = function()
       require("plugins.dashboard")
     end,
-    dependencies = {
-      "0x5a4/oogway.nvim",
-    },
   },
 
   {
