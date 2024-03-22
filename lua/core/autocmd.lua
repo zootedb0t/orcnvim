@@ -9,13 +9,12 @@ cmd("TextYankPost", {
 })
 
 -- Fixing cursor
-cmd("VimLeave", {
-  pattern = "*",
-  callback = function()
-    -- vim.opt.guicursor = vim.opt.guicursor + { "a:ver25-blink100" }  -- Verical cursor
-    vim.opt.guicursor = vim.opt.guicursor + { "a:block-blink100" } -- Block cursor
-  end,
-})
+-- cmd("VimLeave", {
+--   pattern = "*",
+--   callback = function()
+--     vim.opt.guicursor = vim.opt.guicursor + { "a:block-blink100" } -- Block cursor
+--   end,
+-- })
 
 -- Don't continue comments
 cmd("BufEnter", {
