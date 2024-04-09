@@ -1,5 +1,4 @@
 local cmp = require("cmp")
-local luasnip = require("luasnip")
 local icons = require("core.icons")
 local MAX_LABEL_WIDTH = 25
 
@@ -14,7 +13,8 @@ local menu_format = function(_, item)
   -- item.menu = ({
   --   buffer = "[buf]",
   --   nvim_lsp = "[lsp]",
-  --   luasnip = "[snip]",
+  -- 	 luasnip = "[snip]",
+  --   snippets = "[snip]",
   --   path = "[path]",
   -- })[entry.source.name]
 
@@ -36,8 +36,14 @@ cmp.setup({
 
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      vim.snippet.expand(args.body)
     end,
+  },
+
+  view = {
+    entries = {
+      follow_cursor = true,
+    },
   },
 
   mapping = {
@@ -56,8 +62,8 @@ cmp.setup({
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif require("luasnip").expand_or_jumpable() then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+      elseif vim.snippet.jumpable(1) then
+        vim.snippet.jump(1)
       else
         fallback()
       end
@@ -69,8 +75,8 @@ cmp.setup({
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif require("luasnip").jumpable(-1) then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+      elseif vim.snippet.jumpable(-1) then
+        vim.snippet.jump(-1)
       else
         fallback()
       end
@@ -82,7 +88,7 @@ cmp.setup({
 
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
-    { name = "luasnip" },
+    { name = "snippets" },
     { name = "buffer" },
     { name = "path" },
     { name = "nvim_lsp_signature_help" },

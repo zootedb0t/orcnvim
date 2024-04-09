@@ -138,17 +138,6 @@ local plugin = {
   },
 
   {
-    "L3MON4D3/LuaSnip",
-    lazy = true,
-    config = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
-    end,
-    dependencies = {
-      "rafamadriz/friendly-snippets",
-    },
-  },
-
-  {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
     opts = {},
@@ -297,6 +286,16 @@ local plugin = {
     config = function()
       require("plugins.others").peek()
     end,
+  },
+
+  {
+    "garymjr/nvim-snippets",
+    opts = {
+      friendly_snippets = true,
+    },
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+    },
   },
 }
 

@@ -77,7 +77,7 @@ local function mode()
   local mode_text = modes[current_mode] or ""
   return table.concat({
     update_mode_colors(),
-    mode_text,
+    icon.ui.Neovim .. ' ' .. mode_text,
     "%#Normal#",
   })
 end

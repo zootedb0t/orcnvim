@@ -67,6 +67,7 @@ local get_gps = function()
         TypeParameter = icon.kind.TypeParameter .. space,
       },
       highlight = true,
+      separator = space .. icon.ui.BoldDividerRight .. space,
       click = true,
     })
   end
