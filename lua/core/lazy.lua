@@ -36,16 +36,6 @@ local plugin = {
   -- },
 
   {
-    "numToStr/Comment.nvim",
-    keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
-    opts = function()
-      return {
-        ignore = "^$",
-      }
-    end,
-  },
-
-  {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = "VeryLazy",
@@ -290,6 +280,7 @@ local plugin = {
 
   {
     "garymjr/nvim-snippets",
+    lazy = true,
     opts = {
       friendly_snippets = true,
     },
