@@ -76,7 +76,6 @@ M.setup = function()
     update_in_insert = false,
     virtual_text = false,
     float = {
-      focusable = true,
       border = "single",
       source = "if_many",
       prefix = function(diag)
