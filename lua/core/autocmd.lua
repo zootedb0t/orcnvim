@@ -35,7 +35,7 @@ cmd("VimResized", {
 cmd("BufEnter", {
   pattern = "*.rasi",
   callback = function()
-    vim.diagnostic.enable(0, false)
+    vim.diagnostic.enable(false, { bufnr = 0 })
   end,
   desc = "No Lsp error for rofi config",
 })

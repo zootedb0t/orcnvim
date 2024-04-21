@@ -77,7 +77,7 @@ local function mode()
   local mode_text = modes[current_mode] or ""
   return table.concat({
     update_mode_colors(),
-    icon.ui.Neovim .. ' ' .. mode_text,
+    icon.ui.Neovim .. " " .. mode_text,
     "%#Normal#",
   })
 end
@@ -133,7 +133,7 @@ local function diagnostics()
     end
   end
 
-  if buffer_diagnostic == nil then
+  if buffer_diagnostic == nil or not vim.diagnostic.is_enabled({ bufnr = 0 }) then
     return ""
   else
     diagnosticHighlight("DiagnosticError", icon.diagnostics.Error, severity.ERROR)
