@@ -7,7 +7,7 @@ function M.statusline_highlight()
     stl = get_highlight(0, { name = "Function" }),
     stl_insert = get_highlight(0, { name = "Keyword" }),
     stl_visual = get_highlight(0, { name = "@attribute", link = false }),
-    stl_replace = get_highlight(0, { name = "Float" }),
+    stl_replace = get_highlight(0, { name = "@keyword.function" }),
     stl_terminal = get_highlight(0, { name = "Conditional" }),
     stl_cmd = get_highlight(0, { name = "Boolean" }),
   }

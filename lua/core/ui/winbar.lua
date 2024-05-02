@@ -22,8 +22,7 @@ local function filename()
       "%#FileIconWinBar#",
       fileicon_hl.icon,
       fname,
-      icon.ui.Pencil,
-      " ",
+      icon.ui.Pencil .. " ",
     }, " ")
   else
     return table.concat({

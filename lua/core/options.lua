@@ -22,7 +22,6 @@ local options = {
     signcolumn = "yes", -- Always show the sign column
     guicursor = vim.opt.guicursor + { "a:blinkon100" }, -- Fix blinking cursor
     smartcase = true, -- Case sensitivie searching
-    grepprg = "rg --hidden --vimgrep --smart-case --", -- Replace Vimgrep with Ripgrep   hlsearch = true,
     splitbelow = true, -- Splitting a new window below the current one
     splitright = true, -- Splitting a new window at the right of the current one
     splitkeep = "screen", -- Maintain code view when splitting

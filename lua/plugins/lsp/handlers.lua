@@ -95,41 +95,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     if client then
-      if client.supports_method(methods.textDocument_codeAction) then
-        map({ "n", "v" }, "<localleader>ca", vim.lsp.buf.code_action, { desc = "Code actions", buffer = bufnr })
-      end
-
-      if client.supports_method(methods.textDocument_rename) then
-        map("n", "<localleader>rn", vim.lsp.buf.rename, { desc = "Rename", buffer = bufnr })
-      end
-
-      if client.supports_method(methods.textDocument_signatureHelp) then
-        map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = bufnr })
-      end
-
-      if client.supports_method(methods.textDocument_declaration) then
-        map("n", "gD", vim.lsp.buf.declaration, { desc = "Methods Declaration", buffer = bufnr })
-      end
-
-      if client.supports_method(methods.textDocument_definition) then
-        map("n", "gd", vim.lsp.buf.definition, { desc = "Methods Definition", buffer = bufnr })
-      end
-
-      if client.supports_method(methods.textDocument_implementation) then
-        map("n", "gi", vim.lsp.buf.implementation, { desc = "Implementation", buffer = bufnr })
-      end
-
       if client.supports_method(methods.textDocument_typeDefinition) then
         map("n", "<localleader>D", vim.lsp.buf.type_definition, { desc = "Type Definition", buffer = bufnr })
       end
 
-      if client.supports_method(methods.textDocument_hover) then
-        map("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = bufnr })
-      end
-
-      map("n", "<localleader>d", vim.diagnostic.open_float, { desc = "Open Diagnostic Float Window" })
-      map("n", "[d", vim.diagnostic.goto_prev, { desc = "Goto previous diagnostic" })
-      map("n", "]d", vim.diagnostic.goto_next, { desc = "Goto next diagnostic" })
       map("n", "<localleader>q", vim.diagnostic.setloclist, { desc = "Show diagnostic in quickfix list" })
     end
     on_attach(client, bufnr)
