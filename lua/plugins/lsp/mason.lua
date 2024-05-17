@@ -8,7 +8,7 @@ local servers = {
   clangd = {},
   pyright = {},
   lua_ls = {},
-  hls = {},
+  -- hls = {},
   eslint = {},
   bashls = {},
 }

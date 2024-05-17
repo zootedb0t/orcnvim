@@ -269,14 +269,14 @@ local plugin = {
     },
   },
 
-  {
-    "toppair/peek.nvim",
-    ft = "markdown",
-    build = "deno task --quiet build:fast",
-    config = function()
-      require("plugins.others").peek()
-    end,
-  },
+--  {
+--    "toppair/peek.nvim",
+--   ft = "markdown",
+--    build = "deno task --quiet build:fast",
+--    config = function()
+--      require("plugins.others").peek()
+--    end,
+--  },
 
   {
     "garymjr/nvim-snippets",
