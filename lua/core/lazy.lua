@@ -150,15 +150,9 @@ local plugin = {
   },
 
   {
-    "NvChad/nvim-colorizer.lua",
-    cmd = "ColorizerToggle",
-    opts = function()
-      return {
-        user_default_options = {
-          names = false,
-        },
-      }
-    end,
+    "brenoprata10/nvim-highlight-colors",
+    lazy = true,
+    opts = {},
   },
 
   { "nvim-tree/nvim-web-devicons", lazy = true },
@@ -269,14 +263,14 @@ local plugin = {
     },
   },
 
---  {
---    "toppair/peek.nvim",
---   ft = "markdown",
---    build = "deno task --quiet build:fast",
---    config = function()
---      require("plugins.others").peek()
---    end,
---  },
+  --  {
+  --    "toppair/peek.nvim",
+  --   ft = "markdown",
+  --    build = "deno task --quiet build:fast",
+  --    config = function()
+  --      require("plugins.others").peek()
+  --    end,
+  --  },
 
   {
     "garymjr/nvim-snippets",

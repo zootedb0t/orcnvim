@@ -85,7 +85,12 @@ local mappings = {
   b = {
     name = icon.ui.File .. " Buffers",
     b = { "<cmd>Telescope buffers<cr>", "Buffers" },
-    c = { "<cmd>ColorizerToggle<cr>", "Attach colorizer" },
+    c = {
+      function()
+        require("nvim-highlight-colors").toggle()
+      end,
+      "Toggle color highlight",
+    },
     d = { "<cmd>bd<cr>", "Delete buffer" },
     l = { "<cmd>bnext<cr>", "Next Buffer" },
     h = { "<cmd>bprevious<cr>", "Next Buffer" },
