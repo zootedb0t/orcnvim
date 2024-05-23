@@ -165,9 +165,11 @@ end
 -- end
 
 local function searchcount()
-  local result = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
-  local denominator = math.min(result.total, result.maxcount)
-  return vim.v.hlsearch > 0 and string.format("%%#Type#󰱽 [%d/%d]", result.current, denominator) or ""
+  if vim.v.hlsearch > 0 then
+    local result = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
+    local denominator = math.min(result.total or 0, result.maxcount or 0)
+    return string.format("%%#Type#󰱽 [%d/%d]", result.current, denominator)
+  end
 end
 
 local function plugin_updates()
@@ -197,7 +199,7 @@ local function active()
       mode(),
       diagnostics(),
       "%=",
-      searchcount(),
+      -- searchcount(),
       lineinfo(),
     }
   end

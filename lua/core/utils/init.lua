@@ -82,7 +82,7 @@ function M.lsp_filetype()
     "c",
     "cpp",
     "css",
-    "haskell",
+    -- "haskell",
     "html",
     "javascript",
     "lua",

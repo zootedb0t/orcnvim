@@ -90,8 +90,8 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "Configure LSP On Attach",
   callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
     local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     if client then
