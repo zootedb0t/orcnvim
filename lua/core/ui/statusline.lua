@@ -168,13 +168,61 @@ local function searchcount()
   if vim.v.hlsearch > 0 then
     local result = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
     local denominator = math.min(result.total or 0, result.maxcount or 0)
-    return string.format("%%#Type#󰱽 [%d/%d]", result.current, denominator)
+    return string.format("%%#Type#%s [%d/%d]", icon.ui.Search, result.current, denominator)
   end
 end
 
 local function plugin_updates()
   local lazy_info = require("lazy.status")
   return lazy_info.has_updates() and "%#Boolean#" .. lazy_info.updates() or ""
+end
+
+local progress_status = {
+  client = nil,
+  kind = nil,
+  title = nil,
+  percentage = nil,
+}
+
+local function lsp_progress_component()
+  vim.api.nvim_create_autocmd("LspProgress", {
+    group = vim.api.nvim_create_augroup("lsp-progress/statusline", { clear = true }),
+    desc = "Update LSP progress in statusline",
+    pattern = { "begin", "end", "report" },
+    callback = function(args)
+      if not args.data then
+        return
+      end
+
+      progress_status = {
+        client = vim.lsp.get_client_by_id(args.data.client_id).name,
+        kind = args.data.params.value.kind,
+        title = args.data.params.value.title,
+        percentage = args.data.params.value.percentage,
+      }
+
+      if progress_status.kind == "end" then
+        progress_status.title = nil
+        vim.defer_fn(function()
+          vim.cmd.redrawstatus()
+        end, 1000)
+      else
+        vim.cmd.redrawstatus()
+      end
+    end,
+  })
+
+  if not progress_status.client or not progress_status.title then
+    return ""
+  end
+  return table.concat({
+    string.format(
+      "%%#Conditional#%s [%s]",
+      -- progress_status.client,
+      progress_status.title,
+      progress_status.percentage .. "%%"
+    ),
+  })
 end
 
 local function active()
@@ -187,6 +235,7 @@ local function active()
       diagnostics(),
       "%=",
       lsp(),
+      lsp_progress_component(),
       "%=",
       git(),
       filetype(),

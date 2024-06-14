@@ -13,4 +13,12 @@ function M.treesitter_context()
   })
 end
 
+function M.highlight_colors()
+  require("nvim-highlight-colors").setup({
+    exclude_filetypes = {
+      "lazy",
+    },
+  })
+end
+
 return M

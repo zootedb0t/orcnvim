@@ -87,13 +87,6 @@ local plugin = {
   },
 
   {
-    "j-hui/fidget.nvim",
-    event = "LspAttach",
-    tag = "legacy",
-    opts = {},
-  },
-
-  {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     config = function()
@@ -151,8 +144,10 @@ local plugin = {
 
   {
     "brenoprata10/nvim-highlight-colors",
-    lazy = true,
-    opts = {},
+    event = "VeryLazy",
+    config = function()
+      require("plugins.others").highlight_colors()
+    end,
   },
 
   { "nvim-tree/nvim-web-devicons", lazy = true },

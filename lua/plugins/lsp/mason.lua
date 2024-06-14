@@ -17,12 +17,12 @@ mason.setup({
   ui = {
     border = "single",
     width = 0.7,
-    height = 0.8,
+    height = 0.7,
   },
 })
 
 mason_lsp.setup({
-  ensure_installed = vim.tbl_keys(servers),
+  ensure_installed = vim.tbl_extend("keep", vim.tbl_keys(servers), { "pylint", "djlint" }),
   handlers = {
     function(servers_name)
       require("lspconfig")[servers_name].setup({

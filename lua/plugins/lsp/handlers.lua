@@ -5,21 +5,19 @@ local methods = vim.lsp.protocol.Methods
 local map = vim.keymap.set
 
 -- Highlight current word under cursor
-local function lsp_highlight(client, bufnr)
-  if client.server_capabilities.documentHighlightProvider then
-    vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
-    vim.api.nvim_clear_autocmds({
-      buffer = bufnr,
-      group = "lsp_document_highlight",
-    })
+local function lsp_references_highlight(client, bufnr)
+  if client.supports_method(methods.textDocument_documentHighlight) then
+    vim.api.nvim_create_augroup("lsp_references_highlight", { clear = false })
     vim.api.nvim_create_autocmd("CursorHold", {
+      group = "lsp_references_highlight",
+      desc = "Highlight references under the cursor",
       buffer = bufnr,
-      group = "lsp_document_highlight",
       callback = vim.lsp.buf.document_highlight,
     })
     vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter" }, {
+      group = "lsp_references_highlight",
+      desc = "Clear highlight references",
       buffer = bufnr,
-      group = "lsp_document_highlight",
       callback = vim.lsp.buf.clear_references,
     })
   end
@@ -31,10 +29,10 @@ end
 -- end
 
 local function on_attach(client, bufnr)
-  if client.server_capabilities.documentSymbolProvider then
+  if client.supports_method(methods.textDocument_documentSymbol) then
     navic.attach(client, bufnr)
   end
-  lsp_highlight(client, bufnr)
+  lsp_references_highlight(client, bufnr)
   -- disable_formatting(client)
 end
 
@@ -46,11 +44,11 @@ M.capabilities = function()
 end
 
 M.setup = function()
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  vim.lsp.handlers[methods.textDocument_hover] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "single",
   })
 
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+  vim.lsp.handlers[methods.textDocument_signatureHelp] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = "single",
   })
 
@@ -83,6 +81,7 @@ M.setup = function()
         return string.format(" %s ", lsp_signs[severity]), "Diagnostic" .. severity
       end,
     },
+    jump = { float = true },
   })
   require("lspconfig.ui.windows").default_options.border = "single"
 end

@@ -126,14 +126,6 @@ local mappings = {
     },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>Mason<cr>", "Mason Info" },
-    j = {
-      vim.diagnostic.goto_next,
-      "Next Diagnostic",
-    },
-    k = {
-      vim.diagnostic.goto_prev,
-      "Prev Diagnostic",
-    },
     l = { vim.lsp.codelens.run, "CodeLens Action" },
     q = { vim.diagnostic.setloclist, "Quickfix" },
     r = { vim.lsp.buf.rename, "Rename" },
