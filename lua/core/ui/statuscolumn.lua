@@ -25,7 +25,7 @@ local function stc()
     if vim.v.relnum == 0 then
       component[2] = num_status and "%=%l" .. " "
     else
-      component[2] = relnum_status and "%=%r" .. " " or "%=%l" .. " "
+      component[2] = relnum_status and "%=%l" .. " "
     end
   end
 
