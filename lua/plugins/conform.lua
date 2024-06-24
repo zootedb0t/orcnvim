@@ -18,7 +18,7 @@ function M.config()
 end
 
 function M.format()
-  conform.format({ lsp_fallback = true })
+  conform.format({ lsp_format = "fallback" })
 end
 
 return M
