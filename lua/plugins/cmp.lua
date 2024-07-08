@@ -1,42 +1,29 @@
 local cmp = require("cmp")
 local icons = require("core.icons")
-local MAX_LABEL_WIDTH = 25
-
-local get_ws = function(max, len)
-  return string.rep(" ", (max - len))
-end
+local MAX_ABBR_WIDTH, MAX_MENU_WIDTH = 25, 30
 
 -- Format for cmp popup menu to have fixed width
 local menu_format = function(_, item)
-  local content = item.abbr
   item.kind = string.format("%s %s", icons.kind[item.kind], item.kind)
-  -- item.menu = ({
-  --   buffer = "[buf]",
-  --   nvim_lsp = "[lsp]",
-  -- 	 luasnip = "[snip]",
-  --   snippets = "[snip]",
-  --   path = "[path]",
-  -- })[entry.source.name]
+  if vim.api.nvim_strwidth(item.abbr) > MAX_ABBR_WIDTH then
+    item.abbr = vim.fn.strcharpart(item.abbr, 0, MAX_ABBR_WIDTH) .. " " .. icons.ui.Ellipsis
+  end
 
-  -- #content gives size of string
-  if #content > MAX_LABEL_WIDTH then
-    -- Returns string Like |strpart()| but using character index (start form 0) and length instead
-    -- of byte index and length.
-    item.abbr = vim.fn.strcharpart(content, 0, MAX_LABEL_WIDTH) .. icons.ui.Ellipsis
-  else
-    item.abbr = content .. get_ws(MAX_LABEL_WIDTH, #content)
+  if vim.api.nvim_strwidth(item.menu or "") > MAX_MENU_WIDTH then
+    item.menu = vim.fn.strcharpart(item.menu, 0, MAX_MENU_WIDTH) .. " " .. icons.ui.Ellipsis
   end
   return item
 end
 
 cmp.setup({
   formatting = {
+    fields = { "abbr", "kind", "menu" },
     format = menu_format,
   },
 
   snippet = {
     expand = function(args)
-      vim.snippet.expand(args.body)
+      require("luasnip").lsp_expand(args.body)
     end,
   },
 
@@ -62,33 +49,27 @@ cmp.setup({
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif vim.snippet.active({ direction = 1 }) then
-        vim.snippet.jump(1)
+      elseif require("luasnip").expand_or_jumpable() then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
       else
         fallback()
       end
-    end, {
-      "i",
-      "s",
-    }),
+    end, { "i", "s" }),
 
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif vim.snippet.active({ direction = -1 }) then
-        vim.snippet.jump(-1)
+      elseif require("luasnip").jumpable(-1) then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
       else
         fallback()
       end
-    end, {
-      "i",
-      "s",
-    }),
+    end, { "i", "s" }),
   },
 
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
-    { name = "snippets" },
+    { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },
     { name = "nvim_lsp_signature_help" },
@@ -98,7 +79,28 @@ cmp.setup({
     completion = {
       winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None",
       scrollbar = false,
-      border = "single",
+      border = {
+        { "󱐋", "WarningMsg" },
+        { "─", "Comment" },
+        { "╮", "Comment" },
+        { "│", "Comment" },
+        { "╯", "Comment" },
+        { "─", "Comment" },
+        { "╰", "Comment" },
+        { "│", "Comment" },
+      },
+    },
+    documentation = {
+      border = {
+        { "󰙎", "DiagnosticHint" },
+        { "─", "Comment" },
+        { "╮", "Comment" },
+        { "│", "Comment" },
+        { "╯", "Comment" },
+        { "─", "Comment" },
+        { "╰", "Comment" },
+        { "│", "Comment" },
+      },
     },
   },
 })

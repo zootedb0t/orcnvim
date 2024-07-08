@@ -21,12 +21,8 @@ local function stc()
     component[1] = ""
   end
 
-  if vim.v.virtnum == 0 then
-    if vim.v.relnum == 0 then
-      component[2] = num_status and "%=%l" .. " "
-    else
-      component[2] = relnum_status and "%=%l" .. " "
-    end
+  if (num_status or relnum_status) and vim.v.virtnum == 0 then
+    component[2] = "%=%l" .. " "
   end
 
   return table.concat(component, "")

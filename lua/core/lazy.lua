@@ -268,11 +268,11 @@ local plugin = {
   --  },
 
   {
-    "garymjr/nvim-snippets",
+    "L3MON4D3/LuaSnip",
     lazy = true,
-    opts = {
-      friendly_snippets = true,
-    },
+    config = function()
+      require("luasnip.loaders.from_vscode").lazy_load()
+    end,
     dependencies = {
       "rafamadriz/friendly-snippets",
     },
