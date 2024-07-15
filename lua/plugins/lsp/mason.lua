@@ -22,7 +22,7 @@ mason.setup({
 })
 
 mason_lsp.setup({
-  ensure_installed = vim.tbl_extend("keep", vim.tbl_keys(servers), { "pylint", "djlint" }),
+  ensure_installed = vim.tbl_extend("keep", vim.tbl_keys(servers), { "pylint", "djlint", "bashls" }),
   handlers = {
     function(servers_name)
       require("lspconfig")[servers_name].setup({

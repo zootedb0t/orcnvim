@@ -128,7 +128,7 @@ local plugin = {
 
   {
     "folke/which-key.nvim",
-    keys = " ",
+    event = "VeryLazy",
     config = function()
       require("plugins.whichkey")
     end,
