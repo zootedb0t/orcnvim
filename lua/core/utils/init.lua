@@ -89,6 +89,9 @@ function M.lsp_filetype()
     "python",
     "typescript",
     "sh",
+    "json",
+    "jsonc",
+    "rust",
   }
 end
 

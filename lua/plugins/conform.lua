@@ -12,6 +12,7 @@ function M.config()
       html = { "prettierd" },
       markdown = { "prettierd" },
       json = { "prettierd" },
+      jsonc = { "prettierd" },
       htmldjango = { "djlint" },
     },
   })

@@ -2,10 +2,6 @@ local wk = require("which-key")
 
 wk.setup({
   preset = "helix",
-  modes = {
-    i = false, -- Insert mode
-    x = false, -- Visual mode
-  },
   icons = {
     rules = false,
   },
@@ -25,7 +21,7 @@ wk.add({
     desc = "Fuzzily search in current buffer",
   },
 
-	-- Open Nvim-Tree
+  -- Open Nvim-Tree
   { "<leader>e", "<cmd>NvimTreeFindFileToggle<cr>", desc = "Open File Explorer" },
 
   -- Actions
@@ -84,7 +80,7 @@ wk.add({
   -- Lsp
   { "<leader>l", group = "LSP" },
   { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
-  { "{<leader>ld", "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", desc = "Current Buffer Diagnostics" },
+  { "<leader>ld", "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", desc = "Current Buffer Diagnostics" },
   {
     "<leader>lf",
     function()
@@ -115,4 +111,6 @@ wk.add({
   { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search highlight group" },
   { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Search keymaps" },
   { "<leader>sr", "<cmd>Telescope oldfiles<cr>", desc = "Search Recent Files" },
+
+  { "<leader>w", proxy = "<c-w>", group = "Windows" }, -- proxy to window mappings
 })

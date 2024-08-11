@@ -198,7 +198,7 @@ local function lsp_progress_component()
         client = vim.lsp.get_client_by_id(args.data.client_id).name,
         kind = args.data.params.value.kind,
         title = args.data.params.value.title,
-        percentage = args.data.params.value.percentage,
+        percentage = args.data.params.value.percentage or "",
       }
 
       if progress_status.kind == "end" then
