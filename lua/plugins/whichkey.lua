@@ -79,7 +79,7 @@ wk.add({
 
   -- Lsp
   { "<leader>l", group = "LSP" },
-  { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
+  { "<leader>la", vim.lsp.buf.code_action, desc = "Code Action" },
   { "<leader>ld", "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", desc = "Current Buffer Diagnostics" },
   {
     "<leader>lf",
@@ -96,7 +96,7 @@ wk.add({
     desc = "Toggle Inlay Hint",
   },
   { "<leader>li", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
-  { "<leader>lq", "<cmd>vim.diagnostic.setloclist<cr>", desc = "Quickfix Diagnostics" },
+  { "<leader>lq", vim.diagnostic.setloclist, desc = "Quickfix Diagnostics" },
   { "<leader>lr", vim.lsp.buf.rename, desc = "Lsp Rename" },
   { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document Symbols" },
   { "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols" },

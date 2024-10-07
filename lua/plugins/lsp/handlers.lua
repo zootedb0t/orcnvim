@@ -83,7 +83,6 @@ M.setup = function()
     },
     jump = { float = true },
   })
-  require("lspconfig.ui.windows").default_options.border = "single"
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
