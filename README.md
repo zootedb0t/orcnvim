@@ -47,7 +47,7 @@ Now set environment variable `$NVIM_APPNAME=orcnvim`. Start `neovim` now `orcnvi
 - Support `neovim` built-in [lsp](https://github.com/neovim/nvim-lspconfig).
 - Lazy load plugins for faster startup time. Thanks to [lazy.nvim](https://github.com/folke/lazy.nvim/)
 - Custom `Statuscolumn`, `Winbar` and `Statusline`.
-- Autocompletion using [cmp](https://github.com/hrsh7th/nvim-cmp).
+- Autocompletion using [blink.cmp](https://github.com/Saghen/blink.cmp).
 - Syntax highlighting using [tree-sitter](https://github.com/nvim-treesitter/nvim-treesitter).
 - Support [Formatting](https://github.com/stevearc/conform.nvim) and [Linting](https://github.com/nvimtools/none-ls.nvim).
 
