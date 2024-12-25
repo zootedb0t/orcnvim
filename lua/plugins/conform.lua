@@ -1,8 +1,7 @@
-local M = {}
-local conform = require("conform")
-
-function M.config()
-  conform.setup({
+return {
+    "stevearc/conform.nvim",
+    event = "VeryLazy",
+    opts = {
     formatters_by_ft = {
       lua = { "stylua" },
       python = { "black" },
@@ -15,11 +14,5 @@ function M.config()
       jsonc = { "prettierd" },
       htmldjango = { "djlint" },
     },
-  })
-end
-
-function M.format()
-  conform.format({ lsp_format = "fallback" })
-end
-
-return M
+    }
+}
