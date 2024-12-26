@@ -11,8 +11,8 @@
 
 --]]
 
-require("core.options") -- Neovim options
-require("core.keymaps") -- My keybinding
-require("core.lazy") -- Lazy plugin manager
-require("core.autocmd") -- Autocommand
-require("core.ui.colorscheme") -- Colorscheme related settings
+require("orcnvim.options") -- Neovim options
+require("orcnvim.keymaps") -- My keybinding
+require("orcnvim.lazy") -- Lazy plugin manager
+require("orcnvim.autocmd") -- Autocommand
+require("orcnvim.ui.colorscheme") -- Colorscheme related settings

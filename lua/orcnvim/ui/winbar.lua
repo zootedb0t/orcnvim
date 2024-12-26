@@ -1,11 +1,11 @@
 local M = {}
 
 -- Import highlights, icons and functions
-local is_empty = require("core.utils").isempty
-local is_match = require("core.utils").ismatch
-local devicon = require("core.utils").get_icons
-local disable_winbar = require("core.utils").disable()
-local icon = require("core.icons")
+local is_empty = require("orcnvim.utils").isempty
+local is_match = require("orcnvim.utils").ismatch
+local devicon = require("orcnvim.utils").get_icons
+local disable_winbar = require("orcnvim.utils").disable()
+local icon = require("orcnvim.icons")
 local space = " "
 
 local function filename()

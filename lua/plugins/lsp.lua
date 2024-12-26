@@ -5,9 +5,9 @@ return {
     "mason-lspconfig.nvim",
     "saghen/blink.cmp",
   },
-  ft = require("core.utils").lsp_filetype(),
+  ft = require("orcnvim.utils").lsp_filetype(),
   config = function()
-    local icon = require("core.icons")
+    local icon = require("orcnvim.icons")
     local navic = require("nvim-navic")
     local methods = vim.lsp.protocol.Methods
     local map = vim.keymap.set

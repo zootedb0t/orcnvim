@@ -30,7 +30,7 @@ return {
         {
           "<leader>al",
           function()
-            require("core.utils").toggle_number()
+            require("orcnvim.utils").toggle_number()
           end,
           group = "Fold Close",
         },
@@ -38,14 +38,14 @@ return {
         {
           "<leader>aq",
           function()
-            require("core.utils").quickfix_toggle()
+            require("orcnvim.utils").quickfix_toggle()
           end,
           desc = "Toggle Quickfix window",
         },
         {
           "<leader>as",
           function()
-            require("core.utils").toggle_statusline()
+            require("orcnvim.utils").toggle_statusline()
           end,
           desc = "Toggle Statusline",
         },
@@ -99,7 +99,7 @@ return {
         {
           "<leader>lh",
           function()
-            require("core.utils").inlay_hint()
+            require("orcnvim.utils").inlay_hint()
           end,
           desc = "Toggle Inlay Hint",
         },

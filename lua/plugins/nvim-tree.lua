@@ -1,4 +1,4 @@
-local icon = require("core.icons")
+local icon = require("orcnvim.icons")
 return {
   "nvim-tree/nvim-tree.lua",
   cmd = "NvimTreeFindFileToggle",

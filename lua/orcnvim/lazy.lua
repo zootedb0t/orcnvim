@@ -1,4 +1,4 @@
-local icons = require("core.icons")
+local icons = require("orcnvim.icons")
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
@@ -21,7 +21,7 @@ require("lazy").setup({
   lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json", -- lockfile generated after running update.
   performance = {
     rtp = {
-      reset = true, -- reset the runtime path to $VIMRUNTIME and your config directory
+      reset = true,
       ---@type string[] list any plugins you want to disable here
       disabled_plugins = {
         "gzip", -- disable gzip
@@ -47,7 +47,6 @@ require("lazy").setup({
     notify = false,
   },
   install = {
-    -- try to load one of these colorschemes when starting an installation during startup
     colorscheme = { "citruszest" },
   },
   dev = {

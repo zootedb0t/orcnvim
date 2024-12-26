@@ -52,7 +52,7 @@ cmd({ "BufWritePost" }, {
 
 -- Update statusline highlight.
 cmd("ColorScheme", {
-  callback = require("core.ui.highlight").statusline_highlight,
+  callback = require("orcnvim.ui.highlight").statusline_highlight,
 })
 
 -- Disable Semantic Token

@@ -1,17 +1,17 @@
 Statusline = {}
 
 -- Import highlights, icons and function
-require("core.ui.highlight").statusline_highlight()
-local icon = require("core.icons")
-local is_empty = require("core.utils").isempty
-local is_match = require("core.utils").ismatch
-local devicon = require("core.utils").get_icons
+require("orcnvim.ui.highlight").statusline_highlight()
+local icon = require("orcnvim.icons")
+local is_empty = require("orcnvim.utils").isempty
+local is_match = require("orcnvim.utils").ismatch
+local devicon = require("orcnvim.utils").get_icons
 -- Add filetypes to the list for which you don't want statusline before unpack statement
 local disable_statusline = {
   "TelescopePrompt",
   "lazy",
   "NvimTree",
-  unpack(require("core.utils").disable() or {}),
+  unpack(require("orcnvim.utils").disable() or {}),
 }
 
 local function update_mode_colors()

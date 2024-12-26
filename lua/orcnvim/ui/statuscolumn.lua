@@ -1,6 +1,6 @@
 local M = {}
 
-local is_match = require("core.utils").ismatch
+local is_match = require("orcnvim.utils").ismatch
 -- Add filetypes to the list for which you don't want statuscolumn before unpack statement
 local disable_statuscolumn = {
   "TelescopePrompt",
@@ -8,7 +8,7 @@ local disable_statuscolumn = {
   "NvimTree",
   "help",
   "netrw",
-  unpack(require("core.utils").disable()),
+  unpack(require("orcnvim.utils").disable()),
 }
 
 local function stc()
