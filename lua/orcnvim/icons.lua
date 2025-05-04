@@ -100,7 +100,7 @@ return {
     Plus = "",
     Project = "",
     Rocket = "",
-    Search = "",
+    Search = "",
     SignIn = "",
     SignOut = "",
     Spanner = "",

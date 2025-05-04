@@ -77,33 +77,6 @@ return {
               ["ic"] = "@class.inner",
             },
           },
-          move = {
-            enable = true,
-            goto_next_start = {
-              ["]f"] = { query = "@function.outer", desc = "Start of function start" },
-              ["]b"] = { query = "@block.outer", desc = "Start of block" },
-              ["]p"] = { query = "@parameter.inner", desc = "Start of parameter" },
-              ["]c"] = { query = "@class.outer", desc = "Start of class" },
-            },
-            goto_next_end = {
-              ["]F"] = { query = "@function.outer", desc = "End of function" },
-              ["]B"] = { query = "@block.outer", desc = "End of block" },
-              ["]P"] = { query = "@parameter.inner", desc = "End of parameter" },
-              ["]C"] = { query = "@class.outer", desc = "End of class" },
-            },
-            goto_previous_start = {
-              ["[f"] = { query = "@function.outer", desc = "Previous function start" },
-              ["[b"] = { query = "@block.outer", desc = "Previous block start" },
-              ["[p"] = { query = "@parameter.inner", desc = "Previous parameter start" },
-              ["[c"] = { query = "@class.outer", desc = "Previous class" },
-            },
-            goto_previous_end = {
-              ["[F"] = { query = "@function.outer", desc = "Previous function end" },
-              ["[B"] = { query = "@block.outer", desc = "Previous block end" },
-              ["[P"] = { query = "@parameter.inner", desc = "Previous parameter end" },
-              ["[C"] = { query = "@class.outer", desc = "Previous class end" },
-            },
-          },
         },
       })
     end,

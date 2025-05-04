@@ -1,8 +1,5 @@
 return {
   "nvimtools/none-ls.nvim",
-  dependencies = {
-    "mason-lspconfig.nvim",
-  },
   ft = require("orcnvim.utils").lint_filetype(),
   config = function()
     local null_ls = require("null-ls")

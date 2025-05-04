@@ -89,14 +89,14 @@ end
 
 local git = function()
   local git_info = vim.b.gitsigns_status_dict
-  local git_icon = devicon("git", "")
+  local git_icon = devicon(".git", "")
 
   if not git_info or vim.tbl_isempty(git_info) then
     return ""
   end
 
   local render_git = {
-    string.format("%%#DevIconGitLogo#%s %s", git_icon.icon, git_info.head),
+    string.format("%%#DevIcon.git#%s %s", git_icon.icon, git_info.head),
   }
 
   local function addGitHighlight(highlightGroup, iconValue, infoType)
@@ -112,11 +112,12 @@ local git = function()
 end
 
 local function lsp()
+  local settings_icon = devicon("settings", "")
   local names = vim.tbl_map(function(server)
     return server.name
   end, vim.lsp.get_clients({ bufnr = 0 }))
 
-  return #names > 0 and "%#Conditional#" .. "[ " .. table.concat(names, " ") .. "]" or ""
+  return #names > 0 and "%#Conditional#" .. "[" .. settings_icon.icon .. " " .. table.concat(names, " ") .. "]" or ""
 end
 
 local function diagnostics()
