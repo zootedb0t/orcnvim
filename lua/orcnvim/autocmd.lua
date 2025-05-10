@@ -31,36 +31,7 @@ cmd("VimResized", {
   desc = "Equalize Splits",
 })
 
--- Disable diagnostic for rofi config
-cmd("BufEnter", {
-  pattern = "*.rasi",
-  callback = function()
-    vim.diagnostic.enable(false, { bufnr = 0 })
-  end,
-  desc = "No Lsp error for rofi config",
-})
-
--- For suckless
-cmd({ "BufWritePost" }, {
-  pattern = ".Xresources",
-  callback = function()
-    vim.cmd("!xrdb %")
-    vim.cmd("!pidof st | xargs kill -s USR1")
-  end,
-  desc = "Reload st terminal",
-})
-
 -- Update statusline highlight.
 cmd("ColorScheme", {
   callback = require("orcnvim.ui.highlight").statusline_highlight,
 })
-
--- Disable Semantic Token
--- vim.api.nvim_create_autocmd("LspAttach", {
---   callback = function(args)
---     local client = vim.lsp.get_client_by_id(args.data.client_id)
---     if client then
---       client.server_capabilities.semanticTokensProvider = nil
---     end
---   end,
--- })

@@ -4,7 +4,7 @@ return {
   { "dstein64/vim-startuptime", cmd = "StartupTime" },
   {
     "brenoprata10/nvim-highlight-colors",
-    event = "VeryLazy",
+    event = { "BufReadPost", "BufNewFile" },
     opts = {
       exclude_filetypes = {
         "lazy",

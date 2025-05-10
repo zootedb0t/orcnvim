@@ -1,7 +1,7 @@
 return {
-    "stevearc/conform.nvim",
-    event = "VeryLazy",
-    opts = {
+  "stevearc/conform.nvim",
+  event = "LspAttach",
+  opts = {
     formatters_by_ft = {
       lua = { "stylua" },
       python = { "black" },
@@ -14,5 +14,5 @@ return {
       jsonc = { "prettierd" },
       htmldjango = { "djlint" },
     },
-    }
+  },
 }

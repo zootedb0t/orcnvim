@@ -68,3 +68,6 @@ map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
 -- Save file
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+
+-- Open Nvim-Tree
+map("n", "\\", "<cmd>NvimTreeFindFileToggle<cr>", { desc = "Open File Explorer" })

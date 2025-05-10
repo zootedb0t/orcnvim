@@ -21,8 +21,6 @@ return {
         desc = "Fuzzily search in current buffer",
       },
 
-      -- Open Nvim-Tree
-      { "<leader>e", "<cmd>NvimTreeFindFileToggle<cr>", desc = "Open File Explorer" },
       {
         -- Actions
         { "<leader>a", group = "Action" },

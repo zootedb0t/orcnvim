@@ -2,7 +2,7 @@ return {
   "saghen/blink.cmp",
   dependencies = "rafamadriz/friendly-snippets",
   build = "cargo build --release",
-  event = "InsertEnter",
+  event = "LspAttach",
   opts = {
     -- keymap = { preset = "default" },
     sources = {
@@ -32,7 +32,7 @@ return {
       -- will be removed in a future release
       use_nvim_cmp_as_default = false,
       -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-      nerd_font_variant = "normal",
+      -- nerd_font_variant = "normal",
       kind_icons = require("orcnvim.icons").kind,
     },
     keymap = {

@@ -2,6 +2,10 @@ local icon = require("orcnvim.icons")
 
 return {
   "nvim-telescope/telescope.nvim",
+  dependencies = {
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    { "nvim-telescope/telescope-file-browser.nvim" },
+  },
   cmd = "Telescope",
   opts = {
     defaults = {
@@ -30,7 +34,6 @@ return {
         height = 0.65,
         preview_cutoff = 120,
       },
-      borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
       mappings = {
         i = {
           ["<C-j>"] = require("telescope.actions").move_selection_next,
@@ -73,9 +76,5 @@ return {
         files = false,
       },
     },
-  },
-  dependencies = {
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    { "nvim-telescope/telescope-file-browser.nvim" },
   },
 }

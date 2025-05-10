@@ -21,7 +21,7 @@
 - `Node` for installing lsp-servers.
 - `deno` for [peek.nvim](https://github.com/toppair/peek.nvim).
 - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts/) for icons.
-- [mason.nvim](https://github.com/williamboman/mason.nvim) has several requirements for installing `lsp servers` like `npm`, `cargo` etc. Check full list [here](https://github.com/williamboman/mason.nvim#requirements).
+- [mason.nvim](https://github.com/mason-org/mason.nvim) has several requirements for installing `lsp servers` like `npm`, `cargo` etc. Check full list [here](https://github.com/mason-org/mason.nvim#requirements).
 - [Tree-sitter-cli](https://github.com/tree-sitter/tree-sitter/tree/master/cli) install it using `npm` or `cargo`.
 - Clipboard tools like `xclip` or `wl-clipboard` for integration with system clipboard.
 - `fd` and `ripgrep` for [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim).
