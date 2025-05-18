@@ -3,7 +3,6 @@ return {
   "nvim-tree/nvim-tree.lua",
   cmd = "NvimTreeFindFileToggle",
   opts = {
-
     sync_root_with_cwd = true,
     view = {
       adaptive_size = true,
@@ -16,13 +15,6 @@ return {
       indent_markers = {
         enable = true,
         inline_arrows = true,
-        icons = {
-          corner = "└",
-          edge = "│",
-          item = "│",
-          bottom = "─",
-          none = " ",
-        },
       },
       root_folder_label = false,
       icons = {
@@ -51,7 +43,4 @@ return {
       },
     },
   },
-  -- config = function()
-  --   require("plugins.nvim-tree")
-  -- end,
 }

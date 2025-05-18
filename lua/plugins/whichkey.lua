@@ -88,7 +88,6 @@ return {
         {
           "<leader>lf",
           function()
-            -- require("plugins.conform").format()
             local conform = require("conform")
             conform.format({ lsp_format = "fallback" })
           end,

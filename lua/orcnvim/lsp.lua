@@ -28,33 +28,20 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.buf.signature_help({
   border = "single",
 })
 
--- Define lsp signs
-local lsp_signs = {
-  ERROR = icon.diagnostics.Error,
-  WARN = icon.diagnostics.Warning,
-  INFO = icon.diagnostics.Information,
-  HINT = icon.diagnostics.Hint,
-}
-
 vim.diagnostic.config({
   underline = false,
   signs = {
     text = {
-      lsp_signs.ERROR,
-      lsp_signs.WARN,
-      lsp_signs.INFO,
-      lsp_signs.HINT,
+      icon.diagnostics.Error,
+      icon.diagnostics.Warning,
+      icon.diagnostics.Information,
+      icon.diagnostics.Hint,
     },
   },
   severity_sort = true,
-  update_in_insert = false,
   float = {
     border = "single",
     source = "if_many",
-    prefix = function(diag)
-      local severity = vim.diagnostic.severity[diag.severity]
-      return string.format(" %s ", lsp_signs[severity]), "Diagnostic" .. severity
-    end,
   },
   jump = { float = true },
 })
@@ -65,7 +52,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     local navic = require("nvim-navic")
-    -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     if client then
       if client:supports_method("textDocument/typeDefinition") then
@@ -92,11 +78,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- Enable LSP
 vim.lsp.enable({
-  "luals",
+  "lua_ls",
   "cssls",
   "html",
   "ts_ls",
   "clangd",
   "pyright",
   "bashls",
+  "jsonls",
 })

@@ -1,6 +1,5 @@
 return {
   { "DaikyXendo/nvim-material-icon", lazy = true },
-  { "nvim-lua/plenary.nvim", lazy = true },
   { "dstein64/vim-startuptime", cmd = "StartupTime" },
   {
     "brenoprata10/nvim-highlight-colors",

@@ -1,3 +1,4 @@
+---@type vim.lsp.Config
 local function symbol_info()
   local bufnr = vim.api.nvim_get_current_buf()
   local clangd_client = vim.lsp.get_clients({ bufnr = bufnr, name = "clangd" })[1]

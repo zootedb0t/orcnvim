@@ -66,4 +66,4 @@ for scope, table in pairs(options) do
 end
 
 -- Experimental. https://github.com/neovim/neovim/pull/27855/
-require('vim._extui').enable({})
+require("vim._extui").enable({})
