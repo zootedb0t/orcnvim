@@ -1,4 +1,4 @@
-local icon = require("orcnvim.icons")
+local icon = require("orcnvim.icons").diagnostics
 local map = vim.keymap.set
 
 -- Highlight current word under cursor
@@ -20,27 +20,23 @@ local function lsp_references_highlight(client, bufnr)
   end
 end
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.buf.hover({
-  border = "single",
-})
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.buf.signature_help({
-  border = "single",
-})
-
 vim.diagnostic.config({
   underline = false,
   signs = {
     text = {
-      icon.diagnostics.Error,
-      icon.diagnostics.Warning,
-      icon.diagnostics.Information,
-      icon.diagnostics.Hint,
+      icon.Error,
+      icon.Warning,
+      icon.Information,
+      icon.Hint,
+    },
+    numhl = {
+      "ErrorMsg",
+      "WarningMsg",
     },
   },
   severity_sort = true,
   float = {
-    border = "single",
+    border = "rounded",
     source = "if_many",
   },
   jump = { float = true },
@@ -50,25 +46,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
   desc = "Configure LSP On Attach",
   callback = function(args)
     local bufnr = args.buf
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
     local navic = require("nvim-navic")
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    if client then
-      if client:supports_method("textDocument/typeDefinition") then
-        map("n", "<localleader>D", vim.lsp.buf.type_definition, { desc = "Type Definition", buffer = bufnr })
-      end
 
-      if client:supports_method("textDocument/documentColor") then
-        vim.lsp.document_color.enable(true, args.buf)
-      end
+    if client:supports_method("textDocument/typeDefinition") then
+      map("n", "<localleader>D", vim.lsp.buf.type_definition, { desc = "Type Definition", buffer = bufnr })
+    end
 
-      if client:supports_method("textDocument/semanticTokens/full") then
-        client.server_capabilities.semanticTokensProvider = nil
-      end
+    if client:supports_method("textDocument/documentColor") then
+      vim.lsp.document_color.enable(true, args.buf)
+    end
 
-      if client:supports_method("textDocument/documentSymbol") then
-        navic.attach(client, bufnr)
-      end
+    if client:supports_method("textDocument/semanticTokens/full") then
+      client.server_capabilities.semanticTokensProvider = nil
+    end
+
+    if client:supports_method("textDocument/documentSymbol") then
+      navic.attach(client, bufnr)
     end
 
     lsp_references_highlight(client, bufnr)

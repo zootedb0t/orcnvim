@@ -20,7 +20,6 @@ local options = {
     showmode = false, -- Disable showing modes in command line
     sidescrolloff = 4, -- Number of columns to keep at the sides of the cursor
     signcolumn = "yes", -- Always show the sign column
-    guicursor = vim.opt.guicursor + { "a:blinkon100" }, -- Fix blinking cursor
     smartcase = true, -- Case sensitivie searching
     splitbelow = true, -- Splitting a new window below the current one
     splitright = true, -- Splitting a new window at the right of the current one

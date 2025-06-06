@@ -13,6 +13,10 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup({
+  change_detection = {
+    enabled = false,
+    notify = false,
+  },
   spec = {
     -- import your plugins
     { import = "plugins" },
@@ -53,7 +57,7 @@ require("lazy").setup({
     path = "~/Documents/repos/",
   },
   ui = {
-    border = "single",
+    border = "rounded",
     icons = {
       cmd = icons.ui.BoxChecked,
       config = icons.ui.Gear,

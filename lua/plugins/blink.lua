@@ -4,13 +4,14 @@ return {
   build = "cargo build --release",
   event = "LspAttach",
   opts = {
-    -- keymap = { preset = "default" },
     sources = {
-      default = { "lsp", "path", "snippets", "buffer" },
+      default = { "lsp", "snippets", "path", "buffer" },
     },
     completion = {
+      list = {
+        selection = { preselect = false, auto_insert = true },
+      },
       accept = {
-        -- experimental auto-brackets support
         auto_brackets = {
           enabled = true,
         },
@@ -18,7 +19,10 @@ return {
       menu = {
         border = "rounded",
         draw = {
-          treesitter = { "lsp" },
+          columns = {
+            { "kind_icon" },
+            { "label", "kind", gap = 1 },
+          },
         },
       },
       documentation = {
@@ -27,12 +31,7 @@ return {
       },
     },
     appearance = {
-      -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-      -- Useful for when your theme doesn't support blink.cmp
-      -- will be removed in a future release
-      use_nvim_cmp_as_default = false,
-      -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-      -- nerd_font_variant = "normal",
+      -- use_nvim_cmp_as_default = false,
       kind_icons = require("orcnvim.icons").kind,
     },
     keymap = {
@@ -40,5 +39,8 @@ return {
       ["<C-y>"] = { "select_and_accept" },
     },
     signature = { enabled = true },
+    fuzzy = {
+      implementation = "rust",
+    },
   },
 }
