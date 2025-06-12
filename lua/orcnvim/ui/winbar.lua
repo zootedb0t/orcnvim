@@ -9,28 +9,21 @@ local icon = require("orcnvim.icons")
 local space = " "
 
 local function filename()
-  local buf_mod = vim.bo.modified
   local fname = vim.fn.expand("%:t")
   local extension = vim.fn.expand("%:e")
-  local fileicon_hl = devicon(fname, extension)
-  vim.api.nvim_set_hl(0, "FileIconWinBar", { fg = fileicon_hl.highlight, bold = true })
 
-  if is_empty(fname) and not buf_mod then
+  if fname == "" and not vim.bo.modified then
     return ""
-  elseif not is_empty(fname) and buf_mod then
-    return table.concat({
-      "%#FileIconWinBar#",
-      fileicon_hl.icon,
-      fname,
-      icon.ui.Pencil .. " ",
-    }, " ")
-  else
-    return table.concat({
-      "%#FileIconWinBar#",
-      fileicon_hl.icon,
-      fname,
-    }, " ")
   end
+
+  local fileicon = devicon(fname, extension)
+  local icon_str = "%#FileIcon#" .. fileicon.icon .. " " .. fname
+
+  if vim.bo.modified then
+    icon_str = icon_str .. " " .. icon.ui.Pencil
+  end
+
+  return icon_str
 end
 
 local get_gps = function()

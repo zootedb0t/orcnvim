@@ -1,5 +1,10 @@
 local M = {}
 
+local devicons_ok, devicons = pcall(require, "nvim-web-devicons")
+if not devicons_ok then
+  return vim.notify("nvim-web-devicons is not installed", vim.log.levels.WARN)
+end
+
 -- 's' is not table, if table use 'vim.tbl_isempty()' instead
 function M.isempty(s)
   return s == nil or s == 0 or s == ""
@@ -14,17 +19,17 @@ function M.ismatch(table, value)
 end
 
 function M.get_icons(filename, extension)
-  local status_ok, devicons = pcall(require, "nvim-web-devicons")
-  if not status_ok then
-    vim.notify("nvim-web-devicons is not installed")
+  if not devicons then
     return ""
   end
+
   local file_icon, color = devicons.get_icon_color(filename, extension, { default = true })
-  if M.isempty(file_icon) and M.isempty(color) then
-    vim.notify("Can't find icon or color")
+  if not file_icon or file_icon == "" then
     return ""
   end
-  return { icon = file_icon, highlight = color }
+  local hl_group = "FileIcon"
+  vim.api.nvim_set_hl(0, "FileIcon", { fg = color })
+  return { icon = file_icon, highlight = hl_group }
 end
 
 function M.disable()

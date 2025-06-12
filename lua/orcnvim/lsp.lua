@@ -80,4 +80,5 @@ vim.lsp.enable({
   "pyright",
   "bashls",
   "jsonls",
+  "ruff",
 })

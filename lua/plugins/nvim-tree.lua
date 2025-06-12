@@ -1,4 +1,3 @@
-local icon = require("orcnvim.icons")
 return {
   "nvim-tree/nvim-tree.lua",
   cmd = "NvimTreeFindFileToggle",
@@ -17,30 +16,6 @@ return {
         inline_arrows = true,
       },
       root_folder_label = false,
-      icons = {
-        git_placement = "after",
-        glyphs = {
-          default = icon.kind.File,
-          symlink = icon.ui.FileSymlink,
-          bookmark = icon.ui.BookMark,
-          modified = icon.ui.Circle,
-          folder = {
-            default = icon.ui.Folder,
-            open = icon.ui.FolderOpen,
-            empty = icon.ui.EmptyFolder,
-            empty_open = icon.ui.EmptyFolderOpen,
-            symlink = icon.ui.FolderSymlink,
-            symlink_open = icon.ui.FolderSymlink,
-          },
-          git = {
-            unstaged = icon.git.FileUnstaged,
-            staged = icon.git.FileStaged,
-            unmerged = icon.git.FileUnmerged,
-            renamed = icon.git.FileRenamed,
-            untracked = icon.git.FileUntracked,
-          },
-        },
-      },
     },
   },
 }

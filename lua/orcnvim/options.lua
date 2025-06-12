@@ -49,6 +49,7 @@ local options = {
     foldexpr = "v:lua.vim.treesitter.foldexpr()",
     foldtext = "",
     smoothscroll = true,
+    laststatus = 3,
   },
 
   g = {

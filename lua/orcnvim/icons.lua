@@ -103,7 +103,7 @@ return {
     Search = "",
     SignIn = "",
     SignOut = "",
-    Spanner = "",
+    Spanner = "",
     Tab = "󰌒",
     Table = "",
     Target = "",
@@ -151,7 +151,7 @@ return {
     Diff = "󰦓",
     Repo = "",
     Octoface = "",
-    Branch = "",
+    Branch = "",
   },
 
   line_bar = {

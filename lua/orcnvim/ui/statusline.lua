@@ -15,143 +15,147 @@ local disable_statusline = {
 }
 
 local function update_mode_colors()
-  local current_mode = vim.api.nvim_get_mode().mode
-  local mode_color = ""
-  if current_mode == "n" or current_mode == "no" then
-    mode_color = "%#StatusLineAccent#"
-  elseif current_mode == "i" or current_mode == "ic" then
-    mode_color = "%#StatusLineInsertAccent#"
-  elseif current_mode == "v" or current_mode == "V" or current_mode == "" then
-    mode_color = "%#StatusLineVisualAccent#"
-  elseif current_mode == "R" then
-    mode_color = "%#StatusLineReplaceAccent#"
-  elseif current_mode == "c" then
-    mode_color = "%#StatusLineCmdLineAccent#"
-  elseif current_mode == "t" then
-    mode_color = "%#StatusLineTerminalAccent#"
-  end
-  return mode_color
+  local mode_colors = {
+    n = "%#StatusLineAccent#",
+    no = "%#StatusLineAccent#",
+    i = "%#StatusLineInsertAccent#",
+    ic = "%#StatusLineInsertAccent#",
+    v = "%#StatusLineVisualAccent#",
+    V = "%#StatusLineVisualAccent#",
+    ["\22"] = "%#StatusLineVisualAccent#", -- CTRL-V (Visual Block)
+    R = "%#StatusLineReplaceAccent#",
+    c = "%#StatusLineCmdLineAccent#",
+    t = "%#StatusLineTerminalAccent#",
+  }
+  return mode_colors[vim.api.nvim_get_mode().mode] or ""
 end
 
-local modes = {
-  ["n"] = "NORMAL",
-  ["no"] = "O-PENDING",
-  ["nov"] = "O-PENDING",
-  ["noV"] = "O-PENDING",
-  ["no\22"] = "O-PENDING",
-  ["niI"] = "NORMAL",
-  ["niR"] = "NORMAL",
-  ["niV"] = "NORMAL",
-  ["nt"] = "NORMAL",
-  ["ntT"] = "NORMAL",
-  ["v"] = "VISUAL",
-  ["vs"] = "VISUAL",
-  ["V"] = "V-LINE",
-  ["Vs"] = "V-LINE",
-  ["\22"] = "V-BLOCK",
-  ["\22s"] = "V-BLOCK",
-  ["s"] = "SELECT",
-  ["S"] = "S-LINE",
-  ["\19"] = "S-BLOCK",
-  ["i"] = "INSERT",
-  ["ic"] = "INSERT",
-  ["ix"] = "INSERT",
-  ["R"] = "REPLACE",
-  ["Rc"] = "REPLACE",
-  ["Rx"] = "REPLACE",
-  ["Rv"] = "V-REPLACE",
-  ["Rvc"] = "V-REPLACE",
-  ["Rvx"] = "V-REPLACE",
-  ["c"] = "COMMAND",
-  ["cv"] = "EX",
-  ["ce"] = "EX",
-  ["r"] = "REPLACE",
-  ["rm"] = "MORE",
-  ["r?"] = "CONFIRM",
-  ["!"] = "SHELL",
-  ["t"] = "TERMINAL",
-}
-
 local function mode()
+  local modes = {
+    n = "NORMAL",
+    no = "O-PENDING",
+    nov = "O-PENDING",
+    noV = "O-PENDING",
+    ["no\22"] = "O-PENDING",
+    niI = "NORMAL",
+    niR = "NORMAL",
+    niV = "NORMAL",
+    nt = "NORMAL",
+    ntT = "NORMAL",
+    v = "VISUAL",
+    vs = "VISUAL",
+    V = "V-LINE",
+    Vs = "V-LINE",
+    ["\22"] = "V-BLOCK",
+    ["\22s"] = "V-BLOCK",
+    s = "SELECT",
+    S = "S-LINE",
+    ["\19"] = "S-BLOCK",
+    i = "INSERT",
+    ic = "INSERT",
+    ix = "INSERT",
+    R = "REPLACE",
+    Rc = "REPLACE",
+    Rx = "REPLACE",
+    Rv = "V-REPLACE",
+    Rvc = "V-REPLACE",
+    Rvx = "V-REPLACE",
+    c = "COMMAND",
+    cv = "EX",
+    ce = "EX",
+    r = "REPLACE",
+    rm = "MORE",
+    ["r?"] = "CONFIRM",
+    ["!"] = "SHELL",
+    t = "TERMINAL",
+  }
+
   local current_mode = vim.api.nvim_get_mode().mode
   local mode_text = modes[current_mode] or ""
-  return table.concat({
-    update_mode_colors(),
-    icon.ui.Neovim .. " " .. mode_text,
-    "%#Normal#",
-  })
+  return update_mode_colors() .. icon.ui.Neovim .. " " .. mode_text .. "%#Normal#"
 end
 
 local function filename()
-  local fname = vim.fn.expand("%:t")
-  return not is_empty(fname) and fname or ""
+  return vim.fn.expand("%:t") or ""
 end
 
 local git = function()
   local git_info = vim.b.gitsigns_status_dict
-  local git_icon = devicon(".git", "")
 
-  if not git_info or vim.tbl_isempty(git_info) then
+  if is_empty(git_info) then
     return ""
   end
 
   local render_git = {
-    string.format("%%#DevIcon.git#%s %s", git_icon.icon, git_info.head),
+    string.format("%%#DevIcon.git#%s %s", icon.git.Branch, git_info.head),
   }
 
-  local function addGitHighlight(highlightGroup, iconValue, infoType)
-    if not is_empty(infoType) then
-      table.insert(render_git, string.format("%%#%s#%s %s", highlightGroup, iconValue, infoType))
+  local git_stats = {
+    { group = "GitSignsAdd", icon = icon.git.LineAdded, value = git_info.added },
+    { group = "GitSignsChange", icon = icon.git.LineModified, value = git_info.changed },
+    { group = "GitSignsDelete", icon = icon.git.LineRemoved, value = git_info.removed },
+  }
+
+  for _, stat in ipairs(git_stats) do
+    if not is_empty(stat.value) then
+      render_git[#render_git + 1] = string.format("%%#%s#%s %s", stat.group, stat.icon, stat.value)
     end
   end
-
-  addGitHighlight("GitSignsAdd", icon.git.LineAdded, git_info.added)
-  addGitHighlight("GitSignsChange", icon.git.LineModified, git_info.changed)
-  addGitHighlight("GitSignsDelete", icon.git.LineRemoved, git_info.removed)
   return table.concat(render_git, " ")
 end
 
 local function lsp()
-  local settings_icon = devicon("settings", "")
-  local names = vim.tbl_map(function(server)
-    return server.name
-  end, vim.lsp.get_clients({ bufnr = 0 }))
-
-  return #names > 0 and "%#Conditional#" .. "[" .. settings_icon.icon .. " " .. table.concat(names, " ") .. "]" or ""
+  local lsp_icon = icon.ui.Gear
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
+  if vim.tbl_isempty(clients) then
+    return ""
+  end
+  local active_clients = {}
+  for _, client in ipairs(clients) do
+    active_clients[#active_clients + 1] = client.name
+  end
+  return string.format("%%#Conditional#[%s %s]", lsp_icon, table.concat(active_clients, " "))
 end
 
 local function diagnostics()
-  local renderDiagnostics = {}
-  local severity = vim.diagnostic.severity
-  local buffer_diagnostic = vim.diagnostic.count(0)
+  if not vim.diagnostic.is_enabled({ bufnr = 0 }) then
+    return ""
+  end
 
-  local function diagnosticHighlight(highlightGroup, iconValue, type)
-    if not is_empty(buffer_diagnostic[type]) then
-      table.insert(
-        renderDiagnostics,
-        string.format("%%#%s#%s %s", highlightGroup, iconValue, buffer_diagnostic[type] or "")
-      )
+  local buffer_diagnostic = vim.diagnostic.count(0)
+  if not buffer_diagnostic or vim.tbl_isempty(buffer_diagnostic) then
+    return ""
+  end
+
+  local result = {}
+  local severity = vim.diagnostic.severity
+
+  local severity_map = {
+    [severity.ERROR] = { group = "DiagnosticError", icon = icon.diagnostics.Error },
+    [severity.WARN] = { group = "DiagnosticWarn", icon = icon.diagnostics.Warning },
+    [severity.HINT] = { group = "DiagnosticHint", icon = icon.diagnostics.Hint },
+    [severity.INFO] = { group = "DiagnosticInfo", icon = icon.diagnostics.Information },
+  }
+  for sev, data in pairs(severity_map) do
+    local count = buffer_diagnostic[sev]
+    if count and count > 0 then
+      result[#result + 1] = string.format("%%#%s#%s %d", data.group, data.icon, count)
     end
   end
 
-  if buffer_diagnostic == nil or not vim.diagnostic.is_enabled({ bufnr = 0 }) then
-    return ""
-  else
-    diagnosticHighlight("DiagnosticError", icon.diagnostics.Error, severity.ERROR)
-    diagnosticHighlight("DiagnosticWarn", icon.diagnostics.Warning, severity.WARN)
-    diagnosticHighlight("DiagnosticHint", icon.diagnostics.Hint, severity.HINT)
-    diagnosticHighlight("DiagnosticInfo", icon.diagnostics.Information, severity.INFO)
-    return table.concat(renderDiagnostics, " ")
-  end
+  return table.concat(result, " ")
 end
 
 local function filetype()
-  local fname = vim.fn.expand("%:t")
-  local extension = vim.fn.expand("%:e")
-  local ftype = vim.bo.filetype:upper()
-  local file_icon = devicon(fname, extension)
-  vim.api.nvim_set_hl(0, "FileIcon", { fg = file_icon.highlight })
-  return string.format("%%#FileIcon#%s %s", file_icon.icon, ftype)
+  local buf = vim.api.nvim_buf_get_name(0)
+  local name, ext = vim.fn.fnamemodify(buf, ":t"), vim.fn.fnamemodify(buf, ":e")
+  local ftype = vim.bo.filetype
+
+  local icon_data = devicon(name, ext)
+  local file_icon = icon_data and icon_data.icon or ""
+  local hl = icon_data and icon_data.highlight or "Comment"
+
+  return string.format("%%#%s#%s %s", hl, file_icon, ftype:upper())
 end
 
 local function lineinfo()
@@ -166,11 +170,21 @@ end
 -- end
 
 local function searchcount()
-  if vim.v.hlsearch > 0 then
-    local result = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
-    local denominator = math.min(result.total or 0, result.maxcount or 0)
-    return string.format("%%#Type#%s [%d/%d]", icon.ui.Search, result.current, denominator)
+  -- if vim.v.hlsearch > 0 then
+  --   local result = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
+  --   local denominator = math.min(result.total or 0, result.maxcount or 0)
+  --   return string.format("%%#Type#%s [%d/%d]", icon.ui.Search, result.current, denominator)
+  -- end
+
+  if vim.v.hlsearch == 0 then
+    return ""
   end
+
+  local result = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
+  local current = result.current or 0
+  local total = math.min(result.total or 0, result.maxcount or 999)
+
+  return string.format("%%#Type#%s [%d/%d]", icon.ui.Search, current, total)
 end
 
 local function plugin_updates()
@@ -228,7 +242,7 @@ end
 
 local function active()
   local parts
-  local winwidth = vim.o.laststatus == 3 and vim.o.columns or vim.api.nvim_win_get_width(0)
+  local winwidth = vim.api.nvim_win_get_width(0)
   if winwidth >= 90 then
     parts = {
       mode(),

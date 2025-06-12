@@ -41,6 +41,14 @@ return {
     signature = { enabled = true },
     fuzzy = {
       implementation = "rust",
+      sorts = {
+        "exact",
+        "score",
+        "sort_text",
+      },
+    },
+    cmdline = {
+      enabled = false,
     },
   },
 }
