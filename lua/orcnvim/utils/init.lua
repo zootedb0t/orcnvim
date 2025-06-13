@@ -43,35 +43,23 @@ end
 
 -- Toggle statusline
 function M.toggle_statusline()
-  local statusline = vim.opt.laststatus:get() -- : is used to pass self as first-parameter
-  if statusline == 3 then
-    vim.opt.laststatus = 0
-  elseif statusline == 0 then
-    vim.opt.laststatus = 3
-  end
+  vim.o.laststatus = vim.o.laststatus == 3 and 0 or 3
 end
 
 -- Qucikfix window
 function M.quickfix_toggle()
-  local windows = vim.fn.getwininfo()
-  for i = 1, vim.tbl_count(windows) do
-    local tbl = windows[i]
-    if tbl.quickfix == 1 then
-      vim.cmd("cclose")
-    else
-      vim.cmd("horizontal botright copen") -- Open quickfix window horizontally
-    end
+  local qf_winid = vim.fn.getqflist({ winid = 0 }).winid
+  if qf_winid ~= 0 then
+    vim.cmd.cclose()
+  else
+    vim.cmd("botright copen")
   end
 end
 
 --- Change the number column between relative and fixed
 function M.toggle_number()
-  local number = vim.wo.number -- local to window
-  local relativenumber = vim.wo.relativenumber -- local to window
-  if number and relativenumber then
-    vim.wo.relativenumber = false
-  elseif number then
-    vim.wo.relativenumber = true
+  if vim.wo.number then
+    vim.wo.relativenumber = not vim.wo.relativenumber
   end
 end
 

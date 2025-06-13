@@ -170,12 +170,6 @@ end
 -- end
 
 local function searchcount()
-  -- if vim.v.hlsearch > 0 then
-  --   local result = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
-  --   local denominator = math.min(result.total or 0, result.maxcount or 0)
-  --   return string.format("%%#Type#%s [%d/%d]", icon.ui.Search, result.current, denominator)
-  -- end
-
   if vim.v.hlsearch == 0 then
     return ""
   end
@@ -241,38 +235,49 @@ local function lsp_progress_component()
 end
 
 local function active()
-  local parts
-  local winwidth = vim.api.nvim_win_get_width(0)
-  if winwidth >= 90 then
-    parts = {
-      mode(),
-      filename(),
-      diagnostics(),
-      "%=",
-      lsp(),
-      lsp_progress_component(),
-      "%=",
-      git(),
-      filetype(),
-      lineinfo(),
-      searchcount(),
-      plugin_updates(),
-    }
-  else
-    parts = {
-      mode(),
-      diagnostics(),
-      "%=",
-      -- searchcount(),
-      lineinfo(),
-    }
+  local parts = {}
+  local winwidth = vim.fn.winwidth(0)
+
+  local function add(component)
+    local value = type(component) == "function" and component() or component
+    if not is_empty(value) then
+      table.insert(parts, value)
+    end
   end
-  return table.concat(
-    vim.tbl_filter(function(val)
-      return not is_empty(val)
-    end, parts),
-    " "
-  )
+
+  if winwidth >= 90 then
+    -- Wide layout
+    local components = {
+      mode,
+      filename,
+      diagnostics,
+      "%=",
+      lsp,
+      lsp_progress_component,
+      "%=",
+      git,
+      filetype,
+      lineinfo,
+      searchcount,
+      plugin_updates,
+    }
+    for _, component in ipairs(components) do
+      add(component)
+    end
+  else
+    -- Narrow layout
+    local components = {
+      mode,
+      diagnostics,
+      "%=",
+      lineinfo,
+    }
+    for _, component in ipairs(components) do
+      add(component)
+    end
+  end
+
+  return table.concat(parts, " ")
 end
 
 local function inactive()
