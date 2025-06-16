@@ -4,9 +4,9 @@ return {
   build = "cargo build --release",
   event = "LspAttach",
   opts = {
-    sources = {
-      default = { "lsp", "snippets", "path", "buffer" },
-    },
+    -- sources = {
+    --   default = { "lsp", "snippets", "path", "buffer" },
+    -- },
     completion = {
       list = {
         selection = { preselect = false, auto_insert = true },
@@ -31,7 +31,6 @@ return {
       },
     },
     appearance = {
-      -- use_nvim_cmp_as_default = false,
       kind_icons = require("orcnvim.icons").kind,
     },
     keymap = {
@@ -41,14 +40,14 @@ return {
     signature = { enabled = true },
     fuzzy = {
       implementation = "rust",
-      sorts = {
-        "exact",
-        "score",
-        "sort_text",
-      },
+      -- sorts = {
+      --   "exact",
+      --   "score",
+      --   "sort_text",
+      -- },
     },
-    cmdline = {
-      enabled = false,
-    },
+    -- cmdline = {
+    --   enabled = false,
+    -- },
   },
 }

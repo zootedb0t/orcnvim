@@ -1,13 +1,13 @@
 local M = {}
 
 -- Import highlights, icons and functions
-local is_empty = require("orcnvim.utils").isempty
 local is_match = require("orcnvim.utils").ismatch
 local devicon = require("orcnvim.utils").get_icons
 local disable_winbar = require("orcnvim.utils").disable()
 local icon = require("orcnvim.icons")
 local space = " "
 
+-- Winbar filename component
 local function filename()
   local fname = vim.fn.expand("%:t")
   local extension = vim.fn.expand("%:e")
@@ -26,59 +26,52 @@ local function filename()
   return icon_str
 end
 
+-- Winbar gps component
+local gps_ok, gps = pcall(require, "nvim-navic")
+
+if gps_ok then
+  gps.setup({
+    icons = {
+      File = icon.ui.File .. space,
+      Module = icon.kind.Module .. space,
+      Namespace = icon.kind.Namespace .. space,
+      Package = icon.kind.Package .. space,
+      Class = icon.kind.Class .. space,
+      Method = icon.kind.Method .. space,
+      Property = icon.kind.Property .. space,
+      Field = icon.kind.Field .. space,
+      Constructor = icon.kind.Constructor .. space,
+      Enum = icon.kind.Enum .. space,
+      Interface = icon.kind.Interface .. space,
+      Function = icon.kind.Function .. space,
+      Variable = icon.kind.Variable .. space,
+      Constant = icon.kind.Constant .. space,
+      String = icon.kind.String .. space,
+      Number = icon.kind.Number .. space,
+      Boolean = icon.kind.Boolean .. space,
+      Array = icon.kind.Array .. space,
+      Object = icon.kind.Object .. space,
+      Key = icon.kind.Key .. space,
+      Null = icon.kind.Null .. space,
+      EnumMember = icon.kind.EnumMember .. space,
+      Struct = icon.kind.Struct .. space,
+      Event = icon.kind.Event .. space,
+      Operator = icon.kind.Operator .. space,
+      TypeParameter = icon.kind.TypeParameter .. space,
+    },
+    highlight = true,
+    -- separator = space .. icon.ui.BoldDividerRight .. space,
+    separator = space .. icon.ui.DividerRight .. space,
+    click = true,
+  })
+end
 local get_gps = function()
-  local status_ok_gps, gps = pcall(require, "nvim-navic")
-  if status_ok_gps then
-    gps.setup({
-      icons = {
-        File = icon.ui.File .. space,
-        Module = icon.kind.Module .. space,
-        Namespace = icon.kind.Namespace .. space,
-        Package = icon.kind.Package .. space,
-        Class = icon.kind.Class .. space,
-        Method = icon.kind.Method .. space,
-        Property = icon.kind.Property .. space,
-        Field = icon.kind.Field .. space,
-        Constructor = icon.kind.Constructor .. space,
-        Enum = icon.kind.Enum .. space,
-        Interface = icon.kind.Interface .. space,
-        Function = icon.kind.Function .. space,
-        Variable = icon.kind.Variable .. space,
-        Constant = icon.kind.Constant .. space,
-        String = icon.kind.String .. space,
-        Number = icon.kind.Number .. space,
-        Boolean = icon.kind.Boolean .. space,
-        Array = icon.kind.Array .. space,
-        Object = icon.kind.Object .. space,
-        Key = icon.kind.Key .. space,
-        Null = icon.kind.Null .. space,
-        EnumMember = icon.kind.EnumMember .. space,
-        Struct = icon.kind.Struct .. space,
-        Event = icon.kind.Event .. space,
-        Operator = icon.kind.Operator .. space,
-        TypeParameter = icon.kind.TypeParameter .. space,
-      },
-      highlight = true,
-      -- separator = space .. icon.ui.BoldDividerRight .. space,
-      separator = space .. icon.ui.DividerRight .. space,
-      click = true,
-    })
-  end
-
-  local status_ok, gps_location = pcall(gps.get_location, {})
-  if not status_ok then
+  if not gps_ok or not gps.is_available() then
     return ""
   end
 
-  if not gps.is_available() or gps_location == "error" then
-    return ""
-  end
-
-  if not is_empty(gps_location) then
-    return gps_location
-  else
-    return ""
-  end
+  local ok, location = pcall(gps.get_location, {})
+  return (ok and location and location ~= "error") and location or ""
 end
 
 local function active()

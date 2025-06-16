@@ -12,20 +12,15 @@ local disable_statuscolumn = {
 }
 
 local function stc()
-  local component = {}
-  local num_status, relnum_status = vim.opt.number:get(), vim.opt.relativenumber:get()
-  local signcolumn_status = vim.opt.signcolumn:get()
-  if signcolumn_status == "yes" then
-    component[1] = "%s"
-  else
-    component[1] = ""
+  if vim.v.virtnum ~= 0 then
+    return ""
   end
 
-  if (num_status or relnum_status) and vim.v.virtnum == 0 then
-    component[2] = "%=%l" .. " "
-  end
+  local sign = vim.opt.signcolumn:get() == "yes" and "%s" or ""
+  local num_enabled = vim.opt.number:get() or vim.opt.relativenumber:get()
+  local num = num_enabled and "%=%l " or ""
 
-  return table.concat(component, "")
+  return sign .. num
 end
 
 function M.draw()

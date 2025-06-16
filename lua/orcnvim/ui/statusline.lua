@@ -14,70 +14,80 @@ local disable_statusline = {
   unpack(require("orcnvim.utils").disable() or {}),
 }
 
+local mode_colors = {
+  n = "%#StatusLineAccent#",
+  no = "%#StatusLineAccent#",
+  i = "%#StatusLineInsertAccent#",
+  ic = "%#StatusLineInsertAccent#",
+  v = "%#StatusLineVisualAccent#",
+  V = "%#StatusLineVisualAccent#",
+  ["\22"] = "%#StatusLineVisualAccent#", -- CTRL-V (Visual Block)
+  R = "%#StatusLineReplaceAccent#",
+  c = "%#StatusLineCmdLineAccent#",
+  t = "%#StatusLineTerminalAccent#",
+}
+
 local function update_mode_colors()
-  local mode_colors = {
-    n = "%#StatusLineAccent#",
-    no = "%#StatusLineAccent#",
-    i = "%#StatusLineInsertAccent#",
-    ic = "%#StatusLineInsertAccent#",
-    v = "%#StatusLineVisualAccent#",
-    V = "%#StatusLineVisualAccent#",
-    ["\22"] = "%#StatusLineVisualAccent#", -- CTRL-V (Visual Block)
-    R = "%#StatusLineReplaceAccent#",
-    c = "%#StatusLineCmdLineAccent#",
-    t = "%#StatusLineTerminalAccent#",
-  }
   return mode_colors[vim.api.nvim_get_mode().mode] or ""
 end
 
-local function mode()
-  local modes = {
-    n = "NORMAL",
-    no = "O-PENDING",
-    nov = "O-PENDING",
-    noV = "O-PENDING",
-    ["no\22"] = "O-PENDING",
-    niI = "NORMAL",
-    niR = "NORMAL",
-    niV = "NORMAL",
-    nt = "NORMAL",
-    ntT = "NORMAL",
-    v = "VISUAL",
-    vs = "VISUAL",
-    V = "V-LINE",
-    Vs = "V-LINE",
-    ["\22"] = "V-BLOCK",
-    ["\22s"] = "V-BLOCK",
-    s = "SELECT",
-    S = "S-LINE",
-    ["\19"] = "S-BLOCK",
-    i = "INSERT",
-    ic = "INSERT",
-    ix = "INSERT",
-    R = "REPLACE",
-    Rc = "REPLACE",
-    Rx = "REPLACE",
-    Rv = "V-REPLACE",
-    Rvc = "V-REPLACE",
-    Rvx = "V-REPLACE",
-    c = "COMMAND",
-    cv = "EX",
-    ce = "EX",
-    r = "REPLACE",
-    rm = "MORE",
-    ["r?"] = "CONFIRM",
-    ["!"] = "SHELL",
-    t = "TERMINAL",
-  }
+-- Statusline Mode component
+local modes = {
+  n = "NORMAL",
+  no = "O-PENDING",
+  nov = "O-PENDING",
+  noV = "O-PENDING",
+  ["no\22"] = "O-PENDING",
+  niI = "NORMAL",
+  niR = "NORMAL",
+  niV = "NORMAL",
+  nt = "NORMAL",
+  ntT = "NORMAL",
+  v = "VISUAL",
+  vs = "VISUAL",
+  V = "V-LINE",
+  Vs = "V-LINE",
+  ["\22"] = "V-BLOCK",
+  ["\22s"] = "V-BLOCK",
+  s = "SELECT",
+  S = "S-LINE",
+  ["\19"] = "S-BLOCK",
+  i = "INSERT",
+  ic = "INSERT",
+  ix = "INSERT",
+  R = "REPLACE",
+  Rc = "REPLACE",
+  Rx = "REPLACE",
+  Rv = "V-REPLACE",
+  Rvc = "V-REPLACE",
+  Rvx = "V-REPLACE",
+  c = "COMMAND",
+  cv = "EX",
+  ce = "EX",
+  r = "REPLACE",
+  rm = "MORE",
+  ["r?"] = "CONFIRM",
+  ["!"] = "SHELL",
+  t = "TERMINAL",
+}
 
+local function mode()
   local current_mode = vim.api.nvim_get_mode().mode
   local mode_text = modes[current_mode] or ""
   return update_mode_colors() .. icon.ui.Neovim .. " " .. mode_text .. "%#Normal#"
 end
 
+-- Statusline Filename component
 local function filename()
   return vim.fn.expand("%:t") or ""
 end
+
+-- Statusline Git component
+local git_stats = {
+  { group = "GitSignsAdd", icon = icon.git.LineAdded, key = "added " },
+  { group = "GitSignsChange", icon = icon.git.LineModified, key = "changed" },
+  { group = "GitSignsDelete", icon = icon.git.LineRemoved, key = "removed" },
+}
 
 local git = function()
   local git_info = vim.b.gitsigns_status_dict
@@ -86,60 +96,63 @@ local git = function()
     return ""
   end
 
-  local render_git = {
-    string.format("%%#DevIcon.git#%s %s", icon.git.Branch, git_info.head),
-  }
+  local parts, idx = {}, 1
+  parts[idx] = string.format("%%#DevIcon.git#%s %s", icon.git.Branch, git_info.head)
 
-  local git_stats = {
-    { group = "GitSignsAdd", icon = icon.git.LineAdded, value = git_info.added },
-    { group = "GitSignsChange", icon = icon.git.LineModified, value = git_info.changed },
-    { group = "GitSignsDelete", icon = icon.git.LineRemoved, value = git_info.removed },
-  }
-
-  for _, stat in ipairs(git_stats) do
-    if not is_empty(stat.value) then
-      render_git[#render_git + 1] = string.format("%%#%s#%s %s", stat.group, stat.icon, stat.value)
+  for i = 1, #git_stats do
+    local cfg = git_stats[i]
+    local value = git_stats[cfg.key]
+    if not is_empty(value) then
+      -- Manual indexing is faster
+      idx = idx + 1
+      parts[idx] = string.format("%%#%s#%s %s", cfg.group, cfg.icon, value)
     end
   end
-  return table.concat(render_git, " ")
+
+  return table.concat(parts, " ")
 end
 
+-- Statusline LSP component
 local function lsp()
-  local lsp_icon = icon.ui.Gear
   local clients = vim.lsp.get_clients({ bufnr = 0 })
   if vim.tbl_isempty(clients) then
     return ""
   end
-  local active_clients = {}
+
+  local active_clients, idx = {}, 0
+
   for _, client in ipairs(clients) do
-    active_clients[#active_clients + 1] = client.name
+    idx = idx + 1
+    active_clients[idx] = client.name
   end
-  return string.format("%%#Conditional#[%s %s]", lsp_icon, table.concat(active_clients, " "))
+
+  return string.format("%%#Conditional#[%s %s]", icon.ui.Gear, table.concat(active_clients, " "))
 end
 
+-- Statusline diagnostic component
+local severity = vim.diagnostic.severity
+local severity_map = {
+  [severity.ERROR] = { group = "DiagnosticError", icon = icon.diagnostics.Error },
+  [severity.WARN] = { group = "DiagnosticWarn", icon = icon.diagnostics.Warning },
+  [severity.HINT] = { group = "DiagnosticHint", icon = icon.diagnostics.Hint },
+  [severity.INFO] = { group = "DiagnosticInfo", icon = icon.diagnostics.Information },
+}
 local function diagnostics()
   if not vim.diagnostic.is_enabled({ bufnr = 0 }) then
     return ""
   end
 
-  local buffer_diagnostic = vim.diagnostic.count(0)
-  if not buffer_diagnostic or vim.tbl_isempty(buffer_diagnostic) then
+  local count = vim.diagnostic.count(0)
+  if not count or vim.tbl_isempty(count) then
     return ""
   end
 
-  local result = {}
-  local severity = vim.diagnostic.severity
-
-  local severity_map = {
-    [severity.ERROR] = { group = "DiagnosticError", icon = icon.diagnostics.Error },
-    [severity.WARN] = { group = "DiagnosticWarn", icon = icon.diagnostics.Warning },
-    [severity.HINT] = { group = "DiagnosticHint", icon = icon.diagnostics.Hint },
-    [severity.INFO] = { group = "DiagnosticInfo", icon = icon.diagnostics.Information },
-  }
+  local result, idx = {}, 0
   for sev, data in pairs(severity_map) do
-    local count = buffer_diagnostic[sev]
-    if count and count > 0 then
-      result[#result + 1] = string.format("%%#%s#%s %d", data.group, data.icon, count)
+    local n = count[sev]
+    if n and n > 0 then
+      idx = idx + 1
+      result[idx] = string.format("%%#%s#%s %d", data.group, data.icon, n)
     end
   end
 
@@ -147,9 +160,13 @@ local function diagnostics()
 end
 
 local function filetype()
+  local ftype = vim.bo.filetype
+  if ftype == "" then
+    return ""
+  end
+
   local buf = vim.api.nvim_buf_get_name(0)
   local name, ext = vim.fn.fnamemodify(buf, ":t"), vim.fn.fnamemodify(buf, ":e")
-  local ftype = vim.bo.filetype
 
   local icon_data = devicon(name, ext)
   local file_icon = icon_data and icon_data.icon or ""
@@ -169,6 +186,7 @@ end
 --   return string.format("%s", icon.line_bar[i])
 -- end
 
+-- Statusline Searchcount component
 local function searchcount()
   if vim.v.hlsearch == 0 then
     return ""
@@ -176,104 +194,106 @@ local function searchcount()
 
   local result = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
   local current = result.current or 0
-  local total = math.min(result.total or 0, result.maxcount or 999)
+  local total = result.total or 0
+  local maxcount = result.maxcount or 999
+  local display_total = total > maxcount and maxcount or total
 
-  return string.format("%%#Type#%s [%d/%d]", icon.ui.Search, current, total)
+  return string.format("%%#Type#%s [%d/%d]", icon.ui.Search, current, display_total)
 end
 
+-- Statusline Plugin component
 local function plugin_updates()
   local lazy_info = require("lazy.status")
   return lazy_info.has_updates() and "%#Boolean#" .. lazy_info.updates() or ""
 end
 
+-- Statusline LSP-Progress component
 local progress_status = {
   client = nil,
   kind = nil,
   title = nil,
   percentage = nil,
 }
+local progress_augroup = vim.api.nvim_create_augroup("lsp-progress/statusline", { clear = true })
+-- local autocmd_created = false
 
-local function lsp_progress_component()
-  vim.api.nvim_create_autocmd("LspProgress", {
-    group = vim.api.nvim_create_augroup("lsp-progress/statusline", { clear = true }),
-    desc = "Update LSP progress in statusline",
-    pattern = { "begin", "end", "report" },
-    callback = function(args)
-      if not args.data then
-        return
-      end
+vim.api.nvim_create_autocmd("LspProgress", {
+  group = progress_augroup,
+  desc = "Update LSP progress in statusline",
+  pattern = { "begin", "end", "report" },
+  callback = function(args)
+    local data = args.data
+    if not data or not data.params then
+      return
+    end
 
-      progress_status = {
-        client = vim.lsp.get_client_by_id(args.data.client_id).name,
-        kind = args.data.params.value.kind,
-        title = args.data.params.value.title,
-        percentage = args.data.params.value.percentage or "",
-      }
+    local client = vim.lsp.get_client_by_id(data.client_id)
+    if not client then
+      return
+    end
 
-      if progress_status.kind == "end" then
-        progress_status.title = nil
-        vim.defer_fn(function()
-          vim.cmd.redrawstatus()
-        end, 1000)
-      else
+    -- Update fields in-place instead of reassigning whole table
+    progress_status.client = client.name
+    progress_status.kind = data.params.value.kind
+    progress_status.title = data.params.value.title
+    progress_status.percentage = data.params.value.percentage or ""
+
+    if progress_status.kind == "end" then
+      progress_status.title = nil
+      vim.defer_fn(function()
         vim.cmd.redrawstatus()
-      end
-    end,
-  })
+      end, 1000)
+    else
+      vim.cmd.redrawstatus()
+    end
+  end,
+})
 
+local function lsp_progress()
   if not progress_status.client or not progress_status.title then
     return ""
   end
-  return table.concat({
-    string.format(
-      "%%#Conditional#%s [%s]",
-      -- progress_status.client,
-      progress_status.title,
-      progress_status.percentage .. "%%"
-    ),
-  })
+
+  return string.format(
+    "%%#Conditional#%s [%s]",
+    progress_status.title,
+    progress_status.percentage ~= "" and (progress_status.percentage .. "%%") or ""
+  )
 end
 
 local function active()
-  local parts = {}
   local winwidth = vim.fn.winwidth(0)
 
-  local function add(component)
+  local components = winwidth >= 90
+      and {
+        mode,
+        filename,
+        diagnostics,
+        "%=",
+        lsp,
+        lsp_progress,
+        "%=",
+        git,
+        filetype,
+        lineinfo,
+        searchcount,
+        plugin_updates,
+      }
+    or {
+      mode,
+      diagnostics,
+      "%=",
+      lineinfo,
+    }
+
+  local parts, idx = {}, 1
+
+  for i = 1, #components do
+    local component = components[i]
     local value = type(component) == "function" and component() or component
     if not is_empty(value) then
-      table.insert(parts, value)
-    end
-  end
-
-  if winwidth >= 90 then
-    -- Wide layout
-    local components = {
-      mode,
-      filename,
-      diagnostics,
-      "%=",
-      lsp,
-      lsp_progress_component,
-      "%=",
-      git,
-      filetype,
-      lineinfo,
-      searchcount,
-      plugin_updates,
-    }
-    for _, component in ipairs(components) do
-      add(component)
-    end
-  else
-    -- Narrow layout
-    local components = {
-      mode,
-      diagnostics,
-      "%=",
-      lineinfo,
-    }
-    for _, component in ipairs(components) do
-      add(component)
+      parts[idx] = value
+      idx = idx + 1
     end
   end
 
