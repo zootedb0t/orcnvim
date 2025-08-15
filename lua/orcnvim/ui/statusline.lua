@@ -14,6 +14,7 @@ local disable_statusline = {
   unpack(require("orcnvim.utils").disable() or {}),
 }
 
+-- Statusline Mode-color component
 local mode_colors = {
   n = "%#StatusLineAccent#",
   no = "%#StatusLineAccent#",
@@ -215,7 +216,6 @@ local progress_status = {
   percentage = nil,
 }
 local progress_augroup = vim.api.nvim_create_augroup("lsp-progress/statusline", { clear = true })
--- local autocmd_created = false
 
 vim.api.nvim_create_autocmd("LspProgress", {
   group = progress_augroup,

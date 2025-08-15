@@ -6,6 +6,9 @@ return {
     icons = {
       rules = false,
     },
+    win = {
+      border = "none",
+    },
     spec = {
       -- Open Dashboard
       { "<leader>;", "<cmd>Dashboard<CR>", desc = "Open Dashboard" },
