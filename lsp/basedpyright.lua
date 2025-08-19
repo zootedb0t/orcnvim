@@ -1,6 +1,6 @@
 ---@type vim.lsp.Config
 return {
-  cmd = { "pyright-langserver", "--stdio" },
+  cmd = { "basedpyright-langserver", "--stdio" },
   filetypes = { "python" },
   root_markers = {
     "pyproject.toml",
@@ -12,7 +12,7 @@ return {
     ".git",
   },
   settings = {
-    python = {
+    basedpyright = {
       analysis = {
         autoSearchPaths = true,
         useLibraryCodeForTypes = true,
