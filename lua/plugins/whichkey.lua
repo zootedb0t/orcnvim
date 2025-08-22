@@ -16,12 +16,8 @@ return {
       -- Fuzzy search current buffer
       {
         "<leader>/",
-        function()
-          require("telescope.builtin").current_buffer_fuzzy_find(
-            require("telescope.themes").get_dropdown({ previewer = false })
-          )
-        end,
-        desc = "Fuzzily search in current buffer",
+        "<cmd>FzfLua grep_curbuf<cr>",
+        desc = "Fuzzy search current buffer",
       },
 
       {
@@ -56,7 +52,7 @@ return {
       {
         -- Buffers
         { "<leader>b", group = "Buffers" },
-        { "<leader>bb", "<cmd>Telescope buffers<cr>", desc = "List buffers" },
+        { "<leader>bb", "<cmd>FzfLua buffers<cr>", desc = "List buffers" },
         {
           "<leader>bc",
           function()
@@ -87,7 +83,7 @@ return {
         -- Lsp
         { "<leader>l", group = "LSP" },
         { "<leader>la", vim.lsp.buf.code_action, desc = "Code Action" },
-        { "<leader>ld", "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", desc = "Current Buffer Diagnostics" },
+        { "<leader>ld", "<cmd>FzfLua lsp_document_diagnostics<cr>", desc = "Current Buffer Diagnostics" },
         {
           "<leader>lf",
           function()
@@ -106,21 +102,19 @@ return {
         { "<leader>li", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
         { "<leader>lq", vim.diagnostic.setloclist, desc = "Quickfix Diagnostics" },
         { "<leader>lr", vim.lsp.buf.rename, desc = "Lsp Rename" },
-        { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document Symbols" },
-        { "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols" },
+        { "<leader>lS", "<cmd>FzfLua lsp_workspace_symbols<cr>", desc = "Workspace Symbols" },
       },
 
       {
         -- Searches
         { "<leader>s", desc = "Search" },
-        { "<leader>sb", "<cmd>Telescope git_branches<cr>", desc = "Checkout branch" },
-        { "<leader>sc", "<cmd>Telescope commands<cr>", desc = "Search Commands" },
-        { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-        { "<leader>sg", "<Cmd>Telescope live_grep<CR>", desc = "Grep in CWD" },
-        { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Find Help Tags" },
-        { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search highlight group" },
-        { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Search keymaps" },
-        { "<leader>sr", "<cmd>Telescope oldfiles<cr>", desc = "Search Recent Files" },
+        { "<leader>sb", "<cmd>FzfLua git_branches<cr>", desc = "Checkout branch" },
+        { "<leader>sc", "<cmd>FzfLua commands<cr>", desc = "Search Commands" },
+        { "<leader>sf", "<cmd>FzfLua files<cr>", desc = "Find Files" },
+        { "<leader>sg", "<Cmd>FzfLua live_grep<CR>", desc = "Grep in CWD" },
+        { "<leader>sh", "<cmd>FzfLua helptags<cr>", desc = "Find Help Tags" },
+        { "<leader>sk", "<cmd>FzfLua keymaps<cr>", desc = "Search keymaps" },
+        { "<leader>sr", "<cmd>FzfLua oldfiles<cr>", desc = "Search Recent Files" },
       },
 
       { "<leader>w", proxy = "<c-w>", group = "Windows" }, -- proxy to window mappings

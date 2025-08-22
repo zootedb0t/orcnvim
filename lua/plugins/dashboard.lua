@@ -45,31 +45,25 @@ return {
           icon = icons.ui.Files .. " ",
           desc = "Search Buffer",
           key = "b",
-          action = "Telescope buffers",
+          action = "FzfLua buffers",
         },
         {
           icon = icons.ui.Gear .. " ",
           desc = "Edit Config",
           key = "c",
-          action = function()
-            require("telescope.builtin").find_files({
-              prompt_title = "Search Config",
-              prompt_prefix = "   ",
-              cwd = "~/.config/nvim",
-            })
-          end,
+          action = "FzfLua files cwd=~/.config/nvim/",
         },
         {
           icon = icons.ui.History .. " ",
           desc = "Recent Files",
           key = "r",
-          action = "Telescope oldfiles",
+          action = "FzfLua oldfiles",
         },
         {
           icon = icons.ui.Hourglass .. " ",
           desc = "Load Session",
           key = "s",
-          action = "Telescope persisted",
+          action = "FzfLua persisted",
         },
         {
           icon = icons.ui.Package .. " ",

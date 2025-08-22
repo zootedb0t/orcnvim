@@ -37,6 +37,7 @@ function M.disable()
     "alpha",
     "toggleterm",
     "mason",
+    "fzf",
     "",
   }
 end

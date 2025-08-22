@@ -59,12 +59,12 @@ map("n", "<M-2>", "2gt", { desc = "Gota 2st tab" })
 map("n", "<M-3>", "3gt", { desc = "Gota 3st tab" })
 
 -- Terminal Mapping(From lazyvim)
-map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
-map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
-map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
-map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
-map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
-map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
+-- map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+-- map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
+-- map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
+-- map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
+-- map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
+-- map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
 -- Save file
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
