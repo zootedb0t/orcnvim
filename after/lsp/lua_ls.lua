@@ -5,20 +5,6 @@ return {
   filetypes = { "lua" },
   settings = {
     Lua = {
-      runtime = {
-        version = "LuaJIT",
-        path = (function()
-          local runtime_path = vim.split(package.path, ";")
-          table.insert(runtime_path, "lua/?.lua")
-          table.insert(runtime_path, "lua/?/init.lua")
-          return runtime_path
-        end)(),
-      },
-      diagnostics = {
-        globals = {
-          "vim",
-        },
-      },
       workspace = {
         maxPreload = 5000,
         preloadFileSize = 10000,

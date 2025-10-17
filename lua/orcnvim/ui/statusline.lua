@@ -127,7 +127,7 @@ local function lsp()
     active_clients[idx] = client.name
   end
 
-  return string.format("%%#Conditional#[%s %s]", icon.ui.Gear, table.concat(active_clients, " "))
+  return string.format("%%#Conditional#%s %s", icon.ui.Gear, table.concat(active_clients, " "))
 end
 
 -- Statusline diagnostic component
@@ -262,7 +262,7 @@ local function lsp_progress()
 end
 
 local function active()
-  local winwidth = vim.fn.winwidth(0)
+  local winwidth = vim.o.columns
 
   local components = winwidth >= 90
       and {

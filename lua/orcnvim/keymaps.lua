@@ -7,8 +7,8 @@ map("n", "Q", "<Nop>")
 map("n", "q:", "<Nop>")
 
 -- Remap for dealing with word wrap
-map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Check for line wrapping" })
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Check for line wrapping" })
+map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Check for line wrapping" })
 
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
@@ -17,10 +17,10 @@ map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window wi
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- Better Window Navigation using <ctrl> hjkl keys
-map("n", "<C-h>", "<C-w>h", { desc = "Go to left window " })
-map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window " })
-map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window " })
-map("n", "<C-l>", "<C-w>l", { desc = "Go to right window " })
+map("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
+map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
+map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
+map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
 -- better indenting
 map("v", "<", "<gv", { desc = "Indent Left" })
@@ -57,14 +57,6 @@ cnoreabbrev <expr> Wq ((getcmdtype() is# ':' && getcmdline() is# 'Wq')?('wq'):('
 map("n", "<M-1>", "1gt", { desc = "Gota 1st tab" })
 map("n", "<M-2>", "2gt", { desc = "Gota 2st tab" })
 map("n", "<M-3>", "3gt", { desc = "Gota 3st tab" })
-
--- Terminal Mapping(From lazyvim)
--- map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
--- map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
--- map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
--- map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
--- map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
--- map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
 -- Save file
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })

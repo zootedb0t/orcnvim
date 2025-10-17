@@ -8,6 +8,7 @@ local disable_statuscolumn = {
   "NvimTree",
   "help",
   "netrw",
+  "qf",
   unpack(require("orcnvim.utils").disable()),
 }
 
