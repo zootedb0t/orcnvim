@@ -43,23 +43,3 @@ cmd("FileType", {
     pcall(vim.treesitter.start)
   end,
 })
-
--- https://www.reddit.com/r/neovim/comments/1kzdd5x/restartlsp_but_for_native_vimlsp/
-vim.api.nvim_create_user_command("LspRestart", function()
-  local bufnr = vim.api.nvim_get_current_buf()
-  local clients = vim.lsp.get_clients({ bufnr = bufnr })
-  vim.lsp.stop_client(clients, true)
-
-  local timer = assert(vim.uv.new_timer())
-
-  timer:start(500, 0, function()
-    for _, _client in ipairs(clients) do
-      vim.schedule_wrap(function(client)
-        vim.lsp.enable(client.name)
-
-        vim.cmd(":noautocmd write")
-        vim.cmd(":edit")
-      end)(_client)
-    end
-  end)
-end, {})
