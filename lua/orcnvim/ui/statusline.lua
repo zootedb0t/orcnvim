@@ -102,8 +102,8 @@ local git = function()
 
   for i = 1, #git_stats do
     local cfg = git_stats[i]
-    local value = git_stats[cfg.key]
-    if not is_empty(value) then
+    local value = git_info[cfg.key]
+    if value and value > 0 then
       -- Manual indexing is faster
       idx = idx + 1
       parts[idx] = string.format("%%#%s#%s %s", cfg.group, cfg.icon, value)
