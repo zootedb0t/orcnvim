@@ -54,7 +54,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     if client:supports_method("textDocument/documentColor") then
-      vim.lsp.document_color.enable(true, args.buf)
+      map({
+        "n",
+        "x",
+      }, "grc", vim.lsp.document_color.color_presentation, { desc = "vim.lsp.document_color.color_presentation" })
     end
 
     if client:supports_method("textDocument/semanticTokens/full") then

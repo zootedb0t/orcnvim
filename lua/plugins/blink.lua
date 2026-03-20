@@ -4,9 +4,6 @@ return {
   build = "cargo build --release",
   event = "LspAttach",
   opts = {
-    -- sources = {
-    --   default = { "lsp", "snippets", "path", "buffer" },
-    -- },
     completion = {
       list = {
         selection = { preselect = false, auto_insert = true },
@@ -40,14 +37,6 @@ return {
     signature = { enabled = true },
     fuzzy = {
       implementation = "rust",
-      -- sorts = {
-      --   "exact",
-      --   "score",
-      --   "sort_text",
-      -- },
     },
-    -- cmdline = {
-    --   enabled = false,
-    -- },
   },
 }

@@ -2,15 +2,6 @@ return {
   { "DaikyXendo/nvim-material-icon", lazy = true },
   { "dstein64/vim-startuptime", cmd = "StartupTime" },
   {
-    "brenoprata10/nvim-highlight-colors",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      exclude_filetypes = {
-        "lazy",
-      },
-    },
-  },
-  {
     "nvim-treesitter/nvim-treesitter-context",
     cmd = "TSContextToggle",
     opts = {
