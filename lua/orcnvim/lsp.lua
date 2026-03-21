@@ -1,6 +1,20 @@
 local icon = require("orcnvim.icons").diagnostics
 local map = vim.keymap.set
 
+local severity = vim.diagnostic.severity
+local signs = {
+  [severity.ERROR] = icon.Error,
+  [severity.WARN] = icon.Warning,
+  [severity.HINT] = icon.Hint,
+  [severity.INFO] = icon.Information,
+}
+local hl_map = {
+  [severity.ERROR] = "DiagnosticError",
+  [severity.WARN] = "DiagnosticWarn",
+  [severity.HINT] = "DiagnosticHint",
+  [severity.INFO] = "DiagnosticInfo",
+}
+
 -- Highlight current word under cursor
 local function lsp_references_highlight(client, bufnr)
   if client:supports_method("textDocument/documentHighlight") then
@@ -40,6 +54,19 @@ vim.diagnostic.config({
     source = "if_many",
   },
   jump = { float = true },
+  -- Customize vim.diagnostic.show()
+  status = {
+    format = function(counts)
+      local items = {}
+      for level, _ in ipairs(vim.diagnostic.severity) do
+        local count = counts[level]
+        if count and count > 0 then
+          table.insert(items, ("%%#%s#%s %s"):format(hl_map[level], signs[level], count))
+        end
+      end
+      return table.concat(items, " ")
+    end,
+  },
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {

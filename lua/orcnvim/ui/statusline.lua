@@ -131,33 +131,12 @@ local function lsp()
 end
 
 -- Statusline diagnostic component
-local severity = vim.diagnostic.severity
-local severity_map = {
-  [severity.ERROR] = { group = "DiagnosticError", icon = icon.diagnostics.Error },
-  [severity.WARN] = { group = "DiagnosticWarn", icon = icon.diagnostics.Warning },
-  [severity.HINT] = { group = "DiagnosticHint", icon = icon.diagnostics.Hint },
-  [severity.INFO] = { group = "DiagnosticInfo", icon = icon.diagnostics.Information },
-}
 local function diagnostics()
   if not vim.diagnostic.is_enabled({ bufnr = 0 }) then
     return ""
   end
 
-  local count = vim.diagnostic.count(0)
-  if not count or vim.tbl_isempty(count) then
-    return ""
-  end
-
-  local result, idx = {}, 0
-  for sev, data in pairs(severity_map) do
-    local n = count[sev]
-    if n and n > 0 then
-      idx = idx + 1
-      result[idx] = string.format("%%#%s#%s %d", data.group, data.icon, n)
-    end
-  end
-
-  return table.concat(result, " ")
+  return vim.diagnostic.status()
 end
 
 local function filetype()
