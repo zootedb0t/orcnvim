@@ -39,6 +39,7 @@ return {
         "vimdoc",
         "haskell",
         "hyprlang",
+        "kdl",
       })
     end,
   },

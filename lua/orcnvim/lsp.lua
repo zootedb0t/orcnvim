@@ -53,7 +53,6 @@ vim.diagnostic.config({
     border = "rounded",
     source = "if_many",
   },
-  jump = { float = true },
   -- Customize vim.diagnostic.show()
   status = {
     format = function(counts)

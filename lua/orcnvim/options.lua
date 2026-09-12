@@ -1,5 +1,6 @@
 local options = {
   opt = {
+    autocomplete = true,
     clipboard = { "unnamedplus" }, -- Connection to the system clipboard
     completeopt = { "menu", "popup" }, -- Options for insert mode completion
     copyindent = true, -- Copy the previous indentation on autoindenting

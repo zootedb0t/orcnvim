@@ -1,6 +1,7 @@
 return {
   "stevearc/conform.nvim",
-  event = "LspAttach",
+  event = { "BufWritePre" },
+  cmd = { "ConformInfo" },
   opts = {
     formatters_by_ft = {
       lua = { "stylua" },
@@ -17,6 +18,7 @@ return {
       json = { "prettierd" },
       jsonc = { "prettierd" },
       htmldjango = { "djlint" },
+      kdl = { "kdlfmt" },
     },
   },
 }
