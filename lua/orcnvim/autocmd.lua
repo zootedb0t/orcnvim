@@ -35,11 +35,3 @@ cmd("VimResized", {
 cmd("ColorScheme", {
   callback = require("orcnvim.ui.highlight").statusline_highlight,
 })
-
--- Enable tressitter features
-cmd("FileType", {
-  pattern = "*",
-  callback = function()
-    pcall(vim.treesitter.start)
-  end,
-})

@@ -60,6 +60,3 @@ map("n", "<M-3>", "3gt", { desc = "Gota 3st tab" })
 
 -- Save file
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
-
--- Open Nvim-Tree
-map("n", "\\", "<cmd>NvimTreeFindFileToggle<cr>", { desc = "Open File Explorer" })

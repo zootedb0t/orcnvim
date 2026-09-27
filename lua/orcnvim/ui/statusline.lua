@@ -85,7 +85,7 @@ end
 
 -- Statusline Git component
 local git_stats = {
-  { group = "GitSignsAdd", icon = icon.git.LineAdded, key = "added " },
+  { group = "GitSignsAdd", icon = icon.git.LineAdded, key = "added" },
   { group = "GitSignsChange", icon = icon.git.LineModified, key = "changed" },
   { group = "GitSignsDelete", icon = icon.git.LineRemoved, key = "removed" },
 }
@@ -181,12 +181,6 @@ local function searchcount()
   return string.format("%%#Type#%s [%d/%d]", icon.ui.Search, current, display_total)
 end
 
--- Statusline Plugin component
-local function plugin_updates()
-  local lazy_info = require("lazy.status")
-  return lazy_info.has_updates() and "%#Boolean#" .. lazy_info.updates() or ""
-end
-
 -- Statusline LSP-Progress component
 local progress_status = {
   client = nil,
@@ -256,7 +250,6 @@ local function active()
         filetype,
         lineinfo,
         searchcount,
-        plugin_updates,
       }
     or {
       mode,

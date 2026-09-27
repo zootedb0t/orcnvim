@@ -1,6 +1,9 @@
-local icons = require("orcnvim.icons")
-local headers = {
-  orcnvim = [[
+local function load_dashboard()
+  vim.pack.add({ "https://github.com/nvimdev/dashboard-nvim" })
+
+  local icons = require("orcnvim.icons")
+  local headers = {
+    orcnvim = [[
  ██████╗ ██████╗  ██████╗███╗   ██╗██╗   ██╗██╗███╗   ███╗
 ██╔═══██╗██╔══██╗██╔════╝████╗  ██║██║   ██║██║████╗ ████║
 ██║   ██║██████╔╝██║     ██╔██╗ ██║██║   ██║██║██╔████╔██║
@@ -8,7 +11,7 @@ local headers = {
 ╚██████╔╝██║  ██║╚██████╗██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║
  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
      ]],
-  orcnvim_new = [[
+    orcnvim_new = [[
  ▄▄▄▄▄▄▄ ▄▄▄▄▄▄   ▄▄▄▄▄▄▄ ▄▄    ▄ ▄▄   ▄▄ ▄▄▄ ▄▄   ▄▄
 █       █   ▄  █ █       █  █  █ █  █ █  █   █  █▄█  █
 █   ▄   █  █ █ █ █       █   █▄█ █  █▄█  █   █       █
@@ -17,14 +20,11 @@ local headers = {
 █       █   █  █ █    █▄▄█ █ █   ██     ██   █ ██▄██ █
 █▄▄▄▄▄▄▄█▄▄▄█  █▄█▄▄▄▄▄▄▄█▄█  █▄▄█ █▄▄▄█ █▄▄▄█▄█   █▄█
   ]],
-}
+  }
 
-local logo = string.rep("\n\n", 1) .. headers.orcnvim_new .. "\n"
+  local logo = string.rep("\n\n", 1) .. headers.orcnvim_new .. "\n"
 
-return {
-  "nvimdev/dashboard-nvim",
-  cmd = "Dashboard",
-  opts = {
+  require("dashboard").setup({
     theme = "doom",
     config = {
       header = vim.split(logo, "\n"),
@@ -39,7 +39,7 @@ return {
           icon = icons.ui.Telescope .. " ",
           desc = "Find File",
           key = "f",
-          action = "Telescope find_files",
+          action = "FzfLua find_files",
         },
         {
           icon = icons.ui.Files .. " ",
@@ -66,12 +66,6 @@ return {
           action = "FzfLua persisted",
         },
         {
-          icon = icons.ui.Package .. " ",
-          desc = "Lazy Plugin",
-          key = "l",
-          action = "Lazy",
-        },
-        {
           icon = icons.ui.Exit .. " ",
           desc = "Quit",
           key = "q",
@@ -91,5 +85,9 @@ return {
         }
       end,
     },
-  },
-}
+  })
+
+  vim.cmd.Dashboard() -- actually open it now that setup() has registered dashboard-nvim's own command
+end
+
+vim.api.nvim_create_user_command("Dashboard", load_dashboard, { desc = "Open the dashboard" })
