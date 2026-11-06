@@ -1,8 +1,14 @@
 local M = {}
 
-local devicons_ok, devicons = pcall(require, "nvim-web-devicons")
-if not devicons_ok then
-  return vim.notify("nvim-web-devicons is not installed", vim.log.levels.WARN)
+local devicons
+local function get_devicons()
+  if not devicons then
+    local ok, mod = pcall(require, "nvim-web-devicons")
+    if ok then
+      devicons = mod
+    end
+  end
+  return devicons
 end
 
 -- 's' is not table, if table use 'vim.tbl_isempty()' instead
@@ -19,11 +25,12 @@ function M.ismatch(table, value)
 end
 
 function M.get_icons(filename, extension)
-  if not devicons then
-    return ""
+  local icon = get_devicons()
+  if not icon then
+    return nil
   end
 
-  local file_icon, color = devicons.get_icon_color(filename, extension, { default = true })
+  local file_icon, color = icon.get_icon_color(filename, extension, { default = true })
   if not file_icon or file_icon == "" then
     return ""
   end

@@ -1,62 +1,30 @@
-vim.api.nvim_create_autocmd("PackChanged", {
-  callback = function(ev)
-    local name, kind = ev.data.spec.name, ev.data.kind
-    if name == "nvim-treesitter" and kind == "update" then
-      if not ev.data.active then
-        vim.cmd.packadd("nvim-treesitter")
-      end
-      vim.cmd("TSUpdate")
-    end
-  end,
+-- vim.api.nvim_create_autocmd("PackChanged", {
+--   callback = function(ev)
+--     local name, kind = ev.data.spec.name, ev.data.kind
+--     if name == "nvim-treesitter" and kind == "update" then
+--       if not ev.data.active then
+--         vim.cmd.packadd("nvim-treesitter")
+--       end
+--       vim.cmd("TSUpdate")
+--     end
+--   end,
+-- })
+
+vim.pack.add({
+  "https://github.com/nvim-treesitter/nvim-treesitter",
 })
 
-local ts_loaded = false
+require("nvim-treesitter").setup({})
 
 vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "json", "kdl", "lua", "c", "cpp", "python", "toml", "rust", "javascript" },
   callback = function()
-    if not ts_loaded then
-      vim.pack.add({
-        {
-          src = "https://github.com/nvim-treesitter/nvim-treesitter",
-          version = "main",
-        },
-        -- { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
-        { src = "https://github.com/windwp/nvim-ts-autotag" },
-      })
-
-      require("nvim-treesitter").install({
-        "bash",
-        "c",
-        "comment",
-        "cmake",
-        "cpp",
-        "css",
-        "go",
-        "html",
-        "javascript",
-        "java",
-        "jsdoc",
-        "json",
-        "lua",
-        "php",
-        "python",
-        "rust",
-        "typescript",
-        "yaml",
-        "markdown",
-        "markdown_inline",
-        "vim",
-        "gitignore",
-        "diff",
-        "fish",
-        "vimdoc",
-        "haskell",
-        "hyprlang",
-        "kdl",
-      })
-      require("nvim-ts-autotag").setup()
-      ts_loaded = true
-    end
-    pcall(vim.treesitter.start)
+    -- syntax highlighting, provided by Neovim
+    vim.treesitter.start()
+    -- folds, provided by Neovim
+    -- vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    -- vim.wo.foldmethod = "expr"
+    -- indentation, provided by nvim-treesitter
+    -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })

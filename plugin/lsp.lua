@@ -1,3 +1,8 @@
+vim.pack.add({
+  "https://github.com/saghen/blink.lib",
+  "https://github.com/saghen/blink.cmp",
+})
+
 local icon = require("orcnvim.icons").diagnostics
 local map = vim.keymap.set
 
@@ -81,12 +86,17 @@ local function setup_lsp()
       end
 
       if client:supports_method("textDocument/documentColor") then
-        map({
-          "n",
-          "x",
-        }, "grc", vim.lsp.document_color.color_presentation, {
-          desc = "vim.lsp.document_color.color_presentation",
-        })
+        map(
+          {
+            "n",
+            "x",
+          },
+          "grc",
+          vim.lsp.document_color.color_presentation,
+          {
+            desc = "vim.lsp.document_color.color_presentation",
+          }
+        )
       end
 
       if client:supports_method("textDocument/semanticTokens/full") then
@@ -100,6 +110,10 @@ local function setup_lsp()
       lsp_references_highlight(client, bufnr)
       map("n", "<localleader>q", vim.diagnostic.setloclist, { desc = "Show diagnostic in quickfix list" })
     end,
+  })
+
+  vim.lsp.config("*", {
+    capabilities = require("blink.cmp").get_lsp_capabilities(),
   })
 
   -- Enable LSP
